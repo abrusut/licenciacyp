@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception
+END
+exception_full.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception/exception_full.html.twig
+END
+error404.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception/error404.html.twig
+END
+traces.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception/traces.html.twig
+END
+logs.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception/logs.html.twig
+END
+traces_text.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception/traces_text.html.twig
+END
+error.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception/error.html.twig
+END
+layout.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception/layout.html.twig
+END
+exception.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception/exception.html.twig
+END
+trace.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/public/bundles/theme-bundle/!svn/ver/44/tags/0.9/Resources/views/Exception/trace.html.twig
+END

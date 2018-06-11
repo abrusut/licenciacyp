@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="twelvecol date">
+		<ul class="ui-widget ui-helper-clearfix" id="icons">
+			<li>
+
+				<div class="icons_fila">
+					<span class="ui-icon ui-icon-contact"> </span>
+				</div>
+				<div class="icons_fila">
+					<a title="Contacto" target="_blank" href="//www.santafe.gov.ar/index.php/web/guia/contactenos">Contacto</a>
+				</div>
+
+			</li> {% if app.user is not null %}
+			<li>
+				<div class="icons_fila">
+					<span class="ui-icon ui-icon-eject"> </span>
+				</div>
+				<div class="icons_fila">
+					<a href="{{ path(path_logout) }}" title="Salir del sistema...">Salir</a>
+				</div>
+			</li>
+			<li>
+				<div class="icons_fila">
+					<span class="ui-icon ui-icon-person"> </span>
+				</div>
+				<div class="icons_fila">{{app.user.username}}</div>
+			</li> {% endif %}
+		</ul>
+
+		<ul class="icons_left ui-widget ui-helper-clearfix">		
+			<li>
+				<div class="icons_fila">
+					<span class="ui-icon ui-icon-calendar calendario_fecha_general"> </span>
+				</div>
+				<div class="icons_fila">{{ "now"|date("d/m/Y") }}</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="twelvecol head_aplicativo">
+
+		<div class="div_left" >
+			<img alt="Gobierno de Santa Fe" src="//www.santafe.gov.ar/assets/standard/images/logo-stafeavanza.jpg">
+		</div>
+		<h1 class="div_right">{{ encabezado_titulo | default('Titulo de la aplicación') }}</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="twelvecol dependence-name">
+		<p>{{ encabezado_nombre_dependencia | default('Nombre de dependencia') }} - {{ encabezado_nombre_organismo | default('Nombre de organismo') }}</p>
+	</div>
+</div>

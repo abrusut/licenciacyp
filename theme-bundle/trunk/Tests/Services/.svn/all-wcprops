@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/public/bundles/theme-bundle/!svn/ver/19/trunk/Tests/Services
+END
+FiltroAnnotationsTestClasses.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/public/bundles/theme-bundle/!svn/ver/16/trunk/Tests/Services/FiltroAnnotationsTestClasses.php
+END
+FiltroServiceTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/public/bundles/theme-bundle/!svn/ver/19/trunk/Tests/Services/FiltroServiceTest.php
+END
+MesajeriaHelperServiceTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/public/bundles/theme-bundle/!svn/ver/16/trunk/Tests/Services/MesajeriaHelperServiceTest.php
+END

@@ -1,0 +1,3 @@
+m_prod_licencia_cy_p_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MProdLicenciaCyPBundle:Default:index }

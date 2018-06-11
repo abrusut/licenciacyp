@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/public/bundles/theme-bundle/!svn/ver/57/tags/1.0.1
+END
+phpunit.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/public/bundles/theme-bundle/!svn/ver/57/tags/1.0.1/phpunit.xml
+END
+ThemeAplicativoBundle.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/public/bundles/theme-bundle/!svn/ver/57/tags/1.0.1/ThemeAplicativoBundle.php
+END
+composer.json
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/public/bundles/theme-bundle/!svn/ver/57/tags/1.0.1/composer.json
+END
