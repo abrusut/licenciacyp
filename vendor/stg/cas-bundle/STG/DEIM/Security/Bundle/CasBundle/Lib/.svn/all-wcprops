@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/public/bundles/cas-auth-bundle/!svn/ver/14/tags/1.2/Lib
+END
+CAS.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/public/bundles/cas-auth-bundle/!svn/ver/14/tags/1.2/Lib/CAS.php
+END
+Client.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/public/bundles/cas-auth-bundle/!svn/ver/14/tags/1.2/Lib/Client.php
+END
+Storage.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/public/bundles/cas-auth-bundle/!svn/ver/14/tags/1.2/Lib/Storage.php
+END

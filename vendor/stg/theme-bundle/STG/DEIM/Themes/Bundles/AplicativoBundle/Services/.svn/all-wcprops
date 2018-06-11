@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/public/bundles/theme-bundle/!svn/ver/104/tags/1.0.2/Services
+END
+ExceptionHandlerService.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/public/bundles/theme-bundle/!svn/ver/104/tags/1.0.2/Services/ExceptionHandlerService.php
+END
+UtilService.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/public/bundles/theme-bundle/!svn/ver/104/tags/1.0.2/Services/UtilService.php
+END
+MensajeriaHelperService.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/public/bundles/theme-bundle/!svn/ver/104/tags/1.0.2/Services/MensajeriaHelperService.php
+END
+FiltroService.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/public/bundles/theme-bundle/!svn/ver/104/tags/1.0.2/Services/FiltroService.php
+END
+PersistanceService.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/public/bundles/theme-bundle/!svn/ver/104/tags/1.0.2/Services/PersistanceService.php
+END
+PaginatorService.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/public/bundles/theme-bundle/!svn/ver/104/tags/1.0.2/Services/PaginatorService.php
+END
+ValidatorService.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/public/bundles/theme-bundle/!svn/ver/104/tags/1.0.2/Services/ValidatorService.php
+END
+CustomLoggerService.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/public/bundles/theme-bundle/!svn/ver/104/tags/1.0.2/Services/CustomLoggerService.php
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/public/bundles/cas-auth-bundle/!svn/ver/14/tags/1.2/Security
+END
+LogoutSuccessHandler.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/public/bundles/cas-auth-bundle/!svn/ver/14/tags/1.2/Security/LogoutSuccessHandler.php
+END
+CasAuthenticationEntryPoint.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/public/bundles/cas-auth-bundle/!svn/ver/14/tags/1.2/Security/CasAuthenticationEntryPoint.php
+END
+CasListener.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/public/bundles/cas-auth-bundle/!svn/ver/14/tags/1.2/Security/CasListener.php
+END
