@@ -134,6 +134,7 @@ class Persona
     /**
      * @return mixed
      */
+
     public function getProvincia()
     {
         return $this->provincia;
