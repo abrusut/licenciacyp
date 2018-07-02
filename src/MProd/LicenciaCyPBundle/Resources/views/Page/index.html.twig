@@ -1,0 +1,42 @@
+{% extends 'MProdLicenciaCyPBundle:Page:base.html.twig' %}
+
+{% block menu %}
+    {% block submenus %}
+        <li class=''>
+            <a href="{{ path('path_home') }}">
+                <span>Generar Licencia</span>
+            </a>
+        </li>
+        {% if  not is_granted('IS_AUTHENTICATED_FULLY')  %}
+            <li class=''>
+
+
+            </li>
+        {% endif %}
+        {% if  is_granted('ROLE_SUPER_ADMIN')  %}
+
+        {% endif %}
+        {% if  is_granted('ROLE_ADMIN') or  is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_TECNICO')%}
+            <li>
+
+            </li>
+        {% endif %}
+        {% if  is_granted('ROLE_ADMIN') or  is_granted('ROLE_SUPER_ADMIN') %}
+            <li>
+
+            </li>
+        {% endif %}
+
+        {% if  not is_granted('IS_AUTHENTICATED_FULLY')  %}
+            <li class=''>
+
+            </li>
+        {% endif %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li class="icons">
+
+            </li>
+        {% endif %}
+
+    {% endblock %}
+{% endblock %}

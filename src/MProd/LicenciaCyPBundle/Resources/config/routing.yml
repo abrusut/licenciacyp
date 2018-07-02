@@ -1,3 +1,17 @@
-m_prod_licencia_cy_p_homepage:
-    path:     /hello/{name}
+path_home:
+    path:     /
     defaults: { _controller: MProdLicenciaCyPBundle:Default:index }
+
+login:
+    path:     /login
+    defaults: { _controller: MProdLicenciaCyPBundle:Security:login }
+
+logout:
+    path:     /logout
+
+login_check:
+    path:     /loginCheck
+
+change_password:
+    path: /Security/ChangePassword
+    defaults: { _controller: MProdLicenciaCyPBundle:Security:changePassword }

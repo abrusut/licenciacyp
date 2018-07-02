@@ -101,15 +101,15 @@ knp_paginator:
 theme_aplicativo:
     datos_aplicativo:
         encabezado:
-            titulo: 'Registro de Emprendedores Sociales'
-            nombre_dependencia:  'Secretaría de Desarrollo Territorial y Economía Social'            
+            titulo: 'Gestión de Licencia Caza y Pesca'
+            nombre_dependencia:  'Secretaría de Ganadería, Lechería y Recursos Naturales'
             nombre_organismo: 'Ministerio de la Producción'
             #imagen_top_url:  '../../src/MProd/EmprendedoresBundle/Resources/images/logoCrear1.jpg'
             #path_ayuda: m_prod_emprendedores_ayuda
-            #path_logout :  _logout
-            #path_login:   _login
-            #path_home: m_prod_emprendedores_homepage
-            webmaster_correo: rrecalde@santafe.gov.ar
+            path_logout :  logout
+            #path_login:   login
+            path_home: path_home
+            webmaster_correo: agespinosa@santafe.gov.ar
         pie_pagina:
             titulo: 
             domicilio: 
