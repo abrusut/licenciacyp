@@ -3,7 +3,7 @@
 namespace MProd\LicenciaCyPBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-//use MProd\LicenciaCyPBundle\Entity\Usuario;
+use MProd\LicenciaCyPBundle\Entity\Usuario;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

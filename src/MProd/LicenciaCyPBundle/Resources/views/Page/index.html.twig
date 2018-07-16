@@ -23,7 +23,9 @@
         {% endif %}
         {% if  is_granted('ROLE_ADMIN') or  is_granted('ROLE_SUPER_ADMIN') %}
             <li>
-
+                <a href="{{path('tecnico_list')}}">
+                    <span>Tecnicos</span>
+                </a>
             </li>
         {% endif %}
 

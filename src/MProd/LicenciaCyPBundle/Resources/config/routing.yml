@@ -15,3 +15,11 @@ login_check:
 change_password:
     path: /Security/ChangePassword
     defaults: { _controller: MProdLicenciaCyPBundle:Security:changePassword }
+
+tecnico_list:
+    path:    /tecnico/list
+    defaults: { _controller: MProdLicenciaCyPBundle:Tecnico:list }
+
+tecnico_add:
+   path:    /tecnico/add
+   defaults: { _controller: MProdLicenciaCyPBundle:Tecnico:add }

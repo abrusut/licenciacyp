@@ -26,4 +26,3 @@ security:
         MProd\LicenciaCyPBundle\Entity\Usuario:
             algorithm: bcrypt
             cost: 12
-
