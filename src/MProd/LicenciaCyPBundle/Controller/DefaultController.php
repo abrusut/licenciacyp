@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('MProdLicenciaCyPBundle:Page:index.html.twig');
+        return $this->render('MProdLicenciaCyPBundle:Page:home.html.twig');
     }
 }

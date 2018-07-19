@@ -11,10 +11,22 @@ namespace MProd\LicenciaCyPBundle\Controller;
 use MProd\LicenciaCyPBundle\Entity\Tecnico;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use MProd\LicenciaCyPBundle\Form\TecnicoType;
 
 class TecnicoController extends Controller {
 
+
+    public function viewAction($id)
+    {
+
+        $em = $this->container->get('doctrine')->getManager();
+        $tecnico = $em->getRepository('MProdLicenciaCyPBundle:Tecnico')->find($id);
+        $deleteForm = $this->createDeleteForm($tecnico->getId());
+
+        return $this->render('MProdLicenciaCyPBundle:Tecnico:view.html.twig', array('tecnico' => $tecnico,
+            'delete_form' => $deleteForm->createView()));
+
+    }
 
     public function listAction(Request $request) {
         $em = $this->container->get('doctrine')->getManager();

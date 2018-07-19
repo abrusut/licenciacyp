@@ -21,10 +21,6 @@ class TecnicoType extends AbstractType
             ->add('dni')
             ->add('email')
             ->add('telefono')
-            ->add('role')
-            ->add('password')
-            ->add('isActive')
-            ->add('salt')
         ;
     }
     

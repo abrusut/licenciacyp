@@ -23,3 +23,11 @@ tecnico_list:
 tecnico_add:
    path:    /tecnico/add
    defaults: { _controller: MProdLicenciaCyPBundle:Tecnico:add }
+
+tecnico_view:
+    path:     /tecnico/view/{id}
+    defaults: { _controller: MProdLicenciaCyPBundle:Tecnico:view }
+
+add_administrador:
+    path:     /administrador/add
+    defaults: { _controller: MProdLicenciaCyPBundle:Administrador:addAdministrador }
