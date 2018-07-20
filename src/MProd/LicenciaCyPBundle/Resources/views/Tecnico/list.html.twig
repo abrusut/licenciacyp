@@ -88,13 +88,12 @@
                                 <button title="Editar" class="opciones" onclick="location.href = '{{path("tecnico_edit",{'id':A.id})}}';">E</button>
                                 
                                 </td>
-                            {#
-                                                            <td>
-                                                                <button title="Blanquear Contraseña" class="opciones"
-                                                                        onclick="location.href = '{{path("reset_pass_tecnico",{'id':A.id})}}';">BC</button>
-                                                            </td>
-
-                            #}
+                            
+                                <td>
+                                    <button title="Blanquear Contraseña" class="opciones"
+                                            onclick="location.href = '{{path("reset_pass_tecnico",{'id':A.id})}}';">BC</button>
+                                </td>
+                        
                             </tr>
                         </div>
                     {% endfor %}

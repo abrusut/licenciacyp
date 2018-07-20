@@ -15,6 +15,41 @@ use MProd\LicenciaCyPBundle\Form\TecnicoType;
 
 class TecnicoController extends Controller {
 
+    public function resetPassTecnicoAction($id) {
+
+        $em = $this->container->get('doctrine')->getManager();
+        $tecnico = $em->getRepository('MProdLicenciaCyPBundle:Tecnico')->find($id);
+
+        $passwordplano = 'TEcnico1';
+        //obtengo el entorno de seguridad
+        $encoder = $this->container->get('security.password_encoder');
+        //codifico el password
+        $encoded = $encoder->encodePassword($tecnico, $passwordplano);
+        //seteo el password
+        $tecnico->setPassword($encoded);
+
+        try {
+            $em->persist($tecnico);
+            $em->flush();
+            $this->addFlash('resetPass', 'Se ha reseteado el password del técnico  ' . $tecnico->getApellido() . ','. $tecnico->getNombre() . '.');
+
+            // realiza alguna acción, como enviar un correo electrónico
+            $message = \Swift_Message::newInstance()->setSubject('Contacto del sistema de caza y pesca.')
+                ->setFrom('agespinosa@santafe.gov.ar')
+                ->setTo($tecnico->getEmail())
+                ->setBody($this->renderView('MProdLicenciaCyPBundle:Tecnico:ResetPassTecnico.txt.twig'));
+
+            $this->get('mailer')->send($message);
+        } catch (\Doctrine\DBAL\DBALException $e) {
+            $exception_number = $e->getPrevious()->getCode();
+            $exception_message = $e->getMessage();
+
+            return $this->render('MProdLicenciaCyPBundle:Exception:errorDB.html.twig',
+                array('errorCode' => $exception_number, 'errorMessage' => $exception_message));
+        }
+        return $this->redirect($this->generateUrl("tecnico_list"));
+    }
+
         public function editAction($id, Request $request) {
 
         $em = $this->container->get('doctrine')->getManager();

@@ -35,7 +35,11 @@ tecnico_delete:
 tecnico_edit:
     path:     /tecnico/edit/{id}
     defaults: { _controller: MProdLicenciaCyPBundle:Tecnico:edit }
-    
+
+reset_pass_tecnico:
+    path:     /tecnico/ResetPassTecnico/{id}/
+    defaults: { _controller: MProdLicenciaCyPBundle:Tecnico:resetPassTecnico }
+        
 add_administrador:
     path:     /administrador/add
     defaults: { _controller: MProdLicenciaCyPBundle:Administrador:addAdministrador }
