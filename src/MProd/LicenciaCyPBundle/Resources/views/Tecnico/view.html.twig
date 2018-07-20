@@ -1,12 +1,12 @@
 {% extends "MProdLicenciaCyPBundle:Page:index.html.twig" %}
 
 {% block cuerpo %}
-{#
+
     {% block  breadcrumb %}
-        {% set breadoption = { 'Inicio': 'page_home', 'Lista de Administradores': 'list_administrador','Ver Técnico':'#'} %}
+        {% set breadoption = { 'Inicio': 'path_home', 'Lista de Tecnicos': 'tecnico_list','Ver Técnico':'#'} %}
         {{parent()}}
     {% endblock%}
-#}
+
     <div class="row form detalles">
 
         <h3>Técnico</h3>
