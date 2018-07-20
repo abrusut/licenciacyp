@@ -28,6 +28,37 @@ class TecnicoController extends Controller {
 
     }
 
+        private function createDeleteForm($id) {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl("tecnico_delete", array('id' => $id)))
+            ->setMethod('DELETE')
+            ->getForm();
+    }
+
+    public function deleteAction($id, Request $request)
+    {
+        $em = $this->container->get('doctrine')->getManager();
+        $tecnico = $em->getRepository('MProdLicenciaCyPBundle:Tecnico')->find($id);
+
+        $form = $this->createDeleteForm($tecnico->getId());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+
+                $em->remove($tecnico);
+                $em->flush();
+                $this->addFlash('tecnico_list', 'El Técnico ' . $tecnico . ' ha sido borrado correctamente.');
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                $exception_number = $e->getPrevious()->getCode();
+                $exception_message = $e->getMessage();
+
+                return $this->render('MProdLicenciaCyPBundle:Exception:errorDB.html.twig', array('errorCode' => $exception_number, 'errorMessage' => $exception_message));
+            }
+            return $this->redirect($this->generateUrl("tecnico_list"));
+        }
+    }
+
     public function listAction(Request $request) {
         $em = $this->container->get('doctrine')->getManager();
         $tecnico= $em

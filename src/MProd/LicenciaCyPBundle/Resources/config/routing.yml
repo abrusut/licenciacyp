@@ -28,6 +28,11 @@ tecnico_view:
     path:     /tecnico/view/{id}
     defaults: { _controller: MProdLicenciaCyPBundle:Tecnico:view }
 
+
+tecnico_delete:
+    path:     /tecnico/delete/{id}
+    defaults: { _controller: MProdLicenciaCyPBundle:Tecnico:delete }
+
 add_administrador:
     path:     /administrador/add
     defaults: { _controller: MProdLicenciaCyPBundle:Administrador:addAdministrador }

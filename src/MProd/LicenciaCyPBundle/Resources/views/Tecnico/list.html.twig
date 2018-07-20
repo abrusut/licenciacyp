@@ -82,13 +82,13 @@
                                 <td>{{A.apellido}}</td>
                                 <td>{{A.telefono}}</td>
                                 <td>{{A.email}}</td>
-                                {#
-                                                            <td>
-                                                                <button title="Ver" class="opciones" onclick="location.href = '{{path("tecnico_view",{'id':A.id})}}';">V</button>
-                                                                <button title="Editar" class="opciones" onclick="location.href = '{{path("tecnico_edit",{'id':A.id})}}';">E</button>
-
-                                                            </td>
-
+                               
+                                <td>
+                                    <button title="Ver" class="opciones" onclick="location.href = '{{path("tecnico_view",{'id':A.id})}}';">V</button>
+                                {#    <button title="Editar" class="opciones" onclick="location.href = '{{path("tecnico_edit",{'id':A.id})}}';">E</button>
+                                #}
+                                </td>
+                            {#
                                                             <td>
                                                                 <button title="Blanquear Contraseña" class="opciones"
                                                                         onclick="location.href = '{{path("reset_pass_tecnico",{'id':A.id})}}';">BC</button>
