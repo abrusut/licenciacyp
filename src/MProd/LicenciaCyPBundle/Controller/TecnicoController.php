@@ -15,6 +15,37 @@ use MProd\LicenciaCyPBundle\Form\TecnicoType;
 
 class TecnicoController extends Controller {
 
+        public function editAction($id, Request $request) {
+
+        $em = $this->container->get('doctrine')->getManager();
+        $tecnico = $em
+            ->getRepository('MProdLicenciaCyPBundle:Tecnico')
+            ->find($id);
+        $form = $this
+            ->container
+            ->get('form.factory')
+            ->create(new TecnicoType(), $tecnico);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid() and $form->isSubmitted()) {
+
+            try {
+                $em->persist($tecnico);
+                $em->flush();
+                $this->addFlash('tecnico_list_mensaje', 'El Técnico ' . $tecnico . '  ha sido editado correctamente.');
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                $exception_number = $e->getPrevious()->getCode();
+                $exception_message = $e->getMessage();
+
+                return $this->render('MProdLicenciaCyPBundle:Exception:errorDB.html.twig', array('errorCode' => $exception_number, 'errorMessage' => $exception_message));
+            }
+            return $this->redirect($this->generateUrl("tecnico_list"));
+        }
+
+        return $this->render('MProdLicenciaCyPBundle:Tecnico:edit.html.twig', array('form' => $form->createView()));
+    }
+
 
     public function viewAction($id)
     {
