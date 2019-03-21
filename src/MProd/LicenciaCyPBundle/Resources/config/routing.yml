@@ -1,6 +1,6 @@
 path_home:
     path:     /
-    defaults: { _controller: MProdLicenciaCyPBundle:Default:index }
+    defaults: { _controller: MProdLicenciaCyPBundle:Licencia:add }    
 
 login:
     path:     /login
@@ -43,3 +43,7 @@ reset_pass_tecnico:
 add_administrador:
     path:     /administrador/add
     defaults: { _controller: MProdLicenciaCyPBundle:Administrador:addAdministrador }
+
+persona_add:
+   path:    /persona/add
+   defaults: { _controller: MProdLicenciaCyPBundle:Persona:add }    

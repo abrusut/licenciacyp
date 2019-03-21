@@ -60,11 +60,19 @@ class TipoLicencia
      */
     private $fechaTope;
 
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="is_active", type="boolean")
+     * 
+     */
+    protected $isActive;
+
     /*============================Setter y getters ===============================*/
 
     function __construct()
     {
-
+        $this->setIsActive(true);
     }
 
     function __toString()
@@ -153,6 +161,26 @@ class TipoLicencia
         $this->fechaTope = $fechaTope;
     }
 
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive() {
+        return $this->isActive;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Persona
+     */
+    public function setIsActive($isActive) {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
 
     /*============================Constructor   ===============================
      */

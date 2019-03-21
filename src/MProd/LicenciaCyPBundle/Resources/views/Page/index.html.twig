@@ -1,5 +1,18 @@
 {% extends 'MProdLicenciaCyPBundle:Page:base.html.twig' %}
 
+{% block javascripts %} 
+    {{parent()}}
+    <script>
+        $(document).ready(function () {
+
+            $('.js-datepicker').datepicker({
+                format: 'mm-dd-yyyy'
+            });
+
+        });
+    </script>
+{% endblock %} 
+
 {% block menu %}
     {% block submenus %}
         <li class=''>

@@ -28,9 +28,9 @@ class Provincia
 
 
 
-    function __construct($nombre)
+    function __construct()
     {
-        $this->nombre = $nombre;
+     ;
     }
 
     /**

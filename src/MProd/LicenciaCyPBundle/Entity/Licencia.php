@@ -74,6 +74,34 @@ class Licencia
     private $tipoLicencia;
 
     /**
+     * @var \MProd\LicenciaCyPBundle\Entity\Persona
+     *
+     * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\Persona", inversedBy="licencias")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="persona_id", referencedColumnName="id")
+     * })
+     */
+    private $persona;
+
+    
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"comment"="Tabla persona"})
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+
+    }
+
+    public function __toString()
+    {
+        return $this->getLicencia(). ' ';
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -185,21 +213,29 @@ class Licencia
         $this->tipoLicencia = $tipoLicencia;
     }
 
-
-
-
-    /*============================Setter y getters ===============================*/
-
-    function __construct()
+    /**
+     * @return mixed
+     */
+    public function getPersona()
     {
-
+        return $this->persona;
     }
 
-    function __toString()
+    /**
+     * @param mixed $persona
+     */
+    public function setPersona(Persona $persona)
     {
-        return $this->getLicencia(). ' ';
+        $this->persona = $persona;
     }
 
+     /**
+        * @ORM\PrePersist
+    */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
 
 

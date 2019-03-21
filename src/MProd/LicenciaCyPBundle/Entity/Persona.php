@@ -3,11 +3,14 @@ namespace MProd\LicenciaCyPBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Cuenta
  * @ORM\Entity
  * @ORM\Table(name="persona")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Persona
 {
@@ -76,18 +79,23 @@ class Persona
     private $localidadOtraProvincia;
 
 
+   /**
+     * 
+     * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\TipoDocumento")
+     */
+    private $tipoDocumento;
+
 
     /**
      * @var string
      *
-     * @ORM\Column(name="documento", type="string", length=9, unique=true)
+     * @ORM\Column(name="numero_documento", type="string", length=9, unique=true)
      * @Assert\NotBlank()
      * @Assert\Length(min = 8)
      * @Assert\Length( max = 8)
-     * @Assert\NotNull()
-     * @Assert\Regex(pattern="/^[F|M|f|m|\d]\d{1,7}$/")
+     * @Assert\NotNull()     
      */
-    private $documento;
+    private $numeroDocumento;
 
 
     /**
@@ -131,6 +139,26 @@ class Persona
      */
     private $provincia;
 
+    /**    
+    * @ORM\OneToMany(targetEntity="MProd\LicenciaCyPBundle\Entity\Licencia", mappedBy="persona")
+    */
+    private $licencias;
+
+    
+     /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"comment"="Tabla persona"})
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->licencias = new ArrayCollection();
+    }
+
+
+
     /**
      * @return mixed
      */
@@ -149,11 +177,7 @@ class Persona
     }
 
 
-    function __construct($id)
-    {
-        $this->id = $id;
-    }
-
+   
     /**
      *  Retorna el nombre y el apellido del Usuario
      *
@@ -295,17 +319,17 @@ class Persona
     /**
      * @return string
      */
-    public function getDocumento()
+    public function getNumeroDocumento()
     {
-        return $this->documento;
+        return $this->numeroDocumento;
     }
 
     /**
-     * @param string $documento
+     * @param string $numeroDocumento
      */
-    public function setDocumento($documento)
+    public function setNumeroDocumento($numeroDocumento)
     {
-        $this->documento = $documento;
+        $this->numeroDocumento = $numeroDocumento;
     }
 
     /**
@@ -372,6 +396,28 @@ class Persona
         $this->email = $email;
     }
 
+ /**
+     * @return mixed
+     */
+    public function getTipoDocumento()
+    {
+        return $this->tipoDocumento;
+    }
 
+    /**
+     * @param mixed $tipoDocumento
+     */
+    public function setTipoDocumento($tipoDocumento)
+    {
+        $this->tipoDocumento = $tipoDocumento;
+    }
+
+    /**
+        * @ORM\PrePersist
+    */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
 }
