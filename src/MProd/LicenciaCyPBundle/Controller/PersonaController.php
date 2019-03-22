@@ -5,7 +5,9 @@ namespace MProd\LicenciaCyPBundle\Controller;
 use MProd\LicenciaCyPBundle\Entity\Persona;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use MProd\LicenciaCyPBundle\Form\PersonaType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PersonaController extends Controller
 {
@@ -38,5 +40,26 @@ class PersonaController extends Controller
         }
 
         return $this->render('MProdLicenciaCyPBundle:Persona:add.html.twig', array('form' => $form->createView()));
+    }
+
+    public function findByAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        /*if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('message' => 'La busqueda debe ser por Ajax!'), 400);
+        } */       
+        $data = json_decode($request->getContent());
+
+        $persona = $em
+                            ->getRepository('MProdLicenciaCyPBundle:Persona')
+                            ->findOneBy(array(
+                                'sexo' => $data->sexo,
+                                'tipoDocumento' => $data->tipoDocumento,
+                                'numeroDocumento' => $data->numeroDocumento,
+                            ));
+
+       
+        $array = json_decode( json_encode( $persona ), true );
+        return new JsonResponse($persona,Response::HTTP_OK);
     }
 }

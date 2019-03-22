@@ -47,3 +47,7 @@ add_administrador:
 persona_add:
    path:    /persona/add
    defaults: { _controller: MProdLicenciaCyPBundle:Persona:add }    
+
+persona_findBy:
+   path:    /persona/findBy/{tipoDocumento}/{numeroDocumento}/{sexo}
+   defaults: { _controller: MProdLicenciaCyPBundle:Persona:findBy } 

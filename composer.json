@@ -7,8 +7,8 @@
         "psr-4": { "": "src/", "SymfonyStandard\\": "app/SymfonyStandard/" }
     },
     "require": {
-        "php": ">=5.3.9, <5.5",
-        "symfony/symfony": "2.8",
+        "php": "5.*",
+        "symfony/symfony": "2.8.*",
         "doctrine/orm": "~2.2,>=2.2.3,<2.5",
         "doctrine/dbal": "<2.5",
         "doctrine/doctrine-bundle": "~1.4",
@@ -23,7 +23,8 @@
         "stg/cas-bundle": "1.*",
         "ircmaxell/password-compat": "~1.0",
         "whiteoctober/tcpdf-bundle": "^1.0",
-        "phpoffice/phpword": "dev-master"
+        "phpoffice/phpword": "dev-master",
+        "symfony/serializer": "^3.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

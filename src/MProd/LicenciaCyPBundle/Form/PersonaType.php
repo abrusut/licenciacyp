@@ -5,6 +5,7 @@ namespace MProd\LicenciaCyPBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class PersonaType extends AbstractType
 {
@@ -38,14 +39,18 @@ class PersonaType extends AbstractType
             ->add('sexo', 'choice', array('choices' => array('m' => 'Masculino', 'f' => 'Femenino'), 'required' => FALSE))
             ->add('jubilado', 'choice', array('choices' => array('s' => 'Si', 'n' => 'No'), 'required' => FALSE))
             ->add('telefono', 'text', array('label' => 'Teléfono', 'required' => FALSE, 'attr'=>array('placeholder'=>'3420000000')))
-            ->add('email')
-            ->add('localidad', 'entity', array(
+            ->add('email', EmailType::class)
+            /*->add('localidad', 'entity', array(
                 'label' => 'Localidad',
                 'class' => 'MProdLicenciaCyPBundle:Localidad',                 
-                'required' => FALSE
-                ))
+                'required' => TRUE            
+                ))*/
+            ->add('localidad')
             ->add('provincia')
-            ->add('localidadOtraProvincia')
+            ->add('localidadOtraProvincia','text', array(
+                'label' => 'Localidad Otra Provincia',
+                'required' => FALSE
+            ))
         ;
     }
     

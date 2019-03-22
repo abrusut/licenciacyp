@@ -46,7 +46,7 @@ class Persona
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_nacimiento", type="datetime")
+     * @ORM\Column(name="fecha_nacimiento", type="date")
      * @Assert\NotNull()
      */
     private $fechaNacimiento;
