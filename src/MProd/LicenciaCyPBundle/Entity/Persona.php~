@@ -460,27 +460,4 @@ class Persona
     {
         return $this->licencias;
     }
-
-    /**
-     * Set jubilado
-     *
-     * @param boolean $jubilado
-     * @return Persona
-     */
-    public function setJubilado($jubilado)
-    {
-        $this->jubilado = $jubilado;
-
-        return $this;
-    }
-
-    /**
-     * Get jubilado
-     *
-     * @return boolean 
-     */
-    public function getJubilado()
-    {
-        return $this->jubilado;
-    }
 }

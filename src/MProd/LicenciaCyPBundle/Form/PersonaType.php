@@ -37,7 +37,13 @@ class PersonaType extends AbstractType
             ->add('calle')
             ->add('numero')
             ->add('sexo', 'choice', array('choices' => array('m' => 'Masculino', 'f' => 'Femenino'), 'required' => FALSE))
-            ->add('jubilado', 'choice', array('choices' => array('s' => 'Si', 'n' => 'No'), 'required' => FALSE))
+            ->add('jubilado', 'choice', 
+                     array('choices' => array(1 => 'Si', 0 => 'No'),
+                           'required' => true,
+                           'multiple' => false,
+                           'expanded' => true                           
+                           )                   
+                     )
             ->add('telefono', 'text', array('label' => 'Teléfono', 'required' => FALSE, 'attr'=>array('placeholder'=>'3420000000')))
             ->add('email', EmailType::class)
             /*->add('localidad', 'entity', array(

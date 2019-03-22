@@ -8,7 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use MProd\LicenciaCyPBundle\Form\PersonaType;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class PersonaController extends Controller
 {
         public function addAction(Request $request) {
@@ -45,9 +48,11 @@ class PersonaController extends Controller
     public function findByAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
 
-        /*if (!$request->isXmlHttpRequest()) {
-            return new JsonResponse(array('message' => 'La busqueda debe ser por Ajax!'), 400);
-        } */       
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        
+        $serializer = new Serializer($normalizers, $encoders);
+
         $data = json_decode($request->getContent());
 
         $persona = $em
@@ -59,7 +64,8 @@ class PersonaController extends Controller
                             ));
 
        
-        $array = json_decode( json_encode( $persona ), true );
-        return new JsonResponse($persona,Response::HTTP_OK);
+        $personaJson = $serializer->serialize($persona, 'json');
+        
+        return new Response($personaJson,Response::HTTP_OK, array('content-type'=> 'application/json'));
     }
 }

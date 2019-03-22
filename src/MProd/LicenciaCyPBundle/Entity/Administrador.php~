@@ -6,27 +6,21 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * TipoDocumento
+ * Administrador
  *
  * @ORM\Entity
  */
-class TipoDocumento
+class Administrador extends Usuario
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /*============================Variables ===============================*/
 
     /**
      *@var string
      *
-     *@ORM\Column(name="tipo", type="string", length=100)
+     *@ORM\Column(name="cargo", type="string", length=100)
      */
-    private $tipo;
+    protected $cargo;
 
 
 
@@ -34,44 +28,39 @@ class TipoDocumento
      *
      */
     /**
-     * Set tipo
+     * Set cargo
      *
-     * @param string $tipo
-     * @return TipoDocumento
+     * @param string $cargo
+     * @return Administrador
      */
-    public function setTipo($tipo)
+    public function setCargo($cargo)
     {
-        $this->tipo = $tipo;
+        $this->cargo = $cargo;
 
         return $this;
     }
 
     /**
-     * Get tipo
+     * Get cargo
      *
      * @return string
      */
-    public function getTipo()
+    public function getCargo()
     {
-        return $this->tipo;
+        return $this->cargo;
     }
 
     /*============================Constructor   ===============================
      */
+    public function __construct() {
+        parent::__construct();
+        $this->isActive = true;
+        $this->setRole("ROLE_ADMIN");
+    }
 
     public function __toString() {
-        return $this->getTipo();
+        return $this->getId()." ".$this->getNombre()." ". $this->getApellido()." ".$this->getCargo();
 
     }
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
