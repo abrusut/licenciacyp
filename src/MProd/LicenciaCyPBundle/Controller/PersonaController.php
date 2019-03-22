@@ -12,9 +12,11 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use MProd\LicenciaCyPBundle\Entity\Licencia;
 class PersonaController extends Controller
 {
-        public function addAction(Request $request) {
+    public function addAction(Request $request) {
         $em = $this->container->get('doctrine')->getManager();
         $persona = new Persona();
         $form = $this
@@ -24,10 +26,7 @@ class PersonaController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid() and $form->isSubmitted()) {
-        	//$licencia->setAnio(2018);
-        	//$licencia->setFechaEmitida(new \DateTime());
-        	//$licencia->setFechaVencimiento(new \DateTime());
+        if ($form->isValid() and $form->isSubmitted()) {                      
 
             try {
                 $em->persist($persona);
@@ -48,10 +47,18 @@ class PersonaController extends Controller
     public function findByAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
 
-        $encoders = array(new XmlEncoder(), new JsonEncoder());
-        $normalizers = array(new ObjectNormalizer());
+        $encoders = new JsonEncoder();
+        $normalizer = new GetSetMethodNormalizer();
         
-        $serializer = new Serializer($normalizers, $encoders);
+        $callback = function ($dateTime) {
+            return $dateTime instanceof \DateTime
+                ? $dateTime->format('d/m/Y')
+                : '';
+        };
+
+        $normalizer->setCallbacks(array('fechaNacimiento' => $callback));
+        
+        $serializer = new Serializer(array($normalizer), array($encoders));
 
         $data = json_decode($request->getContent());
 

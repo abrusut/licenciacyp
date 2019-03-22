@@ -101,7 +101,7 @@ class Persona
     /**
      * @var String
      *
-     * @ORM\Column(name="sexo", type="string", length=1, nullable=true)
+     * @ORM\Column(name="sexo", type="string", length=1, nullable=true,unique=true)
      * @Assert\Length(min = 1)
      *
      */
@@ -125,7 +125,7 @@ class Persona
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=50, nullable=false, unique=true)
+     * @ORM\Column(name="email", type="string", length=50, nullable=false, unique=false)
      * @Assert\NotNull()
      * @Assert\Email()
      */
@@ -397,7 +397,7 @@ class Persona
     }
 
     /**
-        * @ORM\PrePersist
+    * @ORM\PrePersist
     */
     public function setCreatedAtValue()
     {

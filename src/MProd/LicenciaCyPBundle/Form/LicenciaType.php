@@ -17,6 +17,9 @@ class LicenciaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('fechaEmitida','hidden', array(
+                'constraints' => null
+                ))
             ->add('tipoLicencia','entity', 
                 array(
                     'label' => 'Tipo Licencia',
@@ -34,7 +37,7 @@ class LicenciaType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'MProd\LicenciaCyPBundle\Entity\Licencia',
-            'cascade_validation' => true
+            'cascade_validation' => true            
         ));
     }
 

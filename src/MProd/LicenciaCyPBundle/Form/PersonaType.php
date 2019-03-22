@@ -16,6 +16,7 @@ class PersonaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('id','hidden')
             ->add('nombre')
             ->add('apellido')
             ->add('fechaNacimiento', 'date', array( 'label'=>'Fecha de Nacimiento',
@@ -67,7 +68,8 @@ class PersonaType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'MProd\LicenciaCyPBundle\Entity\Persona',
-            'cascade_validation' => true
+            'cascade_validation' => true,
+            'error_bubbling' => true
         ));
     }
 

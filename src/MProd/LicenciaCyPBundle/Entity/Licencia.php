@@ -5,11 +5,13 @@ namespace MProd\LicenciaCyPBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\PrePersist;
 /**
  * Licencia
  *
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Licencia
 {
@@ -76,7 +78,8 @@ class Licencia
     /**
      * @var \MProd\LicenciaCyPBundle\Entity\Persona
      *
-     * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\Persona", inversedBy="licencias")
+     * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\Persona", 
+     *                  inversedBy="licencias",cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="persona_id", referencedColumnName="id")
      * })
@@ -236,9 +239,6 @@ class Licencia
     {
         $this->createdAt = new \DateTime();
     }
-
-
-
 
 
     /**

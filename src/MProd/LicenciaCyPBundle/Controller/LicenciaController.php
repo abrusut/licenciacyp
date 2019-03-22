@@ -19,10 +19,24 @@ class LicenciaController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid() and $form->isSubmitted()) {
-        	$licencia->setAnio(2018);
+        // $form->isValid() 
+        if ($form->isSubmitted()) {                                    
+            $anio = new \DateTime();
+            $endOfYear = new \DateTime('last day of December this year');
+
+        	$licencia->setAnio($anio->format('Y'));
         	$licencia->setFechaEmitida(new \DateTime());
-        	$licencia->setFechaVencimiento(new \DateTime());
+            $licencia->setFechaVencimiento($endOfYear);
+            $licencia->setComprobante(1);
+            
+            $dataPersona =  $request->request->getParameters('persona');
+            $persona = $em
+                            ->getRepository('MProdLicenciaCyPBundle:Persona')
+                            ->findOneBy(array(
+                                'sexo' => $dataPersona->getSexo(),
+                                'tipoDocumento' => $dataPersona->getTipoDocumento(),
+                                'numeroDocumento' => $dataPersona->getNumeroDocumento(),
+                            ));
 
             try {
                 $em->persist($licencia);
