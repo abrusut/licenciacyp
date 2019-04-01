@@ -3,6 +3,14 @@
 
 {% block cuerpo %}
 
+     {% if app.session.flashBag.has('home_mensaje') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('home_mensaje') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% block  breadcrumb %}
         {% set breadoption = { 'Inicio': 'path_home', 'Nueva Licencia': '#'} %}
         {{parent()}}

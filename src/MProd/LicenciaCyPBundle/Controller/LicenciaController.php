@@ -30,7 +30,7 @@ class LicenciaController extends Controller
             try {
                 $em->persist($licencia);
                 $em->flush();
-                $this->addFlash('home_mensaje', 'La Licencia ' . $licencia . ' ha sido creado correctamente.');
+                $this->addFlash('home_mensaje', 'La Licencia ' . $licencia . ' ha sido creada correctamente.');
             } catch (\Doctrine\DBAL\DBALException $e) {
                 $exception_number = $e->getPrevious()->getCode();
                 $exception_message = $e->getMessage();
@@ -62,14 +62,14 @@ class LicenciaController extends Controller
                 //$persona->setNumeroDocumento($personaRequest->getNumeroDocumento());
                 //$persona->setSexo($personaRequest->getSexo());
                 $persona->setApellido($personaRequest->getApellido());
-                $persona->setCalle($personaRequest->getCalle());
+                $persona->setDomicilioCalle($personaRequest->getDomicilioCalle());
                 $persona->setEmail($personaRequest->getEmail());
                 $persona->setFechaNacimiento($personaRequest->getFechaNacimiento());
                 $persona->setJubilado($personaRequest->getJubilado());
                 $persona->setLocalidad($personaRequest->getLocalidad());
                 $persona->setLocalidadOtraProvincia($personaRequest->getLocalidadOtraProvincia());
                 $persona->setNombre($personaRequest->getNombre());
-                $persona->setNumero($personaRequest->getNumero());                
+                $persona->setDomicilioNumero($personaRequest->getDomicilioNumero());                
                 $persona->setProvincia($personaRequest->getProvincia());                
                 $persona->setTelefono($personaRequest->getTelefono());                                
                 $licencia->setPersona($persona);

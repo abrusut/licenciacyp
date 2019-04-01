@@ -57,11 +57,12 @@ class PersonaController extends Controller
         };
 
         $normalizer->setCallbacks(array('fechaNacimiento' => $callback));
-        
+        $normalizer->setIgnoredAttributes(array('licencias'));
+
         $serializer = new Serializer(array($normalizer), array($encoders));
 
         $data = json_decode($request->getContent());
-
+        
         $persona = $em
                             ->getRepository('MProdLicenciaCyPBundle:Persona')
                             ->findOneBy(array(
