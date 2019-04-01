@@ -6,6 +6,7 @@ use MProd\LicenciaCyPBundle\Entity\Licencia;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MProd\LicenciaCyPBundle\Form\LicenciaType;
+use MProd\LicenciaCyPBundle\Entity\Persona;
 
 class LicenciaController extends Controller
 {
@@ -18,26 +19,14 @@ class LicenciaController extends Controller
             ->create(new LicenciaType(), $licencia);
 
         $form->handleRequest($request);
-
-        // $form->isValid() 
-        if ($form->isSubmitted()) {                                    
-            $anio = new \DateTime();
-            $endOfYear = new \DateTime('last day of December this year');
-
-        	$licencia->setAnio($anio->format('Y'));
-        	$licencia->setFechaEmitida(new \DateTime());
-            $licencia->setFechaVencimiento($endOfYear);
-            $licencia->setComprobante(1);
+        
+        if ($form->isSubmitted() && $form->isValid() ) {                                    
+                    	  	                                  
+            // $personaRequest = $request->request->get('mprod_licenciacypbundle_licencia')['persona'];
+           
+            // Actualizo la Persona con los datos enviados            
+            $this->bindPersonaToLicencia($licencia);
             
-            $dataPersona =  $request->request->getParameters('persona');
-            $persona = $em
-                            ->getRepository('MProdLicenciaCyPBundle:Persona')
-                            ->findOneBy(array(
-                                'sexo' => $dataPersona->getSexo(),
-                                'tipoDocumento' => $dataPersona->getTipoDocumento(),
-                                'numeroDocumento' => $dataPersona->getNumeroDocumento(),
-                            ));
-
             try {
                 $em->persist($licencia);
                 $em->flush();
@@ -52,5 +41,41 @@ class LicenciaController extends Controller
         }
 
         return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));
+    }
+
+    private function bindPersonaToLicencia(Licencia $licencia) {
+        $em = $this->container->get('doctrine')->getManager();
+
+        $personaRequest = $licencia->getPersona();
+        // Si la licencia tiene ID de Persona, lo levanto para que Doctrine no intente
+        // hacer Insert, y haga update
+        if(!is_null($personaRequest) &&
+            is_object($personaRequest) &&
+            !is_null($personaRequest->getId()))
+        {
+            $persona =  $em
+                ->getRepository('MProdLicenciaCyPBundle:Persona')
+                ->find($licencia->getPersona()->getId());
+
+            if(!is_null($persona)){
+                //$persona->setTipoDocumento($personaRequest->getTipoDocumento());
+                //$persona->setNumeroDocumento($personaRequest->getNumeroDocumento());
+                //$persona->setSexo($personaRequest->getSexo());
+                $persona->setApellido($personaRequest->getApellido());
+                $persona->setCalle($personaRequest->getCalle());
+                $persona->setEmail($personaRequest->getEmail());
+                $persona->setFechaNacimiento($personaRequest->getFechaNacimiento());
+                $persona->setJubilado($personaRequest->getJubilado());
+                $persona->setLocalidad($personaRequest->getLocalidad());
+                $persona->setLocalidadOtraProvincia($personaRequest->getLocalidadOtraProvincia());
+                $persona->setNombre($personaRequest->getNombre());
+                $persona->setNumero($personaRequest->getNumero());                
+                $persona->setProvincia($personaRequest->getProvincia());                
+                $persona->setTelefono($personaRequest->getTelefono());                                
+                $licencia->setPersona($persona);
+            }
+            
+        }
+
     }
 }

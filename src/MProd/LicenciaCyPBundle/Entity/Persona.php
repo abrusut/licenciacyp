@@ -25,20 +25,20 @@ class Persona
 
     /**
      * @var string
-     * @ORM\Column(name="nombre", type="string", length=50)
+     * @ORM\Column(name="nombre", type="string", length=60)
      * @Assert\NotBlank()
      * @Assert\Length(min = 3)
-     * @Assert\Length( max = 150)
+     * @Assert\Length( max = 60)
      * @Assert\NotNull()
      */
     private $nombre;
 
     /**
      * @var string
-     * @ORM\Column(name="apellido", type="string", length=50)
+     * @ORM\Column(name="apellido", type="string", length=60)
      * @Assert\NotBlank()
      * @Assert\Length(min = 3)
-     * @Assert\Length( max = 50)
+     * @Assert\Length( max = 60)
      * @Assert\NotNull()
      */
     private $apellido;
@@ -46,7 +46,7 @@ class Persona
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_nacimiento", type="date")
+     * @ORM\Column(name="fecha_nacimiento", type="date", nullable=false)
      * @Assert\NotNull()
      */
     private $fechaNacimiento;
@@ -54,19 +54,23 @@ class Persona
     /**
      * @var string
      *
-     * @ORM\Column(name="calle", type="string")
+     * @ORM\Column(name="domicilio_calle", type="string", nullable=true,length=60)
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 3)
+     * @Assert\Length( max = 60)
+     * @Assert\NotNull()
      */
-    private $calle;
+    private $domicilioCalle;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="numero", type="string")
+     * @ORM\Column(name="domicilio_numero", type="integer",nullable=true)
      */
-    private $numero;
+    private $domicilioNumero;
 
-    /**
-     * muchos Persona pueden tener una localidad
+    /**     
+     * @var \MProd\LicenciaCyPBundle\Entity\Localidad
      * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\Localidad")
      */
     private $localidad;
@@ -74,22 +78,22 @@ class Persona
     /**
      * @var string
      *
-     * @ORM\Column(name="localidad_otra_provincia", type="string")
+     * @ORM\Column(name="localidad_otra_provincia", type="string", nullable=true)
      */
     private $localidadOtraProvincia;
 
 
    /**
-     * 
+     * @var \MProd\LicenciaCyPBundle\Entity\TipoDocumento
      * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\TipoDocumento")
      */
     private $tipoDocumento;
 
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="numero_documento", type="string", length=9, unique=true)
+     * @ORM\Column(name="numero_documento", type="string", length=9)
      * @Assert\NotBlank()
      * @Assert\Length(min = 8)
      * @Assert\Length( max = 8)
@@ -101,8 +105,8 @@ class Persona
     /**
      * @var String
      *
-     * @ORM\Column(name="sexo", type="string", length=1, nullable=true,unique=true)
-     * @Assert\Length(min = 1)
+     * @ORM\Column(name="sexo", type="string", length=1, nullable=false)
+     * @Assert\Choice(choices={"m", "f"}, message="Seleccione un Genero Valido")
      *
      */
     private $sexo;
@@ -116,7 +120,7 @@ class Persona
     private $jubilado;
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="telefono", type="string", length=15, nullable=true)
      */
@@ -125,20 +129,21 @@ class Persona
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=50, nullable=false, unique=false)
+     * @ORM\Column(name="email", type="string", length=50, nullable=false)
      * @Assert\NotNull()
      * @Assert\Email()
      */
     private $email;
 
-    /**
-     * One Persona has One Provincia.
+    /**     
+     * @var \MProd\LicenciaCyPBundle\Entity\Provincia
      * @ORM\OneToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\Provincia")
      * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id")
      */
     private $provincia;
 
     /**    
+    * @var \MProd\LicenciaCyPBundle\Entity\Licencia
     * @ORM\OneToMany(targetEntity="MProd\LicenciaCyPBundle\Entity\Licencia", mappedBy="persona")
     */
     private $licencias;
@@ -249,38 +254,6 @@ class Persona
     public function setFechaNacimiento($fechaNacimiento)
     {
         $this->fechaNacimiento = $fechaNacimiento;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCalle()
-    {
-        return $this->calle;
-    }
-
-    /**
-     * @param string $calle
-     */
-    public function setCalle($calle)
-    {
-        $this->calle = $calle;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNumero()
-    {
-        return $this->numero;
-    }
-
-    /**
-     * @param string $numero
-     */
-    public function setNumero($numero)
-    {
-        $this->numero = $numero;
     }
 
     /**
@@ -482,5 +455,51 @@ class Persona
     public function getJubilado()
     {
         return $this->jubilado;
+    }
+
+    /**
+     * Set domicilioCalle
+     *
+     * @param string $domicilioCalle
+     * @return Persona
+     */
+    public function setDomicilioCalle($domicilioCalle)
+    {
+        $this->domicilioCalle = $domicilioCalle;
+
+        return $this;
+    }
+
+    /**
+     * Get domicilioCalle
+     *
+     * @return string 
+     */
+    public function getDomicilioCalle()
+    {
+        return $this->domicilioCalle;
+    }
+
+    /**
+     * Set domicilioNumero
+     *
+     * @param integer $domicilioNumero
+     * @return Persona
+     */
+    public function setDomicilioNumero($domicilioNumero)
+    {
+        $this->domicilioNumero = $domicilioNumero;
+
+        return $this;
+    }
+
+    /**
+     * Get domicilioNumero
+     *
+     * @return integer 
+     */
+    public function getDomicilioNumero()
+    {
+        return $this->domicilioNumero;
     }
 }

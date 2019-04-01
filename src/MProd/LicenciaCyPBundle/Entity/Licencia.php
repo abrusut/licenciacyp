@@ -21,29 +21,7 @@ class Licencia
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /*============================Variables ===============================*/
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="anio", type="integer", nullable=false)
-     * @Assert\Range(
-     *              min = 2018
-     * )
-     */
-    private $anio;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="licencia", type="integer", nullable=false)
-     * @Assert\Range(
-     *              min = 0
-     * )
-     */
-    private $licencia;
-
+   
     /**
      * @var \DateTime
      *
@@ -52,6 +30,13 @@ class Licencia
      */
     private $fechaEmitida;
 
+     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_desde", type="datetime")
+     * @Assert\NotNull()
+     */
+    private $fechaDesde;
 
     /**
      * @var \DateTime
@@ -70,7 +55,7 @@ class Licencia
     private $comprobante;
 
     /**
-     * Varias licencias se pueden asociar a un mismo tipo de licencia
+     * @var \MProd\LicenciaCyPBundle\Entity\TipoLicencia     
      * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\TipoLicencia")
      */
     private $tipoLicencia;
@@ -87,21 +72,15 @@ class Licencia
     private $persona;
 
     
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"comment"="Tabla persona"})
-     */
-    private $createdAt;
-
     public function __construct()
-    {
-
+    {        
+        $this->setFechaVencimiento(new \DateTime('last day of December this year'));        
+        $this->setFechaEmitida(new \DateTime());        
     }
 
     public function __toString()
     {
-        return $this->getLicencia(). ' ';
+        return $this->getId(). ' '. $this->getComprobante();
     }
 
     /**
@@ -120,37 +99,7 @@ class Licencia
         $this->id = $id;
     }
 
-    /**
-     * @return int
-     */
-    public function getAnio()
-    {
-        return $this->anio;
-    }
 
-    /**
-     * @param int $anio
-     */
-    public function setAnio($anio)
-    {
-        $this->anio = $anio;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLicencia()
-    {
-        return $this->licencia;
-    }
-
-    /**
-     * @param int $licencia
-     */
-    public function setLicencia($licencia)
-    {
-        $this->licencia = $licencia;
-    }
 
     /**
      * @return \DateTime
@@ -232,35 +181,42 @@ class Licencia
         $this->persona = $persona;
     }
 
-     /**
-        * @ORM\PrePersist
+    /**
+    * @ORM\PrePersist
     */
-    public function setCreatedAtValue()
+    public function setFechaEmitidaValue()
     {
-        $this->createdAt = new \DateTime();
+        $this->fechaEmitida = new \DateTime();
     }
 
+    /**
+    * @ORM\PrePersist
+    */
+    public function setComprobanteValue()
+    {
+        $this->comprobante = $this->getTipoLicencia()->getId().'-'.$this->getPersona()->getTipoDocumento()->getId().'-'.$this->getPersona()->getNumeroDocumento().'-'.$this->getPersona()->getSexo();
+    }
 
     /**
-     * Set createdAt
+     * Set fechaDesde
      *
-     * @param \DateTime $createdAt
+     * @param \DateTime $fechaDesde
      * @return Licencia
      */
-    public function setCreatedAt($createdAt)
+    public function setFechaDesde($fechaDesde)
     {
-        $this->createdAt = $createdAt;
+        $this->fechaDesde = $fechaDesde;
 
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get fechaDesde
      *
      * @return \DateTime 
      */
-    public function getCreatedAt()
+    public function getFechaDesde()
     {
-        return $this->createdAt;
+        return $this->fechaDesde;
     }
 }

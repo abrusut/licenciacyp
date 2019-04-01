@@ -35,8 +35,8 @@ class PersonaType extends AbstractType
                         'required' => FALSE
                     ))            
             ->add('numeroDocumento', 'text', array('label' => 'Número de Documento', 'attr'=>array('placeholder'=>'99999999')))
-            ->add('calle')
-            ->add('numero')
+            ->add('domicilioCalle')
+            ->add('domicilioNumero')
             ->add('sexo', 'choice', array('choices' => array('m' => 'Masculino', 'f' => 'Femenino'), 'required' => FALSE))
             ->add('jubilado', 'choice', 
                      array('choices' => array(1 => 'Si', 0 => 'No'),
