@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MProd\LicenciaCyPBundle\Form\LicenciaType;
 use MProd\LicenciaCyPBundle\Entity\Persona;
+use MProd\LicenciaCyPBundle\Entity\Comprobante;
+use MProd\LicenciaCyPBundle\Entity\TipoLicencia;
 
 class LicenciaController extends Controller
 {
@@ -21,11 +23,12 @@ class LicenciaController extends Controller
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid() ) {                                    
-                    	  	                                  
-            // $personaRequest = $request->request->get('mprod_licenciacypbundle_licencia')['persona'];
-           
+                    	  	                                                         
             // Actualizo la Persona con los datos enviados            
             $this->bindPersonaToLicencia($licencia);
+            $licencia->setComprobante(
+                $this->createComprobante($licencia->getTipoLicencia()->getId()));
+
             
             try {
                 $em->persist($licencia);
@@ -43,6 +46,19 @@ class LicenciaController extends Controller
         return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));
     }
 
+    private function getTipoLicenciaById($idTipoLicencia){
+        $em = $this->container->get('doctrine')->getManager();
+        $tipoLicencia =  $em
+                ->getRepository('MProdLicenciaCyPBundle:TipoLicencia')
+                ->find($idTipoLicencia);
+        return $tipoLicencia;
+    }
+
+    private function createComprobante($idTipoLicencia) {        
+        $comprobante = new Comprobante();
+        $comprobante->setMonto($this->getTipoLicenciaById($idTipoLicencia)->getArancel());
+        return $comprobante;
+    }
     private function bindPersonaToLicencia(Licencia $licencia) {
         $em = $this->container->get('doctrine')->getManager();
 
@@ -55,7 +71,7 @@ class LicenciaController extends Controller
         {
             $persona =  $em
                 ->getRepository('MProdLicenciaCyPBundle:Persona')
-                ->find($licencia->getPersona()->getId());
+                ->find($personaRequest->getId());
 
             if(!is_null($persona)){
                 //$persona->setTipoDocumento($personaRequest->getTipoDocumento());

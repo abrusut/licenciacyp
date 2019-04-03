@@ -46,14 +46,6 @@ class Licencia
      */
     private $fechaVencimiento;
 
-
-    /**
-     *@var string
-     *
-     *@ORM\Column(name="comprobante", type="string")
-     */
-    private $comprobante;
-
     /**
      * @var \MProd\LicenciaCyPBundle\Entity\TipoLicencia     
      * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\TipoLicencia")
@@ -72,6 +64,13 @@ class Licencia
     private $persona;
 
     
+     /**     
+     * @var \MProd\LicenciaCyPBundle\Entity\Comprobante
+     * @ORM\OneToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\Comprobante",cascade={"persist"})
+     * @ORM\JoinColumn(name="comprobante_id", referencedColumnName="id")
+     */
+    private $comprobante;
+
     public function __construct()
     {        
         $this->setFechaVencimiento(new \DateTime('last day of December this year'));        
@@ -80,7 +79,7 @@ class Licencia
 
     public function __toString()
     {
-        return $this->getId(). ' '. $this->getComprobante();
+        return 'Licencia Numero '.$this->getId();
     }
 
     /**
@@ -131,23 +130,7 @@ class Licencia
     public function setFechaVencimiento($fechaVencimiento)
     {
         $this->fechaVencimiento = $fechaVencimiento;
-    }
-
-    /**
-     * @return string
-     */
-    public function getComprobante()
-    {
-        return $this->comprobante;
-    }
-
-    /**
-     * @param string $comprobante
-     */
-    public function setComprobante($comprobante)
-    {
-        $this->comprobante = $comprobante;
-    }
+    }   
 
     /**
      * @return mixed
@@ -189,14 +172,7 @@ class Licencia
         $this->fechaEmitida = new \DateTime();
     }
 
-    /**
-    * @ORM\PrePersist
-    */
-    public function setComprobanteValue()
-    {
-        $this->comprobante = $this->getTipoLicencia()->getId().'-'.$this->getPersona()->getTipoDocumento()->getId().'-'.$this->getPersona()->getNumeroDocumento().'-'.$this->getPersona()->getSexo();
-    }
-
+ 
     /**
      * Set fechaDesde
      *
@@ -218,5 +194,28 @@ class Licencia
     public function getFechaDesde()
     {
         return $this->fechaDesde;
+    }
+
+    /**
+     * Set comprobante
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\Comprobante $comprobante
+     * @return Licencia
+     */
+    public function setComprobante(\MProd\LicenciaCyPBundle\Entity\Comprobante $comprobante = null)
+    {
+        $this->comprobante = $comprobante;
+
+        return $this;
+    }
+
+    /**
+     * Get comprobante
+     *
+     * @return \MProd\LicenciaCyPBundle\Entity\Comprobante 
+     */
+    public function getComprobante()
+    {
+        return $this->comprobante;
     }
 }
