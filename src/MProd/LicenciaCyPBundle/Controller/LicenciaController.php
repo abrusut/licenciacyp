@@ -13,6 +13,7 @@ use MProd\LicenciaCyPBundle\Entity\TipoLicencia;
 class LicenciaController extends Controller
 {
       public function addAction(Request $request) {
+        $this->get('logger')->info("LicenciaController, addAction");
         $em = $this->container->get('doctrine')->getManager();
         $licencia = new Licencia();
         $form = $this
@@ -23,75 +24,29 @@ class LicenciaController extends Controller
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid() ) {                                    
-                    	  	                                                         
-            // Actualizo la Persona con los datos enviados            
-            $this->bindPersonaToLicencia($licencia);
-            $licencia->setComprobante(
-                $this->createComprobante($licencia->getTipoLicencia()->getId()));
-
+            $this->get('logger')->info("LicenciaController, formulario enviado OK..");                                          
+            $this->get('licencia_service')->generarLicencia($licencia);
             
             try {
                 $em->persist($licencia);
                 $em->flush();
+                $this->get('logger')->info("LicenciaController, formulario PROCESADO OK..".'La Licencia ' . $licencia . ' ha sido creada correctamente.');                                          
                 $this->addFlash('home_mensaje', 'La Licencia ' . $licencia . ' ha sido creada correctamente.');
-            } catch (\Doctrine\DBAL\DBALException $e) {
-                $exception_number = $e->getPrevious()->getCode();
-                $exception_message = $e->getMessage();
-
-                return $this->render('MProdLicenciaCyPBundle:Exception:errorDB.html.twig', array('errorCode' => $exception_number, 'errorMessage' => $exception_message));
+            } catch (\Doctrine\DBAL\DBALException $e) {                                                          
+                $exceptionNumber = $e->getPrevious()->getCode();
+                $exceptionMessage = $e->getMessage();
+                $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
+                return $this->render('MProdLicenciaCyPBundle:Exception:errorDB.html.twig', array('errorCode' => $exceptionNumber, 'errorMessage' => $exceptionMessage));
             }
+
+            $this->get('logger')->info("LicenciaController, Redirect path_home");
             return $this->redirect($this->generateUrl("path_home"));
         }
 
+        $this->get('logger')->info("LicenciaController, devuelvo formulario a la vista");
         return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));
     }
 
-    private function getTipoLicenciaById($idTipoLicencia){
-        $em = $this->container->get('doctrine')->getManager();
-        $tipoLicencia =  $em
-                ->getRepository('MProdLicenciaCyPBundle:TipoLicencia')
-                ->find($idTipoLicencia);
-        return $tipoLicencia;
-    }
-
-    private function createComprobante($idTipoLicencia) {        
-        $comprobante = new Comprobante();
-        $comprobante->setMonto($this->getTipoLicenciaById($idTipoLicencia)->getArancel());
-        return $comprobante;
-    }
-    private function bindPersonaToLicencia(Licencia $licencia) {
-        $em = $this->container->get('doctrine')->getManager();
-
-        $personaRequest = $licencia->getPersona();
-        // Si la licencia tiene ID de Persona, lo levanto para que Doctrine no intente
-        // hacer Insert, y haga update
-        if(!is_null($personaRequest) &&
-            is_object($personaRequest) &&
-            !is_null($personaRequest->getId()))
-        {
-            $persona =  $em
-                ->getRepository('MProdLicenciaCyPBundle:Persona')
-                ->find($personaRequest->getId());
-
-            if(!is_null($persona)){
-                //$persona->setTipoDocumento($personaRequest->getTipoDocumento());
-                //$persona->setNumeroDocumento($personaRequest->getNumeroDocumento());
-                //$persona->setSexo($personaRequest->getSexo());
-                $persona->setApellido($personaRequest->getApellido());
-                $persona->setDomicilioCalle($personaRequest->getDomicilioCalle());
-                $persona->setEmail($personaRequest->getEmail());
-                $persona->setFechaNacimiento($personaRequest->getFechaNacimiento());
-                $persona->setJubilado($personaRequest->getJubilado());
-                $persona->setLocalidad($personaRequest->getLocalidad());
-                $persona->setLocalidadOtraProvincia($personaRequest->getLocalidadOtraProvincia());
-                $persona->setNombre($personaRequest->getNombre());
-                $persona->setDomicilioNumero($personaRequest->getDomicilioNumero());                
-                $persona->setProvincia($personaRequest->getProvincia());                
-                $persona->setTelefono($personaRequest->getTelefono());                                
-                $licencia->setPersona($persona);
-            }
-            
-        }
-
-    }
+   
+    
 }

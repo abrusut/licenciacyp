@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
- * Cuenta
- * @ORM\Entity
+ * Persona
+ * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\PersonaRepository")
  * @ORM\Table(name="persona")
  * @ORM\HasLifecycleCallbacks()
  */

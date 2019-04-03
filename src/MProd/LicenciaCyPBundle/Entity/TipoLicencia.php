@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * TipoLicencia
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\TipoLicenciaRepository")
  */
 class TipoLicencia
 {

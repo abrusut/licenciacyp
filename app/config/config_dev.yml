@@ -41,6 +41,12 @@ monolog:
         #    type:   chromephp
         #    level:  info
 
+        app_logs:
+            type:  rotating_file
+            max_files: 10
+            path:   "%kernel.logs_dir%/licenciaCyP_%kernel.environment%.log"
+            level:  debug
+            channels: ["!doctrine","!main","!event","!php","!translation","!security"]
 assetic:
     use_controller: true
 

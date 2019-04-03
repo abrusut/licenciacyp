@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\PrePersist;
 /**
  * Licencia
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\LicenciaRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Licencia
@@ -156,12 +156,18 @@ class Licencia
         return $this->persona;
     }
 
+   
     /**
-     * @param mixed $persona
+     * Set persona
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\Persona $persona
+     * @return Licencia
      */
     public function setPersona(Persona $persona)
     {
         $this->persona = $persona;
+
+        return $this;
     }
 
     /**

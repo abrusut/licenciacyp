@@ -1,4 +1,12 @@
 services:
-#    m_prod_licencia_cy_p.example:
-#        class: MProd\LicenciaCyPBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    licencia_service:
+        class: MProd\LicenciaCyPBundle\Service\LicenciaServiceImpl
+        autowire: true
+
+    persona_service:
+        class: MProd\LicenciaCyPBundle\Service\PersonaServiceImpl
+        autowire: true
+    
+    tipo_licencia_service:
+        class: MProd\LicenciaCyPBundle\Service\TipoLicenciaServiceImpl
+        autowire: true
