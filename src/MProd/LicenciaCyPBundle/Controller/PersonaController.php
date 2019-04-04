@@ -14,13 +14,21 @@ class PersonaController extends Controller
         $this->get('logger')->info("Entro en PersonaController findByAction ");
 
         $data = json_decode($request->getContent());
-        $personaJson = $this->get('persona_service')
+        
+        $persona = $this->get('persona_service')
                             ->findBySexoAndTipoDocumentoAndNumeroDocumento($data->sexo,
                                                                             $data->tipoDocumento,
                                                                             $data->numeroDocumento);
 
         
-        $this->get('logger')->info("Result: ".$personaJson);                                                                            
+        $jsonService = $this->get('json_service');          
+        $jsonService->setArrayIgnoredAttributes(array('licencias'));
+
+        $personaJson = $jsonService->transformToJson($persona);
+                     
+
+        $this->get('logger')->info("Persona: ".$personaJson);  
+
         return new Response($personaJson,Response::HTTP_OK, array('content-type'=> 'application/json'));
     }
 }

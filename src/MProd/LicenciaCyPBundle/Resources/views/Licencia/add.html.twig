@@ -3,9 +3,9 @@
 
 {% block cuerpo %}
 
-     {% if app.session.flashBag.has('home_mensaje') %}
+     {% if app.session.flashBag.has('licenciaForm_message') %}
         <div class="alert alert-success">
-            {% for msg in app.session.flashBag.get('home_mensaje') %}
+            {% for msg in app.session.flashBag.get('licenciaForm_message') %}
                 {{ msg }}
             {% endfor %}
         </div>

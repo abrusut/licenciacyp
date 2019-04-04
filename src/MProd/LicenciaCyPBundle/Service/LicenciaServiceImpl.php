@@ -2,25 +2,38 @@
 
 namespace MProd\LicenciaCyPBundle\Service;
 
-use Doctrine\ORM\EntityManager;
 use MProd\LicenciaCyPBundle\Entity\Licencia;
 use MProd\LicenciaCyPBundle\Entity\Comprobante;
 use Psr\Log\LoggerInterface;
-
-
+use MProd\LicenciaCyPBundle\Repository\ILicenciaRepository;
 class LicenciaServiceImpl implements ILicenciaService {
 
     private $personaService;
-    private $em;
     private $tipoLicenciaService;
+    private $licenciaRepository;
 
-    public function __construct(LoggerInterface $logger, EntityManager $entityManager,
-                                IPersonaService $personaService, ITipoLicenciaService $tipoLicenciaService )
+    public function __construct(LoggerInterface $logger,
+                                IPersonaService $personaService, 
+                                ITipoLicenciaService $tipoLicenciaService,
+                                ILicenciaRepository $licenciaRepository )
     {
-        $this->personaService = $personaService;
-        $this->em = $entityManager;
-        $this->tipoLicenciaService = $tipoLicenciaService;
+        $this->personaService = $personaService;    
+        $this->licenciaRepository = $licenciaRepository;    
+        $this->tipoLicenciaService = $tipoLicenciaService;       
     }   
+
+    /**
+     * @param MProd\LicenciaCyPBundle\Entity\Licencia     
+     * @return void
+     */  
+    public function save(Licencia $licencia){
+        return $this->licenciaRepository->save($licencia);
+    }
+
+    public function findById($id){
+        $this->logger->info("Buscando Licencia por id ".$id);
+        return $this->licenciaRepository->findById($id);       
+    }
 
     public function generarLicencia(Licencia $licencia){
         // Actualizo la Persona (si existe previamente) con los datos enviados            
@@ -59,10 +72,11 @@ class LicenciaServiceImpl implements ILicenciaService {
 
             // SI existe actualizo los datos con los datos que viajaron en el request
             if(!is_null($persona)){
+                $persona->copyValues($personaRequest);
                 //$persona->setTipoDocumento($personaRequest->getTipoDocumento());
                 //$persona->setNumeroDocumento($personaRequest->getNumeroDocumento());
                 //$persona->setSexo($personaRequest->getSexo());
-                $persona->setApellido($personaRequest->getApellido());
+               /* $persona->setApellido($personaRequest->getApellido());
                 $persona->setDomicilioCalle($personaRequest->getDomicilioCalle());
                 $persona->setEmail($personaRequest->getEmail());
                 $persona->setFechaNacimiento($personaRequest->getFechaNacimiento());
@@ -72,11 +86,13 @@ class LicenciaServiceImpl implements ILicenciaService {
                 $persona->setNombre($personaRequest->getNombre());
                 $persona->setDomicilioNumero($personaRequest->getDomicilioNumero());                
                 $persona->setProvincia($personaRequest->getProvincia());                
-                $persona->setTelefono($personaRequest->getTelefono());                                
+                $persona->setTelefono($personaRequest->getTelefono());  */                              
                 $licencia->setPersona($persona);
             }            
         }
     }
+
+     
 
 }
 

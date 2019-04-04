@@ -2,24 +2,35 @@
 
 namespace MProd\LicenciaCyPBundle\Service;
 
-use Doctrine\ORM\EntityManager;
 use MProd\LicenciaCyPBundle\Entity\TipoLicencia;
 use Psr\Log\LoggerInterface;
+use MProd\LicenciaCyPBundle\Repository\ITipoLicenciaRepository;
+
 
 
 class TipoLicenciaServiceImpl implements ITipoLicenciaService {
+    
+    private $logger;
+    private $tipoLicenciaRepository;
 
-    private $em;
-
-    public function __construct(LoggerInterface $logger,EntityManager $entityManager )
+    public function __construct(LoggerInterface $logger, 
+            ITipoLicenciaRepository $tipoLicenciaRepository )
     {
-        $this->em = $entityManager;
+        $this->logger = $logger;
+        $this->tipoLicenciaRepository = $tipoLicenciaRepository;
+    }
+
+    /**
+     * @param MProd\LicenciaCyPBundle\Entity\TipoLicencia     
+     * @return void
+     */  
+    public function save(TipoLicencia $tipoLicencia){
+        return $this->tipoLicenciaRepository->save($tipoLicencia);
     }
 
     public function findById($id){
-        return  $this->em
-                ->getRepository(TipoLicencia::class)
-                ->find($id);
+        $this->logger->info("Buscando TipoLicencia por id ".$id);
+        return $this->tipoLicenciaRepository->findById($id);       
     }
 }
 

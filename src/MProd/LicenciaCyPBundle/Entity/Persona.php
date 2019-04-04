@@ -502,4 +502,13 @@ class Persona
     {
         return $this->domicilioNumero;
     }
+    
+    public function copyValues($objectForCopy)
+    {   
+        $vars=is_object($objectForCopy)?get_object_vars($objectForCopy):$objectForCopy;
+        if(!is_array($vars)) throw Exception('Sin propiedades para el objeto persona!');
+        foreach ($vars as $key => $value) {
+            $this->$key = $value;
+        }
+    }
 }

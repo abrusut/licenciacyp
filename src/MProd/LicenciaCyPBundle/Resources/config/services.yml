@@ -1,4 +1,5 @@
 services:
+   
     licencia_service:
         class: MProd\LicenciaCyPBundle\Service\LicenciaServiceImpl
         autowire: true
@@ -10,3 +11,28 @@ services:
     tipo_licencia_service:
         class: MProd\LicenciaCyPBundle\Service\TipoLicenciaServiceImpl
         autowire: true
+
+    json_service:
+        class: MProd\LicenciaCyPBundle\Service\JsonServiceImpl
+        autowire: true
+
+    persona_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - MProd\LicenciaCyPBundle\Entity\Persona        
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\IPersonaRepository
+
+    licencia_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - MProd\LicenciaCyPBundle\Entity\Licencia
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\ILicenciaRepository
+    
+    tipo_licencia_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - MProd\LicenciaCyPBundle\Entity\TipoLicencia
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\ITipoLicenciaRepository
