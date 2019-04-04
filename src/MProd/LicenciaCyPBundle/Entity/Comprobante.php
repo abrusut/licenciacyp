@@ -33,6 +33,30 @@ class Comprobante
      */
     private $monto;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="recargo", type="float", nullable=false)
+     * @Assert\Range(
+     *              min = 0,
+     *              minMessage = "El recargo no pueden ser menor que cero"
+     * )
+     */
+    private $recargo;
+
+     /**
+     *@var string
+     *
+     *@ORM\Column(name="cliente_sap", type="string", nullable=false)
+     */
+    private $clienteSap; 
+
+     /**
+     *@var string
+     *
+     *@ORM\Column(name="letra_servicio", type="string", nullable=false)
+     */
+    private $letraServicio; 
 
     /**
      *@var string
@@ -48,13 +72,28 @@ class Comprobante
      */
     private $fechaPago;
 
-     /**
+    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_vencimiento", type="datetime", nullable=true)
+     * @ORM\Column(name="primer_vencimiento", type="datetime", nullable=true)
      * @Assert\NotNull()
      */
-    private $fechaVencimiento;
+    private $primerVencimiento;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="segundo_vencimiento", type="datetime", nullable=true)
+     * @Assert\NotNull()
+     */
+    private $segundoVencimiento;    
+
+    /**
+     *@var string
+     *
+     *@ORM\Column(name="numero_codigo_barra", type="string", nullable=true)
+     */
+    private $numeroCodigoBarra;
 
      /**
      * @var \DateTime
@@ -62,10 +101,7 @@ class Comprobante
      * @ORM\Column(name="created_at", type="datetime")
      * @Assert\NotNull()
      */
-    private $createdAt;
-
-    
-
+    private $createdAt;    
    
 
     /**
