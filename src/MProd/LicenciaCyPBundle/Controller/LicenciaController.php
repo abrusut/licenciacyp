@@ -12,6 +12,7 @@ use MProd\LicenciaCyPBundle\Entity\TipoLicencia;
 use MProd\LicenciaCyPBundle\Service\LicenciaServiceImpl;
 use MProd\LicenciaCyPBundle\Service\ILicenciaService;
 use MProd\LicenciaCyPBundle\Exception\SimpleMessageException;
+use MProd\LicenciaCyPBundle\Service\BoletaServiceImpl;
 
 class LicenciaController extends Controller
 {
@@ -34,6 +35,8 @@ class LicenciaController extends Controller
                 
                 /** @var LicenciaServiceImpl $licenciaService */
                 $licenciaService = $this->get('licencia_service');
+                /** @var BoletaServiceImpl $boletaService */
+                $boletaService = $this->get('boleta_service');
               
                 try {
                     $licenciaService->generarLicencia($licencia);
@@ -48,6 +51,7 @@ class LicenciaController extends Controller
 
                 try {
                     $licenciaService->save($licencia);
+                    $boletaService->generarBoleta($licencia);
                     
                     $this->get('logger')->info("LicenciaController, formulario PROCESADO OK..".'La Licencia ' . $licencia . ' ha sido creada correctamente.');                                          
                     $this->addFlash('licenciaForm_message', 'La Licencia ' . $licencia . ' ha sido creada correctamente.');

@@ -34,7 +34,7 @@ class ComprobanteServiceImpl implements IComprobanteService{
             $fechaPrimerVencimiento = new \DateTime();
             $fechaPrimerVencimiento->add(new \DateInterval('P'.$tipoLicencia->getDiasPrimerVencimiento().'D'));
             $comprobante->setPrimerVencimiento($fechaPrimerVencimiento);
-            $recargoPrimerVencimiento = round($tipoLicencia->getArancel() * $tipoLicencia->getPorcentajeRecargoPrimerVencimiento(),2);
+            $recargoPrimerVencimiento = round(($tipoLicencia->getArancel() * $tipoLicencia->getPorcentajeRecargoPrimerVencimiento())/100,2);
             $comprobante->setRecargoPrimerVencimiento($recargoPrimerVencimiento);
         }
 
@@ -44,7 +44,7 @@ class ComprobanteServiceImpl implements IComprobanteService{
             $fechaSegundoVencimiento = new \DateTime();
             $fechaSegundoVencimiento->add(new \DateInterval('P'.$tipoLicencia->getDiasSegundoVencimiento().'D'));
             $comprobante->setSegundoVencimiento($fechaSegundoVencimiento);
-            $recargoSegundoVencimiento = round($tipoLicencia->getArancel() * $tipoLicencia->getPorcentajeRecargoSegundoVencimiento(),2);
+            $recargoSegundoVencimiento = round(($tipoLicencia->getArancel() * $tipoLicencia->getPorcentajeRecargoSegundoVencimiento())/100,2);
             $comprobante->setRecargoSegundoVencimiento($recargoSegundoVencimiento);
         }
         

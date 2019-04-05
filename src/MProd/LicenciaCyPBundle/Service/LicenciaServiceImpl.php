@@ -16,18 +16,21 @@ class LicenciaServiceImpl implements ILicenciaService {
     private $tipoLicenciaService;
     private $licenciaRepository;
     private $comprobanteService;
+    private $boletaService;
 
     public function __construct(LoggerInterface $logger,
                                 IPersonaService $personaService, 
                                 ITipoLicenciaService $tipoLicenciaService,
                                 ILicenciaRepository $licenciaRepository,
-                                IComprobanteService $comprobanteService )
+                                IComprobanteService $comprobanteService,
+                                IBoletaService $boletaService )
     {
         $this->logger = $logger;
         $this->personaService = $personaService;    
         $this->licenciaRepository = $licenciaRepository;    
         $this->tipoLicenciaService = $tipoLicenciaService;       
         $this->comprobanteService = $comprobanteService;
+        $this->boletaService = $boletaService;
     }   
 
     /**
@@ -54,7 +57,7 @@ class LicenciaServiceImpl implements ILicenciaService {
 
         $licencia->setComprobante($comprobante);
 
-        $licencia->configurarVigencia();
+        $licencia->configurarVigencia();        
         
     }
 
