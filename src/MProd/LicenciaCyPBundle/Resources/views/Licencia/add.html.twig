@@ -11,6 +11,14 @@
         </div>
     {% endif %}
 
+    {% if app.session.flashBag.has('licenciaForm_message_error') %}
+        <div class="alert alert-danger">
+            {% for msg in app.session.flashBag.get('licenciaForm_message_error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% block  breadcrumb %}
         {% set breadoption = { 'Inicio': 'path_home', 'Nueva Licencia': '#'} %}
         {{parent()}}

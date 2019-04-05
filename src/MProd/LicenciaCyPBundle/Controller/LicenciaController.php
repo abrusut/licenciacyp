@@ -11,6 +11,7 @@ use MProd\LicenciaCyPBundle\Entity\Comprobante;
 use MProd\LicenciaCyPBundle\Entity\TipoLicencia;
 use MProd\LicenciaCyPBundle\Service\LicenciaServiceImpl;
 use MProd\LicenciaCyPBundle\Service\ILicenciaService;
+use MProd\LicenciaCyPBundle\Exception\SimpleMessageException;
 
 class LicenciaController extends Controller
 {
@@ -33,9 +34,18 @@ class LicenciaController extends Controller
                 
                 /** @var LicenciaServiceImpl $licenciaService */
                 $licenciaService = $this->get('licencia_service');
-                
-                $licenciaService->generarLicencia($licencia);
-                
+              
+                try {
+                    $licenciaService->generarLicencia($licencia);
+                } catch (SimpleMessageException $sme) {                                                          
+                    $exceptionNumber = $sme->getCode();
+                    $exceptionMessage = $sme->getMessage();
+                    $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
+
+                    $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .'. $sme->getMessage());
+                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));                    
+                }
+
                 try {
                     $licenciaService->save($licencia);
                     

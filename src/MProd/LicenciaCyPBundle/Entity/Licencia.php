@@ -224,4 +224,17 @@ class Licencia
     {
         return $this->comprobante;
     }
+
+
+    public function configurarVigencia(){
+         // Vencimiento
+         $fechaVencimiento = new \DateTime();
+         $fechaVencimiento->add(new \DateInterval('P'.$this->tipoLicencia->getDiasVigencia().'D'));
+
+         if($this->tipoLicencia->getDiasVigencia() == 365){
+            $fechaVencimiento = new \DateTime('last day of December this year');
+         }
+
+        $this->setFechaVencimiento($fechaVencimiento);
+    }
 }

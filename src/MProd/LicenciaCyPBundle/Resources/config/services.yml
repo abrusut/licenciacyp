@@ -15,6 +15,10 @@ services:
     json_service:
         class: MProd\LicenciaCyPBundle\Service\JsonServiceImpl
         autowire: true
+    
+    comprobante_service:
+        class: MProd\LicenciaCyPBundle\Service\ComprobanteServiceImpl
+        autowire: true
 
     persona_repository:
         class: Doctrine\ORM\EntityRepository
@@ -36,3 +40,10 @@ services:
         arguments:
             - MProd\LicenciaCyPBundle\Entity\TipoLicencia
         autowiring_types: MProd\LicenciaCyPBundle\Repository\ITipoLicenciaRepository
+    
+    comprobante_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - MProd\LicenciaCyPBundle\Entity\Comprobante
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\IComprobanteRepository

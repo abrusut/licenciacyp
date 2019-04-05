@@ -16,7 +16,9 @@ class TiposDocumentos implements FixtureInterface {
             array(
                 'tipo' => 'L.E'
             ),
-
+            array(
+                'tipo' => 'L.C'
+            ),
 
             // ...
         );

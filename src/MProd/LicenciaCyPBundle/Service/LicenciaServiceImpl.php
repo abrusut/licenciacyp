@@ -6,20 +6,28 @@ use MProd\LicenciaCyPBundle\Entity\Licencia;
 use MProd\LicenciaCyPBundle\Entity\Comprobante;
 use Psr\Log\LoggerInterface;
 use MProd\LicenciaCyPBundle\Repository\ILicenciaRepository;
+use MProd\LicenciaCyPBundle\Exception\SimpleMessageException;
+use MProd\LicenciaCyPBundle\Entity\Persona;
+use MProd\LicenciaCyPBundle\Entity\TipoLicencia;
 class LicenciaServiceImpl implements ILicenciaService {
 
+    private $logger;
     private $personaService;
     private $tipoLicenciaService;
     private $licenciaRepository;
+    private $comprobanteService;
 
     public function __construct(LoggerInterface $logger,
                                 IPersonaService $personaService, 
                                 ITipoLicenciaService $tipoLicenciaService,
-                                ILicenciaRepository $licenciaRepository )
+                                ILicenciaRepository $licenciaRepository,
+                                IComprobanteService $comprobanteService )
     {
+        $this->logger = $logger;
         $this->personaService = $personaService;    
         $this->licenciaRepository = $licenciaRepository;    
         $this->tipoLicenciaService = $tipoLicenciaService;       
+        $this->comprobanteService = $comprobanteService;
     }   
 
     /**
@@ -36,27 +44,49 @@ class LicenciaServiceImpl implements ILicenciaService {
     }
 
     public function generarLicencia(Licencia $licencia){
+        $this->validate($licencia);            
+
         // Actualizo la Persona (si existe previamente) con los datos enviados            
-        $this->bindPersonaToLicencia($licencia);
-
-        $idTipoLicencia = $licencia->getTipoLicencia()->getId();
-
+        $this->bindPersonaToLicencia($licencia);        
+        
         // Creo el Comprobante
-        $licencia->setComprobante(
-            $this->createComprobante($idTipoLicencia));
+        $comprobante = $this->comprobanteService->generarComprobante($licencia->getTipoLicencia());        
+
+        $licencia->setComprobante($comprobante);
+
+        $licencia->configurarVigencia();
         
     }
 
-    public function createComprobante($idTipoLicencia) {        
-        $comprobante = new Comprobante();
-        
-        //Obtengo el tipo de licencia para sacar el Arancel
-        $tipoLicencia = $this->tipoLicenciaService->findById($idTipoLicencia);
+    public function validate(Licencia $licencia){
+        /** @var Persona $persona */
+        $persona = $licencia->getPersona();
 
-        $comprobante->setMonto($tipoLicencia->getArancel());
-        return $comprobante;
+        /** @var TipoLicencia $tipoLicencia */
+        $tipoLicencia = $licencia->getTipoLicencia();
+
+        $generoJubiladoTipoLicencia = $tipoLicencia->getGeneroJubilado();
+
+        $sexoCliente = $persona->getSexo();
+        $isPersonaJubilado = $persona->getJubilado();
+
+        if(!is_null($generoJubiladoTipoLicencia))
+        {
+            if($isPersonaJubilado && ($generoJubiladoTipoLicencia != 'j') ){
+                throw new SimpleMessageException("Selecciona que es Jubilado, pero la licencia no es del mismo tipo");
+            }
+
+            if(!$isPersonaJubilado && ($generoJubiladoTipoLicencia == 'j') ){
+                throw new SimpleMessageException("Selecciona que NO es Jubilado, pero la licencia que intenta sacar es para Jubilados");
+            }
+
+            if($sexoCliente == 'f' && $generoJubiladoTipoLicencia != 'f'
+                || ($sexoCliente == 'm' && $generoJubiladoTipoLicencia != 'm') ){
+                throw new SimpleMessageException("El genero de la licencia seleccionada no corresponde con el cargado en la persona");
+            }
+        }
     }
-
+    
     public function bindPersonaToLicencia(Licencia $licencia) {        
         // Saco los datos de la persona que vino en el request
         $personaRequest = $licencia->getPersona();
@@ -67,26 +97,12 @@ class LicenciaServiceImpl implements ILicenciaService {
             is_object($personaRequest) &&
             !is_null($personaRequest->getId()))
         {           
-            // Obtengo la Persona desde la Base 
+            // Obtengo la Persona desde la Base              
             $persona = $this->personaService->findById($personaRequest->getId());
 
             // SI existe actualizo los datos con los datos que viajaron en el request
             if(!is_null($persona)){
-                $persona->copyValues($personaRequest);
-                //$persona->setTipoDocumento($personaRequest->getTipoDocumento());
-                //$persona->setNumeroDocumento($personaRequest->getNumeroDocumento());
-                //$persona->setSexo($personaRequest->getSexo());
-               /* $persona->setApellido($personaRequest->getApellido());
-                $persona->setDomicilioCalle($personaRequest->getDomicilioCalle());
-                $persona->setEmail($personaRequest->getEmail());
-                $persona->setFechaNacimiento($personaRequest->getFechaNacimiento());
-                $persona->setJubilado($personaRequest->getJubilado());
-                $persona->setLocalidad($personaRequest->getLocalidad());
-                $persona->setLocalidadOtraProvincia($personaRequest->getLocalidadOtraProvincia());
-                $persona->setNombre($personaRequest->getNombre());
-                $persona->setDomicilioNumero($personaRequest->getDomicilioNumero());                
-                $persona->setProvincia($personaRequest->getProvincia());                
-                $persona->setTelefono($personaRequest->getTelefono());  */                              
+                $persona->copyValues($personaRequest);                                            
                 $licencia->setPersona($persona);
             }            
         }

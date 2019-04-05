@@ -14,39 +14,123 @@ class TipoLicencias implements FixtureInterface
     public function load(ObjectManager $manager)
     {
 
-        $tipos = array(
+        $tiposLicencia = array(
             array(
-                'descripcion'=>'Licencia Caza',
-                'arancel'=> 750.00,
+                'descripcion'=>'Caza Deportiva Particular',
+                'generoJubilado'=>null,
+                'arancel'=> 300.00,
                 'diasVigencia'=>365,
-                'fechaTope'=>new \DateTime()
+                'fechaTope'=>new \DateTime(),
+                'isActive'=>1,
+                'clienteSap'=>'15964',
+                'letraServicio'=>'A',
+                'porcentajeRecargoPrimerVencimiento'=>0,
+                'porcentajeRecargoSegundoVencimiento'=>0,
+                'diasPrimerVencimiento'=>0,
+                'diasSegundoVencimiento'=>0,
                 ),
             array(
-                'descripcion'=>'Licencia Pesca',
+                'descripcion'=>'Pesca Deportiva Particular',
+                'generoJubilado'=>null,
                 'arancel'=> 500.00,
                 'diasVigencia'=>365,
-                'fechaTope'=>new \DateTime()
+                'fechaTope'=>new \DateTime(),
+                'isActive'=>1,
+                'clienteSap'=>'15964',
+                'letraServicio'=>'A',
+                'porcentajeRecargoPrimerVencimiento'=>0,
+                'porcentajeRecargoSegundoVencimiento'=>0,
+                'diasPrimerVencimiento'=>0,
+                'diasSegundoVencimiento'=>0,
                 ),
             array(
-                'descripcion'=>'Licencia Caza y Pesca',
-                'arancel'=> 1200.00,
-                'diasVigencia'=>365,
-                'fechaTope'=>new \DateTime()
+                'descripcion'=>'Caza Deportiva Turista Nacional',
+                'generoJubilado'=>null,
+                'arancel'=> 400.00,
+                'diasVigencia'=>7,
+                'fechaTope'=>new \DateTime(),
+                'isActive'=>1,
+                'clienteSap'=>'15964',
+                'letraServicio'=>'A',
+                'porcentajeRecargoPrimerVencimiento'=>0,
+                'porcentajeRecargoSegundoVencimiento'=>0,
+                'diasPrimerVencimiento'=>0,
+                'diasSegundoVencimiento'=>0,
                 ),
             array(
-                'descripcion'=>'Licencia Jubilados',
-                'arancel'=> 0.00,
-                'diasVigencia'=>365,
-                'fechaTope'=>new \DateTime()
+                'descripcion'=>'Pesca Deportiva Turista Nacional',
+                'generoJubilado'=>null,
+                'arancel'=> 200,
+                'diasVigencia'=>7,
+                'fechaTope'=>new \DateTime(),
+                'isActive'=>1,
+                'clienteSap'=>'15964',
+                'letraServicio'=>'A',
+                'porcentajeRecargoPrimerVencimiento'=>0,
+                'porcentajeRecargoSegundoVencimiento'=>0,
+                'diasPrimerVencimiento'=>0,
+                'diasSegundoVencimiento'=>0,
                 ),
-
+            array(
+                'descripcion'=>'Caza deportiva Dama',
+                'generoJubilado'=>'f',
+                'arancel'=> 0,
+                'diasVigencia'=>365,
+                'fechaTope'=>new \DateTime(),
+                'isActive'=>1,
+                'clienteSap'=>'15964',
+                'letraServicio'=>'A',
+                'porcentajeRecargoPrimerVencimiento'=>0,
+                'porcentajeRecargoSegundoVencimiento'=>0,
+                'diasPrimerVencimiento'=>0,
+                'diasSegundoVencimiento'=>0,
+            ),
+            array(
+                'descripcion'=>'Pesca deportiva Dama',
+                'generoJubilado'=>'f',
+                'arancel'=> 0,
+                'diasVigencia'=>365,
+                'fechaTope'=>new \DateTime(),
+                'isActive'=>1,
+                'clienteSap'=>'15964',
+                'letraServicio'=>'A',
+                'porcentajeRecargoPrimerVencimiento'=>0,
+                'porcentajeRecargoSegundoVencimiento'=>0,
+                'diasPrimerVencimiento'=>0,
+                'diasSegundoVencimiento'=>0,
+            ),
+            array(
+                'descripcion'=>'Caza deportiva Jubilado',
+                'generoJubilado'=>'j',
+                'arancel'=> 0,
+                'diasVigencia'=>365,
+                'fechaTope'=>new \DateTime(),
+                'isActive'=>1,
+                'clienteSap'=>'15964',
+                'letraServicio'=>'A',
+                'porcentajeRecargoPrimerVencimiento'=>0,
+                'porcentajeRecargoSegundoVencimiento'=>0,
+                'diasPrimerVencimiento'=>0,
+                'diasSegundoVencimiento'=>0,
+            ),
+            array(
+                'descripcion'=>'Pesca deportiva Jubilado',
+                'generoJubilado'=>'j',
+                'arancel'=> 0,
+                'diasVigencia'=>365,
+                'fechaTope'=>new \DateTime(),
+                'isActive'=>1,
+                'clienteSap'=>'15964',
+                'letraServicio'=>'A',
+                'porcentajeRecargoPrimerVencimiento'=>0,
+                'porcentajeRecargoSegundoVencimiento'=>0,
+                'diasPrimerVencimiento'=>0,
+                'diasSegundoVencimiento'=>0,
+            )
         );
-        foreach ($tipos as $tipo) {
+        foreach ($tiposLicencia as $tipoLicencia) {
             $entidad = new \MProd\LicenciaCyPBundle\Entity\TipoLicencia();
-            $entidad->setDescripcion($tipo['descripcion']);
-            $entidad->setArancel($tipo['arancel']);
-            $entidad->setDiasVigencia($tipo['diasVigencia']);
-            $entidad->setFechaTope($tipo['fechaTope']);
+            $entidad = $entidad->copyValues($tipoLicencia);
             $manager->persist($entidad);
         }
         $manager->flush();

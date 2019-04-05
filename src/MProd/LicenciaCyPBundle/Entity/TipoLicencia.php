@@ -31,6 +31,29 @@ class TipoLicencia
     private $descripcion;
 
     /**
+     * @var String
+     *
+     * @ORM\Column(name="genero_jubilado", type="string", length=1, nullable=true)
+     * @Assert\Choice(choices={"m", "f", "j"}, message="Seleccione una opcion Valida")
+     *
+     */
+    private $generoJubilado;
+
+    /**
+     *@var string
+     *
+     *@ORM\Column(name="cliente_sap", type="string", nullable=false)
+     */
+    private $clienteSap; 
+
+     /**
+     *@var string
+     *
+     *@ORM\Column(name="letra_servicio", type="string", nullable=false)
+     */
+    private $letraServicio;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="arancel", type="float", nullable=true)
@@ -42,6 +65,22 @@ class TipoLicencia
     private $arancel;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="porcentaje_recargo_primer_vencimiento", type="float", nullable=true)
+     * )
+     */
+    private $porcentajeRecargoPrimerVencimiento;
+
+       /**
+     * @var float
+     *
+     * @ORM\Column(name="porcentaje_recargo_segundo_vencimiento", type="float", nullable=true)
+     * )
+     */
+    private $porcentajeRecargoSegundoVencimiento;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="dias_vigencia", type="integer", nullable=true)
@@ -50,6 +89,26 @@ class TipoLicencia
      * )
      */
     private $diasVigencia;
+
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="dias_primer_vencimiento", type="integer", nullable=true)
+     * @Assert\Range(
+     *              min = 0
+     * )
+     */
+    private $diasPrimerVencimiento;
+
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="dias_segundo_vencimiento", type="integer", nullable=true)
+     * @Assert\Range(
+     *              min = 0
+     * )
+     */
+    private $diasSegundoVencimiento;
 
 
     /**
@@ -184,7 +243,175 @@ class TipoLicencia
 
     /*============================Constructor   ===============================
      */
+    
+    /**
+     * Set clienteSap
+     *
+     * @param string $clienteSap
+     * @return TipoLicencia
+     */
+    public function setClienteSap($clienteSap)
+    {
+        $this->clienteSap = $clienteSap;
 
+        return $this;
+    }
 
+    /**
+     * Get clienteSap
+     *
+     * @return string 
+     */
+    public function getClienteSap()
+    {
+        return $this->clienteSap;
+    }
 
+    /**
+     * Set letraServicio
+     *
+     * @param string $letraServicio
+     * @return TipoLicencia
+     */
+    public function setLetraServicio($letraServicio)
+    {
+        $this->letraServicio = $letraServicio;
+
+        return $this;
+    }
+
+    /**
+     * Get letraServicio
+     *
+     * @return string 
+     */
+    public function getLetraServicio()
+    {
+        return $this->letraServicio;
+    }
+
+    /**
+     * Set diasPrimerVencimiento
+     *
+     * @param integer $diasPrimerVencimiento
+     * @return TipoLicencia
+     */
+    public function setDiasPrimerVencimiento($diasPrimerVencimiento)
+    {
+        $this->diasPrimerVencimiento = $diasPrimerVencimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get diasPrimerVencimiento
+     *
+     * @return integer 
+     */
+    public function getDiasPrimerVencimiento()
+    {
+        return $this->diasPrimerVencimiento;
+    }
+
+    /**
+     * Set diasSegundoVencimiento
+     *
+     * @param integer $diasSegundoVencimiento
+     * @return TipoLicencia
+     */
+    public function setDiasSegundoVencimiento($diasSegundoVencimiento)
+    {
+        $this->diasSegundoVencimiento = $diasSegundoVencimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get diasSegundoVencimiento
+     *
+     * @return integer 
+     */
+    public function getDiasSegundoVencimiento()
+    {
+        return $this->diasSegundoVencimiento;
+    }
+
+    /**
+     * Set porcentajeRecargoPrimerVencimiento
+     *
+     * @param float $porcentajeRecargoPrimerVencimiento
+     * @return TipoLicencia
+     */
+    public function setPorcentajeRecargoPrimerVencimiento($porcentajeRecargoPrimerVencimiento)
+    {
+        $this->porcentajeRecargoPrimerVencimiento = $porcentajeRecargoPrimerVencimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get porcentajeRecargoPrimerVencimiento
+     *
+     * @return float 
+     */
+    public function getPorcentajeRecargoPrimerVencimiento()
+    {
+        return $this->porcentajeRecargoPrimerVencimiento;
+    }
+
+    /**
+     * Set porcentajeRecargoSegundoVencimiento
+     *
+     * @param float $porcentajeRecargoSegundoVencimiento
+     * @return TipoLicencia
+     */
+    public function setPorcentajeRecargoSegundoVencimiento($porcentajeRecargoSegundoVencimiento)
+    {
+        $this->porcentajeRecargoSegundoVencimiento = $porcentajeRecargoSegundoVencimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get porcentajeRecargoSegundoVencimiento
+     *
+     * @return float 
+     */
+    public function getPorcentajeRecargoSegundoVencimiento()
+    {
+        return $this->porcentajeRecargoSegundoVencimiento;
+    }
+
+    public function copyValues($objectForCopy)
+    {           
+        $vars=is_object($objectForCopy)?get_object_vars($objectForCopy):$objectForCopy;
+        if(!is_array($vars)) throw Exception('Sin propiedades para el objeto TipoLicencia!');
+        foreach ($vars as $key => $value) {
+            $this->$key = $value;
+        }
+        return $this;
+    }
+
+    /**
+     * Set generoJubilado
+     *
+     * @param string $generoJubilado
+     * @return TipoLicencia
+     */
+    public function setGeneroJubilado($generoJubilado)
+    {
+        $this->generoJubilado = $generoJubilado;
+
+        return $this;
+    }
+
+    /**
+     * Get generoJubilado
+     *
+     * @return string 
+     */
+    public function getGeneroJubilado()
+    {
+        return $this->generoJubilado;
+    }
 }

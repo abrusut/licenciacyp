@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
 
 class PersonaType extends AbstractType
 {
@@ -52,7 +54,12 @@ class PersonaType extends AbstractType
                 'class' => 'MProdLicenciaCyPBundle:Localidad',                 
                 'required' => TRUE            
                 ))*/
-            ->add('localidad')
+            ->add('localidad', EntityType::class,array(
+                'class' => 'MProdLicenciaCyPBundle:Localidad',
+                'query_builder' => function (EntityRepository $er) {        
+                    return $er->createQueryBuilder('l')->orderBy('l.l_nom_dis', 'ASC');     
+                 }                 
+            ))
             ->add('provincia')
             ->add('localidadOtraProvincia','text', array(
                 'label' => 'Localidad Otra Provincia',
@@ -60,6 +67,7 @@ class PersonaType extends AbstractType
             ))
         ;
     }
+
     
     /**
      * @param OptionsResolverInterface $resolver

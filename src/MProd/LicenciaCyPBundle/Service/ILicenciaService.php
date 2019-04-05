@@ -17,8 +17,7 @@ interface ILicenciaService{
     public function generarLicencia(Licencia $licencia);
 
     public function bindPersonaToLicencia(Licencia $licencia);
-    
-    public function createComprobante($idTipoLicencia);
+        
 }
 
 ?>

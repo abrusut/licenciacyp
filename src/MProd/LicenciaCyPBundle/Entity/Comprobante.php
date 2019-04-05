@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\PrePersist;
 /**
  * Comprobante
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\ComprobanteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Comprobante
@@ -36,13 +36,17 @@ class Comprobante
     /**
      * @var float
      *
-     * @ORM\Column(name="recargo", type="float", nullable=false)
-     * @Assert\Range(
-     *              min = 0,
-     *              minMessage = "El recargo no pueden ser menor que cero"
-     * )
+     * @ORM\Column(name="recargo_segundo_vencimiento", type="float", nullable=true)     
      */
-    private $recargo;
+    private $recargoSegundoVencimiento;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="recargo_primer_vencimiento", type="float", nullable=true)
+     * 
+     */
+    private $recargoPrimerVencimiento;
 
      /**
      *@var string
@@ -248,5 +252,166 @@ class Comprobante
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }   
+
+    /**
+     * Set clienteSap
+     *
+     * @param string $clienteSap
+     * @return Comprobante
+     */
+    public function setClienteSap($clienteSap)
+    {
+        $this->clienteSap = $clienteSap;
+
+        return $this;
+    }
+
+    /**
+     * Get clienteSap
+     *
+     * @return string 
+     */
+    public function getClienteSap()
+    {
+        return $this->clienteSap;
+    }
+
+    /**
+     * Set letraServicio
+     *
+     * @param string $letraServicio
+     * @return Comprobante
+     */
+    public function setLetraServicio($letraServicio)
+    {
+        $this->letraServicio = $letraServicio;
+
+        return $this;
+    }
+
+    /**
+     * Get letraServicio
+     *
+     * @return string 
+     */
+    public function getLetraServicio()
+    {
+        return $this->letraServicio;
+    }
+
+    /**
+     * Set primerVencimiento
+     *
+     * @param \DateTime $primerVencimiento
+     * @return Comprobante
+     */
+    public function setPrimerVencimiento($primerVencimiento)
+    {
+        $this->primerVencimiento = $primerVencimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get primerVencimiento
+     *
+     * @return \DateTime 
+     */
+    public function getPrimerVencimiento()
+    {
+        return $this->primerVencimiento;
+    }
+
+    /**
+     * Set segundoVencimiento
+     *
+     * @param \DateTime $segundoVencimiento
+     * @return Comprobante
+     */
+    public function setSegundoVencimiento($segundoVencimiento)
+    {
+        $this->segundoVencimiento = $segundoVencimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get segundoVencimiento
+     *
+     * @return \DateTime 
+     */
+    public function getSegundoVencimiento()
+    {
+        return $this->segundoVencimiento;
+    }
+
+    /**
+     * Set numeroCodigoBarra
+     *
+     * @param string $numeroCodigoBarra
+     * @return Comprobante
+     */
+    public function setNumeroCodigoBarra($numeroCodigoBarra)
+    {
+        $this->numeroCodigoBarra = $numeroCodigoBarra;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroCodigoBarra
+     *
+     * @return string 
+     */
+    public function getNumeroCodigoBarra()
+    {
+        return $this->numeroCodigoBarra;
+    }
+
+    /**
+     * Set recargoSegundoVencimiento
+     *
+     * @param float $recargoSegundoVencimiento
+     * @return Comprobante
+     */
+    public function setRecargoSegundoVencimiento($recargoSegundoVencimiento)
+    {
+        $this->recargoSegundoVencimiento = $recargoSegundoVencimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get recargoSegundoVencimiento
+     *
+     * @return float 
+     */
+    public function getRecargoSegundoVencimiento()
+    {
+        return $this->recargoSegundoVencimiento;
+    }
+
+    /**
+     * Set recargoPrimerVencimiento
+     *
+     * @param float $recargoPrimerVencimiento
+     * @return Comprobante
+     */
+    public function setRecargoPrimerVencimiento($recargoPrimerVencimiento)
+    {
+        $this->recargoPrimerVencimiento = $recargoPrimerVencimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get recargoPrimerVencimiento
+     *
+     * @return float 
+     */
+    public function getRecargoPrimerVencimiento()
+    {
+        return $this->recargoPrimerVencimiento;
     }
 }
