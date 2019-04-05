@@ -40,17 +40,28 @@ class LicenciaController extends Controller
               
                 try {
                     $licenciaService->generarLicencia($licencia);
+                    $licenciaService->save($licencia);
+                } catch (\Doctrine\DBAL\DBALException $e) {                                                          
+                    $exceptionNumber = $e->getPrevious()->getCode();
+                    $exceptionMessage = $e->getMessage();
+                    $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
+                    return $this->render('MProdLicenciaCyPBundle:Exception:errorDB.html.twig', array('errorCode' => $exceptionNumber, 'errorMessage' => $exceptionMessage));                
                 } catch (SimpleMessageException $sme) {                                                          
                     $exceptionNumber = $sme->getCode();
                     $exceptionMessage = $sme->getMessage();
                     $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
-
                     $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .'. $sme->getMessage());
                     return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));                    
+                }catch (\RuntimeException $re){
+                    $exceptionNumber = $re->getCode();
+                    $exceptionMessage = $re->getMessage();
+                    $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
+                    $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .'. $re->getMessage());
+                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));
                 }
 
-                try {
-                    $licenciaService->save($licencia);
+                try {                    
+                    //para generar la boleta tiene que estar persistido el comprobante y la licencia
                     $boletaService->generarBoleta($licencia);
                     
                     $this->get('logger')->info("LicenciaController, formulario PROCESADO OK..".'La Licencia ' . $licencia . ' ha sido creada correctamente.');                                          
@@ -60,6 +71,18 @@ class LicenciaController extends Controller
                     $exceptionMessage = $e->getMessage();
                     $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
                     return $this->render('MProdLicenciaCyPBundle:Exception:errorDB.html.twig', array('errorCode' => $exceptionNumber, 'errorMessage' => $exceptionMessage));
+                }catch (SimpleMessageException $sme) {                                                          
+                    $exceptionNumber = $sme->getCode();
+                    $exceptionMessage = $sme->getMessage();
+                    $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
+                    $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .'. $sme->getMessage());
+                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));                    
+                }catch (\RuntimeException $re){
+                    $exceptionNumber = $re->getCode();
+                    $exceptionMessage = $re->getMessage();
+                    $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
+                    $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .'. $re->getMessage());
+                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));
                 }
 
                 $this->get('logger')->info("LicenciaController, Redirect path_home");
