@@ -6,19 +6,15 @@ use MProd\LicenciaCyPBundle\Entity\Licencia;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MProd\LicenciaCyPBundle\Form\LicenciaType;
-use MProd\LicenciaCyPBundle\Entity\Persona;
-use MProd\LicenciaCyPBundle\Entity\Comprobante;
-use MProd\LicenciaCyPBundle\Entity\TipoLicencia;
 use MProd\LicenciaCyPBundle\Service\LicenciaServiceImpl;
-use MProd\LicenciaCyPBundle\Service\ILicenciaService;
 use MProd\LicenciaCyPBundle\Exception\SimpleMessageException;
 use MProd\LicenciaCyPBundle\Service\BoletaServiceImpl;
+use MProd\LicenciaCyPBundle\Service\ComprobanteServiceImpl;
+use MProd\LicenciaCyPBundle\Service\EncryptImpl;
 
 class LicenciaController extends Controller
 {
-    private $logger;
-    private $licenciaService;
-    
+     
     public function addAction(Request $request) {
             $this->get('logger')->info("LicenciaController, addAction");
             
@@ -37,7 +33,12 @@ class LicenciaController extends Controller
                 $licenciaService = $this->get('licencia_service');
                 /** @var BoletaServiceImpl $boletaService */
                 $boletaService = $this->get('boleta_service');
-              
+                /** @var ComprobanteServiceImpl $comprobanteService */
+                $comprobanteService =  $this->get('comprobante_service');
+
+                /** @var EncryptImpl $encryptService */
+                $encryptService = $this->get('encrypt_service');                
+
                 try {
                     $licenciaService->generarLicencia($licencia);
                     $licenciaService->save($licencia);
@@ -51,19 +52,28 @@ class LicenciaController extends Controller
                     $exceptionMessage = $sme->getMessage();
                     $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
                     $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .'. $sme->getMessage());
-                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));                    
+                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', 
+                                         array('form' => $form->createView(),
+                                               'licencia' => $licencia));
                 }catch (\RuntimeException $re){
                     $exceptionNumber = $re->getCode();
                     $exceptionMessage = $re->getMessage();
                     $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
                     $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .'. $re->getMessage());
-                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));
+                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig',
+                                            array('form' => $form->createView(),
+                                            'licencia' => $licencia));
                 }
 
                 try {                    
                     //para generar la boleta tiene que estar persistido el comprobante y la licencia
-                    $boletaService->generarBoleta($licencia);
-                    
+                    $numeroCodigoBarra = $boletaService->generarCodigoBarras($licencia);
+                                        
+                    $licencia->getComprobante()->setNumeroCodigoBarra($numeroCodigoBarra);
+
+                    // Actualizo el comprobante con el codigo de barras
+            		$comprobanteService->save($licencia->getComprobante());
+
                     $this->get('logger')->info("LicenciaController, formulario PROCESADO OK..".'La Licencia ' . $licencia . ' ha sido creada correctamente.');                                          
                     $this->addFlash('licenciaForm_message', 'La Licencia ' . $licencia . ' ha sido creada correctamente.');
                 } catch (\Doctrine\DBAL\DBALException $e) {                                                          
@@ -76,21 +86,38 @@ class LicenciaController extends Controller
                     $exceptionMessage = $sme->getMessage();
                     $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
                     $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .'. $sme->getMessage());
-                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));                    
+                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig',
+                                            array('form' => $form->createView(),
+                                            'licencia' => $licencia));
                 }catch (\RuntimeException $re){
                     $exceptionNumber = $re->getCode();
                     $exceptionMessage = $re->getMessage();
                     $this->get('logger')->error("LicenciaController,ERROR ".$exceptionNumber. " message ".$exceptionMessage );
                     $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .'. $re->getMessage());
-                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));
+                    return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', 
+                                        array('form' => $form->createView(),
+                                        'licencia' => $licencia));
                 }
 
-                $this->get('logger')->info("LicenciaController, Redirect path_home");
-                return $this->redirect($this->generateUrl("path_home"));
+                $this->get('logger')->info("LicenciaController, Se Guardan todos los datos OK, redirijo a la impresion de la boleta");
+                
+               //return $this->redirectToRoute('boleta_pago_imprimir', array('licenciaId' => $licencia->getId()));                
+
+               //$idLicencia = $encryptService->encrypt($licencia->getId());
+               $idLicencia = $licencia->getId();
+               return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', 
+                                        array('form' => $form->createView(),
+                                              'licencia' => $licencia,
+                                              'urlBoletaPago' => $this->generateUrl('boleta_pago_imprimir',
+                                                                                     array('licenciaId' => $idLicencia)
+                                        ))
+                                    );
             }
 
             $this->get('logger')->info("LicenciaController, devuelvo formulario a la vista");
-            return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', array('form' => $form->createView()));
+            return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', 
+                        array('form' => $form->createView(),
+                                'licencia' => $licencia));
     }
 
    

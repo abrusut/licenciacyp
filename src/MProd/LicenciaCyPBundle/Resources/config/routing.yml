@@ -51,3 +51,7 @@ persona_add:
 persona_findBy:
    path:    /persona/findBy/{tipoDocumento}/{numeroDocumento}/{sexo}
    defaults: { _controller: MProdLicenciaCyPBundle:Persona:findBy } 
+
+boleta_pago_imprimir:
+    path:     /boletaPago/imprimir/{licenciaId}
+    defaults: { _controller: MProdLicenciaCyPBundle:BoletaPago:imprimir }    

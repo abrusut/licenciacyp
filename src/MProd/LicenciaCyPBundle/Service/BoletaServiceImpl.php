@@ -20,7 +20,11 @@ class BoletaServiceImpl implements IBoletaService
 		$this->comprobanteService = $comprobanteService;
 	}
 
-	public function generarBoleta(Licencia $licencia)
+	public function generarBoleta(Licencia $licencia, $output)
+	{
+	}
+
+	public function generarCodigoBarras(Licencia $licencia)
 	{
 		$comprobante = $licencia->getComprobante();
 
@@ -120,11 +124,7 @@ class BoletaServiceImpl implements IBoletaService
 		$numeroCodigoBarraDos = $numeroCodigoBarraDos . $verificador2;
 
 		$numeroCodigoBarra = $numeroCodigoBarraUno . $numeroCodigoBarraDos;
-
-		$comprobante->setNumeroCodigoBarra($numeroCodigoBarra);
-
-		$this->comprobanteService->save($comprobante);
-
+		
 		return $numeroCodigoBarra;
 	}
 

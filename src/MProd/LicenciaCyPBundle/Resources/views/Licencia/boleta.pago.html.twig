@@ -1,0 +1,105 @@
+{% block cuerpo %}
+
+  <table width="685"  align="center" cellpadding="0" cellspacing="0" >
+  <tr> 
+    
+    <td width="20" align="center" bordercolor="#FFFFFF"></td>
+  </tr>
+  <tr bordercolor="#FFFFFF" bgcolor="#FFFFFF">     
+    <td height="190" colspan="2" align="center">       
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" height="210">
+          <tr> 
+            <td width="100%" align="center" bordercolor="#D2E8D2" bgcolor="#FFFFFF">           
+			 <table width="778" height="649" border="0" cellpadding="0" cellspacing="0" class="tabla">
+              <tr>
+       
+              </tr>
+              <tr>
+                <td height="10" colspan="3"><div align="center"><strong>Ministerio de la Producci&oacute;n</strong></div></td>
+              </tr>
+              <tr>
+                <td height="10" colspan="3"><div align="center"><strong>Emisi&oacute;n de Boletas Licencias Deportivas </strong></div></td>
+              </tr>
+              <tr>
+                <td height="2" colspan="3">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="327" height="21"  bordercolor="#D2E8D2" style="border:1px "> 
+                <span class="Estilo9"><strong>Solicitante:</strong> {{licencia.persona.apellido}}, {{licencia.persona.nombre}}</span></td>
+                <td width="451" colspan="2" align="right" >
+                  <div align="left" class="Estilo9"> <span class="textAdmin"><strong>Emisor:</strong> - </span></div></td>
+              </tr>
+              <tr>
+                <td height="15"><span class="Estilo9"><strong>Vencimiento:</strong> {{licencia.fechaVencimiento |date('Y-m-d H:i:s')}} </span></td>
+                <td colspan="2"> <span class="textAdmin Estilo9"><strong>N&ordm; Boleta :</strong> {{licencia.id}} </span> </td>
+              </tr>
+             
+              <tr>
+                <th height="19" colspan="" nowrap bordercolor="#000000"><div align="center" class="Estilo9">
+                  <div align="left">DETALLE: {{licencia.tipoLicencia.descripcion}}</div>
+                </div></th>
+                <th colspan="2" nowrap bordercolor="#000000"><div align="center" class="Estilo9">
+                  <div align="left">IMPORTE: {{licencia.tipoLicencia.arancel}}</div>
+                </div></th>
+              </tr>
+               <tr> 
+                  <td height="187" colspan="2"> 
+                    <div align="center"> <!--img src="codigobarraLicencias.php" width="568" height="164" border="0" --><br>
+                        {{licencia.comprobante.numeroCodigoBarra}}
+                    </div></td>
+                </tr>
+              <tr>
+                <td height="19" colspan="3">------------------------------------------------------------------------------------------------------------------<span class="Estilo7">Para el Depositante</span></td>
+              </tr>
+
+               <tr>
+                <td height="10" colspan="3"><div align="center"><strong>Ministerio de la Producci&oacute;n</strong></div></td>
+              </tr>
+              <tr>
+                <td height="10" colspan="3"><div align="center"><strong>Emisi&oacute;n de Boletas Licencias Deportivas </strong></div></td>
+              </tr>
+              <tr>
+                <td height="2" colspan="3">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="327" height="21"  bordercolor="#D2E8D2" style="border:1px "> 
+                <span class="Estilo9"><strong>Solicitante:</strong> {{licencia.persona.apellido}}, {{licencia.persona.nombre}}</span></td>
+                <td width="451" colspan="2" align="right" >
+                  <div align="left" class="Estilo9"> <span class="textAdmin"><strong>Emisor:</strong> - </span></div></td>
+              </tr>
+              <tr>
+                <td height="15"><span class="Estilo9"><strong>Vencimiento:</strong> {{licencia.fechaVencimiento |date('Y-m-d H:i:s')}} </span></td>
+                <td colspan="2"> <span class="textAdmin Estilo9"><strong>N&ordm; Boleta :</strong> {{licencia.id}} </span> </td>
+              </tr>
+             
+              <tr>
+                <th height="19" colspan="" nowrap bordercolor="#000000"><div align="center" class="Estilo9">
+                  <div align="left">DETALLE: {{licencia.tipoLicencia.descripcion}}</div>
+                </div></th>
+                <th colspan="2" nowrap bordercolor="#000000"><div align="center" class="Estilo9">
+                  <div align="left">IMPORTE: {{licencia.tipoLicencia.arancel}}</div>
+                </div></th>
+              </tr>
+               <tr> 
+                  <td height="187" colspan="2"> 
+                    <div align="center"> <!--img src="codigobarraLicencias.php" width="568" height="164" border="0" --><br>
+                        {{licencia.comprobante.numeroCodigoBarra}}
+                    </div></td>
+                </tr>
+              <tr>
+                <td height="19" colspan="3">------------------------------------------------------------------------------------------------------------------<span class="Estilo7">Para el Depositante</span></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+      </td>
+  </tr>
+</table>           
+
+{% endblock %}
+{% block javascripts %}
+      
+    <script language = "javascript"  src = "{{ asset('js/licencia.js') }}">          
+    </script> 
+
+{% endblock %}      

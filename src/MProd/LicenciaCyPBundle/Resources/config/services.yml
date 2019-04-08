@@ -1,3 +1,6 @@
+parameters:
+    keySalt:  licenciaCyPMinisterioProduccion
+
 services:
    
     licencia_service:
@@ -23,6 +26,10 @@ services:
     boleta_service:
         class: MProd\LicenciaCyPBundle\Service\BoletaServiceImpl
         autowire: true
+
+    encrypt_service:
+        class: MProd\LicenciaCyPBundle\Service\EncryptImpl
+        arguments: ['@logger','%keySalt%']
 
     persona_repository:
         class: Doctrine\ORM\EntityRepository

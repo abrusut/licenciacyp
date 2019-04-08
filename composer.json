@@ -24,7 +24,8 @@
         "ircmaxell/password-compat": "~1.0",
         "whiteoctober/tcpdf-bundle": "^1.0",
         "phpoffice/phpword": "dev-master",
-        "symfony/serializer": "^3.4"
+        "symfony/serializer": "^3.4",
+        "sgk/barcode-bundle": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

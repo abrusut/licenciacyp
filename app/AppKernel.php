@@ -26,6 +26,8 @@ class AppKernel extends Kernel
             //new STG\DEIM\Security\Bundle\CasBundle\CasBundle(),
             //new MProd\Ecosocial\TwebBundle\MProdEcosocialTwebBundle(),
             new MProd\LicenciaCyPBundle\MProdLicenciaCyPBundle(),
+
+            //new SGK\BarcodeBundle\SGKBarcodeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

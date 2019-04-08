@@ -228,11 +228,24 @@ class Licencia
 
     public function configurarVigencia(){
          // Vencimiento
-         $fechaVencimiento = new \DateTime();
-         $fechaVencimiento->add(new \DateInterval('P'.$this->tipoLicencia->getDiasVigencia().'D'));
+         $fechaVencimiento = new \DateTime();         
 
          if($this->tipoLicencia->getDiasVigencia() == 365){
+            // Vence el ultimo dia del año corriente
             $fechaVencimiento = new \DateTime('last day of December this year');
+         }else{            
+            // Si la fecha desde es distinta al hoy, calculo el vencimiento
+            $fechaDesde = $this->getFechaDesde();
+            $today = new \DateTime();
+                    
+            $diff  = $today->diff($fechaDesde);
+            if(!is_null($fechaDesde) && $diff->days > 0){
+                // Vence segun los dias de vigencia configurados
+                $sumatoriaDeDias = ($diff->days + 1) + $this->tipoLicencia->getDiasVigencia();                
+                $fechaVencimiento->add(new \DateInterval('P'.$sumatoriaDeDias .'D'));
+            }else{
+                $fechaVencimiento->add(new \DateInterval('P'.$this->tipoLicencia->getDiasVigencia().'D'));
+            }
          }
 
         $this->setFechaVencimiento($fechaVencimiento);

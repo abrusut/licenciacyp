@@ -6,7 +6,9 @@ use MProd\LicenciaCyPBundle\Entity\Licencia;
 
 
 interface IBoletaService{    
-    public function generarBoleta(Licencia $licencia);
+    public function generarCodigoBarras(Licencia $licencia);
+
+    public function generarBoleta(Licencia $licencia, $output);
 }
 
 ?>

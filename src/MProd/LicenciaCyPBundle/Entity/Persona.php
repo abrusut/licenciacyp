@@ -25,7 +25,7 @@ class Persona
 
     /**
      * @var string
-     * @ORM\Column(name="nombre", type="string", length=60)
+     * @ORM\Column(name="nombre", type="string", length=60,nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 3)
      * @Assert\Length( max = 60)
@@ -35,7 +35,7 @@ class Persona
 
     /**
      * @var string
-     * @ORM\Column(name="apellido", type="string", length=60)
+     * @ORM\Column(name="apellido", type="string", length=60,nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 3)
      * @Assert\Length( max = 60)
@@ -134,10 +134,10 @@ class Persona
      * @Assert\Email()
      */
     private $email;
-
-    /**     
+    
+     /**     
      * @var \MProd\LicenciaCyPBundle\Entity\Provincia
-     * @ORM\OneToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\Provincia")
+     * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\Provincia")
      * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id")
      */
     private $provincia;

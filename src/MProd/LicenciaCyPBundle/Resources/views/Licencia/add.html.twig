@@ -8,6 +8,11 @@
             {% for msg in app.session.flashBag.get('licenciaForm_message') %}
                 {{ msg }}
             {% endfor %}
+
+            {% if urlBoletaPago %}
+                <input type='button' value='Imprimir Boleta Pago' 
+                    onclick="imprimirBoletaPago('{{urlBoletaPago}}')">
+            {% endif %}
         </div>
     {% endif %}
 
