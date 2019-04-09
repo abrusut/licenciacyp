@@ -9,14 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\PropertyInfo\PropertyInfo\Tests;
+namespace Symfony\Component\PropertyInfo\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\PropertyInfo\Type;
 
 /**
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class TypeTest extends \PHPUnit_Framework_TestCase
+class TypeTest extends TestCase
 {
     public function testConstruct()
     {
@@ -34,6 +35,12 @@ class TypeTest extends \PHPUnit_Framework_TestCase
         $collectionValueType = $type->getCollectionValueType();
         $this->assertInstanceOf('Symfony\Component\PropertyInfo\Type', $collectionValueType);
         $this->assertEquals(Type::BUILTIN_TYPE_STRING, $collectionValueType->getBuiltinType());
+    }
+
+    public function testIterable()
+    {
+        $type = new Type('iterable');
+        $this->assertSame('iterable', $type->getBuiltinType());
     }
 
     /**

@@ -37,7 +37,7 @@ class LicenciaController extends Controller
                 $comprobanteService =  $this->get('comprobante_service');
 
                 /** @var EncryptImpl $encryptService */
-                $encryptService = $this->get('encrypt_service');                
+                $encryptService = $this->get('encrypt_service');                           
 
                 try {
                     $licenciaService->generarLicencia($licencia);
@@ -75,6 +75,7 @@ class LicenciaController extends Controller
             		$comprobanteService->save($licencia->getComprobante());
 
                     $this->get('logger')->info("LicenciaController, formulario PROCESADO OK..".'La Licencia ' . $licencia . ' ha sido creada correctamente.');                                          
+                    $this->container->get('session')->getFlashBag()->clear();
                     $this->addFlash('licenciaForm_message', 'La Licencia ' . $licencia . ' ha sido creada correctamente.');
                 } catch (\Doctrine\DBAL\DBALException $e) {                                                          
                     $exceptionNumber = $e->getPrevious()->getCode();
@@ -99,16 +100,14 @@ class LicenciaController extends Controller
                                         'licencia' => $licencia));
                 }
 
-                $this->get('logger')->info("LicenciaController, Se Guardan todos los datos OK, redirijo a la impresion de la boleta");
-                
-               //return $this->redirectToRoute('boleta_pago_imprimir', array('licenciaId' => $licencia->getId()));                
+                $this->get('logger')->info("LicenciaController, Se Guardan todos los datos OK, redirijo a la impresion de la boleta");                           
 
                //$idLicencia = $encryptService->encrypt($licencia->getId());
                $idLicencia = $licencia->getId();
-               return $this->render('MProdLicenciaCyPBundle:Licencia:add.html.twig', 
-                                        array('form' => $form->createView(),
+               return $this->redirectToRoute('path_home', 
+                                        array(
                                               'licencia' => $licencia,
-                                              'urlBoletaPago' => $this->generateUrl('boleta_pago_imprimir',
+                                              'urlBoletaPago' => $this->generateUrl('boleta_pago_imprimir_pdf',
                                                                                      array('licenciaId' => $idLicencia)
                                         ))
                                     );

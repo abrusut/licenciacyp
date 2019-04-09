@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Emisi&oacute;n de Boletas Licencias Deportivas</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="copyright" content="&copy;" />
+        <meta name="robot" content="all" />
+        
+        <link rel="icon" href="//www.santafe.gob.ar/assets/standard/images/favicon.ico">
+        
+        <style>
+             .pleft {
+                padding-left: 5px;
+            }
+        </style>
+</head>
+ <body>
+    <div class="container">
+          <div align="center"><strong>Ministerio de la Producci&oacute;n</strong></div>
+          <div align="center"><strong>Emisi&oacute;n de Boletas Licencias Deportivas </strong></div>
+
+          <div><strong>Solicitante:</strong> {{licencia.persona.apellido}}, {{licencia.persona.nombre}}</div>
+          <div><strong>Emisor:</strong> Ministerio de la Producci&oacute;n</div>
+        
+          <div><strong>Vencimiento:</strong> {{licencia.fechaVencimiento |date('Y-m-d H:i:s')}} </div>
+          <div><strong>N&ordm; Boleta :</strong> {{licencia.id}} </span> </div>
+          <div><strong>Detalle: </strong> {{licencia.tipoLicencia.descripcion}}</div>
+          <div><strong>Importe: </strong>  {{licencia.tipoLicencia.arancel}} </div>
+          <div align="center"> 
+              <img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="468" height="164"
+               border="0">            
+              <div>{{licencia.comprobante.numeroCodigoBarra}}</div>
+          </div>      
+          <div>------------------------------------------------------------------------------------------------------------------<span class="Estilo7">Para el Depositante</span></div>          
+             <div align="center"><strong>Ministerio de la Producci&oacute;n</strong></div>
+          <div align="center"><strong>Emisi&oacute;n de Boletas Licencias Deportivas </strong></div>
+
+          <div><strong>Solicitante:</strong> {{licencia.persona.apellido}}, {{licencia.persona.nombre}}</div>
+          <div><strong>Emisor:</strong> Ministerio de la Producci&oacute;n</div>
+        
+          <div><strong>Vencimiento:</strong> {{licencia.fechaVencimiento |date('Y-m-d H:i:s')}} </div>
+          <div><strong>N&ordm; Boleta :</strong> {{licencia.id}} </span> </div>
+          <div><strong>Detalle: </strong> {{licencia.tipoLicencia.descripcion}}</div>
+          <div><strong>Importe: </strong>  {{licencia.tipoLicencia.arancel}} </div>
+          <div align="center"> 
+              <img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="468" height="164"
+               border="0">            
+              <div>{{licencia.comprobante.numeroCodigoBarra}}</div>
+          </div>      
+          <div>------------------------------------------------------------------------------------------------------------------<span class="Estilo7">Para el Depositante</span></div>          
+    </div>
+
+    </body>
+</html>

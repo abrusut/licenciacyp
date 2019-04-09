@@ -36,18 +36,16 @@ interface UserInterface
     /**
      * Returns the roles granted to the user.
      *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
+     *     public function getRoles()
+     *     {
+     *         return array('ROLE_USER');
+     *     }
      *
      * Alternatively, the roles might be stored on a ``roles`` property,
      * and populated in any number of different ways when the user object
      * is created.
      *
-     * @return Role[] The user roles
+     * @return (Role|string)[] The user roles
      */
     public function getRoles();
 

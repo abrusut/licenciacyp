@@ -12,10 +12,10 @@
 namespace Symfony\Component\Form\Extension\Core\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,11 +27,16 @@ class CollectionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['allow_add'] && $options['prototype']) {
-            $prototype = $builder->create($options['prototype_name'], $options['entry_type'], array_replace(array(
+            $prototypeOptions = array_replace(array(
+                'required' => $options['required'],
                 'label' => $options['prototype_name'].'label__',
-            ), $options['entry_options'], array(
-                'data' => $options['prototype_data'],
-            )));
+            ), $options['entry_options']);
+
+            if (null !== $options['prototype_data']) {
+                $prototypeOptions['data'] = $options['prototype_data'];
+            }
+
+            $prototype = $builder->create($options['prototype_name'], $options['entry_type'], $prototypeOptions);
             $builder->setAttribute('prototype', $prototype->getForm());
         }
 
@@ -57,7 +62,8 @@ class CollectionType extends AbstractType
         ));
 
         if ($form->getConfig()->hasAttribute('prototype')) {
-            $view->vars['prototype'] = $form->getConfig()->getAttribute('prototype')->createView($view);
+            $prototype = $form->getConfig()->getAttribute('prototype');
+            $view->vars['prototype'] = $prototype->setParent($form)->createView($view);
         }
     }
 
@@ -83,14 +89,14 @@ class CollectionType extends AbstractType
         };
         $optionsNormalizer = function (Options $options, $value) use ($entryOptionsNormalizer) {
             if (null !== $value) {
-                @trigger_error('The form option "options" is deprecated since version 2.8 and will be removed in 3.0. Use "entry_options" instead.', E_USER_DEPRECATED);
+                @trigger_error('The form option "options" is deprecated since Symfony 2.8 and will be removed in 3.0. Use "entry_options" instead.', E_USER_DEPRECATED);
             }
 
             return $entryOptionsNormalizer($options, $value);
         };
         $typeNormalizer = function (Options $options, $value) {
             if (null !== $value) {
-                @trigger_error('The form option "type" is deprecated since version 2.8 and will be removed in 3.0. Use "entry_type" instead.', E_USER_DEPRECATED);
+                @trigger_error('The form option "type" is deprecated since Symfony 2.8 and will be removed in 3.0. Use "entry_type" instead.', E_USER_DEPRECATED);
             }
 
             return $value;
@@ -103,7 +109,7 @@ class CollectionType extends AbstractType
             return __NAMESPACE__.'\TextType';
         };
         $entryOptions = function (Options $options) {
-            if (1 === count($options['options']) && isset($options['block_name'])) {
+            if (1 === \count($options['options']) && isset($options['block_name'])) {
                 return array();
             }
 

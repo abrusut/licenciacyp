@@ -13,8 +13,8 @@ namespace Symfony\Bundle\FrameworkBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Helper\DescriptorHelper;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -39,7 +39,7 @@ class EventDispatcherDebugCommand extends ContainerAwareCommand
                 new InputOption('raw', null, InputOption::VALUE_NONE, 'To output raw description'),
             ))
             ->setDescription('Displays configured listeners for an application')
-            ->setHelp(<<<EOF
+            ->setHelp(<<<'EOF'
 The <info>%command.name%</info> command displays all configured listeners:
 
   <info>php %command.full_name%</info>
@@ -59,13 +59,13 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output = new SymfonyStyle($input, $output);
+        $io = new SymfonyStyle($input, $output);
         $dispatcher = $this->getEventDispatcher();
 
         $options = array();
         if ($event = $input->getArgument('event')) {
             if (!$dispatcher->hasListeners($event)) {
-                $output->warning(sprintf('The event "%s" does not have any registered listeners.', $event));
+                $io->warning(sprintf('The event "%s" does not have any registered listeners.', $event));
 
                 return;
             }
@@ -76,8 +76,8 @@ EOF
         $helper = new DescriptorHelper();
         $options['format'] = $input->getOption('format');
         $options['raw_text'] = $input->getOption('raw');
-        $options['output'] = $output;
-        $helper->describe($output, $dispatcher, $options);
+        $options['output'] = $io;
+        $helper->describe($io, $dispatcher, $options);
     }
 
     /**

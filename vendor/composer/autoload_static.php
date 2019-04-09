@@ -8,23 +8,32 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
 {
     public static $files = array (
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'e40631d46120a9c38ea139981f8dab26' => __DIR__ . '/..' . '/ircmaxell/password-compat/lib/password.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
+        '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
+        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '3e2471375464aac821502deb0ac64275' => __DIR__ . '/..' . '/symfony/polyfill-php54/bootstrap.php',
+        'edc6464955a37aa4d5fbf39d40fb6ee7' => __DIR__ . '/..' . '/symfony/polyfill-php55/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
-        'edc6464955a37aa4d5fbf39d40fb6ee7' => __DIR__ . '/..' . '/symfony/polyfill-php55/bootstrap.php',
-        '3e2471375464aac821502deb0ac64275' => __DIR__ . '/..' . '/symfony/polyfill-php54/bootstrap.php',
-        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'Z' => 
         array (
+            'Zend\\Validator\\' => 15,
             'Zend\\Stdlib\\' => 12,
+            'Zend\\ServiceManager\\' => 20,
             'Zend\\Escaper\\' => 13,
+            'Zend\\Barcode\\' => 13,
+        ),
+        'W' => 
+        array (
+            'WhiteOctober\\TCPDFBundle\\' => 25,
         ),
         'T' => 
         array (
@@ -38,6 +47,8 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
             'Symfony\\Polyfill\\Php55\\' => 23,
             'Symfony\\Polyfill\\Php54\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Polyfill\\Apcu\\' => 22,
             'Symfony\\Component\\Security\\Acl\\' => 31,
             'Symfony\\Component\\' => 18,
             'Symfony\\Bundle\\SwiftmailerBundle\\' => 33,
@@ -52,10 +63,12 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
             'Symfony\\Bridge\\Doctrine\\' => 24,
             'SymfonyStandard\\' => 16,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
+            'SensioLabs\\Security\\' => 20,
         ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Psr\\Container\\' => 14,
             'PhpOffice\\PhpWord\\' => 18,
             'PhpOffice\\Common\\' => 17,
         ),
@@ -69,25 +82,48 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         ),
         'I' => 
         array (
+            'Interop\\Container\\' => 18,
             'Incenteev\\ParameterHandler\\' => 27,
         ),
         'D' => 
         array (
             'Doctrine\\Common\\Cache\\' => 22,
+            'Doctrine\\Common\\Annotations\\' => 28,
+            'Doctrine\\Common\\' => 16,
             'Doctrine\\Bundle\\FixturesBundle\\' => 31,
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
         ),
+        'C' => 
+        array (
+            'Composer\\CaBundle\\' => 18,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Zend\\Validator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-validator/src',
+        ),
         'Zend\\Stdlib\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-stdlib/src',
         ),
+        'Zend\\ServiceManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-servicemanager/src',
+        ),
         'Zend\\Escaper\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-escaper/src',
+        ),
+        'Zend\\Barcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-barcode/src',
+        ),
+        'WhiteOctober\\TCPDFBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/whiteoctober/tcpdf-bundle',
         ),
         'Twig\\' => 
         array (
@@ -116,6 +152,14 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Polyfill\\Apcu\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-apcu',
         ),
         'Symfony\\Component\\Security\\Acl\\' => 
         array (
@@ -173,9 +217,17 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         array (
             0 => __DIR__ . '/..' . '/sensio/framework-extra-bundle',
         ),
+        'SensioLabs\\Security\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sensiolabs/security-checker/SensioLabs/Security',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
         ),
         'PhpOffice\\PhpWord\\' => 
         array (
@@ -193,6 +245,10 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         array (
             0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle',
         ),
+        'Interop\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
+        ),
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
@@ -200,6 +256,14 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         'Doctrine\\Common\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
+        ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
+        ),
+        'Doctrine\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
         ),
         'Doctrine\\Bundle\\FixturesBundle\\' => 
         array (
@@ -213,6 +277,10 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-bundle',
         ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
     );
 
     public static $fallbackDirsPsr4 = array (
@@ -220,13 +288,6 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
     );
 
     public static $prefixesPsr0 = array (
-        'W' => 
-        array (
-            'WhiteOctober\\TCPDFBundle' => 
-            array (
-                0 => __DIR__ . '/..' . '/whiteoctober/tcpdf-bundle',
-            ),
-        ),
         'T' => 
         array (
             'Twig_' => 
@@ -244,10 +305,6 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
             array (
                 0 => __DIR__ . '/..' . '/sensio/distribution-bundle',
             ),
-            'SensioLabs\\Security' => 
-            array (
-                0 => __DIR__ . '/..' . '/sensiolabs/security-checker',
-            ),
             'STG\\DEIM\\Themes\\Bundles\\AplicativoBundle' => 
             array (
                 0 => __DIR__ . '/..' . '/stg/theme-bundle',
@@ -257,11 +314,25 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
                 0 => __DIR__ . '/..' . '/stg/cas-bundle',
             ),
         ),
+        'M' => 
+        array (
+            'Markup\\BarcodeBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/markup/barcode-bundle',
+            ),
+        ),
         'K' => 
         array (
             'Knp\\Component' => 
             array (
                 0 => __DIR__ . '/..' . '/knplabs/knp-components/src',
+            ),
+        ),
+        'I' => 
+        array (
+            'Imagine' => 
+            array (
+                0 => __DIR__ . '/..' . '/imagine/imagine/lib',
             ),
         ),
         'D' => 
@@ -289,14 +360,6 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
             'Doctrine\\Common\\Collections\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/collections/lib',
-            ),
-            'Doctrine\\Common\\Annotations\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/annotations/lib',
-            ),
-            'Doctrine\\Common\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/common/lib',
             ),
         ),
         'A' => 

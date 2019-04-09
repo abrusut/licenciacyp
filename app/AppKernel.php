@@ -15,19 +15,16 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            //Bundle del Proyecto
-            //new MProd\EmprendedoresBundle\MProdEmprendedoresBundle(),
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),            
             //Bundle del paginador
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             //Bundle de temas de la stg
             new STG\DEIM\Themes\Bundles\AplicativoBundle\ThemeAplicativoBundle(),
             //Bundle de autorización de la STG no va a ser utilizado por el momento
-            //new STG\DEIM\Security\Bundle\CasBundle\CasBundle(),
-            //new MProd\Ecosocial\TwebBundle\MProdEcosocialTwebBundle(),
+            //new STG\DEIM\Security\Bundle\CasBundle\CasBundle(),          
             new MProd\LicenciaCyPBundle\MProdLicenciaCyPBundle(),
 
-            //new SGK\BarcodeBundle\SGKBarcodeBundle(),
+            new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle()            
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

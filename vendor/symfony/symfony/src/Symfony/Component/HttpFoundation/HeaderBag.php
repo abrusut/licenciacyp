@@ -22,8 +22,6 @@ class HeaderBag implements \IteratorAggregate, \Countable
     protected $cacheControl = array();
 
     /**
-     * Constructor.
-     *
      * @param array $headers An array of HTTP headers
      */
     public function __construct(array $headers = array())
@@ -103,15 +101,15 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Returns a header value by name.
      *
-     * @param string $key     The header name
-     * @param mixed  $default The default value
-     * @param bool   $first   Whether to return the first value or all header values
+     * @param string               $key     The header name
+     * @param string|string[]|null $default The default value
+     * @param bool                 $first   Whether to return the first value or all header values
      *
-     * @return string|array The first header value if $first is true, an array of values otherwise
+     * @return string|string[]|null The first header value or default value if $first is true, an array of values otherwise
      */
     public function get($key, $default = null, $first = true)
     {
-        $key = strtr(strtolower($key), '_', '-');
+        $key = str_replace('_', '-', strtolower($key));
 
         if (!array_key_exists($key, $this->headers)) {
             if (null === $default) {
@@ -122,7 +120,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
         }
 
         if ($first) {
-            return count($this->headers[$key]) ? $this->headers[$key][0] : $default;
+            return \count($this->headers[$key]) ? $this->headers[$key][0] : $default;
         }
 
         return $this->headers[$key];
@@ -131,13 +129,13 @@ class HeaderBag implements \IteratorAggregate, \Countable
     /**
      * Sets a header by name.
      *
-     * @param string       $key     The key
-     * @param string|array $values  The value or an array of values
-     * @param bool         $replace Whether to replace the actual value or not (true by default)
+     * @param string          $key     The key
+     * @param string|string[] $values  The value or an array of values
+     * @param bool            $replace Whether to replace the actual value or not (true by default)
      */
     public function set($key, $values, $replace = true)
     {
-        $key = strtr(strtolower($key), '_', '-');
+        $key = str_replace('_', '-', strtolower($key));
 
         $values = array_values((array) $values);
 
@@ -148,7 +146,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
         }
 
         if ('cache-control' === $key) {
-            $this->cacheControl = $this->parseCacheControl($values[0]);
+            $this->cacheControl = $this->parseCacheControl(implode(', ', $this->headers[$key]));
         }
     }
 
@@ -161,7 +159,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     public function has($key)
     {
-        return array_key_exists(strtr(strtolower($key), '_', '-'), $this->headers);
+        return array_key_exists(str_replace('_', '-', strtolower($key)), $this->headers);
     }
 
     /**
@@ -174,7 +172,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     public function contains($key, $value)
     {
-        return in_array($value, $this->get($key, null, false));
+        return \in_array($value, $this->get($key, null, false));
     }
 
     /**
@@ -184,7 +182,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     public function remove($key)
     {
-        $key = strtr(strtolower($key), '_', '-');
+        $key = str_replace('_', '-', strtolower($key));
 
         unset($this->headers[$key]);
 
@@ -199,7 +197,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      * @param string    $key     The parameter key
      * @param \DateTime $default The default value
      *
-     * @return null|\DateTime The parsed DateTime or the default value if the header does not exist
+     * @return \DateTime|null The parsed DateTime or the default value if the header does not exist
      *
      * @throws \RuntimeException When the HTTP header is not parseable
      */
@@ -282,7 +280,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     public function count()
     {
-        return count($this->headers);
+        return \count($this->headers);
     }
 
     protected function getCacheControlHeader()

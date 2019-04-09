@@ -11,10 +11,10 @@
 
 namespace Symfony\Bundle\SecurityBundle\Command;
 
+use Doctrine\DBAL\Schema\SchemaException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Doctrine\DBAL\Schema\SchemaException;
 
 /**
  * Installs the tables required by the ACL system.
@@ -43,7 +43,7 @@ class InitAclCommand extends ContainerAwareCommand
         $this
             ->setName('init:acl')
             ->setDescription('Mounts ACL tables in the database')
-            ->setHelp(<<<EOF
+            ->setHelp(<<<'EOF'
 The <info>%command.name%</info> command mounts ACL tables in the database.
 
   <info>php %command.full_name%</info>

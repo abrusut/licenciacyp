@@ -505,10 +505,16 @@ class Persona
     
     public function copyValues($objectForCopy)
     {   
+        // Campos que no se deben actualizar
+        $exludeProperties = array("id","numeroDocumento", "sexo", "tipoDocumento");
+
         $vars=is_object($objectForCopy)?get_object_vars($objectForCopy):$objectForCopy;
         if(!is_array($vars)) throw Exception('Sin propiedades para el objeto persona!');
         foreach ($vars as $key => $value) {
-            $this->$key = $value;
+            if(!in_array($key,$exludeProperties))
+            {
+                $this->$key = $value;
+            }
         }
     }
 }

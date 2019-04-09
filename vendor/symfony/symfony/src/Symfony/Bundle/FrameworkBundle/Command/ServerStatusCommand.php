@@ -13,6 +13,7 @@ namespace Symfony\Bundle\FrameworkBundle\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -31,7 +32,8 @@ class ServerStatusCommand extends ServerCommand
     {
         $this
             ->setDefinition(array(
-                new InputArgument('address', InputArgument::OPTIONAL, 'Address:port', '127.0.0.1:8000'),
+                new InputArgument('address', InputArgument::OPTIONAL, 'Address:port', '127.0.0.1'),
+                new InputOption('port', 'p', InputOption::VALUE_REQUIRED, 'Address port number', '8000'),
             ))
             ->setName('server:status')
             ->setDescription('Outputs the status of the built-in web server for the given address')
@@ -43,8 +45,12 @@ class ServerStatusCommand extends ServerCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output = new SymfonyStyle($input, $output);
+        $io = new SymfonyStyle($input, $output);
         $address = $input->getArgument('address');
+
+        if (false === strpos($address, ':')) {
+            $address .= ':'.$input->getOption('port');
+        }
 
         // remove an orphaned lock file
         if (file_exists($this->getLockFile($address)) && !$this->isServerRunning($address)) {
@@ -52,9 +58,9 @@ class ServerStatusCommand extends ServerCommand
         }
 
         if (file_exists($this->getLockFile($address))) {
-            $output->success(sprintf('Web server still listening on http://%s', $address));
+            $io->success(sprintf('Web server still listening on http://%s', $address));
         } else {
-            $output->warning(sprintf('No web server is listening on http://%s', $address));
+            $io->warning(sprintf('No web server is listening on http://%s', $address));
         }
     }
 

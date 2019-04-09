@@ -1,33 +1,40 @@
 [
     {
-        "name": "doctrine/lexer",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
+        "name": "composer/ca-bundle",
+        "version": "1.1.4",
+        "version_normalized": "1.1.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/doctrine/lexer.git",
-            "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c"
+            "url": "https://github.com/composer/ca-bundle.git",
+            "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/lexer/zipball/83893c552fd2045dd78aef794c31e694c37c0b8c",
-            "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
+            "url": "https://api.github.com/repos/composer/ca-bundle/zipball/558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
+            "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.2"
+            "ext-openssl": "*",
+            "ext-pcre": "*",
+            "php": "^5.3.2 || ^7.0"
         },
-        "time": "2014-09-09 13:34:57",
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5",
+            "psr/log": "^1.0",
+            "symfony/process": "^2.5 || ^3.0 || ^4.0"
+        },
+        "time": "2019-01-28T09:30:10+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.0.x-dev"
+                "dev-master": "1.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Doctrine\\Common\\Lexer\\": "lib/"
+            "psr-4": {
+                "Composer\\CaBundle\\": "src"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -36,59 +43,87 @@
         ],
         "authors": [
             {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Johannes Schmitt",
-                "email": "schmittjoh@gmail.com"
+                "name": "Jordi Boggiano",
+                "email": "j.boggiano@seld.be",
+                "homepage": "http://seld.be"
             }
         ],
-        "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
-        "homepage": "http://www.doctrine-project.org",
+        "description": "Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.",
         "keywords": [
-            "lexer",
-            "parser"
+            "cabundle",
+            "cacert",
+            "certificate",
+            "ssl",
+            "tls"
         ]
     },
     {
-        "name": "doctrine/annotations",
-        "version": "v1.2.7",
-        "version_normalized": "1.2.7.0",
+        "name": "container-interop/container-interop",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/doctrine/annotations.git",
-            "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535"
+            "url": "https://github.com/container-interop/container-interop.git",
+            "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/annotations/zipball/f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
-            "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
+            "url": "https://api.github.com/repos/container-interop/container-interop/zipball/79cbf1341c22ec75643d841642dd5d6acd83bdb8",
+            "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8",
+            "shasum": ""
+        },
+        "require": {
+            "psr/container": "^1.0"
+        },
+        "time": "2017-02-14T19:40:03+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Interop\\Container\\": "src/Interop/Container/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
+        "homepage": "https://github.com/container-interop/container-interop"
+    },
+    {
+        "name": "doctrine/annotations",
+        "version": "v1.4.0",
+        "version_normalized": "1.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/annotations.git",
+            "reference": "54cacc9b81758b14e3ce750f205a393d52339e97"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/annotations/zipball/54cacc9b81758b14e3ce750f205a393d52339e97",
+            "reference": "54cacc9b81758b14e3ce750f205a393d52339e97",
             "shasum": ""
         },
         "require": {
             "doctrine/lexer": "1.*",
-            "php": ">=5.3.2"
+            "php": "^5.6 || ^7.0"
         },
         "require-dev": {
             "doctrine/cache": "1.*",
-            "phpunit/phpunit": "4.*"
+            "phpunit/phpunit": "^5.7"
         },
-        "time": "2015-08-31 12:32:49",
+        "time": "2017-02-24T16:22:25+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.3.x-dev"
+                "dev-master": "1.4.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Doctrine\\Common\\Annotations\\": "lib/"
+            "psr-4": {
+                "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -126,34 +161,42 @@
         ]
     },
     {
-        "name": "psr/log",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "name": "doctrine/cache",
+        "version": "v1.6.2",
+        "version_normalized": "1.6.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/php-fig/log.git",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+            "url": "https://github.com/doctrine/cache.git",
+            "reference": "eb152c5100571c7a45470ff2a35095ab3f3b900b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "url": "https://api.github.com/repos/doctrine/cache/zipball/eb152c5100571c7a45470ff2a35095ab3f3b900b",
+            "reference": "eb152c5100571c7a45470ff2a35095ab3f3b900b",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0"
+            "php": "~5.5|~7.0"
         },
-        "time": "2016-10-10 12:19:37",
+        "conflict": {
+            "doctrine/common": ">2.2,<2.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.8|~5.0",
+            "predis/predis": "~1.0",
+            "satooshi/php-coveralls": "~0.6"
+        },
+        "time": "2017-07-22T12:49:21+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.0.x-dev"
+                "dev-master": "1.6.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Psr\\Log\\": "Psr/Log/"
+                "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -162,16 +205,536 @@
         ],
         "authors": [
             {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
             }
         ],
-        "description": "Common interface for logging libraries",
-        "homepage": "https://github.com/php-fig/log",
+        "description": "Caching library offering an object-oriented API for many cache backends",
+        "homepage": "http://www.doctrine-project.org",
         "keywords": [
-            "log",
-            "psr",
-            "psr-3"
+            "cache",
+            "caching"
+        ]
+    },
+    {
+        "name": "doctrine/collections",
+        "version": "v1.4.0",
+        "version_normalized": "1.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/collections.git",
+            "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/collections/zipball/1a4fb7e902202c33cce8c55989b945612943c2ba",
+            "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.6 || ^7.0"
+        },
+        "require-dev": {
+            "doctrine/coding-standard": "~0.1@dev",
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2017-01-03T10:49:41+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\Common\\Collections\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Collections Abstraction library",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "array",
+            "collections",
+            "iterator"
+        ]
+    },
+    {
+        "name": "doctrine/common",
+        "version": "v2.7.3",
+        "version_normalized": "2.7.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/common.git",
+            "reference": "4acb8f89626baafede6ee5475bc5844096eba8a9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/common/zipball/4acb8f89626baafede6ee5475bc5844096eba8a9",
+            "reference": "4acb8f89626baafede6ee5475bc5844096eba8a9",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/annotations": "1.*",
+            "doctrine/cache": "1.*",
+            "doctrine/collections": "1.*",
+            "doctrine/inflector": "1.*",
+            "doctrine/lexer": "1.*",
+            "php": "~5.6|~7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^5.4.6"
+        },
+        "time": "2017-07-22T08:35:12+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Common\\": "lib/Doctrine/Common"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Common Library for Doctrine projects",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "annotations",
+            "collections",
+            "eventmanager",
+            "persistence",
+            "spl"
+        ]
+    },
+    {
+        "name": "doctrine/data-fixtures",
+        "version": "v1.2.2",
+        "version_normalized": "1.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/data-fixtures.git",
+            "reference": "17fa5bfe6ff52e35cb3d9ec37c934a2f4bd1fa2e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/17fa5bfe6ff52e35cb3d9ec37c934a2f4bd1fa2e",
+            "reference": "17fa5bfe6ff52e35cb3d9ec37c934a2f4bd1fa2e",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/common": "~2.2",
+            "php": "^5.6 || ^7.0"
+        },
+        "conflict": {
+            "doctrine/orm": "< 2.4"
+        },
+        "require-dev": {
+            "doctrine/dbal": "^2.5.4",
+            "doctrine/orm": "^2.5.4",
+            "phpunit/phpunit": "^5.4.6"
+        },
+        "suggest": {
+            "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
+            "doctrine/orm": "For loading ORM fixtures",
+            "doctrine/phpcr-odm": "For loading PHPCR ODM fixtures"
+        },
+        "time": "2016-09-20T10:07:57+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\Common\\DataFixtures": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            }
+        ],
+        "description": "Data Fixtures for all Doctrine Object Managers",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "database"
+        ]
+    },
+    {
+        "name": "doctrine/dbal",
+        "version": "v2.4.5",
+        "version_normalized": "2.4.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/dbal.git",
+            "reference": "5a1f4bf34d61d997ccd9f0539fbc14c7a772aa16"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/dbal/zipball/5a1f4bf34d61d997ccd9f0539fbc14c7a772aa16",
+            "reference": "5a1f4bf34d61d997ccd9f0539fbc14c7a772aa16",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/common": "~2.4",
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*",
+            "symfony/console": "~2.0"
+        },
+        "suggest": {
+            "symfony/console": "For helpful console commands such as SQL execution and import of files."
+        },
+        "time": "2016-01-05T22:18:20+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\DBAL\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            }
+        ],
+        "description": "Database Abstraction Layer",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "database",
+            "dbal",
+            "persistence",
+            "queryobject"
+        ]
+    },
+    {
+        "name": "doctrine/doctrine-bundle",
+        "version": "1.6.13",
+        "version_normalized": "1.6.13.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/DoctrineBundle.git",
+            "reference": "8cd4c2921b6cef14a78d98cd3f0fb81ba6a976f9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/8cd4c2921b6cef14a78d98cd3f0fb81ba6a976f9",
+            "reference": "8cd4c2921b6cef14a78d98cd3f0fb81ba6a976f9",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/dbal": "~2.3",
+            "doctrine/doctrine-cache-bundle": "~1.2",
+            "jdorn/sql-formatter": "~1.1",
+            "php": ">=5.5.9",
+            "symfony/console": "~2.7|~3.0|~4.0",
+            "symfony/dependency-injection": "~2.7|~3.0|~4.0",
+            "symfony/doctrine-bridge": "~2.7|~3.0|~4.0",
+            "symfony/framework-bundle": "~2.7|~3.0|~4.0"
+        },
+        "require-dev": {
+            "doctrine/orm": "~2.3",
+            "phpunit/phpunit": "~4",
+            "satooshi/php-coveralls": "^1.0",
+            "symfony/phpunit-bridge": "~2.7|~3.0|~4.0",
+            "symfony/property-info": "~2.8|~3.0|~4.0",
+            "symfony/validator": "~2.7|~3.0|~4.0",
+            "symfony/yaml": "~2.7|~3.0|~4.0",
+            "twig/twig": "~1.12|~2.0"
+        },
+        "suggest": {
+            "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
+            "symfony/web-profiler-bundle": "To use the data collector."
+        },
+        "time": "2017-10-11T19:48:03+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.6.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Bundle\\DoctrineBundle\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Doctrine Project",
+                "homepage": "http://www.doctrine-project.org/"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Symfony DoctrineBundle",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "database",
+            "dbal",
+            "orm",
+            "persistence"
+        ]
+    },
+    {
+        "name": "doctrine/doctrine-cache-bundle",
+        "version": "1.3.5",
+        "version_normalized": "1.3.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
+            "reference": "5514c90d9fb595e1095e6d66ebb98ce9ef049927"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/5514c90d9fb595e1095e6d66ebb98ce9ef049927",
+            "reference": "5514c90d9fb595e1095e6d66ebb98ce9ef049927",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/cache": "^1.4.2",
+            "doctrine/inflector": "~1.0",
+            "php": ">=5.3.2",
+            "symfony/doctrine-bridge": "~2.7|~3.3|~4.0"
+        },
+        "require-dev": {
+            "instaclick/coding-standard": "~1.1",
+            "instaclick/object-calisthenics-sniffs": "dev-master",
+            "instaclick/symfony2-coding-standard": "dev-remaster",
+            "phpunit/phpunit": "~4.8.36|~5.6|~6.5|~7.0",
+            "predis/predis": "~0.8",
+            "satooshi/php-coveralls": "^1.0",
+            "squizlabs/php_codesniffer": "~1.5",
+            "symfony/console": "~2.7|~3.3|~4.0",
+            "symfony/finder": "~2.7|~3.3|~4.0",
+            "symfony/framework-bundle": "~2.7|~3.3|~4.0",
+            "symfony/phpunit-bridge": "~2.7|~3.3|~4.0",
+            "symfony/security-acl": "~2.7|~3.3",
+            "symfony/validator": "~2.7|~3.3|~4.0",
+            "symfony/yaml": "~2.7|~3.3|~4.0"
+        },
+        "suggest": {
+            "symfony/security-acl": "For using this bundle to cache ACLs"
+        },
+        "time": "2018-11-09T06:25:35+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Bundle\\DoctrineCacheBundle\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Fabio B. Silva",
+                "email": "fabio.bat.silva@gmail.com"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@hotmail.com"
+            },
+            {
+                "name": "Doctrine Project",
+                "homepage": "http://www.doctrine-project.org/"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Symfony Bundle for Doctrine Cache",
+        "homepage": "https://www.doctrine-project.org",
+        "keywords": [
+            "cache",
+            "caching"
+        ]
+    },
+    {
+        "name": "doctrine/doctrine-fixtures-bundle",
+        "version": "v2.4.1",
+        "version_normalized": "2.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
+            "reference": "74b8cc70a4a25b774628ee59f4cdf3623a146273"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/74b8cc70a4a25b774628ee59f4cdf3623a146273",
+            "reference": "74b8cc70a4a25b774628ee59f4cdf3623a146273",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/data-fixtures": "~1.0",
+            "doctrine/doctrine-bundle": "~1.0",
+            "php": ">=5.3.2",
+            "symfony/doctrine-bridge": "~2.7|~3.0|~4.0"
+        },
+        "time": "2017-10-30T19:26:42+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Bundle\\FixturesBundle\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Doctrine Project",
+                "homepage": "http://www.doctrine-project.org"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Symfony DoctrineFixturesBundle",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "Fixture",
+            "persistence"
         ]
     },
     {
@@ -195,7 +758,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.*"
         },
-        "time": "2015-11-06 14:35:42",
+        "time": "2015-11-06T14:35:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -244,37 +807,34 @@
         ]
     },
     {
-        "name": "doctrine/collections",
-        "version": "v1.3.0",
-        "version_normalized": "1.3.0.0",
+        "name": "doctrine/lexer",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/doctrine/collections.git",
-            "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a"
+            "url": "https://github.com/doctrine/lexer.git",
+            "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/collections/zipball/6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
-            "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
+            "url": "https://api.github.com/repos/doctrine/lexer/zipball/83893c552fd2045dd78aef794c31e694c37c0b8c",
+            "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.2"
         },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0"
-        },
-        "time": "2015-04-14 22:21:58",
+        "time": "2014-09-09T13:34:57+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.2.x-dev"
+                "dev-master": "1.0.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-0": {
-                "Doctrine\\Common\\Collections\\": "lib/"
+                "Doctrine\\Common\\Lexer\\": "lib/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -287,240 +847,19 @@
                 "email": "roman@code-factory.org"
             },
             {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
                 "name": "Guilherme Blanco",
                 "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
             },
             {
                 "name": "Johannes Schmitt",
                 "email": "schmittjoh@gmail.com"
             }
         ],
-        "description": "Collections Abstraction library",
+        "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
         "homepage": "http://www.doctrine-project.org",
         "keywords": [
-            "array",
-            "collections",
-            "iterator"
-        ]
-    },
-    {
-        "name": "doctrine/cache",
-        "version": "v1.5.4",
-        "version_normalized": "1.5.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/cache.git",
-            "reference": "47cdc76ceb95cc591d9c79a36dc3794975b5d136"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/cache/zipball/47cdc76ceb95cc591d9c79a36dc3794975b5d136",
-            "reference": "47cdc76ceb95cc591d9c79a36dc3794975b5d136",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.2"
-        },
-        "conflict": {
-            "doctrine/common": ">2.2,<2.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": ">=3.7",
-            "predis/predis": "~1.0",
-            "satooshi/php-coveralls": "~0.6"
-        },
-        "time": "2015-12-19 05:03:47",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.5.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
-            },
-            {
-                "name": "Johannes Schmitt",
-                "email": "schmittjoh@gmail.com"
-            }
-        ],
-        "description": "Caching library offering an object-oriented API for many cache backends",
-        "homepage": "http://www.doctrine-project.org",
-        "keywords": [
-            "cache",
-            "caching"
-        ]
-    },
-    {
-        "name": "doctrine/common",
-        "version": "v2.5.3",
-        "version_normalized": "2.5.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/common.git",
-            "reference": "10f1f19651343f87573129ca970aef1a47a6f29e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/common/zipball/10f1f19651343f87573129ca970aef1a47a6f29e",
-            "reference": "10f1f19651343f87573129ca970aef1a47a6f29e",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/annotations": "1.*",
-            "doctrine/cache": "1.*",
-            "doctrine/collections": "1.*",
-            "doctrine/inflector": "1.*",
-            "doctrine/lexer": "1.*",
-            "php": ">=5.3.2"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~3.7"
-        },
-        "time": "2015-12-25 13:10:16",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.5.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Doctrine\\Common\\": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
-            },
-            {
-                "name": "Johannes Schmitt",
-                "email": "schmittjoh@gmail.com"
-            }
-        ],
-        "description": "Common Library for Doctrine projects",
-        "homepage": "http://www.doctrine-project.org",
-        "keywords": [
-            "annotations",
-            "collections",
-            "eventmanager",
-            "persistence",
-            "spl"
-        ]
-    },
-    {
-        "name": "doctrine/dbal",
-        "version": "v2.4.5",
-        "version_normalized": "2.4.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/dbal.git",
-            "reference": "5a1f4bf34d61d997ccd9f0539fbc14c7a772aa16"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/dbal/zipball/5a1f4bf34d61d997ccd9f0539fbc14c7a772aa16",
-            "reference": "5a1f4bf34d61d997ccd9f0539fbc14c7a772aa16",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/common": "~2.4",
-            "php": ">=5.3.2"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*",
-            "symfony/console": "~2.0"
-        },
-        "suggest": {
-            "symfony/console": "For helpful console commands such as SQL execution and import of files."
-        },
-        "time": "2016-01-05 22:18:20",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Doctrine\\DBAL\\": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
-            }
-        ],
-        "description": "Database Abstraction Layer",
-        "homepage": "http://www.doctrine-project.org",
-        "keywords": [
-            "database",
-            "dbal",
-            "persistence",
-            "queryobject"
+            "lexer",
+            "parser"
         ]
     },
     {
@@ -529,12 +868,12 @@
         "version_normalized": "2.4.8.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/doctrine/doctrine2.git",
+            "url": "https://github.com/doctrine/orm.git",
             "reference": "5aedac1e5c5caaeac14798822c70325dc242d467"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/5aedac1e5c5caaeac14798822c70325dc242d467",
+            "url": "https://api.github.com/repos/doctrine/orm/zipball/5aedac1e5c5caaeac14798822c70325dc242d467",
             "reference": "5aedac1e5c5caaeac14798822c70325dc242d467",
             "shasum": ""
         },
@@ -552,7 +891,7 @@
         "suggest": {
             "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
         },
-        "time": "2015-08-31 13:19:01",
+        "time": "2015-08-31T13:19:01+00:00",
         "bin": [
             "bin/doctrine",
             "bin/doctrine.php"
@@ -599,6 +938,118 @@
         ]
     },
     {
+        "name": "imagine/imagine",
+        "version": "v0.6.3",
+        "version_normalized": "0.6.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/avalanche123/Imagine.git",
+            "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/149041d2a1b517107bfe270ca2b1a17aa341715d",
+            "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "sami/sami": "dev-master"
+        },
+        "suggest": {
+            "ext-gd": "to use the GD implementation",
+            "ext-gmagick": "to use the Gmagick implementation",
+            "ext-imagick": "to use the Imagick implementation"
+        },
+        "time": "2015-09-19T16:54:05+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-develop": "0.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Imagine": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Bulat Shakirzyanov",
+                "email": "mallluhuct@gmail.com",
+                "homepage": "http://avalanche123.com"
+            }
+        ],
+        "description": "Image processing for PHP 5.3",
+        "homepage": "http://imagine.readthedocs.org/",
+        "keywords": [
+            "drawing",
+            "graphics",
+            "image manipulation",
+            "image processing"
+        ]
+    },
+    {
+        "name": "incenteev/composer-parameter-handler",
+        "version": "v2.1.3",
+        "version_normalized": "2.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Incenteev/ParameterHandler.git",
+            "reference": "933c45a34814f27f2345c11c37d46b3ca7303550"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/933c45a34814f27f2345c11c37d46b3ca7303550",
+            "reference": "933c45a34814f27f2345c11c37d46b3ca7303550",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "symfony/yaml": "^2.3 || ^3.0 || ^4.0"
+        },
+        "require-dev": {
+            "composer/composer": "^1.0@dev",
+            "symfony/filesystem": "^2.3 || ^3 || ^4",
+            "symfony/phpunit-bridge": "^4.0"
+        },
+        "time": "2018-02-13T18:05:56+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Incenteev\\ParameterHandler\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Christophe Coevoet",
+                "email": "stof@notk.org"
+            }
+        ],
+        "description": "Composer script handling your ignored parameter file",
+        "homepage": "https://github.com/Incenteev/ParameterHandler",
+        "keywords": [
+            "parameters management"
+        ]
+    },
+    {
         "name": "ircmaxell/password-compat",
         "version": "v1.0.4",
         "version_normalized": "1.0.4.0",
@@ -616,7 +1067,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.*"
         },
-        "time": "2014-11-20 16:49:30",
+        "time": "2014-11-20T16:49:30+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -663,7 +1114,7 @@
         "require-dev": {
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2014-01-12 16:20:24",
+        "time": "2014-01-12T16:20:24+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -695,6 +1146,406 @@
         ]
     },
     {
+        "name": "knplabs/knp-components",
+        "version": "v1.3.10",
+        "version_normalized": "1.3.10.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/KnpLabs/knp-components.git",
+            "reference": "fc1755ba2b77f83a3d3c99e21f3026ba2a1429be"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/fc1755ba2b77f83a3d3c99e21f3026ba2a1429be",
+            "reference": "fc1755ba2b77f83a3d3c99e21f3026ba2a1429be",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "doctrine/mongodb-odm": "~1.0@beta",
+            "doctrine/orm": "~2.4",
+            "doctrine/phpcr-odm": "~1.2",
+            "jackalope/jackalope-doctrine-dbal": "~1.2",
+            "phpunit/phpunit": "~4.2",
+            "ruflin/elastica": "~1.0",
+            "symfony/event-dispatcher": "~2.5",
+            "symfony/property-access": ">=2.3"
+        },
+        "suggest": {
+            "symfony/property-access": "To allow sorting arrays"
+        },
+        "time": "2018-09-11T07:54:48+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Knp\\Component": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "KnpLabs Team",
+                "homepage": "http://knplabs.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://github.com/KnpLabs/knp-components/contributors"
+            }
+        ],
+        "description": "Knplabs component library",
+        "homepage": "http://github.com/KnpLabs/knp-components",
+        "keywords": [
+            "components",
+            "knp",
+            "knplabs",
+            "pager",
+            "paginator"
+        ]
+    },
+    {
+        "name": "knplabs/knp-paginator-bundle",
+        "version": "v2.8.0",
+        "version_normalized": "2.8.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
+            "reference": "f4ece5b347121b9fe13166264f197f90252d4bd2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/f4ece5b347121b9fe13166264f197f90252d4bd2",
+            "reference": "f4ece5b347121b9fe13166264f197f90252d4bd2",
+            "shasum": ""
+        },
+        "require": {
+            "knplabs/knp-components": "~1.2",
+            "php": ">=5.3.3",
+            "symfony/framework-bundle": "~2.7|~3.0|~4.0",
+            "twig/twig": "~1.12|~2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.8.35|~5.4.3|~6.4",
+            "symfony/expression-language": "~2.7|~3.0|~4.0"
+        },
+        "time": "2018-05-16T12:15:58+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Knp\\Bundle\\PaginatorBundle\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "KnpLabs Team",
+                "homepage": "http://knplabs.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle/contributors"
+            }
+        ],
+        "description": "Paginator bundle for Symfony to automate pagination and simplify sorting and other features",
+        "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle",
+        "keywords": [
+            "bundle",
+            "knp",
+            "knplabs",
+            "pager",
+            "pagination",
+            "paginator",
+            "symfony"
+        ]
+    },
+    {
+        "name": "kriswallsmith/assetic",
+        "version": "v1.4.0",
+        "version_normalized": "1.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kriswallsmith/assetic.git",
+            "reference": "e911c437dbdf006a8f62c2f59b15b2d69a5e0aa1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/e911c437dbdf006a8f62c2f59b15b2d69a5e0aa1",
+            "reference": "e911c437dbdf006a8f62c2f59b15b2d69a5e0aa1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.1",
+            "symfony/process": "~2.1|~3.0"
+        },
+        "conflict": {
+            "twig/twig": "<1.27"
+        },
+        "require-dev": {
+            "leafo/lessphp": "^0.3.7",
+            "leafo/scssphp": "~0.1",
+            "meenie/javascript-packer": "^1.1",
+            "mrclay/minify": "<2.3",
+            "natxet/cssmin": "3.0.4",
+            "patchwork/jsqueeze": "~1.0|~2.0",
+            "phpunit/phpunit": "~4.8 || ^5.6",
+            "psr/log": "~1.0",
+            "ptachoire/cssembed": "~1.0",
+            "symfony/phpunit-bridge": "~2.7|~3.0",
+            "twig/twig": "~1.23|~2.0",
+            "yfix/packager": "dev-master"
+        },
+        "suggest": {
+            "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
+            "leafo/scssphp": "Assetic provides the integration with the scssphp SCSS compiler",
+            "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin",
+            "patchwork/jsqueeze": "Assetic provides the integration with the JSqueeze JavaScript compressor",
+            "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
+            "twig/twig": "Assetic provides the integration with the Twig templating engine"
+        },
+        "time": "2016-11-11T18:43:20+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Assetic": "src/"
+            },
+            "files": [
+                "src/functions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kris Wallsmith",
+                "email": "kris.wallsmith@gmail.com",
+                "homepage": "http://kriswallsmith.net/"
+            }
+        ],
+        "description": "Asset Management for PHP",
+        "homepage": "https://github.com/kriswallsmith/assetic",
+        "keywords": [
+            "assets",
+            "compression",
+            "minification"
+        ]
+    },
+    {
+        "name": "markup/barcode-bundle",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
+        "target-dir": "Markup/BarcodeBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/usemarkup/BarcodeBundle.git",
+            "reference": "c228e1eb9211d338adadecf5740b2b59c3e1f302"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/usemarkup/BarcodeBundle/zipball/c228e1eb9211d338adadecf5740b2b59c3e1f302",
+            "reference": "c228e1eb9211d338adadecf5740b2b59c3e1f302",
+            "shasum": ""
+        },
+        "require": {
+            "imagine/imagine": "~0.6.0",
+            "php": ">=5.6",
+            "symfony/framework-bundle": "~2.7|~3.0",
+            "zendframework/zend-barcode": "~2.0|~3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~5.5",
+            "twig/twig": "~1.28|~2.0"
+        },
+        "time": "2017-03-31T14:04:56+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Markup\\BarcodeBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Douglas Greenshields",
+                "email": "douglas@usemarkup.com"
+            },
+            {
+                "name": "Markup",
+                "homepage": "http://www.usemarkup.com/"
+            }
+        ],
+        "description": "Barcode generation bundle wrapping Zend barcode component.",
+        "keywords": [
+            "barcode"
+        ]
+    },
+    {
+        "name": "monolog/monolog",
+        "version": "1.24.0",
+        "version_normalized": "1.24.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Seldaek/monolog.git",
+            "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
+            "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "psr/log": "~1.0"
+        },
+        "provide": {
+            "psr/log-implementation": "1.0.0"
+        },
+        "require-dev": {
+            "aws/aws-sdk-php": "^2.4.9 || ^3.0",
+            "doctrine/couchdb": "~1.0@dev",
+            "graylog2/gelf-php": "~1.0",
+            "jakub-onderka/php-parallel-lint": "0.9",
+            "php-amqplib/php-amqplib": "~2.4",
+            "php-console/php-console": "^3.1.3",
+            "phpunit/phpunit": "~4.5",
+            "phpunit/phpunit-mock-objects": "2.3.0",
+            "ruflin/elastica": ">=0.90 <3.0",
+            "sentry/sentry": "^0.13",
+            "swiftmailer/swiftmailer": "^5.3|^6.0"
+        },
+        "suggest": {
+            "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+            "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+            "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+            "ext-mongo": "Allow sending log messages to a MongoDB server",
+            "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+            "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+            "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
+            "php-console/php-console": "Allow sending log messages to Google Chrome",
+            "rollbar/rollbar": "Allow sending log messages to Rollbar",
+            "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+            "sentry/sentry": "Allow sending log messages to a Sentry server"
+        },
+        "time": "2018-11-05T09:00:11+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Monolog\\": "src/Monolog"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jordi Boggiano",
+                "email": "j.boggiano@seld.be",
+                "homepage": "http://seld.be"
+            }
+        ],
+        "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+        "homepage": "http://github.com/Seldaek/monolog",
+        "keywords": [
+            "log",
+            "logging",
+            "psr-3"
+        ]
+    },
+    {
+        "name": "paragonie/random_compat",
+        "version": "v2.0.18",
+        "version_normalized": "2.0.18.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/paragonie/random_compat.git",
+            "reference": "0a58ef6e3146256cc3dc7cc393927bcc7d1b72db"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/0a58ef6e3146256cc3dc7cc393927bcc7d1b72db",
+            "reference": "0a58ef6e3146256cc3dc7cc393927bcc7d1b72db",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*|5.*"
+        },
+        "suggest": {
+            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+        },
+        "time": "2019-01-03T20:59:08+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/random.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Paragon Initiative Enterprises",
+                "email": "security@paragonie.com",
+                "homepage": "https://paragonie.com"
+            }
+        ],
+        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+        "keywords": [
+            "csprng",
+            "polyfill",
+            "pseudorandom",
+            "random"
+        ]
+    },
+    {
         "name": "pclzip/pclzip",
         "version": "2.8.2",
         "version_normalized": "2.8.2.0",
@@ -709,7 +1560,7 @@
             "reference": "19dd1de9d3f5fc4d7d70175b4c344dee329f45fd",
             "shasum": ""
         },
-        "time": "2014-06-05 11:42:24",
+        "time": "2014-06-05T11:42:24+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -732,6 +1583,506 @@
             "php",
             "zip"
         ]
+    },
+    {
+        "name": "phpoffice/common",
+        "version": "0.2.9",
+        "version_normalized": "0.2.9.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPOffice/Common.git",
+            "reference": "edb5d32b1e3400a35a5c91e2539ed6f6ce925e4d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPOffice/Common/zipball/edb5d32b1e3400a35a5c91e2539ed6f6ce925e4d",
+            "reference": "edb5d32b1e3400a35a5c91e2539ed6f6ce925e4d",
+            "shasum": ""
+        },
+        "require": {
+            "pclzip/pclzip": "^2.8",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpdocumentor/phpdocumentor": "2.*",
+            "phploc/phploc": "2.*",
+            "phpmd/phpmd": "2.*",
+            "phpunit/phpunit": "^4.8.36 || ^7.0",
+            "sebastian/phpcpd": "2.*",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2018-07-13T14:12:34+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PhpOffice\\Common\\": "src/Common/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL"
+        ],
+        "authors": [
+            {
+                "name": "Mark Baker"
+            },
+            {
+                "name": "Franck Lefevre",
+                "homepage": "http://rootslabs.net"
+            }
+        ],
+        "description": "PHPOffice Common",
+        "homepage": "http://phpoffice.github.io",
+        "keywords": [
+            "common",
+            "component",
+            "office",
+            "php"
+        ]
+    },
+    {
+        "name": "phpoffice/phpword",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPOffice/PHPWord.git",
+            "reference": "7b7d4e4936014544aa706f4c03d3ac925d74beb9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPOffice/PHPWord/zipball/7b7d4e4936014544aa706f4c03d3ac925d74beb9",
+            "reference": "7b7d4e4936014544aa706f4c03d3ac925d74beb9",
+            "shasum": ""
+        },
+        "require": {
+            "ext-xml": "*",
+            "php": "^5.3.3 || ^7.0",
+            "phpoffice/common": "^0.2.9",
+            "zendframework/zend-escaper": "^2.2"
+        },
+        "require-dev": {
+            "dompdf/dompdf": "0.8.*",
+            "ext-gd": "*",
+            "ext-zip": "*",
+            "friendsofphp/php-cs-fixer": "^2.2",
+            "mpdf/mpdf": "5.7.4 || 6.* || 7.*",
+            "php-coveralls/php-coveralls": "1.1.0 || ^2.0",
+            "phploc/phploc": "2.* || 3.* || 4.*",
+            "phpmd/phpmd": "2.*",
+            "phpunit/phpunit": "^4.8.36 || ^7.0",
+            "squizlabs/php_codesniffer": "^2.9",
+            "tecnickcom/tcpdf": "6.*"
+        },
+        "suggest": {
+            "dompdf/dompdf": "Allows writing PDF",
+            "ext-gd2": "Allows adding images",
+            "ext-xmlwriter": "Allows writing OOXML and ODF",
+            "ext-xsl": "Allows applying XSL style sheet to headers, to main document part, and to footers of an OOXML template",
+            "ext-zip": "Allows writing OOXML and ODF"
+        },
+        "time": "2018-12-30T00:35:03+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-develop": "0.17-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "PhpOffice\\PhpWord\\": "src/PhpWord"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Mark Baker"
+            },
+            {
+                "name": "Gabriel Bull",
+                "email": "me@gabrielbull.com",
+                "homepage": "http://gabrielbull.com/"
+            },
+            {
+                "name": "Ivan Lanin",
+                "homepage": "http://ivan.lanin.org"
+            },
+            {
+                "name": "Roman Syroeshko",
+                "homepage": "http://ru.linkedin.com/pub/roman-syroeshko/34/a53/994/"
+            },
+            {
+                "name": "Franck Lefevre",
+                "homepage": "https://rootslabs.net/blog/"
+            },
+            {
+                "name": "Antoine de Troostembergh"
+            }
+        ],
+        "description": "PHPWord - A pure PHP library for reading and writing word processing documents (OOXML, ODF, RTF, HTML, PDF)",
+        "homepage": "http://phpoffice.github.io",
+        "keywords": [
+            "ISO IEC 29500",
+            "OOXML",
+            "Office Open XML",
+            "OpenDocument",
+            "OpenXML",
+            "PhpOffice",
+            "PhpWord",
+            "Rich Text Format",
+            "WordprocessingML",
+            "doc",
+            "docx",
+            "html",
+            "odf",
+            "odt",
+            "office",
+            "pdf",
+            "php",
+            "reader",
+            "rtf",
+            "template",
+            "template processor",
+            "word",
+            "writer"
+        ]
+    },
+    {
+        "name": "psr/container",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/container.git",
+            "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+            "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2017-02-14T16:28:37+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Container\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common Container Interface (PHP FIG PSR-11)",
+        "homepage": "https://github.com/php-fig/container",
+        "keywords": [
+            "PSR-11",
+            "container",
+            "container-interface",
+            "container-interop",
+            "psr"
+        ]
+    },
+    {
+        "name": "psr/log",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/log.git",
+            "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+            "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2018-11-20T15:27:04+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Log\\": "Psr/Log/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for logging libraries",
+        "homepage": "https://github.com/php-fig/log",
+        "keywords": [
+            "log",
+            "psr",
+            "psr-3"
+        ]
+    },
+    {
+        "name": "sensio/distribution-bundle",
+        "version": "v4.0.41",
+        "version_normalized": "4.0.41.0",
+        "target-dir": "Sensio/Bundle/DistributionBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
+            "reference": "a0d13880526e85262388e66e165e4c152396ff45"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/a0d13880526e85262388e66e165e4c152396ff45",
+            "reference": "a0d13880526e85262388e66e165e4c152396ff45",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.9",
+            "sensiolabs/security-checker": "~3.0|~4.0|~5.0",
+            "symfony/class-loader": "~2.2",
+            "symfony/framework-bundle": "~2.3",
+            "symfony/process": "~2.2"
+        },
+        "require-dev": {
+            "symfony/form": "~2.2",
+            "symfony/validator": "~2.2",
+            "symfony/yaml": "~2.2"
+        },
+        "suggest": {
+            "symfony/form": "If you want to use the configurator",
+            "symfony/validator": "If you want to use the configurator",
+            "symfony/yaml": "If you want to use  the configurator"
+        },
+        "time": "2018-12-04T16:12:38+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Sensio\\Bundle\\DistributionBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Base bundle for Symfony Distributions",
+        "keywords": [
+            "configuration",
+            "distribution"
+        ]
+    },
+    {
+        "name": "sensio/framework-extra-bundle",
+        "version": "v3.0.29",
+        "version_normalized": "3.0.29.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
+            "reference": "bb907234df776b68922eb4b25bfa061683597b6a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/bb907234df776b68922eb4b25bfa061683597b6a",
+            "reference": "bb907234df776b68922eb4b25bfa061683597b6a",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/common": "~2.2",
+            "symfony/dependency-injection": "~2.3|~3.0",
+            "symfony/framework-bundle": "~2.3|~3.0|~4.0"
+        },
+        "require-dev": {
+            "doctrine/doctrine-bundle": "~1.5",
+            "doctrine/orm": "~2.4,>=2.4.5",
+            "symfony/asset": "~2.7|~3.0|~4.0",
+            "symfony/browser-kit": "~2.3|~3.0|~4.0",
+            "symfony/dom-crawler": "~2.3|~3.0|~4.0",
+            "symfony/expression-language": "~2.4|~3.0|~4.0",
+            "symfony/finder": "~2.3|~3.0|~4.0",
+            "symfony/phpunit-bridge": "~3.2|~4.0",
+            "symfony/psr-http-message-bridge": "^0.3|^1.0",
+            "symfony/security-bundle": "~2.4|~3.0|~4.0",
+            "symfony/templating": "~2.3|~3.0|~4.0",
+            "symfony/translation": "~2.3|~3.0|~4.0",
+            "symfony/twig-bundle": "~2.3|~3.0|~4.0",
+            "symfony/yaml": "~2.3|~3.0|~4.0",
+            "twig/twig": "~1.12|~2.0",
+            "zendframework/zend-diactoros": "^1.3"
+        },
+        "suggest": {
+            "symfony/expression-language": "",
+            "symfony/psr-http-message-bridge": "To use the PSR-7 converters",
+            "symfony/security-bundle": ""
+        },
+        "time": "2017-12-14T19:03:23+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Sensio\\Bundle\\FrameworkExtraBundle\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "This bundle provides a way to configure your controllers with annotations",
+        "keywords": [
+            "annotations",
+            "controllers"
+        ]
+    },
+    {
+        "name": "sensio/generator-bundle",
+        "version": "v2.5.3",
+        "version_normalized": "2.5.3.0",
+        "target-dir": "Sensio/Bundle/GeneratorBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
+            "reference": "e50108c2133ee5c9c484555faed50c17a61221d3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/e50108c2133ee5c9c484555faed50c17a61221d3",
+            "reference": "e50108c2133ee5c9c484555faed50c17a61221d3",
+            "shasum": ""
+        },
+        "require": {
+            "symfony/console": "~2.5",
+            "symfony/framework-bundle": "~2.2"
+        },
+        "require-dev": {
+            "doctrine/orm": "~2.2,>=2.2.3",
+            "symfony/doctrine-bridge": "~2.2",
+            "twig/twig": "~1.11"
+        },
+        "time": "2015-03-17T06:36:52+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Sensio\\Bundle\\GeneratorBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "This bundle generates code for you"
+    },
+    {
+        "name": "sensiolabs/security-checker",
+        "version": "v5.0.3",
+        "version_normalized": "5.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sensiolabs/security-checker.git",
+            "reference": "46be3f58adac13084497961e10eed9a7fb4d44d1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/46be3f58adac13084497961e10eed9a7fb4d44d1",
+            "reference": "46be3f58adac13084497961e10eed9a7fb4d44d1",
+            "shasum": ""
+        },
+        "require": {
+            "composer/ca-bundle": "^1.0",
+            "php": ">=5.5.9",
+            "symfony/console": "~2.7|~3.0|~4.0"
+        },
+        "time": "2018-12-19T17:14:59+00:00",
+        "bin": [
+            "security-checker"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "SensioLabs\\Security\\": "SensioLabs/Security"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien.potencier@gmail.com"
+            }
+        ],
+        "description": "A security checker for your composer.lock"
     },
     {
         "name": "stg/cas-bundle",
@@ -833,64 +2184,113 @@
         ]
     },
     {
-        "name": "kriswallsmith/assetic",
-        "version": "v1.4.0",
-        "version_normalized": "1.4.0.0",
+        "name": "swiftmailer/swiftmailer",
+        "version": "v5.4.12",
+        "version_normalized": "5.4.12.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/kriswallsmith/assetic.git",
-            "reference": "e911c437dbdf006a8f62c2f59b15b2d69a5e0aa1"
+            "url": "https://github.com/swiftmailer/swiftmailer.git",
+            "reference": "181b89f18a90f8925ef805f950d47a7190e9b950"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/e911c437dbdf006a8f62c2f59b15b2d69a5e0aa1",
-            "reference": "e911c437dbdf006a8f62c2f59b15b2d69a5e0aa1",
+            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/181b89f18a90f8925ef805f950d47a7190e9b950",
+            "reference": "181b89f18a90f8925ef805f950d47a7190e9b950",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.1",
-            "symfony/process": "~2.1|~3.0"
-        },
-        "conflict": {
-            "twig/twig": "<1.27"
+            "php": ">=5.3.3"
         },
         "require-dev": {
-            "leafo/lessphp": "^0.3.7",
-            "leafo/scssphp": "~0.1",
-            "meenie/javascript-packer": "^1.1",
-            "mrclay/minify": "<2.3",
-            "natxet/cssmin": "3.0.4",
-            "patchwork/jsqueeze": "~1.0|~2.0",
-            "phpunit/phpunit": "~4.8 || ^5.6",
-            "psr/log": "~1.0",
-            "ptachoire/cssembed": "~1.0",
-            "symfony/phpunit-bridge": "~2.7|~3.0",
-            "twig/twig": "~1.23|~2.0",
-            "yfix/packager": "dev-master"
+            "mockery/mockery": "~0.9.1",
+            "symfony/phpunit-bridge": "~3.2"
         },
-        "suggest": {
-            "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
-            "leafo/scssphp": "Assetic provides the integration with the scssphp SCSS compiler",
-            "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin",
-            "patchwork/jsqueeze": "Assetic provides the integration with the JSqueeze JavaScript compressor",
-            "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
-            "twig/twig": "Assetic provides the integration with the Twig templating engine"
-        },
-        "time": "2016-11-11 18:43:20",
+        "time": "2018-07-31T09:26:32+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.4-dev"
+                "dev-master": "5.4-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Assetic": "src/"
-            },
             "files": [
-                "src/functions.php"
+                "lib/swift_required.php"
             ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chris Corbyn"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Swiftmailer, free feature-rich PHP mailer",
+        "homepage": "https://swiftmailer.symfony.com",
+        "keywords": [
+            "email",
+            "mail",
+            "mailer"
+        ]
+    },
+    {
+        "name": "symfony/assetic-bundle",
+        "version": "v2.8.2",
+        "version_normalized": "2.8.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/assetic-bundle.git",
+            "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/2e0a23a4874838e26de6f025e02fc63328921a4c",
+            "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c",
+            "shasum": ""
+        },
+        "require": {
+            "kriswallsmith/assetic": "~1.4",
+            "php": ">=5.3.0",
+            "symfony/console": "~2.3|~3.0",
+            "symfony/dependency-injection": "~2.3|~3.0",
+            "symfony/framework-bundle": "~2.3|~3.0",
+            "symfony/yaml": "~2.3|~3.0"
+        },
+        "conflict": {
+            "kriswallsmith/spork": "<=0.2",
+            "twig/twig": "<1.27"
+        },
+        "require-dev": {
+            "kriswallsmith/spork": "~0.3",
+            "patchwork/jsqueeze": "~1.0",
+            "symfony/class-loader": "~2.3|~3.0",
+            "symfony/css-selector": "~2.3|~3.0",
+            "symfony/dom-crawler": "~2.3|~3.0",
+            "symfony/phpunit-bridge": "~2.7|~3.0",
+            "symfony/twig-bundle": "~2.3|~3.0"
+        },
+        "suggest": {
+            "kriswallsmith/spork": "to be able to dump assets in parallel",
+            "symfony/twig-bundle": "to use the Twig integration"
+        },
+        "time": "2017-07-14T07:26:46+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Bundle\\AsseticBundle\\": ""
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -903,13 +2303,14 @@
                 "homepage": "http://kriswallsmith.net/"
             }
         ],
-        "description": "Asset Management for PHP",
-        "homepage": "https://github.com/kriswallsmith/assetic",
+        "description": "Integrates Assetic into Symfony2",
+        "homepage": "https://github.com/symfony/AsseticBundle",
         "keywords": [
             "assets",
             "compression",
             "minification"
-        ]
+        ],
+        "abandoned": "symfony/webpack-encore-pack"
     },
     {
         "name": "symfony/monolog-bundle",
@@ -939,7 +2340,7 @@
             "symfony/console": "~2.3|~3.0",
             "symfony/yaml": "~2.3|~3.0"
         },
-        "time": "2017-01-02 19:04:26",
+        "time": "2017-01-02T19:04:26+00:00",
         "type": "symfony-bundle",
         "extra": {
             "branch-alias": {
@@ -974,56 +2375,166 @@
         ]
     },
     {
-        "name": "doctrine/doctrine-bundle",
-        "version": "1.6.4",
-        "version_normalized": "1.6.4.0",
+        "name": "symfony/phpunit-bridge",
+        "version": "v4.2.5",
+        "version_normalized": "4.2.5.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/doctrine/DoctrineBundle.git",
-            "reference": "dd40b0a7fb16658cda9def9786992b8df8a49be7"
+            "url": "https://github.com/symfony/phpunit-bridge.git",
+            "reference": "8796da921e4613352818b478e9bb0803ea0dbb9a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/dd40b0a7fb16658cda9def9786992b8df8a49be7",
-            "reference": "dd40b0a7fb16658cda9def9786992b8df8a49be7",
+            "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/8796da921e4613352818b478e9bb0803ea0dbb9a",
+            "reference": "8796da921e4613352818b478e9bb0803ea0dbb9a",
             "shasum": ""
         },
         "require": {
-            "doctrine/dbal": "~2.3",
-            "doctrine/doctrine-cache-bundle": "~1.0",
-            "jdorn/sql-formatter": "~1.1",
-            "php": ">=5.3.2",
-            "symfony/console": "~2.3|~3.0",
-            "symfony/dependency-injection": "~2.3|~3.0",
-            "symfony/doctrine-bridge": "~2.2|~3.0",
-            "symfony/framework-bundle": "~2.3|~3.0"
+            "php": ">=5.3.3"
         },
-        "require-dev": {
-            "doctrine/orm": "~2.3",
-            "phpunit/phpunit": "~4",
-            "satooshi/php-coveralls": "~0.6.1",
-            "symfony/phpunit-bridge": "~2.7|~3.0",
-            "symfony/property-info": "~2.8|~3.0",
-            "symfony/validator": "~2.2|~3.0",
-            "symfony/yaml": "~2.2|~3.0",
-            "twig/twig": "~1.10"
+        "conflict": {
+            "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
         },
         "suggest": {
-            "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
-            "symfony/web-profiler-bundle": "To use the data collector."
+            "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
         },
-        "time": "2016-08-10 15:35:22",
-        "type": "symfony-bundle",
+        "time": "2019-03-26T20:16:42+00:00",
+        "bin": [
+            "bin/simple-phpunit"
+        ],
+        "type": "symfony-bridge",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.6.x-dev"
+                "dev-master": "4.2-dev"
+            },
+            "thanks": {
+                "name": "phpunit/phpunit",
+                "url": "https://github.com/sebastianbergmann/phpunit"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "bootstrap.php"
+            ],
+            "psr-4": {
+                "Symfony\\Bridge\\PhpUnit\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony PHPUnit Bridge",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "symfony/polyfill-apcu",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-apcu.git",
+            "reference": "a502face1da6a53289480166f24de2c3c68e5c3c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/a502face1da6a53289480166f24de2c3c68e5c3c",
+            "reference": "a502face1da6a53289480166f24de2c3c68e5c3c",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2019-02-06T07:57:58+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.11-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Doctrine\\Bundle\\DoctrineBundle\\": ""
+                "Symfony\\Polyfill\\Apcu\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
+        ],
+        "description": "Symfony polyfill backporting apcu_* functions to lower PHP versions",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "apcu",
+            "compatibility",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-ctype",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-ctype.git",
+            "reference": "82ebae02209c21113908c229e9883c419720738a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
+            "reference": "82ebae02209c21113908c229e9883c419720738a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "ext-ctype": "For best performance"
+        },
+        "time": "2019-02-06T07:57:58+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.11-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Ctype\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -1032,72 +2543,56 @@
         "authors": [
             {
                 "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
+                "homepage": "https://symfony.com/contributors"
             },
             {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Doctrine Project",
-                "homepage": "http://www.doctrine-project.org/"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "name": "Gert de Pagter",
+                "email": "backendtea@gmail.com"
             }
         ],
-        "description": "Symfony DoctrineBundle",
-        "homepage": "http://www.doctrine-project.org",
+        "description": "Symfony polyfill for ctype functions",
+        "homepage": "https://symfony.com",
         "keywords": [
-            "database",
-            "dbal",
-            "orm",
-            "persistence"
+            "compatibility",
+            "ctype",
+            "polyfill",
+            "portable"
         ]
     },
     {
-        "name": "doctrine/data-fixtures",
-        "version": "v1.1.1",
-        "version_normalized": "1.1.1.0",
+        "name": "symfony/polyfill-intl-icu",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/doctrine/data-fixtures.git",
-            "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a"
+            "url": "https://github.com/symfony/polyfill-intl-icu.git",
+            "reference": "999878a3a09d73cae157b0cf89bb6fb2cc073057"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/bd44f6b6e40247b6530bc8abe802e4e4d914976a",
-            "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a",
+            "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/999878a3a09d73cae157b0cf89bb6fb2cc073057",
+            "reference": "999878a3a09d73cae157b0cf89bb6fb2cc073057",
             "shasum": ""
         },
         "require": {
-            "doctrine/common": "~2.2",
-            "php": ">=5.3.2"
-        },
-        "conflict": {
-            "doctrine/orm": "< 2.4"
-        },
-        "require-dev": {
-            "doctrine/orm": "~2.4"
+            "php": ">=5.3.3",
+            "symfony/intl": "~2.3|~3.0|~4.0"
         },
         "suggest": {
-            "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
-            "doctrine/orm": "For loading ORM fixtures",
-            "doctrine/phpcr-odm": "For loading PHPCR ODM fixtures"
+            "ext-intl": "For best performance"
         },
-        "time": "2015-03-30 12:14:13",
+        "time": "2019-01-07T19:39:47+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.1.x-dev"
+                "dev-master": "1.9-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Doctrine\\Common\\DataFixtures": "lib/"
-            }
+            "files": [
+                "bootstrap.php"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -1105,79 +2600,38 @@
         ],
         "authors": [
             {
-                "name": "Jonathan Wage",
-                "email": "jonwage@gmail.com"
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Data Fixtures for all Doctrine Object Managers",
-        "homepage": "http://www.doctrine-project.org",
+        "description": "Symfony polyfill for intl's ICU-related data and classes",
+        "homepage": "https://symfony.com",
         "keywords": [
-            "database"
+            "compatibility",
+            "icu",
+            "intl",
+            "polyfill",
+            "portable",
+            "shim"
         ]
     },
     {
-        "name": "sensio/generator-bundle",
-        "version": "v2.5.3",
-        "version_normalized": "2.5.3.0",
-        "target-dir": "Sensio/Bundle/GeneratorBundle",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-            "reference": "e50108c2133ee5c9c484555faed50c17a61221d3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/e50108c2133ee5c9c484555faed50c17a61221d3",
-            "reference": "e50108c2133ee5c9c484555faed50c17a61221d3",
-            "shasum": ""
-        },
-        "require": {
-            "symfony/console": "~2.5",
-            "symfony/framework-bundle": "~2.2"
-        },
-        "require-dev": {
-            "doctrine/orm": "~2.2,>=2.2.3",
-            "symfony/doctrine-bridge": "~2.2",
-            "twig/twig": "~1.11"
-        },
-        "time": "2015-03-17 06:36:52",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.5.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Sensio\\Bundle\\GeneratorBundle": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "This bundle generates code for you"
-    },
-    {
         "name": "symfony/polyfill-mbstring",
-        "version": "v1.8.0",
-        "version_normalized": "1.8.0.0",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "3296adf6a6454a050679cde90f95350ad604b171"
+            "reference": "fe5e94c604826c35a32fa832f35bd036b6799609"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/3296adf6a6454a050679cde90f95350ad604b171",
-            "reference": "3296adf6a6454a050679cde90f95350ad604b171",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fe5e94c604826c35a32fa832f35bd036b6799609",
+            "reference": "fe5e94c604826c35a32fa832f35bd036b6799609",
             "shasum": ""
         },
         "require": {
@@ -1186,11 +2640,11 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2018-04-26 10:06:28",
+        "time": "2019-02-06T07:57:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.8-dev"
+                "dev-master": "1.11-dev"
             }
         },
         "installation-source": "dist",
@@ -1227,91 +2681,442 @@
         ]
     },
     {
-        "name": "twig/twig",
-        "version": "v1.35.3",
-        "version_normalized": "1.35.3.0",
+        "name": "symfony/polyfill-php54",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/twigphp/Twig.git",
-            "reference": "b48680b6eb7d16b5025b9bfc4108d86f6b8af86f"
+            "url": "https://github.com/symfony/polyfill-php54.git",
+            "reference": "2964b17ddc32dba7bcba009d5501c84d3fba1452"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/b48680b6eb7d16b5025b9bfc4108d86f6b8af86f",
-            "reference": "b48680b6eb7d16b5025b9bfc4108d86f6b8af86f",
+            "url": "https://api.github.com/repos/symfony/polyfill-php54/zipball/2964b17ddc32dba7bcba009d5501c84d3fba1452",
+            "reference": "2964b17ddc32dba7bcba009d5501c84d3fba1452",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.3"
         },
-        "require-dev": {
-            "psr/container": "^1.0",
-            "symfony/debug": "^2.7",
-            "symfony/phpunit-bridge": "^3.3"
-        },
-        "time": "2018-03-20 04:25:58",
+        "time": "2019-02-06T07:57:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.35-dev"
+                "dev-master": "1.11-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Twig_": "lib/"
-            },
             "psr-4": {
-                "Twig\\": "src/"
+                "Symfony\\Polyfill\\Php54\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ],
+            "classmap": [
+                "Resources/stubs"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill backporting some PHP 5.4+ features to lower PHP versions",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-php55",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-php55.git",
+            "reference": "96fa25cef405ea452919559a0025d5dc16e30e4c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-php55/zipball/96fa25cef405ea452919559a0025d5dc16e30e4c",
+            "reference": "96fa25cef405ea452919559a0025d5dc16e30e4c",
+            "shasum": ""
+        },
+        "require": {
+            "ircmaxell/password-compat": "~1.0",
+            "php": ">=5.3.3"
+        },
+        "time": "2019-02-06T07:57:58+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.11-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Php55\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill backporting some PHP 5.5+ features to lower PHP versions",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-php56",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-php56.git",
+            "reference": "f4dddbc5c3471e1b700a147a20ae17cdb72dbe42"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/f4dddbc5c3471e1b700a147a20ae17cdb72dbe42",
+            "reference": "f4dddbc5c3471e1b700a147a20ae17cdb72dbe42",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "symfony/polyfill-util": "~1.0"
+        },
+        "time": "2019-02-06T07:57:58+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.11-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Php56\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-php70",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-php70.git",
+            "reference": "bc4858fb611bda58719124ca079baff854149c89"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/bc4858fb611bda58719124ca079baff854149c89",
+            "reference": "bc4858fb611bda58719124ca079baff854149c89",
+            "shasum": ""
+        },
+        "require": {
+            "paragonie/random_compat": "~1.0|~2.0|~9.99",
+            "php": ">=5.3.3"
+        },
+        "time": "2019-02-06T07:57:58+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.11-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Php70\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ],
+            "classmap": [
+                "Resources/stubs"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill backporting some PHP 7.0+ features to lower PHP versions",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-util",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-util.git",
+            "reference": "b46c6cae28a3106735323f00a0c38eccf2328897"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/b46c6cae28a3106735323f00a0c38eccf2328897",
+            "reference": "b46c6cae28a3106735323f00a0c38eccf2328897",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2019-02-08T14:16:39+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.11-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Util\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "BSD-3-Clause"
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony utilities for portability of PHP codes",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compat",
+            "compatibility",
+            "polyfill",
+            "shim"
+        ]
+    },
+    {
+        "name": "symfony/security-acl",
+        "version": "v3.0.1",
+        "version_normalized": "3.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/security-acl.git",
+            "reference": "ab4dfe2d95e038cd367dd04604487b0a3359bcff"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/security-acl/zipball/ab4dfe2d95e038cd367dd04604487b0a3359bcff",
+            "reference": "ab4dfe2d95e038cd367dd04604487b0a3359bcff",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.9",
+            "symfony/security-core": "~2.8|~3.0|~4.0"
+        },
+        "require-dev": {
+            "doctrine/common": "~2.2",
+            "doctrine/dbal": "~2.2",
+            "psr/log": "~1.0",
+            "symfony/phpunit-bridge": "~2.8|~3.0|~4.0"
+        },
+        "suggest": {
+            "doctrine/dbal": "For using the built-in ACL implementation",
+            "symfony/class-loader": "For using the ACL generateSql script",
+            "symfony/finder": "For using the ACL generateSql script"
+        },
+        "time": "2017-07-21T06:01:18+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Security\\Acl\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
         ],
         "authors": [
             {
                 "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": "http://fabien.potencier.org",
-                "role": "Lead Developer"
+                "email": "fabien@symfony.com"
             },
             {
-                "name": "Armin Ronacher",
-                "email": "armin.ronacher@active-4.com",
-                "role": "Project Founder"
-            },
-            {
-                "name": "Twig Team",
-                "homepage": "http://twig.sensiolabs.org/contributors",
-                "role": "Contributors"
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Twig, the flexible, fast, and secure template language for PHP",
-        "homepage": "http://twig.sensiolabs.org",
-        "keywords": [
-            "templating"
-        ]
+        "description": "Symfony Security Component - ACL (Access Control List)",
+        "homepage": "https://symfony.com"
     },
     {
-        "name": "symfony/symfony",
-        "version": "v2.8.0",
-        "version_normalized": "2.8.0.0",
+        "name": "symfony/swiftmailer-bundle",
+        "version": "v2.6.7",
+        "version_normalized": "2.6.7.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/symfony.git",
-            "reference": "5615b92cd452cd54f1433a3f53de87c096a1107f"
+            "url": "https://github.com/symfony/swiftmailer-bundle.git",
+            "reference": "c4808f5169efc05567be983909d00f00521c53ec"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/symfony/zipball/5615b92cd452cd54f1433a3f53de87c096a1107f",
-            "reference": "5615b92cd452cd54f1433a3f53de87c096a1107f",
+            "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/c4808f5169efc05567be983909d00f00521c53ec",
+            "reference": "c4808f5169efc05567be983909d00f00521c53ec",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "swiftmailer/swiftmailer": "~4.2|~5.0",
+            "symfony/config": "~2.7|~3.0",
+            "symfony/dependency-injection": "~2.7|~3.0",
+            "symfony/http-kernel": "~2.7|~3.0"
+        },
+        "require-dev": {
+            "symfony/console": "~2.7|~3.0",
+            "symfony/framework-bundle": "~2.7|~3.0",
+            "symfony/phpunit-bridge": "~3.3@dev",
+            "symfony/yaml": "~2.7|~3.0"
+        },
+        "suggest": {
+            "psr/log": "Allows logging"
+        },
+        "time": "2017-10-19T01:06:41+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.6-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Bundle\\SwiftmailerBundle\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Symfony SwiftmailerBundle",
+        "homepage": "http://symfony.com"
+    },
+    {
+        "name": "symfony/symfony",
+        "version": "v2.8.49",
+        "version_normalized": "2.8.49.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/symfony.git",
+            "reference": "f8ac64c075a36bedd0de43192d9601c20b99716e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/symfony/zipball/f8ac64c075a36bedd0de43192d9601c20b99716e",
+            "reference": "f8ac64c075a36bedd0de43192d9601c20b99716e",
             "shasum": ""
         },
         "require": {
             "doctrine/common": "~2.4",
+            "ext-xml": "*",
             "php": ">=5.3.9",
             "psr/log": "~1.0",
+            "symfony/polyfill-apcu": "~1.1",
+            "symfony/polyfill-ctype": "~1.8",
             "symfony/polyfill-intl-icu": "~1.0",
             "symfony/polyfill-mbstring": "~1.0",
             "symfony/polyfill-php54": "~1.0",
@@ -1319,11 +3124,12 @@
             "symfony/polyfill-php56": "~1.0",
             "symfony/polyfill-php70": "~1.0",
             "symfony/polyfill-util": "~1.0",
-            "symfony/security-acl": "~2.7",
-            "twig/twig": "~1.23|~2.0"
+            "symfony/security-acl": "~2.7|~3.0.0",
+            "twig/twig": "~1.34|~2.4"
         },
         "conflict": {
-            "phpdocumentor/reflection": "<1.0.7"
+            "phpdocumentor/reflection": "<1.0.7",
+            "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
         },
         "replace": {
             "symfony/asset": "self.version",
@@ -1374,16 +3180,19 @@
             "symfony/yaml": "self.version"
         },
         "require-dev": {
+            "doctrine/annotations": "~1.0",
             "doctrine/data-fixtures": "1.0.*",
             "doctrine/dbal": "~2.4",
             "doctrine/doctrine-bundle": "~1.2",
             "doctrine/orm": "~2.4,>=2.4.5",
-            "egulias/email-validator": "~1.2",
+            "egulias/email-validator": "~1.2,>=1.2.1",
             "monolog/monolog": "~1.11",
-            "ocramius/proxy-manager": "~0.4|~1.0",
-            "phpdocumentor/reflection": "^1.0.7"
+            "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
+            "phpdocumentor/reflection": "^1.0.7",
+            "sensio/framework-extra-bundle": "^3.0.2",
+            "symfony/phpunit-bridge": "~3.4|~4.0"
         },
-        "time": "2015-11-30 17:26:10",
+        "time": "2018-12-06T14:45:26+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1429,1050 +3238,24 @@
         ]
     },
     {
-        "name": "symfony/polyfill-util",
-        "version": "v1.8.0",
-        "version_normalized": "1.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-util.git",
-            "reference": "1a5ad95d9436cbff3296034fe9f8d586dce3fb3a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/1a5ad95d9436cbff3296034fe9f8d586dce3fb3a",
-            "reference": "1a5ad95d9436cbff3296034fe9f8d586dce3fb3a",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "time": "2018-04-26 10:06:28",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Util\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony utilities for portability of PHP codes",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compat",
-            "compatibility",
-            "polyfill",
-            "shim"
-        ]
-    },
-    {
-        "name": "symfony/polyfill-php56",
-        "version": "v1.8.0",
-        "version_normalized": "1.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-php56.git",
-            "reference": "af98553c84912459db3f636329567809d639a8f6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/af98553c84912459db3f636329567809d639a8f6",
-            "reference": "af98553c84912459db3f636329567809d639a8f6",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "symfony/polyfill-util": "~1.0"
-        },
-        "time": "2018-04-26 10:06:28",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Php56\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
-        "name": "paragonie/random_compat",
-        "version": "v2.0.12",
-        "version_normalized": "2.0.12.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/paragonie/random_compat.git",
-            "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/258c89a6b97de7dfaf5b8c7607d0478e236b04fb",
-            "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*|5.*"
-        },
-        "suggest": {
-            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
-        },
-        "time": "2018-04-04 21:24:14",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/random.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Paragon Initiative Enterprises",
-                "email": "security@paragonie.com",
-                "homepage": "https://paragonie.com"
-            }
-        ],
-        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
-        "keywords": [
-            "csprng",
-            "pseudorandom",
-            "random"
-        ]
-    },
-    {
-        "name": "symfony/polyfill-php70",
-        "version": "v1.8.0",
-        "version_normalized": "1.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-php70.git",
-            "reference": "77454693d8f10dd23bb24955cffd2d82db1007a6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/77454693d8f10dd23bb24955cffd2d82db1007a6",
-            "reference": "77454693d8f10dd23bb24955cffd2d82db1007a6",
-            "shasum": ""
-        },
-        "require": {
-            "paragonie/random_compat": "~1.0|~2.0",
-            "php": ">=5.3.3"
-        },
-        "time": "2018-04-26 10:06:28",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Php70\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ],
-            "classmap": [
-                "Resources/stubs"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill backporting some PHP 7.0+ features to lower PHP versions",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
-        "name": "symfony/polyfill-php55",
-        "version": "v1.8.0",
-        "version_normalized": "1.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-php55.git",
-            "reference": "a39456128377a85f2c5707fcae458678560cba46"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-php55/zipball/a39456128377a85f2c5707fcae458678560cba46",
-            "reference": "a39456128377a85f2c5707fcae458678560cba46",
-            "shasum": ""
-        },
-        "require": {
-            "ircmaxell/password-compat": "~1.0",
-            "php": ">=5.3.3"
-        },
-        "time": "2018-04-26 10:06:28",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Php55\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill backporting some PHP 5.5+ features to lower PHP versions",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
-        "name": "symfony/polyfill-php54",
-        "version": "v1.8.0",
-        "version_normalized": "1.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-php54.git",
-            "reference": "6c3a2b84c6025e4ea3f6a19feac35408c64b22e1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-php54/zipball/6c3a2b84c6025e4ea3f6a19feac35408c64b22e1",
-            "reference": "6c3a2b84c6025e4ea3f6a19feac35408c64b22e1",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "time": "2018-04-26 10:06:28",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Php54\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ],
-            "classmap": [
-                "Resources/stubs"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill backporting some PHP 5.4+ features to lower PHP versions",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
-        "name": "symfony/security-acl",
-        "version": "v2.8.0",
-        "version_normalized": "2.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/security-acl.git",
-            "reference": "4a3f7327ad215242c78f6564ad4ea6d2db1b8347"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/security-acl/zipball/4a3f7327ad215242c78f6564ad4ea6d2db1b8347",
-            "reference": "4a3f7327ad215242c78f6564ad4ea6d2db1b8347",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.9",
-            "symfony/security-core": "~2.4|~3.0.0"
-        },
-        "require-dev": {
-            "doctrine/common": "~2.2",
-            "doctrine/dbal": "~2.2",
-            "psr/log": "~1.0",
-            "symfony/phpunit-bridge": "~2.7|~3.0.0"
-        },
-        "suggest": {
-            "doctrine/dbal": "For using the built-in ACL implementation",
-            "symfony/class-loader": "For using the ACL generateSql script",
-            "symfony/finder": "For using the ACL generateSql script"
-        },
-        "time": "2015-12-28 09:39:09",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Security\\Acl\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Security Component - ACL (Access Control List)",
-        "homepage": "https://symfony.com"
-    },
-    {
-        "name": "symfony/polyfill-intl-icu",
-        "version": "v1.8.0",
-        "version_normalized": "1.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-intl-icu.git",
-            "reference": "80ee17ae83c10cd513e5144f91a73607a21edb4e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/80ee17ae83c10cd513e5144f91a73607a21edb4e",
-            "reference": "80ee17ae83c10cd513e5144f91a73607a21edb4e",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "symfony/intl": "~2.3|~3.0|~4.0"
-        },
-        "suggest": {
-            "ext-intl": "For best performance"
-        },
-        "time": "2018-04-25 14:53:50",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill for intl's ICU-related data and classes",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "icu",
-            "intl",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
-        "name": "symfony/assetic-bundle",
-        "version": "v2.8.2",
-        "version_normalized": "2.8.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/assetic-bundle.git",
-            "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/2e0a23a4874838e26de6f025e02fc63328921a4c",
-            "reference": "2e0a23a4874838e26de6f025e02fc63328921a4c",
-            "shasum": ""
-        },
-        "require": {
-            "kriswallsmith/assetic": "~1.4",
-            "php": ">=5.3.0",
-            "symfony/console": "~2.3|~3.0",
-            "symfony/dependency-injection": "~2.3|~3.0",
-            "symfony/framework-bundle": "~2.3|~3.0",
-            "symfony/yaml": "~2.3|~3.0"
-        },
-        "conflict": {
-            "kriswallsmith/spork": "<=0.2",
-            "twig/twig": "<1.27"
-        },
-        "require-dev": {
-            "kriswallsmith/spork": "~0.3",
-            "patchwork/jsqueeze": "~1.0",
-            "symfony/class-loader": "~2.3|~3.0",
-            "symfony/css-selector": "~2.3|~3.0",
-            "symfony/dom-crawler": "~2.3|~3.0",
-            "symfony/phpunit-bridge": "~2.7|~3.0",
-            "symfony/twig-bundle": "~2.3|~3.0"
-        },
-        "suggest": {
-            "kriswallsmith/spork": "to be able to dump assets in parallel",
-            "symfony/twig-bundle": "to use the Twig integration"
-        },
-        "time": "2017-07-14 07:26:46",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Bundle\\AsseticBundle\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Kris Wallsmith",
-                "email": "kris.wallsmith@gmail.com",
-                "homepage": "http://kriswallsmith.net/"
-            }
-        ],
-        "description": "Integrates Assetic into Symfony2",
-        "homepage": "https://github.com/symfony/AsseticBundle",
-        "keywords": [
-            "assets",
-            "compression",
-            "minification"
-        ],
-        "abandoned": "symfony/webpack-encore-pack"
-    },
-    {
-        "name": "swiftmailer/swiftmailer",
-        "version": "v5.4.9",
-        "version_normalized": "5.4.9.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/swiftmailer/swiftmailer.git",
-            "reference": "7ffc1ea296ed14bf8260b6ef11b80208dbadba91"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/7ffc1ea296ed14bf8260b6ef11b80208dbadba91",
-            "reference": "7ffc1ea296ed14bf8260b6ef11b80208dbadba91",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "mockery/mockery": "~0.9.1",
-            "symfony/phpunit-bridge": "~3.2"
-        },
-        "time": "2018-01-23 07:37:21",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/swift_required.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Chris Corbyn"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "Swiftmailer, free feature-rich PHP mailer",
-        "homepage": "https://swiftmailer.symfony.com",
-        "keywords": [
-            "email",
-            "mail",
-            "mailer"
-        ]
-    },
-    {
-        "name": "symfony/swiftmailer-bundle",
-        "version": "v2.6.7",
-        "version_normalized": "2.6.7.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/swiftmailer-bundle.git",
-            "reference": "c4808f5169efc05567be983909d00f00521c53ec"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/c4808f5169efc05567be983909d00f00521c53ec",
-            "reference": "c4808f5169efc05567be983909d00f00521c53ec",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.2",
-            "swiftmailer/swiftmailer": "~4.2|~5.0",
-            "symfony/config": "~2.7|~3.0",
-            "symfony/dependency-injection": "~2.7|~3.0",
-            "symfony/http-kernel": "~2.7|~3.0"
-        },
-        "require-dev": {
-            "symfony/console": "~2.7|~3.0",
-            "symfony/framework-bundle": "~2.7|~3.0",
-            "symfony/phpunit-bridge": "~3.3@dev",
-            "symfony/yaml": "~2.7|~3.0"
-        },
-        "suggest": {
-            "psr/log": "Allows logging"
-        },
-        "time": "2017-10-19 01:06:41",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.6-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Bundle\\SwiftmailerBundle\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "Symfony SwiftmailerBundle",
-        "homepage": "http://symfony.com"
-    },
-    {
-        "name": "sensiolabs/security-checker",
-        "version": "v3.0.7",
-        "version_normalized": "3.0.7.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sensiolabs/security-checker.git",
-            "reference": "59a6a299e2f5612dc8692d40e84373703a5df1b5"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/59a6a299e2f5612dc8692d40e84373703a5df1b5",
-            "reference": "59a6a299e2f5612dc8692d40e84373703a5df1b5",
-            "shasum": ""
-        },
-        "require": {
-            "symfony/console": "~2.0|~3.0"
-        },
-        "time": "2017-03-29 09:29:53",
-        "bin": [
-            "security-checker"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "SensioLabs\\Security": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien.potencier@gmail.com"
-            }
-        ],
-        "description": "A security checker for your composer.lock"
-    },
-    {
-        "name": "sensio/distribution-bundle",
-        "version": "v4.0.39",
-        "version_normalized": "4.0.39.0",
-        "target-dir": "Sensio/Bundle/DistributionBundle",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-            "reference": "bf582cc96becd7ae53f9fe8c4647d0a41c243a42"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/bf582cc96becd7ae53f9fe8c4647d0a41c243a42",
-            "reference": "bf582cc96becd7ae53f9fe8c4647d0a41c243a42",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.9",
-            "sensiolabs/security-checker": "~3.0",
-            "symfony/class-loader": "~2.2",
-            "symfony/framework-bundle": "~2.3",
-            "symfony/process": "~2.2"
-        },
-        "require-dev": {
-            "symfony/form": "~2.2",
-            "symfony/validator": "~2.2",
-            "symfony/yaml": "~2.2"
-        },
-        "suggest": {
-            "symfony/form": "If you want to use the configurator",
-            "symfony/validator": "If you want to use the configurator",
-            "symfony/yaml": "If you want to use  the configurator"
-        },
-        "time": "2017-08-25 16:49:47",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "4.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Sensio\\Bundle\\DistributionBundle": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "Base bundle for Symfony Distributions",
-        "keywords": [
-            "configuration",
-            "distribution"
-        ]
-    },
-    {
-        "name": "sensio/framework-extra-bundle",
-        "version": "v3.0.29",
-        "version_normalized": "3.0.29.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-            "reference": "bb907234df776b68922eb4b25bfa061683597b6a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/bb907234df776b68922eb4b25bfa061683597b6a",
-            "reference": "bb907234df776b68922eb4b25bfa061683597b6a",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/common": "~2.2",
-            "symfony/dependency-injection": "~2.3|~3.0",
-            "symfony/framework-bundle": "~2.3|~3.0|~4.0"
-        },
-        "require-dev": {
-            "doctrine/doctrine-bundle": "~1.5",
-            "doctrine/orm": "~2.4,>=2.4.5",
-            "symfony/asset": "~2.7|~3.0|~4.0",
-            "symfony/browser-kit": "~2.3|~3.0|~4.0",
-            "symfony/dom-crawler": "~2.3|~3.0|~4.0",
-            "symfony/expression-language": "~2.4|~3.0|~4.0",
-            "symfony/finder": "~2.3|~3.0|~4.0",
-            "symfony/phpunit-bridge": "~3.2|~4.0",
-            "symfony/psr-http-message-bridge": "^0.3|^1.0",
-            "symfony/security-bundle": "~2.4|~3.0|~4.0",
-            "symfony/templating": "~2.3|~3.0|~4.0",
-            "symfony/translation": "~2.3|~3.0|~4.0",
-            "symfony/twig-bundle": "~2.3|~3.0|~4.0",
-            "symfony/yaml": "~2.3|~3.0|~4.0",
-            "twig/twig": "~1.12|~2.0",
-            "zendframework/zend-diactoros": "^1.3"
-        },
-        "suggest": {
-            "symfony/expression-language": "",
-            "symfony/psr-http-message-bridge": "To use the PSR-7 converters",
-            "symfony/security-bundle": ""
-        },
-        "time": "2017-12-14 19:03:23",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Sensio\\Bundle\\FrameworkExtraBundle\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "This bundle provides a way to configure your controllers with annotations",
-        "keywords": [
-            "annotations",
-            "controllers"
-        ]
-    },
-    {
-        "name": "incenteev/composer-parameter-handler",
-        "version": "v2.1.3",
-        "version_normalized": "2.1.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Incenteev/ParameterHandler.git",
-            "reference": "933c45a34814f27f2345c11c37d46b3ca7303550"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/933c45a34814f27f2345c11c37d46b3ca7303550",
-            "reference": "933c45a34814f27f2345c11c37d46b3ca7303550",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "symfony/yaml": "^2.3 || ^3.0 || ^4.0"
-        },
-        "require-dev": {
-            "composer/composer": "^1.0@dev",
-            "symfony/filesystem": "^2.3 || ^3 || ^4",
-            "symfony/phpunit-bridge": "^4.0"
-        },
-        "time": "2018-02-13 18:05:56",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.1.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Incenteev\\ParameterHandler\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Christophe Coevoet",
-                "email": "stof@notk.org"
-            }
-        ],
-        "description": "Composer script handling your ignored parameter file",
-        "homepage": "https://github.com/Incenteev/ParameterHandler",
-        "keywords": [
-            "parameters management"
-        ]
-    },
-    {
-        "name": "knplabs/knp-components",
-        "version": "1.3.8",
-        "version_normalized": "1.3.8.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/KnpLabs/knp-components.git",
-            "reference": "b65f69ff04d2f1b7a67ae592273ca6f4d1aa3e5f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/b65f69ff04d2f1b7a67ae592273ca6f4d1aa3e5f",
-            "reference": "b65f69ff04d2f1b7a67ae592273ca6f4d1aa3e5f",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.2"
-        },
-        "require-dev": {
-            "doctrine/mongodb-odm": "~1.0@beta",
-            "doctrine/orm": "~2.4",
-            "doctrine/phpcr-odm": "~1.2",
-            "jackalope/jackalope-doctrine-dbal": "~1.2",
-            "phpunit/phpunit": "~4.2",
-            "ruflin/elastica": "~1.0",
-            "symfony/event-dispatcher": "~2.5",
-            "symfony/property-access": ">=2.3"
-        },
-        "suggest": {
-            "doctrine/common": "to allow usage pagination with Doctrine ArrayCollection",
-            "doctrine/mongodb-odm": "to allow usage pagination with Doctrine ODM MongoDB",
-            "doctrine/orm": "to allow usage pagination with Doctrine ORM",
-            "doctrine/phpcr-odm": "to allow usage pagination with Doctrine ODM PHPCR",
-            "propel/propel1": "to allow usage pagination with Propel ORM",
-            "ruflin/Elastica": "to allow usage pagination with ElasticSearch Client",
-            "solarium/solarium": "to allow usage pagination with Solarium Client",
-            "symfony/property-access": "To allow sorting arrays"
-        },
-        "time": "2018-04-03 12:20:48",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Knp\\Component": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "KnpLabs Team",
-                "homepage": "http://knplabs.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://github.com/KnpLabs/knp-components/contributors"
-            }
-        ],
-        "description": "Knplabs component library",
-        "homepage": "http://github.com/KnpLabs/knp-components",
-        "keywords": [
-            "components",
-            "knp",
-            "knplabs",
-            "pager",
-            "paginator"
-        ]
-    },
-    {
-        "name": "knplabs/knp-paginator-bundle",
-        "version": "v2.8.0",
-        "version_normalized": "2.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-            "reference": "f4ece5b347121b9fe13166264f197f90252d4bd2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/f4ece5b347121b9fe13166264f197f90252d4bd2",
-            "reference": "f4ece5b347121b9fe13166264f197f90252d4bd2",
-            "shasum": ""
-        },
-        "require": {
-            "knplabs/knp-components": "~1.2",
-            "php": ">=5.3.3",
-            "symfony/framework-bundle": "~2.7|~3.0|~4.0",
-            "twig/twig": "~1.12|~2"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.8.35|~5.4.3|~6.4",
-            "symfony/expression-language": "~2.7|~3.0|~4.0"
-        },
-        "time": "2018-05-16 12:15:58",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.8.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Knp\\Bundle\\PaginatorBundle\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "KnpLabs Team",
-                "homepage": "http://knplabs.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle/contributors"
-            }
-        ],
-        "description": "Paginator bundle for Symfony to automate pagination and simplify sorting and other features",
-        "homepage": "http://github.com/KnpLabs/KnpPaginatorBundle",
-        "keywords": [
-            "bundle",
-            "knp",
-            "knplabs",
-            "pager",
-            "pagination",
-            "paginator",
-            "symfony"
-        ]
-    },
-    {
         "name": "tecnickcom/tcpdf",
-        "version": "6.2.17",
-        "version_normalized": "6.2.17.0",
+        "version": "6.2.26",
+        "version_normalized": "6.2.26.0",
         "source": {
             "type": "git",
             "url": "https://github.com/tecnickcom/TCPDF.git",
-            "reference": "64fc19439863e1b1314487a72a74d9bfd0b55a53"
+            "reference": "367241059ca166e3a76490f4448c284e0a161f15"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/64fc19439863e1b1314487a72a74d9bfd0b55a53",
-            "reference": "64fc19439863e1b1314487a72a74d9bfd0b55a53",
+            "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/367241059ca166e3a76490f4448c284e0a161f15",
+            "reference": "367241059ca166e3a76490f4448c284e0a161f15",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2018-02-24 11:48:20",
+        "time": "2018-10-16T17:24:05+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2519,19 +3302,86 @@
         ]
     },
     {
-        "name": "whiteoctober/tcpdf-bundle",
-        "version": "1.0.3",
-        "version_normalized": "1.0.3.0",
-        "target-dir": "WhiteOctober/TCPDFBundle",
+        "name": "twig/twig",
+        "version": "v1.38.4",
+        "version_normalized": "1.38.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/whiteoctober/WhiteOctoberTCPDFBundle.git",
-            "reference": "3a705b0f416792351fc531eb086e6f5caf5339a5"
+            "url": "https://github.com/twigphp/Twig.git",
+            "reference": "7732e9e7017d751313811bd118de61302e9c8b35"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberTCPDFBundle/zipball/3a705b0f416792351fc531eb086e6f5caf5339a5",
-            "reference": "3a705b0f416792351fc531eb086e6f5caf5339a5",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/7732e9e7017d751313811bd118de61302e9c8b35",
+            "reference": "7732e9e7017d751313811bd118de61302e9c8b35",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0",
+            "symfony/polyfill-ctype": "^1.8"
+        },
+        "require-dev": {
+            "psr/container": "^1.0",
+            "symfony/debug": "^2.7",
+            "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
+        },
+        "time": "2019-03-23T14:27:19+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.38-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Twig_": "lib/"
+            },
+            "psr-4": {
+                "Twig\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Armin Ronacher",
+                "email": "armin.ronacher@active-4.com",
+                "role": "Project Founder"
+            },
+            {
+                "name": "Twig Team",
+                "homepage": "https://twig.symfony.com/contributors",
+                "role": "Contributors"
+            }
+        ],
+        "description": "Twig, the flexible, fast, and secure template language for PHP",
+        "homepage": "https://twig.symfony.com",
+        "keywords": [
+            "templating"
+        ]
+    },
+    {
+        "name": "whiteoctober/tcpdf-bundle",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/whiteoctober/WhiteOctoberTCPDFBundle.git",
+            "reference": "33e57940af790c0c8ee6a200a1f0661e415d0a5c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberTCPDFBundle/zipball/33e57940af790c0c8ee6a200a1f0661e415d0a5c",
+            "reference": "33e57940af790c0c8ee6a200a1f0661e415d0a5c",
             "shasum": ""
         },
         "require": {
@@ -2539,12 +3389,12 @@
             "symfony/framework-bundle": ">=2.0",
             "tecnickcom/tcpdf": "*"
         },
-        "time": "2017-05-25 07:39:11",
+        "time": "2019-01-14T13:51:20+00:00",
         "type": "symfony-bundle",
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "WhiteOctober\\TCPDFBundle": ""
+            "psr-4": {
+                "WhiteOctober\\TCPDFBundle\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -2565,262 +3415,88 @@
         ]
     },
     {
-        "name": "doctrine/doctrine-cache-bundle",
-        "version": "1.3.3",
-        "version_normalized": "1.3.3.0",
+        "name": "zendframework/zend-barcode",
+        "version": "2.7.0",
+        "version_normalized": "2.7.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
-            "reference": "4c8e363f96427924e7e519c5b5119b4f54512697"
+            "url": "https://github.com/zendframework/zend-barcode.git",
+            "reference": "50f24f604ef2172a0127efe91e786bc2caf2e8cf"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/4c8e363f96427924e7e519c5b5119b4f54512697",
-            "reference": "4c8e363f96427924e7e519c5b5119b4f54512697",
+            "url": "https://api.github.com/repos/zendframework/zend-barcode/zipball/50f24f604ef2172a0127efe91e786bc2caf2e8cf",
+            "reference": "50f24f604ef2172a0127efe91e786bc2caf2e8cf",
             "shasum": ""
         },
         "require": {
-            "doctrine/cache": "^1.4.2",
-            "doctrine/inflector": "~1.0",
-            "php": ">=5.3.2",
-            "symfony/doctrine-bridge": "~2.7|~3.3|~4.0"
+            "php": "^5.6 || ^7.0",
+            "zendframework/zend-servicemanager": "^2.7.8 || ^3.3",
+            "zendframework/zend-stdlib": "^2.7.7 || ^3.1",
+            "zendframework/zend-validator": "^2.10.1"
         },
         "require-dev": {
-            "instaclick/coding-standard": "~1.1",
-            "instaclick/object-calisthenics-sniffs": "dev-master",
-            "instaclick/symfony2-coding-standard": "dev-remaster",
-            "phpunit/phpunit": "~4|~5",
-            "predis/predis": "~0.8",
-            "satooshi/php-coveralls": "^1.0",
-            "squizlabs/php_codesniffer": "~1.5",
-            "symfony/console": "~2.7|~3.3|~4.0",
-            "symfony/finder": "~2.7|~3.3|~4.0",
-            "symfony/framework-bundle": "~2.7|~3.3|~4.0",
-            "symfony/phpunit-bridge": "~2.7|~3.3|~4.0",
-            "symfony/security-acl": "~2.7|~3.3",
-            "symfony/validator": "~2.7|~3.3|~4.0",
-            "symfony/yaml": "~2.7|~3.3|~4.0"
+            "phpunit/phpunit": "^5.7.23 || ^6.4.3",
+            "zendframework/zend-coding-standard": "~1.0.0",
+            "zendframework/zend-config": "^2.6 || ^3.1",
+            "zendframework/zendpdf": "^2.0.2"
         },
         "suggest": {
-            "symfony/security-acl": "For using this bundle to cache ACLs"
+            "zendframework/zendpdf": "ZendPdf component"
         },
-        "time": "2018-03-27 09:22:12",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Doctrine\\Bundle\\DoctrineCacheBundle\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            },
-            {
-                "name": "Benjamin Eberlei",
-                "email": "kontakt@beberlei.de"
-            },
-            {
-                "name": "Fabio B. Silva",
-                "email": "fabio.bat.silva@gmail.com"
-            },
-            {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@hotmail.com"
-            },
-            {
-                "name": "Doctrine Project",
-                "homepage": "http://www.doctrine-project.org/"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "Symfony Bundle for Doctrine Cache",
-        "homepage": "http://www.doctrine-project.org",
-        "keywords": [
-            "cache",
-            "caching"
-        ]
-    },
-    {
-        "name": "doctrine/doctrine-fixtures-bundle",
-        "version": "v2.4.1",
-        "version_normalized": "2.4.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-            "reference": "74b8cc70a4a25b774628ee59f4cdf3623a146273"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/74b8cc70a4a25b774628ee59f4cdf3623a146273",
-            "reference": "74b8cc70a4a25b774628ee59f4cdf3623a146273",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/data-fixtures": "~1.0",
-            "doctrine/doctrine-bundle": "~1.0",
-            "php": ">=5.3.2",
-            "symfony/doctrine-bridge": "~2.7|~3.0|~4.0"
-        },
-        "time": "2017-10-30 19:26:42",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.4.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Doctrine\\Bundle\\FixturesBundle\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            },
-            {
-                "name": "Doctrine Project",
-                "homepage": "http://www.doctrine-project.org"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "Symfony DoctrineFixturesBundle",
-        "homepage": "http://www.doctrine-project.org",
-        "keywords": [
-            "Fixture",
-            "persistence"
-        ]
-    },
-    {
-        "name": "monolog/monolog",
-        "version": "1.23.0",
-        "version_normalized": "1.23.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Seldaek/monolog.git",
-            "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
-            "reference": "fd8c787753b3a2ad11bc60c063cff1358a32a3b4",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "psr/log": "~1.0"
-        },
-        "provide": {
-            "psr/log-implementation": "1.0.0"
-        },
-        "require-dev": {
-            "aws/aws-sdk-php": "^2.4.9 || ^3.0",
-            "doctrine/couchdb": "~1.0@dev",
-            "graylog2/gelf-php": "~1.0",
-            "jakub-onderka/php-parallel-lint": "0.9",
-            "php-amqplib/php-amqplib": "~2.4",
-            "php-console/php-console": "^3.1.3",
-            "phpunit/phpunit": "~4.5",
-            "phpunit/phpunit-mock-objects": "2.3.0",
-            "ruflin/elastica": ">=0.90 <3.0",
-            "sentry/sentry": "^0.13",
-            "swiftmailer/swiftmailer": "^5.3|^6.0"
-        },
-        "suggest": {
-            "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
-            "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
-            "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-            "ext-mongo": "Allow sending log messages to a MongoDB server",
-            "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
-            "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
-            "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
-            "php-console/php-console": "Allow sending log messages to Google Chrome",
-            "rollbar/rollbar": "Allow sending log messages to Rollbar",
-            "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
-            "sentry/sentry": "Allow sending log messages to a Sentry server"
-        },
-        "time": "2017-06-19 01:22:40",
+        "time": "2017-12-11T15:30:02+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.0.x-dev"
+                "dev-master": "2.7.x-dev",
+                "dev-develop": "2.8.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Monolog\\": "src/Monolog"
+                "Zend\\Barcode\\": "src/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "MIT"
+            "BSD-3-Clause"
         ],
-        "authors": [
-            {
-                "name": "Jordi Boggiano",
-                "email": "j.boggiano@seld.be",
-                "homepage": "http://seld.be"
-            }
-        ],
-        "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
-        "homepage": "http://github.com/Seldaek/monolog",
+        "description": "provides a generic way to generate barcodes",
         "keywords": [
-            "log",
-            "logging",
-            "psr-3"
+            "ZendFramework",
+            "barcode",
+            "zf"
         ]
     },
     {
         "name": "zendframework/zend-escaper",
-        "version": "2.5.1",
-        "version_normalized": "2.5.1.0",
+        "version": "2.6.0",
+        "version_normalized": "2.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/zendframework/zend-escaper.git",
-            "reference": "a4b227d8a477f4e7e9073f8e0a7ae7dbd3104a73"
+            "reference": "31d8aafae982f9568287cb4dce987e6aff8fd074"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/a4b227d8a477f4e7e9073f8e0a7ae7dbd3104a73",
-            "reference": "a4b227d8a477f4e7e9073f8e0a7ae7dbd3104a73",
+            "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/31d8aafae982f9568287cb4dce987e6aff8fd074",
+            "reference": "31d8aafae982f9568287cb4dce987e6aff8fd074",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.23"
+            "php": "^5.6 || ^7.0"
         },
         "require-dev": {
-            "fabpot/php-cs-fixer": "1.7.*",
-            "phpunit/phpunit": "~4.0"
+            "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
+            "zendframework/zend-coding-standard": "~1.0.0"
         },
-        "time": "2015-06-03 14:05:37",
+        "time": "2018-04-25T15:48:53+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.5-dev",
-                "dev-develop": "2.6-dev"
+                "dev-master": "2.6.x-dev",
+                "dev-develop": "2.7.x-dev"
             }
         },
         "installation-source": "dist",
@@ -2833,52 +3509,112 @@
         "license": [
             "BSD-3-Clause"
         ],
-        "homepage": "https://github.com/zendframework/zend-escaper",
+        "description": "Securely and safely escape HTML, HTML attributes, JavaScript, CSS, and URLs",
         "keywords": [
+            "ZendFramework",
             "escaper",
-            "zf2"
+            "zf"
+        ]
+    },
+    {
+        "name": "zendframework/zend-servicemanager",
+        "version": "3.4.0",
+        "version_normalized": "3.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-servicemanager.git",
+            "reference": "a1ed6140d0d3ee803fec96582593ed024950067b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-servicemanager/zipball/a1ed6140d0d3ee803fec96582593ed024950067b",
+            "reference": "a1ed6140d0d3ee803fec96582593ed024950067b",
+            "shasum": ""
+        },
+        "require": {
+            "container-interop/container-interop": "^1.2",
+            "php": "^5.6 || ^7.0",
+            "psr/container": "^1.0",
+            "zendframework/zend-stdlib": "^3.2.1"
+        },
+        "provide": {
+            "container-interop/container-interop-implementation": "^1.2",
+            "psr/container-implementation": "^1.0"
+        },
+        "require-dev": {
+            "mikey179/vfsstream": "^1.6.5",
+            "ocramius/proxy-manager": "^1.0 || ^2.0",
+            "phpbench/phpbench": "^0.13.0",
+            "phpunit/phpunit": "^5.7.25 || ^6.4.4",
+            "zendframework/zend-coding-standard": "~1.0.0"
+        },
+        "suggest": {
+            "ocramius/proxy-manager": "ProxyManager 1.* to handle lazy initialization of services",
+            "zendframework/zend-stdlib": "zend-stdlib ^2.5 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances"
+        },
+        "time": "2018-12-22T06:05:09+00:00",
+        "bin": [
+            "bin/generate-deps-for-config-factory",
+            "bin/generate-factory-for-class"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.3-dev",
+                "dev-develop": "4.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\ServiceManager\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "Factory-Driven Dependency Injection Container",
+        "keywords": [
+            "PSR-11",
+            "ZendFramework",
+            "dependency-injection",
+            "di",
+            "dic",
+            "service-manager",
+            "servicemanager",
+            "zf"
         ]
     },
     {
         "name": "zendframework/zend-stdlib",
-        "version": "2.5.1",
-        "version_normalized": "2.5.1.0",
+        "version": "3.2.1",
+        "version_normalized": "3.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/zendframework/zend-stdlib.git",
-            "reference": "cc8e90a60dd5d44b9730b77d07b97550091da1ae"
+            "reference": "66536006722aff9e62d1b331025089b7ec71c065"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/cc8e90a60dd5d44b9730b77d07b97550091da1ae",
-            "reference": "cc8e90a60dd5d44b9730b77d07b97550091da1ae",
+            "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/66536006722aff9e62d1b331025089b7ec71c065",
+            "reference": "66536006722aff9e62d1b331025089b7ec71c065",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.23"
+            "php": "^5.6 || ^7.0"
         },
         "require-dev": {
-            "fabpot/php-cs-fixer": "1.7.*",
-            "phpunit/phpunit": "~4.0",
-            "zendframework/zend-config": "~2.5",
-            "zendframework/zend-eventmanager": "~2.5",
-            "zendframework/zend-filter": "~2.5",
-            "zendframework/zend-inputfilter": "~2.5",
-            "zendframework/zend-serializer": "~2.5",
-            "zendframework/zend-servicemanager": "~2.5"
+            "phpbench/phpbench": "^0.13",
+            "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
+            "zendframework/zend-coding-standard": "~1.0.0"
         },
-        "suggest": {
-            "zendframework/zend-eventmanager": "To support aggregate hydrator usage",
-            "zendframework/zend-filter": "To support naming strategy hydrator usage",
-            "zendframework/zend-serializer": "Zend\\Serializer component",
-            "zendframework/zend-servicemanager": "To support hydrator plugin manager usage"
-        },
-        "time": "2015-06-03 15:32:03",
+        "time": "2018-08-28T21:34:05+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.5-dev",
-                "dev-develop": "2.6-dev"
+                "dev-master": "3.2.x-dev",
+                "dev-develop": "3.3.x-dev"
             }
         },
         "installation-source": "dist",
@@ -2891,245 +3627,86 @@
         "license": [
             "BSD-3-Clause"
         ],
-        "homepage": "https://github.com/zendframework/zend-stdlib",
+        "description": "SPL extensions, array utilities, error handlers, and more",
         "keywords": [
+            "ZendFramework",
             "stdlib",
+            "zf"
+        ]
+    },
+    {
+        "name": "zendframework/zend-validator",
+        "version": "2.12.0",
+        "version_normalized": "2.12.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-validator.git",
+            "reference": "64c33668e5fa2d39c6289a878f927ea2b0850c30"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-validator/zipball/64c33668e5fa2d39c6289a878f927ea2b0850c30",
+            "reference": "64c33668e5fa2d39c6289a878f927ea2b0850c30",
+            "shasum": ""
+        },
+        "require": {
+            "container-interop/container-interop": "^1.1",
+            "php": "^5.6 || ^7.0",
+            "zendframework/zend-stdlib": "^3.2.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^6.0.8 || ^5.7.15",
+            "psr/http-message": "^1.0",
+            "zendframework/zend-cache": "^2.6.1",
+            "zendframework/zend-coding-standard": "~1.0.0",
+            "zendframework/zend-config": "^2.6",
+            "zendframework/zend-db": "^2.7",
+            "zendframework/zend-filter": "^2.6",
+            "zendframework/zend-http": "^2.5.4",
+            "zendframework/zend-i18n": "^2.6",
+            "zendframework/zend-math": "^2.6",
+            "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
+            "zendframework/zend-session": "^2.8",
+            "zendframework/zend-uri": "^2.5"
+        },
+        "suggest": {
+            "psr/http-message": "psr/http-message, required when validating PSR-7 UploadedFileInterface instances via the Upload and UploadFile validators",
+            "zendframework/zend-db": "Zend\\Db component, required by the (No)RecordExists validator",
+            "zendframework/zend-filter": "Zend\\Filter component, required by the Digits validator",
+            "zendframework/zend-i18n": "Zend\\I18n component to allow translation of validation error messages",
+            "zendframework/zend-i18n-resources": "Translations of validator messages",
+            "zendframework/zend-math": "Zend\\Math component, required by the Csrf validator",
+            "zendframework/zend-servicemanager": "Zend\\ServiceManager component to allow using the ValidatorPluginManager and validator chains",
+            "zendframework/zend-session": "Zend\\Session component, ^2.8; required by the Csrf validator",
+            "zendframework/zend-uri": "Zend\\Uri component, required by the Uri and Sitemap\\Loc validators"
+        },
+        "time": "2019-01-30T14:26:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.12.x-dev",
+                "dev-develop": "2.13.x-dev"
+            },
+            "zf": {
+                "component": "Zend\\Validator",
+                "config-provider": "Zend\\Validator\\ConfigProvider"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Validator\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "provides a set of commonly needed validators",
+        "homepage": "https://github.com/zendframework/zend-validator",
+        "keywords": [
+            "validator",
             "zf2"
-        ]
-    },
-    {
-        "name": "phpoffice/common",
-        "version": "0.2.7",
-        "version_normalized": "0.2.7.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/PHPOffice/Common.git",
-            "reference": "d5992c95f199842fa8ba6329bb15d02716265d5b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/PHPOffice/Common/zipball/d5992c95f199842fa8ba6329bb15d02716265d5b",
-            "reference": "d5992c95f199842fa8ba6329bb15d02716265d5b",
-            "shasum": ""
-        },
-        "require": {
-            "pclzip/pclzip": "^2.8",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpdocumentor/phpdocumentor": "2.*",
-            "phploc/phploc": "2.*",
-            "phpmd/phpmd": "2.*",
-            "phpunit/phpunit": "3.7.*",
-            "sebastian/phpcpd": "2.*",
-            "squizlabs/php_codesniffer": "2.*"
-        },
-        "time": "2017-11-23 14:13:25",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "PhpOffice\\Common\\": "src/Common/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "LGPL"
-        ],
-        "authors": [
-            {
-                "name": "Mark Baker"
-            },
-            {
-                "name": "Franck Lefevre",
-                "homepage": "http://rootslabs.net"
-            }
-        ],
-        "description": "PHPOffice Common",
-        "homepage": "http://phpoffice.github.io",
-        "keywords": [
-            "common",
-            "component",
-            "office",
-            "php"
-        ]
-    },
-    {
-        "name": "symfony/phpunit-bridge",
-        "version": "v4.0.9",
-        "version_normalized": "4.0.9.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/phpunit-bridge.git",
-            "reference": "03971d50f60e019d1640e137633bc596db2573f4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/03971d50f60e019d1640e137633bc596db2573f4",
-            "reference": "03971d50f60e019d1640e137633bc596db2573f4",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "conflict": {
-            "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
-        },
-        "suggest": {
-            "ext-zip": "Zip support is required when using bin/simple-phpunit",
-            "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
-        },
-        "time": "2018-04-30 15:37:01",
-        "bin": [
-            "bin/simple-phpunit"
-        ],
-        "type": "symfony-bridge",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "4.0-dev"
-            },
-            "thanks": {
-                "name": "phpunit/phpunit",
-                "url": "https://github.com/sebastianbergmann/phpunit"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "bootstrap.php"
-            ],
-            "psr-4": {
-                "Symfony\\Bridge\\PhpUnit\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony PHPUnit Bridge",
-        "homepage": "https://symfony.com"
-    },
-    {
-        "name": "phpoffice/phpword",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/PHPOffice/PHPWord.git",
-            "reference": "bdca366d9109d91a8deeb46558b4ed0ef347bc04"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/PHPOffice/PHPWord/zipball/bdca366d9109d91a8deeb46558b4ed0ef347bc04",
-            "reference": "bdca366d9109d91a8deeb46558b4ed0ef347bc04",
-            "shasum": ""
-        },
-        "require": {
-            "ext-xml": "*",
-            "php": "^5.3.3 || ^7.0",
-            "phpoffice/common": "^0.2",
-            "zendframework/zend-escaper": "^2.2",
-            "zendframework/zend-stdlib": "^2.2 || ^3.0"
-        },
-        "require-dev": {
-            "dompdf/dompdf": "0.8.*",
-            "friendsofphp/php-cs-fixer": "^2.0",
-            "mpdf/mpdf": "5.* || 6.* || 7.*",
-            "phpdocumentor/phpdocumentor": "2.*",
-            "phploc/phploc": "2.* || 3.* || 4.*",
-            "phpmd/phpmd": "2.*",
-            "phpunit/phpunit": "^4.8.36 || ^5.0",
-            "squizlabs/php_codesniffer": "^2.7",
-            "tecnickcom/tcpdf": "6.*"
-        },
-        "suggest": {
-            "dompdf/dompdf": "Allows writing PDF",
-            "ext-gd2": "Allows adding images",
-            "ext-xmlwriter": "Allows writing OOXML and ODF",
-            "ext-xsl": "Allows applying XSL style sheet to headers, to main document part, and to footers of an OOXML template",
-            "ext-zip": "Allows writing OOXML and ODF"
-        },
-        "time": "2018-01-03 13:15:59",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "0.15-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "PhpOffice\\PhpWord\\": "src/PhpWord"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "LGPL-3.0"
-        ],
-        "authors": [
-            {
-                "name": "Mark Baker"
-            },
-            {
-                "name": "Gabriel Bull",
-                "email": "me@gabrielbull.com",
-                "homepage": "http://gabrielbull.com/"
-            },
-            {
-                "name": "Ivan Lanin",
-                "homepage": "http://ivan.lanin.org"
-            },
-            {
-                "name": "Roman Syroeshko",
-                "homepage": "http://ru.linkedin.com/pub/roman-syroeshko/34/a53/994/"
-            },
-            {
-                "name": "Franck Lefevre",
-                "homepage": "https://rootslabs.net/blog/"
-            },
-            {
-                "name": "Antoine de Troostembergh"
-            }
-        ],
-        "description": "PHPWord - A pure PHP library for reading and writing word processing documents (OOXML, ODF, RTF, HTML, PDF)",
-        "homepage": "http://phpoffice.github.io",
-        "keywords": [
-            "ISO IEC 29500",
-            "OOXML",
-            "Office Open XML",
-            "OpenDocument",
-            "OpenXML",
-            "PhpOffice",
-            "PhpWord",
-            "Rich Text Format",
-            "WordprocessingML",
-            "doc",
-            "docx",
-            "html",
-            "odf",
-            "odt",
-            "office",
-            "pdf",
-            "php",
-            "reader",
-            "rtf",
-            "template",
-            "template processor",
-            "word",
-            "writer"
         ]
     }
 ]

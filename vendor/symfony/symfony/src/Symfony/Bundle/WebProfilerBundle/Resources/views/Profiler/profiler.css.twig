@@ -7,6 +7,9 @@
     'subtle_border_and_shadow': 'background: #FFF; border: 1px solid #E0E0E0; box-shadow: 0px 0px 1px rgba(128, 128, 128, .2);'
 } %}
 
+{# when updating any of these colors, do the same in toolbar.css.twig #}
+{% set colors = { 'success': '#4F805D', 'warning': '#A46A1F', 'error': '#B0413E' } %}
+
 {# Normalization
    (normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css)
    ========================================================================= #}
@@ -14,9 +17,15 @@ html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:1
 
 {# Basic styles
    ========================================================================= #}
+html, body  {
+    height: 100%;
+    width: 100%;
+}
 body {
     background-color: #F9F9F9;
     color: #222;
+    display: flex;
+    flex-direction: column;
     {{ mixins.sans_serif_font|raw }}
     font-size: 14px;
     line-height: 1.4;
@@ -113,6 +122,7 @@ button {
 }
 .btn-sm svg {
     height: 16px;
+    width: 16px;
     vertical-align: middle;
 }
 .btn-link {
@@ -123,6 +133,7 @@ button {
     outline: none;
     border: 0;
     padding: 0;
+    cursor: pointer;
 }
 .btn-link:hover {
     text-decoration: underline;
@@ -163,10 +174,6 @@ table tbody td {
     border-width: 1px 0;
 }
 
-table tbody td {
-    {{ mixins.break_long_words|raw }}
-}
-
 table tbody div {
     margin: .25em 0;
 }
@@ -185,6 +192,9 @@ table tbody ul {
 }
 .nowrap {
     white-space: pre;
+}
+.prewrap {
+    white-space: pre-wrap;
 }
 .newline {
     display: block;
@@ -232,19 +242,19 @@ table tbody ul {
     padding: 3px 7px;
     white-space: nowrap;
 }
-.label.status-success { background: #5E976E; color: #FFF; }
-.label.status-warning { background: #BC8034; color: #FFF; }
-.label.status-error   { background: #B0413E; color: #FFF; }
+.label.status-success { background: {{ colors.success|raw }}; color: #FFF; }
+.label.status-warning { background: {{ colors.warning|raw }}; color: #FFF; }
+.label.status-error   { background: {{ colors.error|raw }}; color: #FFF; }
 
 {# Metrics
    ------------------------------------------------------------------------- #}
 .metrics {
-    margin: 1em 0;
+    margin: 1em 0 0;
     overflow: auto;
 }
 .metrics .metric {
     float: left;
-    margin-right: 1em;
+    margin: 0 1em 1em 0;
 }
 
 .metric {
@@ -276,8 +286,8 @@ table tbody ul {
 }
 
 .metrics-horizontal .metric {
-    min-height: auto;
-    min-width: auto;
+    min-height: 0;
+    min-width: 0;
 }
 .metrics-horizontal .metric .value,
 .metrics-horizontal .metric .label {
@@ -297,6 +307,12 @@ table tbody ul {
     margin: 0;
     padding-left: 4px;
     vertical-align: middle;
+}
+
+.metric-divider {
+    float: left;
+    margin: 0 1em;
+    min-height: 1px; {# required to apply 'margin' to an empty 'div' #}
 }
 
 {# Cards
@@ -341,11 +357,11 @@ tr.status-warning td {
     border-top: 1px solid #FAFAFA;
 }
 
-.status-warning .colored  {
-    color: #BC8034;
+.status-warning .colored {
+    color: {{ colors.warning|raw }};
 }
 .status-error .colored  {
-    color: #B0413E;
+    color: {{ colors.error|raw }};
 }
 
 {# Syntax highlighting
@@ -397,16 +413,34 @@ tr.status-warning td {
     max-width: 1300px;
     padding-right: 15px;
 }
+#header {
+    flex: 0 0 auto;
+}
+#header .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#summary {
+    flex: 0 0 auto;
+}
 #content {
-    min-height: 1024px;
-    overflow: hidden;
+    height: 100%;
+}
+#main {
+    display: flex;
+    flex-direction: row;
+    min-height: 100%;
+}
+#sidebar {
+    flex: 0 0 220px;
 }
 #collector-wrapper {
-    float: left;
-    width: 100%;
+    flex: 0 1 100%;
+    min-width: 0;
 }
 #collector-content {
-    margin: 0 0 30px 220px;
+    margin: 0 0 30px 0;
     padding: 14px 0 14px 20px;
 }
 
@@ -424,7 +458,6 @@ tr.status-warning td {
     color: #FFF;
     font-weight: normal;
     font-size: 21px;
-    float: left;
     margin: 0;
     padding: 10px 10px 8px;
 }
@@ -433,6 +466,7 @@ tr.status-warning td {
 }
 #header h1 svg {
     height: 40px;
+    width: 40px;
     margin-top: -4px;
     vertical-align: middle;
 }
@@ -440,7 +474,6 @@ tr.status-warning td {
     fill: #FFF;
 }
 #header .search {
-    float: right;
     padding-top: 11px;
 }
 #header .search input {
@@ -469,9 +502,9 @@ tr.status-warning td {
     text-decoration: underline;
 }
 
-#summary .status-success { background: #5E976E; }
-#summary .status-warning { background: #BC8034; }
-#summary .status-error   { background: #B0413E; }
+#summary .status-success { background: {{ colors.success|raw }}; }
+#summary .status-warning { background: {{ colors.warning|raw }}; }
+#summary .status-error   { background: {{ colors.error|raw }};   }
 
 #summary .status-success h2,
 #summary .status-success h2 a,
@@ -506,11 +539,10 @@ tr.status-warning td {
 #sidebar {
     background: #444;
     color: #CCC;
-    float: left;
-    margin-bottom: -99999px; {# needed for 'same-height columns' trick #}
-    margin-left: -100%;
-    padding-bottom: 99999px; {# needed for 'same-height columns' trick #}
+    padding-bottom: 30px;
+    position: relative;
     width: 220px;
+    z-index: 9999;
 }
 #sidebar .module {
     padding: 10px;
@@ -541,7 +573,7 @@ tr.status-warning td {
     margin-left: 5px;
 }
 #sidebar #sidebar-shortcuts .btn {
-    padding: .5em .6em;
+    padding: .5em;
 }
 
 {# Sidebar Search
@@ -585,11 +617,11 @@ tr.status-warning td {
 #menu-profiler {
     margin: 0;
     padding: 0;
+    list-style-type: none;
 }
 #menu-profiler li {
     position: relative;
     margin-bottom: 0;
-    width: 220px;
 }
 #menu-profiler li a {
     border: solid transparent;
@@ -615,6 +647,11 @@ tr.status-warning td {
     top: 8px;
     width: 50px;
     text-align: center;
+}
+#menu-profiler .label .icon img,
+#menu-profiler .label .icon svg {
+    height: 24px;
+    max-width: 24px;
 }
 #menu-profiler li a .label .icon svg path {
     fill: #DDD;
@@ -670,10 +707,10 @@ tr.status-warning td {
 }
 
 #menu-profiler .label-status-warning .count {
-    background: #BC8034;
+    background: {{ colors.warning|raw }};
 }
 #menu-profiler .label-status-error .count {
-    background: #B0413E;
+    background: {{ colors.error|raw }};
 }
 
 {# Timeline panel
@@ -909,17 +946,13 @@ table.logs .sf-call-stack abbr {
 }
 
 @media (max-width: 768px) {
-    #collector-content {
-        margin-left: 50px;
-    }
-
     #sidebar {
-        width: 50px;
-        overflow-y: hidden;
-        transition: width 200ms ease-out;
+        flex-basis: 50px;
+        overflow-x: hidden;
+        transition: flex-basis 200ms ease-out;
     }
     #sidebar:hover, #sidebar.expanded {
-        width: 220px;
+        flex-basis: 220px;
     }
 
     #sidebar-search {
@@ -934,6 +967,18 @@ table.logs .sf-call-stack abbr {
     }
     #sidebar:hover .module, #sidebar.expanded .module {
         display: block;
+    }
+
+    #sidebar:not(:hover):not(.expanded) .label .count {
+        border-radius: 50%;
+        border: 1px solid #eee;
+        height: 8px;
+        min-width: 0;
+        padding: 0;
+        right: 4px;
+        text-indent: -9999px;
+        top: 50%;
+        width: 8px;
     }
 
     .visible-small {

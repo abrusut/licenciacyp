@@ -72,4 +72,11 @@ class LicenciaType extends AbstractType
     {
         return 'mprod_licenciacypbundle_licencia';
     }
+     /**
+     * @return string
+     */
+    public function getId()
+    {
+        return 'mprod_licenciacypbundle_licencia';
+    }
 }

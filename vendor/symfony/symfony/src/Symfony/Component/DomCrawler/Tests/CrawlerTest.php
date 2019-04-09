@@ -11,9 +11,10 @@
 
 namespace Symfony\Component\DomCrawler\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
-class CrawlerTest extends \PHPUnit_Framework_TestCase
+class CrawlerTest extends TestCase
 {
     public function testConstructor()
     {
@@ -47,7 +48,7 @@ class CrawlerTest extends \PHPUnit_Framework_TestCase
 
         $crawler = new Crawler();
         $crawler->add($this->createNodeList()->item(0));
-        $this->assertEquals('foo', $crawler->filterXPath('//div')->attr('class'), '->add() adds nodes from a \DOMElement');
+        $this->assertEquals('foo', $crawler->filterXPath('//div')->attr('class'), '->add() adds nodes from a \DOMNode');
 
         $crawler = new Crawler();
         $crawler->add('<html><body>Foo</body></html>');
@@ -61,16 +62,6 @@ class CrawlerTest extends \PHPUnit_Framework_TestCase
     {
         $crawler = new Crawler();
         $crawler->add(1);
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Nodes set in a Crawler must be DOMElement or DOMDocument instances, "DOMNode" given.
-     */
-    public function testAddInvalidNode()
-    {
-        $crawler = new Crawler();
-        $crawler->add(new \DOMNode());
     }
 
     public function testAddHtmlContent()
@@ -136,7 +127,7 @@ class CrawlerTest extends \PHPUnit_Framework_TestCase
         $internalErrors = libxml_use_internal_errors(true);
 
         $crawler = new Crawler();
-        $crawler->addHtmlContent(<<<EOF
+        $crawler->addHtmlContent(<<<'EOF'
 <!DOCTYPE html>
 <html>
     <head>
@@ -177,7 +168,7 @@ EOF
         $internalErrors = libxml_use_internal_errors(true);
 
         $crawler = new Crawler();
-        $crawler->addXmlContent(<<<EOF
+        $crawler->addXmlContent(<<<'EOF'
 <!DOCTYPE html>
 <html>
     <head>
@@ -189,7 +180,7 @@ EOF
 EOF
         , 'UTF-8');
 
-        $this->assertTrue(count(libxml_get_errors()) > 1);
+        $this->assertGreaterThan(1, libxml_get_errors());
 
         libxml_clear_errors();
         libxml_use_internal_errors($internalErrors);
@@ -224,7 +215,13 @@ EOF
         $crawler = new Crawler();
         $crawler->addContent('<html><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><span>中文</span></html>');
         $this->assertEquals('中文', $crawler->filterXPath('//span')->text(), '->addContent() guess wrong charset');
+    }
 
+    /**
+     * @requires extension iconv
+     */
+    public function testAddContentNonUtf8()
+    {
         $crawler = new Crawler();
         $crawler->addContent(iconv('UTF-8', 'SJIS', '<html><head><meta charset="Shift_JIS"></head><body>日本語</body></html>'));
         $this->assertEquals('日本語', $crawler->filterXPath('//body')->text(), '->addContent() can recognize "Shift_JIS" in html5 meta charset tag');
@@ -264,7 +261,7 @@ EOF
         $crawler = new Crawler();
         $crawler->addNode($this->createNodeList()->item(0));
 
-        $this->assertEquals('foo', $crawler->filterXPath('//div')->attr('class'), '->addNode() adds nodes from a \DOMElement');
+        $this->assertEquals('foo', $crawler->filterXPath('//div')->attr('class'), '->addNode() adds nodes from a \DOMNode');
     }
 
     public function testClear()
@@ -318,7 +315,7 @@ EOF
     {
         $crawler = $this->createTestCrawler()->filterXPath('//ul[1]/li');
         $nodes = $crawler->reduce(function ($node, $i) {
-            return $i !== 1;
+            return 1 !== $i;
         });
         $this->assertNotSame($nodes, $crawler, '->reduce() returns a new instance of a crawler');
         $this->assertInstanceOf('Symfony\\Component\\DomCrawler\\Crawler', $nodes, '->reduce() returns a new instance of a crawler');
@@ -376,7 +373,7 @@ EOF
     public function testHtml()
     {
         $this->assertEquals('<img alt="Bar">', $this->createTestCrawler()->filterXPath('//a[5]')->html());
-        $this->assertEquals('<input type="text" value="TextValue" name="TextName"><input type="submit" value="FooValue" name="FooName" id="FooId"><input type="button" value="BarValue" name="BarName" id="BarId"><button value="ButtonValue" name="ButtonName" id="ButtonId"></button>', trim($this->createTestCrawler()->filterXPath('//form[@id="FooFormId"]')->html()));
+        $this->assertEquals('<input type="text" value="TextValue" name="TextName"><input type="submit" value="FooValue" name="FooName" id="FooId"><input type="button" value="BarValue" name="BarName" id="BarId"><button value="ButtonValue" name="ButtonName" id="ButtonId"></button>', trim(preg_replace('~>\s+<~', '><', $this->createTestCrawler()->filterXPath('//form[@id="FooFormId"]')->html())));
 
         try {
             $this->createTestCrawler()->filterXPath('//ol')->html();
@@ -392,6 +389,7 @@ EOF
 
         $this->assertEquals(array('One', 'Two', 'Three'), $crawler->extract('_text'), '->extract() returns an array of extracted data from the node list');
         $this->assertEquals(array(array('One', 'first'), array('Two', ''), array('Three', '')), $crawler->extract(array('_text', 'class')), '->extract() returns an array of extracted data from the node list');
+        $this->assertEquals(array(array(), array(), array()), $crawler->extract(array()), '->extract() returns empty arrays if the attribute list is empty');
 
         $this->assertEquals(array(), $this->createTestCrawler()->filterXPath('//ol')->extract('_text'), '->extract() returns an empty array if the node list is empty');
     }
@@ -416,6 +414,7 @@ EOF
         $this->assertCount(5, $crawler->filterXPath('(//a | //div)//img'));
         $this->assertCount(7, $crawler->filterXPath('((//a | //div)//img | //ul)'));
         $this->assertCount(7, $crawler->filterXPath('( ( //a | //div )//img | //ul )'));
+        $this->assertCount(1, $crawler->filterXPath("//a[./@href][((./@id = 'Klausi|Claudiu' or normalize-space(string(.)) = 'Klausi|Claudiu' or ./@title = 'Klausi|Claudiu' or ./@rel = 'Klausi|Claudiu') or .//img[./@alt = 'Klausi|Claudiu'])]"));
     }
 
     public function testFilterXPath()
@@ -527,7 +526,7 @@ EOF
 
     public function testFilterXPathWithAttributeAxisAfterElementAxis()
     {
-        $this->assertCount(0, $this->createTestCrawler()->filterXPath('//form/button/attribute::*'), '->filterXPath() handles attribute axes properly when they are preceded by an element filtering axis');
+        $this->assertCount(3, $this->createTestCrawler()->filterXPath('//form/button/attribute::*'), '->filterXPath() handles attribute axes properly when they are preceded by an element filtering axis');
     }
 
     public function testFilterXPathWithChildAxis()
@@ -592,7 +591,7 @@ EOF
 
         $this->assertCount(0, $crawler->filterXPath('self::a'), 'The fake root node has no "real" element name');
         $this->assertCount(0, $crawler->filterXPath('self::a/img'), 'The fake root node has no "real" element name');
-        $this->assertCount(9, $crawler->filterXPath('self::*/a'));
+        $this->assertCount(10, $crawler->filterXPath('self::*/a'));
     }
 
     public function testFilter()
@@ -687,7 +686,7 @@ EOF
 
     public function testSelectButtonWithSingleQuotesInNameAttribute()
     {
-        $html = <<<HTML
+        $html = <<<'HTML'
 <!DOCTYPE html>
 <html lang="en">
 <body>
@@ -708,7 +707,7 @@ HTML;
 
     public function testSelectButtonWithDoubleQuotesInNameAttribute()
     {
-        $html = <<<HTML
+        $html = <<<'HTML'
 <!DOCTYPE html>
 <html lang="en">
 <body>
@@ -745,9 +744,29 @@ HTML;
         }
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage The selected node should be instance of DOMElement
+     */
+    public function testInvalidLink()
+    {
+        $crawler = $this->createTestCrawler('http://example.com/bar/');
+        $crawler->filterXPath('//li/text()')->link();
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage The selected node should be instance of DOMElement
+     */
+    public function testInvalidLinks()
+    {
+        $crawler = $this->createTestCrawler('http://example.com/bar/');
+        $crawler->filterXPath('//li/text()')->link();
+    }
+
     public function testSelectLinkAndLinkFiltered()
     {
-        $html = <<<HTML
+        $html = <<<'HTML'
 <!DOCTYPE html>
 <html lang="en">
 <body>
@@ -815,6 +834,16 @@ HTML;
         } catch (\InvalidArgumentException $e) {
             $this->assertTrue(true, '->form() throws an \InvalidArgumentException if the node list is empty');
         }
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage The selected node should be instance of DOMElement
+     */
+    public function testInvalidForm()
+    {
+        $crawler = $this->createTestCrawler('http://example.com/bar/');
+        $crawler->filterXPath('//li/text()')->form();
     }
 
     public function testLast()
@@ -918,6 +947,8 @@ HTML;
             $crawler = new Crawler('<p></p>');
             $crawler->filter('p')->children();
             $this->assertTrue(true, '->children() does not trigger a notice if the node has no children');
+        } catch (\PHPUnit\Framework\Error\Notice $e) {
+            $this->fail('->children() does not trigger a notice if the node has no children');
         } catch (\PHPUnit_Framework_Error_Notice $e) {
             $this->fail('->children() does not trigger a notice if the node has no children');
         }
@@ -1008,6 +1039,8 @@ HTML;
                     <a href="/bar"><img alt="\' Fabien&quot;s Bar"/></a>
 
                     <a href="?get=param">GetLink</a>
+
+                    <a href="/example">Klausi|Claudiu</a>
 
                     <form action="foo" id="FooFormId">
                         <input type="text" value="TextValue" name="TextName" />

@@ -55,3 +55,8 @@ persona_findBy:
 boleta_pago_imprimir:
     path:     /boletaPago/imprimir/{licenciaId}
     defaults: { _controller: MProdLicenciaCyPBundle:BoletaPago:imprimir }    
+
+boleta_pago_imprimir_pdf:
+    path:     /boletaPago/imprimirPdf/{licenciaId}
+    defaults: { _controller: MProdLicenciaCyPBundle:BoletaPago:imprimirPdf }        
+    

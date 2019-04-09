@@ -13,11 +13,12 @@ namespace Symfony\Component\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
  * @author Michael Hirschler <michael.vhirsch@gmail.com>
  *
- * @link https://en.wikipedia.org/wiki/ISO_9362#Structure
+ * @see https://en.wikipedia.org/wiki/ISO_9362#Structure
  */
 class BicValidator extends ConstraintValidator
 {
@@ -26,6 +27,10 @@ class BicValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
+        if (!$constraint instanceof Bic) {
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Bic');
+        }
+
         if (null === $value || '' === $value) {
             return;
         }
@@ -33,11 +38,13 @@ class BicValidator extends ConstraintValidator
         $canonicalize = str_replace(' ', '', $value);
 
         // the bic must be either 8 or 11 characters long
-        if (!in_array(strlen($canonicalize), array(8, 11))) {
+        if (!\in_array(\strlen($canonicalize), array(8, 11))) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $this->formatValue($value))
                 ->setCode(Bic::INVALID_LENGTH_ERROR)
                 ->addViolation();
+
+            return;
         }
 
         // must contain alphanumeric values only
@@ -46,6 +53,8 @@ class BicValidator extends ConstraintValidator
                 ->setParameter('{{ value }}', $this->formatValue($value))
                 ->setCode(Bic::INVALID_CHARACTERS_ERROR)
                 ->addViolation();
+
+            return;
         }
 
         // first 4 letters must be alphabetic (bank code)
@@ -54,6 +63,8 @@ class BicValidator extends ConstraintValidator
                 ->setParameter('{{ value }}', $this->formatValue($value))
                 ->setCode(Bic::INVALID_BANK_CODE_ERROR)
                 ->addViolation();
+
+            return;
         }
 
         // next 2 letters must be alphabetic (country code)
@@ -62,6 +73,8 @@ class BicValidator extends ConstraintValidator
                 ->setParameter('{{ value }}', $this->formatValue($value))
                 ->setCode(Bic::INVALID_COUNTRY_CODE_ERROR)
                 ->addViolation();
+
+            return;
         }
 
         // should contain uppercase characters only
@@ -70,6 +83,8 @@ class BicValidator extends ConstraintValidator
                 ->setParameter('{{ value }}', $this->formatValue($value))
                 ->setCode(Bic::INVALID_CASE_ERROR)
                 ->addViolation();
+
+            return;
         }
     }
 }

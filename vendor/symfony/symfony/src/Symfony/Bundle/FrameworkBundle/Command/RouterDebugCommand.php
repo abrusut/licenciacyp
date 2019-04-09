@@ -17,8 +17,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * A console command for retrieving information about routes.
@@ -61,7 +61,7 @@ class RouterDebugCommand extends ContainerAwareCommand
                 new InputOption('raw', null, InputOption::VALUE_NONE, 'To output raw route(s)'),
             ))
             ->setDescription('Displays current routes for an application')
-            ->setHelp(<<<EOF
+            ->setHelp(<<<'EOF'
 The <info>%command.name%</info> displays the configured routes:
 
   <info>php %command.full_name%</info>
@@ -78,41 +78,39 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output = new SymfonyStyle($input, $output);
+        $io = new SymfonyStyle($input, $output);
 
         if (false !== strpos($input->getFirstArgument(), ':d')) {
-            $output->caution('The use of "router:debug" command is deprecated since version 2.7 and will be removed in 3.0. Use the "debug:router" instead.');
+            $io->caution('The use of "router:debug" command is deprecated since version 2.7 and will be removed in 3.0. Use the "debug:router" instead.');
         }
 
         $name = $input->getArgument('name');
         $helper = new DescriptorHelper();
+        $routes = $this->getContainer()->get('router')->getRouteCollection();
 
         if ($name) {
-            $route = $this->getContainer()->get('router')->getRouteCollection()->get($name);
-            if (!$route) {
+            if (!$route = $routes->get($name)) {
                 throw new \InvalidArgumentException(sprintf('The route "%s" does not exist.', $name));
             }
 
             $this->convertController($route);
 
-            $helper->describe($output, $route, array(
+            $helper->describe($io, $route, array(
                 'format' => $input->getOption('format'),
                 'raw_text' => $input->getOption('raw'),
                 'name' => $name,
-                'output' => $output,
+                'output' => $io,
             ));
         } else {
-            $routes = $this->getContainer()->get('router')->getRouteCollection();
-
             foreach ($routes as $route) {
                 $this->convertController($route);
             }
 
-            $helper->describe($output, $routes, array(
+            $helper->describe($io, $routes, array(
                 'format' => $input->getOption('format'),
                 'raw_text' => $input->getOption('raw'),
                 'show_controllers' => $input->getOption('show-controllers'),
-                'output' => $output,
+                'output' => $io,
             ));
         }
     }

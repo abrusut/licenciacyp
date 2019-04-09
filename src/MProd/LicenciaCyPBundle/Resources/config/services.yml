@@ -1,6 +1,6 @@
 parameters:
     keySalt:  licenciaCyPMinisterioProduccion
-
+    barcode_directory: '%kernel.root_dir%/../web/barcode/'
 services:
    
     licencia_service:
@@ -30,6 +30,16 @@ services:
     encrypt_service:
         class: MProd\LicenciaCyPBundle\Service\EncryptImpl
         arguments: ['@logger','%keySalt%']
+
+    barcode_service:
+        class: MProd\LicenciaCyPBundle\Service\Barcode\Barcode        
+
+    barcode.twig_extension:
+        class: MProd\LicenciaCyPBundle\Twig\BarcodeTwigExtension
+        arguments: ['@barcode_service','%barcode_directory%']
+        public: false
+        tags:
+            - { name: twig.extension }
 
     persona_repository:
         class: Doctrine\ORM\EntityRepository
