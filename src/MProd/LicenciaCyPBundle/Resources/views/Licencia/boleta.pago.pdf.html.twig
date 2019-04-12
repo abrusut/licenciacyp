@@ -12,12 +12,7 @@
         <meta name="robot" content="all" />
         
         <link rel="icon" href="//www.santafe.gob.ar/assets/standard/images/favicon.ico">
-        
-        <style>
-             .pleft {
-                padding-left: 5px;
-            }
-        </style>
+                
 </head>
  <body>
     <div class="container">
@@ -32,9 +27,7 @@
           <div><strong>Detalle: </strong> {{licencia.tipoLicencia.descripcion}}</div>
           <div><strong>Importe: </strong>  {{licencia.tipoLicencia.arancel}} </div>
           <div align="center"> 
-              <img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="468" height="164"
-               border="0">            
-              <div>{{licencia.comprobante.numeroCodigoBarra}}</div>
+            <img src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">              
           </div>      
           <div>------------------------------------------------------------------------------------------------------------------<span class="Estilo7">Para el Depositante</span></div>          
              <div align="center"><strong>Ministerio de la Producci&oacute;n</strong></div>
@@ -48,9 +41,7 @@
           <div><strong>Detalle: </strong> {{licencia.tipoLicencia.descripcion}}</div>
           <div><strong>Importe: </strong>  {{licencia.tipoLicencia.arancel}} </div>
           <div align="center"> 
-              <img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="468" height="164"
-               border="0">            
-              <div>{{licencia.comprobante.numeroCodigoBarra}}</div>
+           <img src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">                           
           </div>      
           <div>------------------------------------------------------------------------------------------------------------------<span class="Estilo7">Para el Depositante</span></div>          
     </div>

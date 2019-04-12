@@ -22,7 +22,7 @@ class BarcodeTwigExtension extends AbstractExtension
         );
     }
 
-    public function getBarCodeGif($numeroCodigoBarra)
+    public function getBarCodeGif($numeroCodigoBarra, $outPut='html')
     {            
 
         $fontSize = 10;   // GD1 in px ; GD2 in point
@@ -80,7 +80,12 @@ class BarcodeTwigExtension extends AbstractExtension
         // Liberar memoria
         imagedestroy($im);
         
-        return $src;              
+        if($outPut == 'pdf'){            
+            return $pathFile;
+            //return $imgData;
+        }else{
+            return $src;              
+        }
     }
    
 }

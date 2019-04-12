@@ -12,12 +12,15 @@ use MProd\LicenciaCyPBundle\Service\BoletaServiceImpl;
 use MProd\LicenciaCyPBundle\Service\ComprobanteServiceImpl;
 use MProd\LicenciaCyPBundle\Service\Barcode\Barcode;
 use Symfony\Component\HttpFoundation\Response;
+use MProd\LicenciaCyPBundle\Twig\BarcodeTwigExtension;
 
 class BoletaPagoController extends Controller
 {
     public function imprimirAction(Request $request, $licenciaId)
     {
         $this->get('logger')->info("BoletaPagoController, imprimirAction, licencia " . $licenciaId);
+
+        $impresion = $request->query->get('impresion');
 
         $idLicencia = urldecode($licenciaId);
         /** @var LicenciaServiceImpl $licenciaService */
@@ -30,7 +33,8 @@ class BoletaPagoController extends Controller
 
         return $this->render(
             'MProdLicenciaCyPBundle:Licencia:boleta.pago.html.twig',
-            array('licencia' => $licencia)
+            array('licencia' => $licencia,
+                    'impresion' => $impresion)
         );
     }
 
@@ -44,9 +48,9 @@ class BoletaPagoController extends Controller
         $licenciaService = $this->get('licencia_service');
 
         $licencia = $licenciaService->findById($idLicencia);
+       
 
-        /** @var Barcode $barcodeService */
-        $barcodeService = $this->get('barcode_service');
+        $twigExtBarCode = $this->container->get('twig')->getExtension(BarcodeTwigExtension::class);
 
         $pdf = $this->container->get("white_october.tcpdf")->create('HORIZONTAL', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetAuthor('Ministerio de la Producción');
@@ -56,13 +60,28 @@ class BoletaPagoController extends Controller
         $pdf->setFontSubsetting(true);
         $pdf->SetFont('helvetica', '', 11, '', true);
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->AddPage();
-        $html = $this->renderView('MProdLicenciaCyPBundle:Licencia:boleta.pago.pdf.html.twig',
-                                    array('licencia' => $licencia));
-        $pdf->writeHTML($html);
-        echo $html;
-        die();
+        $pdf->setPrintFooter(false);        
+        $pdf->AddPage();       
+
+
+        // El HTML Tiene los datos de la licencia
+        $html = $this->renderView('MProdLicenciaCyPBundle:Licencia:boleta.pago.pdf.sinbarcode.html.twig',
+                                    array('licencia' => $licencia));        
+        $pdf->writeHTML($html, true, false, true, false, 'J');
+
+        // Example of Image from data stream ('PHP rules')
+        $barcode =$twigExtBarCode->getBarCodeGif($licencia->getComprobante()->getNumeroCodigoBarra(),'pdf');
+        // The '@' character is used to indicate that follows an image data stream and not an image file name
+        $pdf->Image($barcode);
+        /** $pdf->Image('@'.$barcode,10,10,130,55);        
+        // Codigo de Barras
+        //$pdf->Write(0, $licencia->getComprobante()->getNumeroCodigoBarra(), '', 0, 'J', true, 0, false, true, 0);        
+                
+        $html = $this->renderView('MProdLicenciaCyPBundle:Licencia:boleta.pago.pdf.sinbarcode.html.twig',
+                                array('licencia' => $licencia));        
+        $pdf->writeHTML($html, true, false, true, false, 'J');
+        $pdf->Image($barcode);
+            **/
         $pdf->Output("example.pdf", 'I');        
     }
 

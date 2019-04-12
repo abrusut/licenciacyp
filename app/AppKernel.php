@@ -24,7 +24,8 @@ class AppKernel extends Kernel
             //new STG\DEIM\Security\Bundle\CasBundle\CasBundle(),          
             new MProd\LicenciaCyPBundle\MProdLicenciaCyPBundle(),
 
-            new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle()            
+            new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),      
+            new Markup\BarcodeBundle\MarkupBarcodeBundle()     
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

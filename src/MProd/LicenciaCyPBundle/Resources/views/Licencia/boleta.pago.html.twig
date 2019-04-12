@@ -11,10 +11,23 @@
         <meta name="copyright" content="&copy;" />
         <meta name="robot" content="all" />
         
+ {% block css %}
+  <!-- css custom theme -->            
+
+            <!-- assets fonts -->
+            <link rel="stylesheet" href="https://www.santafe.gob.ar/assets/standard/css/fonts.css" type="text/css">
+
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                  rel="stylesheet">
+
         <link rel="icon" href="//www.santafe.gob.ar/assets/standard/images/favicon.ico">
+   {% endblock %}
 {% block cuerpo %}
 </head>
  <body>
+ {% if impresion is defined and impresion == 0 %}
+    <button onclick="printPDF()" class="btn btn-primary float-right"><i class="material-icons">print</i></button>
+{% endif %}
   <table width="685"  align="center"  >
   <tr>     
     <td width="20" align="center"></td>
@@ -57,10 +70,11 @@
                   <tr> 
                       <td height="187" colspan="2">                   
                         <div align="center"> 
-                        <img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="568" height="164" border="0">
-                          <br>
-                            {{licencia.comprobante.numeroCodigoBarra}}
+                        <!--img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="568" height="164" border="0">
+                          <br -->                            
+                                                     <img src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">              
                         </div>
+
                       </td>
                     </tr>
                   <tr>
@@ -97,9 +111,14 @@
                   </tr>
                   <tr> 
                       <td height="187" colspan="2"> 
-                        <div align="center"> <img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="568" height="164" border="0"><br>
+                        <div align="center"> 
+                           <img src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">              
+
+                        <!--img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="568" height="164" border="0"><br>
                             {{licencia.comprobante.numeroCodigoBarra}}
-                        </div></td>
+                        </div-->
+                        
+                        </td>
                     </tr>
                   <tr>
                     <td height="19" colspan="3">------------------------------------------------------------------------------------------------------------------<span class="Estilo7">Para el Depositante</span></td>
@@ -114,11 +133,36 @@
 
 {% endblock %}
 {% block javascripts %}
-      
-    <script language = "javascript"  src = "{{ asset('js/licencia.js') }}">          
-    </script> 
 
+       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+                integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+                integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+                crossorigin="anonymous"></script>
+
+
+    
+    <script language = "javascript">
+        function printPDF(){          
+          var printWindow = window.open('', '', 'height=400,width=800');
+          $.get( "{{ path('boleta_pago_imprimir', {licenciaId: licencia.id}) }}?impresion=1", function( data ) {
+              printWindow.document.write(data);
+              printWindow.document.close();
+              printWindow.print();
+              printWindow.close();
+          });
+      }
+ </script> 
+<script language = "javascript"  src = "{{ asset('js/utils.js') }}"/>              
+ <script language = "javascript"  src = "{{ asset('js/licencia.js') }}"/>              
 {% endblock %}      
+
 
     </body>
 </html>

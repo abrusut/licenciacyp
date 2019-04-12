@@ -129,3 +129,9 @@ web_profiler:
     position:             bottom
     intercept_redirects:  false
     excluded_ajax_paths:  ^/bundles|^/_wdt
+
+markup_barcode:
+        definitions:
+            invoice:
+                type: code128
+                format: gif

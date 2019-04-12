@@ -60,3 +60,6 @@ boleta_pago_imprimir_pdf:
     path:     /boletaPago/imprimirPdf/{licenciaId}
     defaults: { _controller: MProdLicenciaCyPBundle:BoletaPago:imprimirPdf }        
     
+licencia_generada_detalle:
+    path:     /licencia/{licenciaId}
+    defaults: { _controller: MProdLicenciaCyPBundle:Licencia:verLicencia }        
