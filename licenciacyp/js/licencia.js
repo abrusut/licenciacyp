@@ -72,7 +72,7 @@ function buscarPersona(){
         )
         {
             $.ajax({  
-                url:        '/persona/findBy/'+ tipoDocumento + '/' + numeroDocumento +'/'+ sexo ,  
+                url:        'persona/findBy/'+ tipoDocumento + '/' + numeroDocumento +'/'+ sexo ,  
                 type:       'POST',   
                 dataType:   'json',  
                 async:      true,  
