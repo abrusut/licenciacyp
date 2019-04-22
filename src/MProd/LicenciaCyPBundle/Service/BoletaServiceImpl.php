@@ -27,6 +27,7 @@ class BoletaServiceImpl implements IBoletaService
 	public function generarCodigoBarras(Licencia $licencia)
 	{
 		$comprobante = $licencia->getComprobante();
+		$tipoLicencia = $licencia->getTipoLicencia();
 
 		$clienteSAP = $comprobante->getClienteSap();
 		$letraServicio = $comprobante->getLetraServicio();
@@ -34,23 +35,37 @@ class BoletaServiceImpl implements IBoletaService
 		// Importe
 		$importe = $licencia->getComprobante()->getMonto();
 
+		// Primer Dia año corriente
+		$firstDayCurrentYear = new \DateTime('first day of January');
+		
 		// Primer Vencimiento
-		$primerVencimiento = "00000";
+		$diasPrimerVencimiento = "000";
+		$anioPrimerVenciemiento = "00";
+		$primerVencimiento = $anioPrimerVenciemiento.$diasPrimerVencimiento;
 		if (!is_null($comprobante->getPrimerVencimiento())) {
-			$anio =	$comprobante->getPrimerVencimiento()->format('y');
-			$dias =	$comprobante->getPrimerVencimiento()->format('d');
-			$primerVencimiento = $anio . $dias;
+			$anioPrimerVenciemiento =	$comprobante->getPrimerVencimiento()->format('y');
+			
+			//Diferencia en dias del primer vencimiento contra el año actual
+			$interval = $firstDayCurrentYear->diff($comprobante->getPrimerVencimiento());			
+			$diasPrimerVencimiento = $interval->format('%a');
+
+			//Armo string final
+			$primerVencimiento = $this->zerofill($anioPrimerVenciemiento,2) . $this->zerofill($diasPrimerVencimiento, 3);
 		}
 
-		$numeroCodigoBarraUno = $clienteSAP . $letraServicio . $this->zerofill($importe, 7) . $primerVencimiento;
-
+		$numeroCodigoBarraUno = $this->zerofill($clienteSAP,5) .
+								$letraServicio . 
+								$this->zerofill($importe, 7) . 
+								$primerVencimiento;
+			
 		$temporal = 0;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 0, 1) * 3;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 1, 1) * 1;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 2, 1) * 7;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 3, 1) * 9;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 4, 1) * 3;
-		$temporal = $temporal + substr($numeroCodigoBarraUno, 5, 1) * 1;
+		//letra servicio cambio a ascii
+		$temporal = $temporal + ord(substr($numeroCodigoBarraUno, 5, 1)) * 1;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 6, 1) * 7;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 7, 1) * 9;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 8, 1) * 3;
@@ -68,22 +83,25 @@ class BoletaServiceImpl implements IBoletaService
 		$verificador1 = 10 - intval($valor);
 		$numeroCodigoBarraUno = $numeroCodigoBarraUno . $verificador1;
 
+		$numeroCodigoBarraDos = "";
 		// Segundo Vencimiento
-		$segundoVencimiento = "00";
-		$recargoSegundoVencimiento = "00000";
-		if (!is_null($comprobante->getSegundoVencimiento())) {
-			$anio =	$comprobante->getSegundoVencimiento()->format('y');
-			$dias =	$comprobante->getSegundoVencimiento()->format('d');
-			$segundoVencimiento = $anio . $dias;
-			$recargoSegundoVencimiento = $comprobante->getRecargoSegundoVencimiento();
+		$segundoVencimiento = "00";		
+		if (!is_null($comprobante->getSegundoVencimiento()) && !is_null($tipoLicencia->getDiasSegundoVencimiento())) {			
+			$segundoVencimiento =	$tipoLicencia->getDiasSegundoVencimiento();
 		}
+
+		$recargo = "00000";
+		if(!is_null($comprobante->getRecargoPrimerVencimiento())){
+			$recargo = $comprobante->getRecargoPrimerVencimiento();
+		}
+
+		$numeroCodigoBarraDos = $this->zerofill($recargo,5) . $this->zerofill($segundoVencimiento,2);
 
 		// 21
 		// 	2 tipo licencia
 		//	9 id licencia
-		//    10 comprobante
-		$numeroCodigoBarraDos = $recargoSegundoVencimiento .
-			$segundoVencimiento .
+		//    10 id comprobante
+		$numeroCodigoBarraDos .= 
 			$this->zerofill($licencia->getTipoLicencia()->getId(), 2) .
 			$this->zerofill($licencia->getId(), 9) .
 			$this->zerofill($comprobante->getId(), 10);

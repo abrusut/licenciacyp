@@ -124,11 +124,7 @@ theme_aplicativo:
 #        cert: false # false to bypass (opcional)
 #        username_attribute: user  # (opcional)
 #        proxy: false # if you want to active the proxy cas mode (opcional)                
-web_profiler:
-    toolbar:              true
-    position:             bottom
-    intercept_redirects:  false
-    excluded_ajax_paths:  ^/bundles|^/_wdt
+
 
 markup_barcode:
         definitions:

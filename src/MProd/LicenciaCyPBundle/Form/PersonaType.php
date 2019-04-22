@@ -34,12 +34,18 @@ class PersonaType extends AbstractType
                     array(
                         'label' => 'Tipo Documento',
                         'class' => 'MProdLicenciaCyPBundle:TipoDocumento',                         
-                        'required' => FALSE
+                        'required' => FALSE,
+                        'empty_value' => '-- Seleccione --'
                     ))            
             ->add('numeroDocumento', 'text', array('label' => 'Número de Documento', 'attr'=>array('placeholder'=>'99999999')))
             ->add('domicilioCalle')
             ->add('domicilioNumero')
-            ->add('sexo', 'choice', array('choices' => array('m' => 'Masculino', 'f' => 'Femenino'), 'required' => FALSE))
+            ->add('sexo', 'choice', 
+                array(
+                        'choices' => array('m' => 'Masculino', 'f' => 'Femenino'), 
+                        'required' => FALSE,
+                        'empty_value' => '-- Seleccione --',
+                    ))
             ->add('jubilado', 'choice', 
                      array('choices' => array(1 => 'Si', 0 => 'No'),
                            'required' => true,
@@ -56,6 +62,7 @@ class PersonaType extends AbstractType
                 ))*/
             ->add('localidad', EntityType::class,array(
                 'class' => 'MProdLicenciaCyPBundle:Localidad',
+                'empty_value' => '-- Seleccione --',
                 'query_builder' => function (EntityRepository $er) {        
                     return $er->createQueryBuilder('l')->orderBy('l.l_nom_dis', 'ASC');     
                  }                 
@@ -63,7 +70,8 @@ class PersonaType extends AbstractType
             ->add('provincia')
             ->add('localidadOtraProvincia','text', array(
                 'label' => 'Localidad Otra Provincia',
-                'required' => FALSE
+                'required' => FALSE,                
+                'disabled' => 'disabled'
             ))
         ;
     }

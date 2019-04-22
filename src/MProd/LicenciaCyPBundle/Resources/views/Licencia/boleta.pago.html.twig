@@ -72,7 +72,7 @@
                         <div align="center"> 
                         <!--img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="568" height="164" border="0">
                           <br -->                            
-                                                     <img src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">              
+                            <img width="50%" src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">              
                         </div>
 
                       </td>
@@ -110,9 +110,9 @@
                     </div></td>
                   </tr>
                   <tr> 
-                      <td height="187" colspan="2"> 
+                      <td height="187" colspan="2" width="100px"> 
                         <div align="center"> 
-                           <img src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">              
+                           <img width="50%" src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">              
 
                         <!--img src="{{ barcodeGif(licencia.comprobante.numeroCodigoBarra) }}" width="568" height="164" border="0"><br>
                             {{licencia.comprobante.numeroCodigoBarra}}
