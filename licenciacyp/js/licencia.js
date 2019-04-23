@@ -1,11 +1,12 @@
-$( document ).ready(function() {
+$( document ).ready(function() {    
+    $('.loading').hide();
     configureSteps();   
     
     // Cuando cambia la provincia saco el id y nombre y busco si es de santa fe
     $( "#mprod_licenciacypbundle_licencia_persona_provincia" ).change(function() {       
        var provinciaNombre = $("#mprod_licenciacypbundle_licencia_persona_provincia option:selected").text();
        var provinciaId = this.value;
-       evaluarProvincia(provinciaId,provinciaNombre)
+       evaluarProvincia(provinciaId,provinciaNombre);
     });
     
 });
@@ -15,6 +16,7 @@ function evaluarProvincia(provinciaId,provinciaNombre){
     if(!isEmpty(provinciaNombre) && 
         !isEmpty(provinciaId) )
     {
+        
         $.ajax({  
             url:        'provincia/findBy/'+ provinciaId + '/' + provinciaNombre ,  
             type:       'POST',   
@@ -24,9 +26,11 @@ function evaluarProvincia(provinciaId,provinciaNombre){
             success: function(data, status) {     
                 configurarSelectLocalidad(data.santaFe);
                 configurarTipoLicencia(data);
+                
             },  
             error : function(xhr, textStatus, errorThrown) {                                
                 console.error(xhr,textStatus,errorThrown);
+                
             }  
             });  
     }else{
@@ -235,9 +239,11 @@ function bindValuesToPersona(persona){
     
     if(persona && persona['provincia']){
         var provinciaId = persona['provincia']['id'];
+        var provinciaNombre = persona['provincia']['nombre'];
         $('#mprod_licenciacypbundle_licencia_persona_provincia option[value='+provinciaId +']').attr('selected','selected');
 
         configurarSelectLocalidad(persona['provincia']['santaFe']);
+        evaluarProvincia(provinciaId,provinciaNombre);
     }
 
     

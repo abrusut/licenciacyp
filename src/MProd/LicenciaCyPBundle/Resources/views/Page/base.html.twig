@@ -11,7 +11,15 @@
     </script> 
      <script>
         $(document).ready(function () {
-
+            $.ajaxSetup({         
+                    beforeSend: function() {
+                        $('.loading').show();
+                    },
+                    complete: function(){
+                       $('.loading').hide();
+                    },
+                    success: function() {}
+                });
             $('.js-datepicker').datepicker({
                 format: 'mm-dd-yyyy'
             });
@@ -38,6 +46,8 @@
 {% endblock %}
 
 {% block cuerpo %}
+
+<div class="loader"></div>
     {% block nuevoybarradebusquedas %}
     {% endblock %}
 

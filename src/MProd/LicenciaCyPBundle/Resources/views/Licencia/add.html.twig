@@ -2,7 +2,7 @@
 
 
 {% block cuerpo %}
-
+<div class="loading">Loading&#8230;</div>
      {% if app.session.flashBag.has('licenciaForm_message') %}
         <div class="alert alert-success">
             {% for msg in app.session.flashBag.get('licenciaForm_message') %}

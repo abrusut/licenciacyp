@@ -105,7 +105,11 @@ class LicenciaServiceImpl implements ILicenciaService {
 
             // SI existe actualizo los datos con los datos que viajaron en el request
             if(!is_null($persona)){
-                $persona->copyValues($personaRequest);                                            
+                $persona->copyValues($personaRequest); 
+                if(!is_null($personaRequest->getLocalidad())){
+                    $persona->setLocalidadOtraProvincia(null);
+                }
+
                 $licencia->setPersona($persona);
             }            
         }
