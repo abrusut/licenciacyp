@@ -28,6 +28,7 @@ class TipoLicencias implements FixtureInterface
                 'porcentajeRecargoSegundoVencimiento'=>0,
                 'diasPrimerVencimiento'=>0,
                 'diasSegundoVencimiento'=>0,
+                'aplicaEnProvincia' => 'SF'
                 ),
             array(
                 'descripcion'=>'Pesca Deportiva Particular',
@@ -42,6 +43,7 @@ class TipoLicencias implements FixtureInterface
                 'porcentajeRecargoSegundoVencimiento'=>0,
                 'diasPrimerVencimiento'=>0,
                 'diasSegundoVencimiento'=>0,
+                'aplicaEnProvincia' => 'SF'
                 ),
             array(
                 'descripcion'=>'Caza Deportiva Turista Nacional',
@@ -56,6 +58,7 @@ class TipoLicencias implements FixtureInterface
                 'porcentajeRecargoSegundoVencimiento'=>0,
                 'diasPrimerVencimiento'=>0,
                 'diasSegundoVencimiento'=>0,
+                'aplicaEnProvincia' => 'T'
                 ),
             array(
                 'descripcion'=>'Pesca Deportiva Turista Nacional',
@@ -70,6 +73,7 @@ class TipoLicencias implements FixtureInterface
                 'porcentajeRecargoSegundoVencimiento'=>0,
                 'diasPrimerVencimiento'=>0,
                 'diasSegundoVencimiento'=>0,
+                'aplicaEnProvincia' => 'T'
                 ),
             array(
                 'descripcion'=>'Caza deportiva Dama',
@@ -84,6 +88,7 @@ class TipoLicencias implements FixtureInterface
                 'porcentajeRecargoSegundoVencimiento'=>0,
                 'diasPrimerVencimiento'=>0,
                 'diasSegundoVencimiento'=>0,
+                'aplicaEnProvincia' => 'SF'
             ),
             array(
                 'descripcion'=>'Pesca deportiva Dama',
@@ -98,6 +103,7 @@ class TipoLicencias implements FixtureInterface
                 'porcentajeRecargoSegundoVencimiento'=>0,
                 'diasPrimerVencimiento'=>0,
                 'diasSegundoVencimiento'=>0,
+                'aplicaEnProvincia' => 'SF'
             ),
             array(
                 'descripcion'=>'Caza deportiva Jubilado',
@@ -112,6 +118,7 @@ class TipoLicencias implements FixtureInterface
                 'porcentajeRecargoSegundoVencimiento'=>0,
                 'diasPrimerVencimiento'=>0,
                 'diasSegundoVencimiento'=>0,
+                'aplicaEnProvincia' => 'SF'
             ),
             array(
                 'descripcion'=>'Pesca deportiva Jubilado',
@@ -126,6 +133,7 @@ class TipoLicencias implements FixtureInterface
                 'porcentajeRecargoSegundoVencimiento'=>0,
                 'diasPrimerVencimiento'=>0,
                 'diasSegundoVencimiento'=>0,
+                'aplicaEnProvincia' => 'SF'
             )
         );
         foreach ($tiposLicencia as $tipoLicencia) {

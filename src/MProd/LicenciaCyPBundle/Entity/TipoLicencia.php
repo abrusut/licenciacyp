@@ -127,6 +127,20 @@ class TipoLicencia
      */
     protected $isActive;
 
+
+     /**
+     *@var string
+     * Define si es un tipo de licencia para:
+     *       "T" Todas las provincias
+     *       "SF" Provincia Santa Fe     
+     *
+     *@ORM\Column(name="aplica_provincia", type="string", nullable=true)
+     */
+    private $aplicaEnProvincia;
+
+    public static $SF = 'SF';
+    public static $T = 'T';
+
     /*============================Setter y getters ===============================*/
 
     function __construct()
@@ -413,5 +427,28 @@ class TipoLicencia
     public function getGeneroJubilado()
     {
         return $this->generoJubilado;
+    }
+
+    /**
+     * Set aplicaEnProvincia
+     *
+     * @param string $aplicaEnProvincia
+     * @return TipoLicencia
+     */
+    public function setAplicaEnProvincia($aplicaEnProvincia)
+    {
+        $this->aplicaEnProvincia = $aplicaEnProvincia;
+
+        return $this;
+    }
+
+    /**
+     * Get aplicaEnProvincia
+     *
+     * @return string 
+     */
+    public function getAplicaEnProvincia()
+    {
+        return $this->aplicaEnProvincia;
     }
 }

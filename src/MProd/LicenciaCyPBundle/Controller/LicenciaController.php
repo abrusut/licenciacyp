@@ -155,8 +155,7 @@ class LicenciaController extends Controller
 
         $licencia = $licenciaService->findById($idLicencia);
         $persona = $licencia->getPersona();
-        $nombre = $persona->getNombre();
-        $jubilado = $persona->getJubilado();
+        
 
         $this->get('logger')->info("LicenciaController, verLicenciaAction devuelvo formulario READONLY a la vista");
         return $this->render(

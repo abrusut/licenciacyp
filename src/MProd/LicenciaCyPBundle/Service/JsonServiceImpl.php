@@ -21,9 +21,16 @@ class JsonServiceImpl implements IJsonService{
 
         $normalizer->setCallbacks(array('fechaNacimiento' => $callback));
 
+        $normalizer->setCircularReferenceLimit(1);
+        // Add Circular reference handler
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+
         if(!is_null($this->arrayIgnoredAttributes) && 
-            is_array($this->arrayIgnoredAttributes))
+            is_array($this->arrayIgnoredAttributes)){
             $normalizer->setIgnoredAttributes($this->arrayIgnoredAttributes);
+        }
 
         $serializer = new Serializer(array($normalizer), array($encoders));
 

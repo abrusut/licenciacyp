@@ -9,7 +9,10 @@
 namespace MProd\LicenciaCyPBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-class Localidades implements FixtureInterface
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+
+class Localidades extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -387,9 +390,19 @@ class Localidades implements FixtureInterface
             $entidad->setLDepartamento($localidad['l_departamento']);
             $entidad->setLNomDpto($localidad['l_nom_dpto']);
             $entidad->setNodo($localidad['nodo']);
+
+            $provinciaSantaFe = $this->getReference('provinciaSantaFe');
+            $entidad->setProvincia($provinciaSantaFe);
+
             $manager->persist($entidad);
         }
         $manager->flush();
+        
+    }
+
+    public function getOrder()
+    {
+        return 2;
     }
 
 }

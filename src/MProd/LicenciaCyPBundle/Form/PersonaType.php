@@ -8,6 +8,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
+use MProd\LicenciaCyPBundle\Entity\Persona;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class PersonaType extends AbstractType
 {
@@ -55,25 +58,29 @@ class PersonaType extends AbstractType
                      )
             ->add('telefono', 'text', array('label' => 'Teléfono', 'required' => FALSE, 'attr'=>array('placeholder'=>'3420000000')))
             ->add('email', EmailType::class)
-            /*->add('localidad', 'entity', array(
-                'label' => 'Localidad',
-                'class' => 'MProdLicenciaCyPBundle:Localidad',                 
-                'required' => TRUE            
-                ))*/
-            ->add('localidad', EntityType::class,array(
-                'class' => 'MProdLicenciaCyPBundle:Localidad',
+            ->add('provincia', EntityType::class,array(
+                'class' => 'MProdLicenciaCyPBundle:Provincia',
                 'empty_value' => '-- Seleccione --',
                 'query_builder' => function (EntityRepository $er) {        
-                    return $er->createQueryBuilder('l')->orderBy('l.l_nom_dis', 'ASC');     
-                 }                 
-            ))
-            ->add('provincia')
+                    return $er->createQueryBuilder('p')->orderBy('p.nombre', 'ASC');     
+                 },
+                 'required' => TRUE                
+                ))
+            ->add('localidad', EntityType::class,array(
+                        'class' => 'MProdLicenciaCyPBundle:Localidad',
+                        'empty_value' => '-- Seleccione --',
+                        'query_builder' => function (EntityRepository $er) {        
+                            return $er->createQueryBuilder('l')->orderBy('l.l_nom_dis', 'ASC');     
+                         },
+                         'required' => FALSE                 
+                        ))                    
+            
             ->add('localidadOtraProvincia','text', array(
                 'label' => 'Localidad Otra Provincia',
-                'required' => FALSE,                
-                'disabled' => 'disabled'
-            ))
-        ;
+                'required' => FALSE                              
+            ));
+        
+            
     }
 
     

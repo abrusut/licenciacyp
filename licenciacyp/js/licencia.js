@@ -1,7 +1,106 @@
 $( document ).ready(function() {
-    configureSteps();       
+    configureSteps();   
+    
+    // Cuando cambia la provincia saco el id y nombre y busco si es de santa fe
+    $( "#mprod_licenciacypbundle_licencia_persona_provincia" ).change(function() {       
+       var provinciaNombre = $("#mprod_licenciacypbundle_licencia_persona_provincia option:selected").text();
+       var provinciaId = this.value;
+       evaluarProvincia(provinciaId,provinciaNombre)
+    });
     
 });
+
+function evaluarProvincia(provinciaId,provinciaNombre){    
+    var parameters= {'provinciaId':provinciaId,'provinciaNombre':provinciaNombre};
+    if(!isEmpty(provinciaNombre) && 
+        !isEmpty(provinciaId) )
+    {
+        $.ajax({  
+            url:        'provincia/findBy/'+ provinciaId + '/' + provinciaNombre ,  
+            type:       'POST',   
+            dataType:   'json',  
+            async:      true,  
+            data: JSON.stringify(parameters),               
+            success: function(data, status) {     
+                configurarSelectLocalidad(data.santaFe);
+                configurarTipoLicencia(data);
+            },  
+            error : function(xhr, textStatus, errorThrown) {                                
+                console.error(xhr,textStatus,errorThrown);
+            }  
+            });  
+    }else{
+        console.error("No me llega el id de provincia " +provinciaId +"  y la descripcion " +provinciaNombre);
+    }
+}
+
+function configurarTipoLicencia(provincia){    
+    var parameters= {'provincia':JSON.stringify(provincia)};
+    if(!isEmpty(provincia))      
+    {
+        $.ajax({  
+            url:        'provincia/findTiposLicenciaForProvincia',  
+            type:       'POST',   
+            dataType:   'json',  
+            async:      true,  
+            data: JSON.stringify(parameters),               
+            success: function(data, status) {     
+                console.log(data);
+                actualizarTiposLicenciaDisponibles(data);
+            },  
+            error : function(xhr, textStatus, errorThrown) {                               
+                console.error(xhr,textStatus,errorThrown);
+            }  
+        });  
+    }else{
+        console.error("No me llega tipoLicenciaId");
+    }
+}
+
+function actualizarTiposLicenciaDisponibles(tiposLicencia){
+    var newOptions = {
+       
+    };
+    
+    var select = $('#mprod_licenciacypbundle_licencia_tipoLicencia');
+    if(select.prop) {
+      var options = select.prop('options');
+    }
+    else {
+      var options = select.attr('options');
+    }
+    // Borra todas las opciones menos la primera
+    $('#mprod_licenciacypbundle_licencia_tipoLicencia').children('option:not(:first)').remove();
+
+   
+    $.each(tiposLicencia, function(val, text) { 
+        if(text && !isEmpty(text['descripcion'])            
+            && !isEmpty(text['id']) ){
+                var id = text['id'];
+                var descripcion = text['descripcion'] + " $"+text['arancel'];
+                
+                $('#mprod_licenciacypbundle_licencia_tipoLicencia')
+                    .append($("<option></option>")
+                    .attr("value",id)
+                    .text(descripcion));
+        }
+    });
+       
+}
+function configurarSelectLocalidad(isSantaFe){
+    if(isSantaFe){    
+        $( "#localidad").show();                                            
+        $( "#mprod_licenciacypbundle_licencia_persona_localidad").attr('required', true);
+        $( "#mprod_licenciacypbundle_licencia_persona_localidadOtraProvincia").attr('required', false);                        
+        $( "#localidadOtraProvincia").hide();
+    }else{     
+        $( "#localidad").hide();      
+        $("#mprod_licenciacypbundle_licencia_persona_localidad").attr('selectedIndex', '-1').find("option:selected").removeAttr("selected");                                             
+        $( "#mprod_licenciacypbundle_licencia_persona_localidad").attr('required', false);
+        $( "#mprod_licenciacypbundle_licencia_persona_localidadOtraProvincia").attr('required', true);
+        $( "#localidadOtraProvincia").show();                                              
+    }   
+}
 
 function hayDatosCargados(){    
     var result = false;
@@ -129,12 +228,16 @@ function bindValuesToPersona(persona){
 
     if(persona && persona['localidad']){
         var localidadId = persona['localidad']['id'];
+        $("#mprod_licenciacypbundle_licencia_persona_localidad").attr('selectedIndex', '-1').find("option:selected").removeAttr("selected");                                             
         $('#mprod_licenciacypbundle_licencia_persona_localidad option[value='+localidadId +']').attr('selected','selected');
+        $('#mprod_licenciacypbundle_licencia_persona_localidad').trigger('change', true);
     }
     
     if(persona && persona['provincia']){
         var provinciaId = persona['provincia']['id'];
         $('#mprod_licenciacypbundle_licencia_persona_provincia option[value='+provinciaId +']').attr('selected','selected');
+
+        configurarSelectLocalidad(persona['provincia']['santaFe']);
     }
 
     

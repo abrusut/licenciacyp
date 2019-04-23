@@ -17,6 +17,15 @@ class Localidad {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+       
+    /**
+     * @var \MProd\LicenciaCyPBundle\Entity\Provincia
+     * 
+     * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\Provincia", inversedBy="localidades")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id")
+     */
+    private $provincia;
+
 
     /**
      * @ORM\Column(type="string", length = 3)
@@ -169,4 +178,27 @@ class Localidad {
         return $this->getLNomDis() ." - ".$this->getLNomDpto(). " - " . $this->getNodo();
     }
 
+
+    /**
+     * Set provincia
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\Provincia $provincia
+     * @return Localidad
+     */
+    public function setProvincia(\MProd\LicenciaCyPBundle\Entity\Provincia $provincia = null)
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return \MProd\LicenciaCyPBundle\Entity\Provincia 
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
+    }
 }

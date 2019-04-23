@@ -3,6 +3,10 @@ parameters:
     barcode_directory: '%kernel.root_dir%/../web/barcode/'
 services:
    
+    provincia_service:
+        class: MProd\LicenciaCyPBundle\Service\ProvinciaServiceImpl
+        autowire: true
+
     licencia_service:
         class: MProd\LicenciaCyPBundle\Service\LicenciaServiceImpl
         autowire: true
@@ -39,7 +43,7 @@ services:
         arguments: ['@barcode_service','%barcode_directory%']
         public: false
         tags:
-            - { name: twig.extension }
+            - { name: twig.extension }    
 
     persona_repository:
         class: Doctrine\ORM\EntityRepository
@@ -68,3 +72,10 @@ services:
         arguments:
             - MProd\LicenciaCyPBundle\Entity\Comprobante
         autowiring_types: MProd\LicenciaCyPBundle\Repository\IComprobanteRepository
+
+    provincia_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+           - MProd\LicenciaCyPBundle\Entity\Provincia        
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\IProvinciaRepository

@@ -77,8 +77,12 @@
                                                     <div>
                                                     </div>
                                             {{ form_row(form.persona.provincia) }}
-                                            {{ form_row(form.persona.localidad) }}
-                                            {{ form_row(form.persona.localidadOtraProvincia) }}
+                                            <div id="localidad">
+                                                {{ form_row(form.persona.localidad) }}
+                                            </div>
+                                            <div id="localidadOtraProvincia">
+                                                {{ form_row(form.persona.localidadOtraProvincia) }}
+                                            </div>
                                             {{form_rest(form)}}                                            
                                             <input type='submit' value='Guardar'>
                                         </div>

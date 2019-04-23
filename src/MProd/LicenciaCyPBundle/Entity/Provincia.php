@@ -4,11 +4,13 @@ namespace MProd\LicenciaCyPBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Provincia
- *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\ProvinciaRepository")
+ * @ORM\Table(name="provincia")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Provincia
 {
@@ -18,6 +20,13 @@ class Provincia
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var \MProd\LicenciaCyPBundle\Entity\Localidad
+     *     
+     * @ORM\OneToMany(targetEntity="MProd\LicenciaCyPBundle\Entity\Localidad", mappedBy="provincia")
+     */
+    private $localidades;
 
     /**
      *@var string
@@ -30,7 +39,7 @@ class Provincia
 
     function __construct()
     {
-     ;
+        $this->localidades = new ArrayCollection();
     }
 
     /**
@@ -77,4 +86,51 @@ class Provincia
 
 
 
+
+    /**
+     * Add localidades
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\Localidad $localidades
+     * @return Provincia
+     */
+    public function addLocalidade(\MProd\LicenciaCyPBundle\Entity\Localidad $localidades)
+    {
+        $this->localidades[] = $localidades;
+
+        return $this;
+    }
+
+    /**
+     * Remove localidades
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\Localidad $localidades
+     */
+    public function removeLocalidade(\MProd\LicenciaCyPBundle\Entity\Localidad $localidades)
+    {
+        $this->localidades->removeElement($localidades);
+    }
+
+    /**
+     * Get localidades
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLocalidades()
+    {
+        return $this->localidades;
+    }
+
+    public function isSantaFe(){
+        return $this->nombre === 'Santa Fe' ? true : false;
+    }
+
+    public function copyValues($objectForCopy)
+    {           
+        $vars=is_object($objectForCopy)?get_object_vars($objectForCopy):$objectForCopy;
+        if(!is_array($vars)) throw Exception('Sin propiedades para el objeto Provincia!');
+        foreach ($vars as $key => $value) {
+            $this->$key = $value;
+        }
+        return $this;
+    }
 }

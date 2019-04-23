@@ -9,7 +9,10 @@
 namespace MProd\LicenciaCyPBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-class Provincias implements FixtureInterface
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+
+class Provincias extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -41,10 +44,19 @@ class Provincias implements FixtureInterface
         );
         foreach ($provincias as $provincia) {
             $entidad = new \MProd\LicenciaCyPBundle\Entity\Provincia();
-            $entidad->setNombre($provincia['nombre']);
+            $entidad->setNombre($provincia['nombre']);            
             $manager->persist($entidad);
+           
+            if($provincia['nombre'] === 'Santa Fe')
+                $this->setReference('provinciaSantaFe', $entidad);
         }
         $manager->flush();
+        
+        
     }
 
+    public function getOrder()
+    {
+        return 2;
+    }
 }

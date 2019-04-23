@@ -21,7 +21,8 @@ class LicenciaType extends AbstractType
                 array(
                     'label' => 'Tipo Licencia',
                     'class' => 'MProdLicenciaCyPBundle:TipoLicencia',                         
-                    'required' => TRUE
+                    'required' => TRUE,
+                    'empty_value' => '-- Seleccione --'                    
                 ))            
                 ->add('fechaEmitida','date', array(                        
                     'constraints' => null,

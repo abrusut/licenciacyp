@@ -63,3 +63,11 @@ boleta_pago_imprimir_pdf:
 licencia_generada_detalle:
     path:     /licencia/{licenciaId}
     defaults: { _controller: MProdLicenciaCyPBundle:Licencia:verLicencia }        
+
+provincia_findBy:
+   path:    /provincia/findBy/{provinciaId}/{provinciaNombre}
+   defaults: { _controller: MProdLicenciaCyPBundle:Provincia:findBy } 
+
+provincia_findTiposLicenciaForProvincia:
+   path:    /provincia/findTiposLicenciaForProvincia
+   defaults: { _controller: MProdLicenciaCyPBundle:Provincia:findTiposLicenciaForProvincia }    
