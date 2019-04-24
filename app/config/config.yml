@@ -101,7 +101,7 @@ knp_paginator:
 theme_aplicativo:
     datos_aplicativo:
         encabezado:
-            titulo: 'Gestión de Licencia Caza y Pescaa'
+            titulo: 'Gestión de Licencia Caza y Pesca'
             nombre_dependencia:  'Secretaría de Ganadería, Lechería y Recursos Naturales'
             nombre_organismo: 'Ministerio de la Producción'
             #imagen_top_url:  '../../src/MProd/EmprendedoresBundle/Resources/images/logoCrear1.jpg'
@@ -130,4 +130,4 @@ markup_barcode:
         definitions:
             invoice:
                 type: code128
-                format: gif
+                format: png

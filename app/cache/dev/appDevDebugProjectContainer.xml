@@ -686,7 +686,7 @@
     <parameter key="knp_paginator.template.filtration">@KnpPaginator/Pagination/filtration.html.twig</parameter>
     <parameter key="knp_paginator.template.sortable">KnpPaginatorBundle:Pagination:sortable_link.html.twig</parameter>
     <parameter key="knp_paginator.page_range">5</parameter>
-    <parameter key="theme_aplicativo.datos_aplicativo.encabezado.titulo">Gestión de Licencia Caza y Pescaa</parameter>
+    <parameter key="theme_aplicativo.datos_aplicativo.encabezado.titulo">Gestión de Licencia Caza y Pesca</parameter>
     <parameter key="theme_aplicativo.datos_aplicativo.encabezado.nombre_dependencia">Secretaría de Ganadería, Lechería y Recursos Naturales</parameter>
     <parameter key="theme_aplicativo.datos_aplicativo.encabezado.nombre_organismo">Ministerio de la Producción</parameter>
     <parameter key="theme_aplicativo.datos_aplicativo.encabezado.imagen_top_url"></parameter>
@@ -2431,7 +2431,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5cbf4ca9ee4602.90282549</argument>
+            <argument>5cc07c17872ec8.66473091</argument>
           </service>
         </argument>
       </argument>
@@ -2709,7 +2709,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>5cbf4ca9ee4602.90282549</argument>
+            <argument>5cc07c17872ec8.66473091</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -3161,7 +3161,7 @@
     </service>
     <service id="monolog.handler.app_logs" class="Monolog\Handler\RotatingFileHandler">
       <argument>/home/abrusut/Documentos/symfony/licenciaCyP/app/logs/licenciaCyP_dev.log</argument>
-      <argument>10</argument>
+      <argument>5</argument>
       <argument>100</argument>
       <argument>true</argument>
       <argument>null</argument>

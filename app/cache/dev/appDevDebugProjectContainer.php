@@ -1896,7 +1896,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getMonolog_Handler_AppLogsService()
     {
-        $this->services['monolog.handler.app_logs'] = $instance = new \Monolog\Handler\RotatingFileHandler(($this->targetDirs[2].'/logs/licenciaCyP_dev.log'), 10, 100, true, NULL);
+        $this->services['monolog.handler.app_logs'] = $instance = new \Monolog\Handler\RotatingFileHandler(($this->targetDirs[2].'/logs/licenciaCyP_dev.log'), 5, 100, true, NULL);
 
         $instance->pushProcessor($this->get('monolog.processor.psr_log_message'));
         $instance->setFilenameFormat('{filename}-{date}', 'Y-m-d');
@@ -2428,7 +2428,7 @@ class appDevDebugProjectContainer extends Container
         $p->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
         $p->addHandler($n);
 
-        return $this->services['security.firewall.map.context.page'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $c), 'page', $a, $d), 2 => $o, 3 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($b, $n, $g, $a, $d, true, $h), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '5cbf4ca9ee4602.90282549', $a, $g), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $j, $g)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, 'page', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $k, 'login', false), NULL, NULL, $a, false), $p);
+        return $this->services['security.firewall.map.context.page'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $c), 'page', $a, $d), 2 => $o, 3 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($b, $n, $g, $a, $d, true, $h), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '5cc07c17872ec8.66473091', $a, $g), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $j, $g)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, 'page', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $k, 'login', false), NULL, NULL, $a, false), $p);
     }
 
     /**
@@ -3710,7 +3710,7 @@ class appDevDebugProjectContainer extends Container
     {
         $a = $this->get('security.user_checker.page');
 
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.usuarios'), $a, 'page', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'licencia1234', 'page'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5cbf4ca9ee4602.90282549')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.usuarios'), $a, 'page', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'licencia1234', 'page'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5cc07c17872ec8.66473091')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -4554,7 +4554,7 @@ class appDevDebugProjectContainer extends Container
             'knp_paginator.template.filtration' => '@KnpPaginator/Pagination/filtration.html.twig',
             'knp_paginator.template.sortable' => 'KnpPaginatorBundle:Pagination:sortable_link.html.twig',
             'knp_paginator.page_range' => 5,
-            'theme_aplicativo.datos_aplicativo.encabezado.titulo' => 'Gestión de Licencia Caza y Pescaa',
+            'theme_aplicativo.datos_aplicativo.encabezado.titulo' => 'Gestión de Licencia Caza y Pesca',
             'theme_aplicativo.datos_aplicativo.encabezado.nombre_dependencia' => 'Secretaría de Ganadería, Lechería y Recursos Naturales',
             'theme_aplicativo.datos_aplicativo.encabezado.nombre_organismo' => 'Ministerio de la Producción',
             'theme_aplicativo.datos_aplicativo.encabezado.imagen_top_url' => '',

@@ -1,26 +1,37 @@
 {% extends "MProdLicenciaCyPBundle:Page:index.html.twig" %} {% block cuerpo %}
-{% if app.session.flashBag.has('licenciaForm_message') %}
-<div class="alert alert-success">
-  {% for msg in app.session.flashBag.get('licenciaForm_message') %}
-  {{ msg }}
-  {% endfor %}
-</div>
-{% endif %}
+
+ {% block css %}                 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                  rel="stylesheet">
+
+    <link rel="icon" href="//www.santafe.gob.ar/assets/standard/images/favicon.ico">
+  {% endblock %}
+
+  {% if app.session.flashBag.has('licenciaForm_message') %}
+  <div class="alert alert-success">
+    {% for msg in app.session.flashBag.get('licenciaForm_message') %}
+    {{ msg }}
+    {% endfor %}
+  </div>
+  {% endif %}
+
 <div class="row"></div>
+
 {% block breadcrumb %} {% set breadoption = { 'Inicio': 'path_home', 'Detalle de
 Licencia Generada': '#'} %}
 {{ parent() }}
-{% endblock %} {% block cardHeader %} {% if urlBoletaPago is defined and
-urlBoletaPago is not empty %}
-<div class="row elevencol">
-  <input
-    style="float: right !important"
-    type="button"
-    value="Imprimir Boleta Pago"
-    onclick="imprimirBoletaPago('{{ urlBoletaPago }}')"
-  />
+{% endblock %} 
+
+{% block cardHeader %} 
+  {% if urlBoletaPago is defined and
+        urlBoletaPago is not empty %}
+    <div class="row elevencol">      
+       <button  onclick="imprimirBoletaPago('{{ urlBoletaPago }}')" class="btn float-right">
+          <i class="material-icons" style="font-size: 30px">print</i>
+      </button>
+    </div>
+     <div class="row"></div>
   {% endif %}
-</div>
 {% endblock %}
 
 <div class="row form">
@@ -270,6 +281,20 @@ urlBoletaPago is not empty %}
               </div>
               <div>
                 <label
+                  for="mprod_licenciacypbundle_licencia_readOnly_persona_provincia"
+                  >Provincia</label
+                > <input
+                  type="email"
+                  id="mprod_licenciacypbundle_licencia_readOnly_persona_email"
+                  name="mprod_licenciacypbundle_licencia_readOnly[persona][email]"
+                  readonly="readonly"
+                  required="required"
+                  value="{{licencia.persona.provincia}}"
+                />
+              </div>
+               {% if licencia.persona.localidad is not null %}      
+              <div>
+                <label
                   for="mprod_licenciacypbundle_licencia_readOnly_persona_localidad"
                   
                   >Localidad</label                
@@ -283,19 +308,9 @@ urlBoletaPago is not empty %}
                   value="{{licencia.persona.localidad}}"
                 />
               </div>
-              <div>
-                <label
-                  for="mprod_licenciacypbundle_licencia_readOnly_persona_provincia"
-                  >Provincia</label
-                > <input
-                  type="email"
-                  id="mprod_licenciacypbundle_licencia_readOnly_persona_email"
-                  name="mprod_licenciacypbundle_licencia_readOnly[persona][email]"
-                  readonly="readonly"
-                  required="required"
-                  value="{{licencia.persona.provincia}}"
-                />
-              </div>
+              {% endif %}
+             
+              {% if licencia.persona.localidad is null and licencia.persona.localidadOtraProvincia is not null %}
               <div>
                 <label
                   for="mprod_licenciacypbundle_licencia_readOnly_persona_localidadOtraProvincia"
@@ -308,27 +323,40 @@ urlBoletaPago is not empty %}
                   value="{{licencia.persona.localidadOtraProvincia}}"
                 />
               </div>
+              {% endif %}
             </div>
-          </div>
-         
+          </div>         
 </form>
+
+      {% if readOnly is defined and readOnly %}
+        {% if comprobante is defined  %}
+        <div class="row form">
+          <label>Comprobante :</label> {{ comprobante.id }}
+          <label>Codigo Barra :</label>{{ comprobante.numeroCodigoBarra }} ( {{ comprobante.numeroCodigoBarra |length }} )
+          <div class="row">
+              <img width="50%" src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">              
+          </div>                          
+        </div>
+          
+        {% endif %}
+      {% endif %}
+
       {% endblock %}
     </div>
   </div>
 </div>
-{% if urlBoletaPago is defined and urlBoletaPago is not empty %}
-<div class="row elevencol">
-  <input
-    style="float: right !important"
-    type="button"
-    value="Imprimir Boleta Pago"
-    onclick="imprimirBoletaPago('{{ urlBoletaPago }}')"
-  />
-  {% endif %}
-</div>
+
 {% endblock %} {% block javascripts %}
 {{ parent() }}
 
 <script language="javascript" src="{{ asset('js/licencia.js') }}"></script>
-
+<script language="javascript">
+ 
+$(document).ready(function()
+        {
+            setTimeout(function(){ 
+              window.open("{{ urlBoletaPago }}",'_blank')
+            }, 3000);
+        });
+</script>
 {% endblock %}

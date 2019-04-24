@@ -45,7 +45,7 @@ monolog:
 
         app_logs:
             type:  rotating_file
-            max_files: 10
+            max_files: 5
             path:   "%kernel.logs_dir%/licenciaCyP_%kernel.environment%.log"
             level:  debug
             channels: ["!doctrine","!main","!event","!php","!translation","!security"]

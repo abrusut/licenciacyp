@@ -36,7 +36,7 @@ class __TwigTemplate_cdc132d1e2a710fd7fa0a0bcce85b52c775adb8551637f32a3cdc33b322
         echo "<!DOCTYPE html>
 <html>
     <head>
-        <title>Emisi&oacute;n de Boletas Licencias Deportivas</title>
+        <title>Emisi&oacute;n de Boletas Licencias Caza y Pesca</title>
         <meta charset=\"UTF-8\">
         <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
@@ -334,7 +334,7 @@ class __TwigTemplate_cdc132d1e2a710fd7fa0a0bcce85b52c775adb8551637f32a3cdc33b322
         return new Source("<!DOCTYPE html>
 <html>
     <head>
-        <title>Emisi&oacute;n de Boletas Licencias Deportivas</title>
+        <title>Emisi&oacute;n de Boletas Licencias Caza y Pesca</title>
         <meta charset=\"UTF-8\">
         <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">

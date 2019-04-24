@@ -216,17 +216,19 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             return array (  '_controller' => 'MProdLicenciaCyPBundle:Administrador:addAdministrador',  '_route' => 'add_administrador',);
         }
 
-        if (0 === strpos($pathinfo, '/persona')) {
-            // persona_add
-            if ('/persona/add' === $pathinfo) {
-                return array (  '_controller' => 'MProd\\LicenciaCyPBundle\\Controller\\PersonaController::addAction',  '_route' => 'persona_add',);
-            }
+        // persona_add
+        if ('/persona/add' === $pathinfo) {
+            return array (  '_controller' => 'MProd\\LicenciaCyPBundle\\Controller\\PersonaController::addAction',  '_route' => 'persona_add',);
+        }
 
-            // persona_findBy
-            if (0 === strpos($pathinfo, '/persona/findBy') && preg_match('#^/persona/findBy/(?P<tipoDocumento>[^/]++)/(?P<numeroDocumento>[^/]++)/(?P<sexo>[^/]++)$#sD', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'persona_findBy')), array (  '_controller' => 'MProd\\LicenciaCyPBundle\\Controller\\PersonaController::findByAction',));
-            }
+        // regenerar_boleta_pago
+        if (0 === strpos($pathinfo, '/licencia/_regenerarboletapago/licencia') && preg_match('#^/licencia/_regenerarboletapago/licencia/(?P<licenciaId>[^/]++)/(?P<readOnly>[^/]++)$#sD', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'regenerar_boleta_pago')), array (  '_controller' => 'MProd\\LicenciaCyPBundle\\Controller\\LicenciaController::regenerarBoletaPagoYCodigoBarraAction',));
+        }
 
+        // persona_findBy
+        if (0 === strpos($pathinfo, '/persona/findBy') && preg_match('#^/persona/findBy/(?P<tipoDocumento>[^/]++)/(?P<numeroDocumento>[^/]++)/(?P<sexo>[^/]++)$#sD', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'persona_findBy')), array (  '_controller' => 'MProd\\LicenciaCyPBundle\\Controller\\PersonaController::findByAction',));
         }
 
         if (0 === strpos($pathinfo, '/boletaPago/imprimir')) {

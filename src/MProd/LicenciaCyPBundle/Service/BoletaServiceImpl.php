@@ -25,23 +25,40 @@ class BoletaServiceImpl implements IBoletaService
 	}
 
 	public function generarCodigoBarras(Licencia $licencia)
-	{
+	{		
 		$comprobante = $licencia->getComprobante();
 		$tipoLicencia = $licencia->getTipoLicencia();
 
-		$clienteSAP = $comprobante->getClienteSap();
-		$letraServicio = $comprobante->getLetraServicio();
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".
+					 $licencia->getId(). 
+					" Comprobante: ".
+					$comprobante->getId().
+					" Tipo Licencia: ".$tipoLicencia->getId() . " - " . $tipoLicencia->getDescripcion());
 
-		// Importe
-		$importe = $licencia->getComprobante()->getMonto();
+		// 5 Digitos Codigo Cliente (Ministerio)
+		$clienteSAP = $this->zerofill($comprobante->getClienteSap(),5);
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+									" ClienteSAP(5): ".$clienteSAP. "(". strlen($clienteSAP) .")" );
+
+		// 1 Digito Importe
+		$letraServicio = $comprobante->getLetraServicio();
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+									" letraServicio(1): ".$letraServicio. "(". strlen($letraServicio) .")");
+
+		// 7 Digitos Importe 
+		$importe = $this->zerofill($licencia->getComprobante()->getMonto(),7);
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+									" importe(7): ".$importe. "(". strlen($importe) .")");
 
 		// Primer Dia año corriente
 		$firstDayCurrentYear = new \DateTime('first day of January');
-		
-		// Primer Vencimiento
+				
 		$diasPrimerVencimiento = "000";
 		$anioPrimerVenciemiento = "00";
-		$primerVencimiento = $anioPrimerVenciemiento.$diasPrimerVencimiento;
+
+		// 5 Digitos Primer Vencimiento
+		$primerVencimiento = $this->zerofill($anioPrimerVenciemiento.$diasPrimerVencimiento,5);		
+
 		if (!is_null($comprobante->getPrimerVencimiento())) {
 			$anioPrimerVenciemiento =	$comprobante->getPrimerVencimiento()->format('y');
 			
@@ -52,20 +69,24 @@ class BoletaServiceImpl implements IBoletaService
 			//Armo string final
 			$primerVencimiento = $this->zerofill($anioPrimerVenciemiento,2) . $this->zerofill($diasPrimerVencimiento, 3);
 		}
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+									" primerVencimiento(5): ".$primerVencimiento. "(". strlen($primerVencimiento) .")");
 
 		$numeroCodigoBarraUno = $this->zerofill($clienteSAP,5) .
 								$letraServicio . 
 								$this->zerofill($importe, 7) . 
-								$primerVencimiento;
-			
+								$this->zerofill($primerVencimiento,5);
+		
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+									" numeroCodigoBarraUno: ".$numeroCodigoBarraUno. "(". strlen($numeroCodigoBarraUno) .")");
+		// Aplicar algoritmo clave 10 con ponderador 3179							
 		$temporal = 0;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 0, 1) * 3;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 1, 1) * 1;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 2, 1) * 7;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 3, 1) * 9;
-		$temporal = $temporal + substr($numeroCodigoBarraUno, 4, 1) * 3;
-		//letra servicio cambio a ascii
-		$temporal = $temporal + ord(substr($numeroCodigoBarraUno, 5, 1)) * 1;
+		$temporal = $temporal + substr($numeroCodigoBarraUno, 4, 1) * 3;		
+		$temporal = $temporal + substr($numeroCodigoBarraUno, 5, 1) * 1;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 6, 1) * 7;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 7, 1) * 9;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 8, 1) * 3;
@@ -79,25 +100,36 @@ class BoletaServiceImpl implements IBoletaService
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 16, 1) * 3;
 		$temporal = $temporal + substr($numeroCodigoBarraUno, 17, 1) * 1;
 
+		// Calculo de Digito Verificador
 		$valor = substr($temporal, -1, 1);
 		$verificador1 = 10 - intval($valor);
+
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+									" verificador1: ".$verificador1);
 		$numeroCodigoBarraUno = $numeroCodigoBarraUno . $verificador1;
 
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+									" numeroCodigoBarraUno: ".$numeroCodigoBarraUno. "(". strlen($numeroCodigoBarraUno) .")");
+
 		$numeroCodigoBarraDos = "";
-		// Segundo Vencimiento
+		// 2 Digitos Segundo Vencimiento
 		$segundoVencimiento = "00";		
 		if (!is_null($comprobante->getSegundoVencimiento()) && !is_null($tipoLicencia->getDiasSegundoVencimiento())) {			
-			$segundoVencimiento =	$tipoLicencia->getDiasSegundoVencimiento();
+			$segundoVencimiento =	$this->zerofill($tipoLicencia->getDiasSegundoVencimiento(),2);
 		}
-
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+									" segundoVencimiento(2): ".$segundoVencimiento. "(". strlen($segundoVencimiento) .")");
+		// 5 Digitos recargo
 		$recargo = "00000";
 		if(!is_null($comprobante->getRecargoPrimerVencimiento())){
-			$recargo = $comprobante->getRecargoPrimerVencimiento();
+			$recargo = $this->zerofill($comprobante->getRecargoPrimerVencimiento(),5);
 		}
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+									" recargo(5): ".$recargo. "(". strlen($recargo) .")");
 
-		$numeroCodigoBarraDos = $this->zerofill($recargo,5) . $this->zerofill($segundoVencimiento,2);
+		$numeroCodigoBarraDos = $recargo.$segundoVencimiento;
 
-		// 21
+		// 21 Digitos Total para identificar la licencia
 		// 	2 tipo licencia
 		//	9 id licencia
 		//    10 id comprobante
@@ -106,6 +138,10 @@ class BoletaServiceImpl implements IBoletaService
 			$this->zerofill($licencia->getId(), 9) .
 			$this->zerofill($comprobante->getId(), 10);
 
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+			" numeroCodigoBarraDos: ".$numeroCodigoBarraDos. "(". strlen($numeroCodigoBarraDos) .")");
+
+		// Aplicar algoritmo clave 10 con ponderador 3179
 		$temporal = 0;
 		$temporal = $temporal + substr($numeroCodigoBarraDos, 20, 1) * 3;
 		$temporal = $temporal + substr($numeroCodigoBarraDos, 21, 1) * 1;
@@ -136,13 +172,22 @@ class BoletaServiceImpl implements IBoletaService
 		$temporal = $temporal + substr($numeroCodigoBarraDos, 46, 1) * 7;
 		$temporal = $temporal + substr($numeroCodigoBarraDos, 47, 1) * 9;
 
+		// Calculo de Digito Verificador
 		$valor2 = substr($temporal, -1, 1);
 		$verificador2 = 10 - intval($valor2);
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+			" verificador2: ".$verificador2);
 
 		$numeroCodigoBarraDos = $numeroCodigoBarraDos . $verificador2;
 
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+			" numeroCodigoBarraDos: ".$numeroCodigoBarraDos . "(". strlen($numeroCodigoBarraDos) .")");
+
 		$numeroCodigoBarra = $numeroCodigoBarraUno . $numeroCodigoBarraDos;
 		
+		$this->logger->info("BoletaServiceImpl, generarCodigoBarras licencia :".$licencia->getId().
+			" numeroCodigoBarra FINAL: ".$numeroCodigoBarra. "(". strlen($numeroCodigoBarra) .")");
+
 		return $numeroCodigoBarra;
 	}
 

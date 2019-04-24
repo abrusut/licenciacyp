@@ -48,6 +48,10 @@ persona_add:
    path:    /persona/add
    defaults: { _controller: MProdLicenciaCyPBundle:Persona:add }    
 
+regenerar_boleta_pago:
+   path:    /licencia/_regenerarboletapago/licencia/{licenciaId}/{readOnly}
+   defaults: { _controller: MProdLicenciaCyPBundle:Licencia:regenerarBoletaPagoYCodigoBarra }  
+
 persona_findBy:
    path:    /persona/findBy/{tipoDocumento}/{numeroDocumento}/{sexo}
    defaults: { _controller: MProdLicenciaCyPBundle:Persona:findBy } 

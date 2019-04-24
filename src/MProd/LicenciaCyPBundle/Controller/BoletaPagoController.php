@@ -41,7 +41,7 @@ class BoletaPagoController extends Controller
     public function imprimirPdfAction(Request $request, $licenciaId)
     {      
         error_reporting(E_ERROR); 
-        $this->get('logger')->info("BoletaPagoController, imprimirAction, licencia " . $licenciaId);
+        $this->get('logger')->info("BoletaPagoController, imprimirPdfAction, licencia " . $licenciaId);
 
         $idLicencia = urldecode($licenciaId);
         /** @var LicenciaServiceImpl $licenciaService */
@@ -52,9 +52,10 @@ class BoletaPagoController extends Controller
 
         $twigExtBarCode = $this->container->get('twig')->getExtension(BarcodeTwigExtension::class);
 
-        $pdf = $this->container->get("white_october.tcpdf")->create('HORIZONTAL', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf = $this->container->get("white_october.tcpdf")->create('VERTICAL', 
+                                    PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetAuthor('Ministerio de la Producción');
-        $pdf->SetTitle('Emisión de Boletas Licencias Deportivas');
+        $pdf->SetTitle('Emisión de Boletas Licencias Caza y Pesca');
         $pdf->SetSubject($licencia->getTipoLicencia()->getDescripcion());
         $pdf->SetKeywords($licencia->getTipoLicencia()->getDescripcion());
         $pdf->setFontSubsetting(true);
@@ -65,23 +66,14 @@ class BoletaPagoController extends Controller
 
 
         // El HTML Tiene los datos de la licencia
-        $html = $this->renderView('MProdLicenciaCyPBundle:Licencia:boleta.pago.pdf.sinbarcode.html.twig',
+        $html = $this->renderView('MProdLicenciaCyPBundle:Licencia:boleta.pago.pdf.html.twig',
                                     array('licencia' => $licencia));        
         $pdf->writeHTML($html, true, false, true, false, 'J');
-
-        // Example of Image from data stream ('PHP rules')
-        $barcode =$twigExtBarCode->getBarCodeGif($licencia->getComprobante()->getNumeroCodigoBarra(),'pdf');
-        // The '@' character is used to indicate that follows an image data stream and not an image file name
-        $pdf->Image($barcode);
-        /** $pdf->Image('@'.$barcode,10,10,130,55);        
-        // Codigo de Barras
-        //$pdf->Write(0, $licencia->getComprobante()->getNumeroCodigoBarra(), '', 0, 'J', true, 0, false, true, 0);        
+        
                 
         $html = $this->renderView('MProdLicenciaCyPBundle:Licencia:boleta.pago.pdf.sinbarcode.html.twig',
                                 array('licencia' => $licencia));        
         $pdf->writeHTML($html, true, false, true, false, 'J');
-        $pdf->Image($barcode);
-            **/
         $pdf->Output("example.pdf", 'I');        
     }
 
