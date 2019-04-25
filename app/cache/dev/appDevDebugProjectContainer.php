@@ -245,6 +245,8 @@ class appDevDebugProjectContainer extends Container
             'session.storage.native' => 'getSession_Storage_NativeService',
             'session.storage.php_bridge' => 'getSession_Storage_PhpBridgeService',
             'session_listener' => 'getSessionListenerService',
+            'sgk_barcode.generator' => 'getSgkBarcode_GeneratorService',
+            'sgk_barcode.twig.extension' => 'getSgkBarcode_Twig_ExtensionService',
             'stg.deim.themes.aplicativo.controller.exception' => 'getStg_Deim_Themes_Aplicativo_Controller_ExceptionService',
             'stg.deim.themes.aplicativo.custom_logger' => 'getStg_Deim_Themes_Aplicativo_CustomLoggerService',
             'stg.deim.themes.aplicativo.exception_handler' => 'getStg_Deim_Themes_Aplicativo_ExceptionHandlerService',
@@ -417,6 +419,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'ThemeAplicativoBundle', ($this->targetDirs[2].'/Resources/ThemeAplicativoBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'ThemeAplicativoBundle', ($this->targetDirs[3].'/vendor/stg/theme-bundle/STG/DEIM/Themes/Bundles/AplicativoBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'MProdLicenciaCyPBundle', ($this->targetDirs[2].'/Resources/MProdLicenciaCyPBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'MProdLicenciaCyPBundle', ($this->targetDirs[3].'/src/MProd/LicenciaCyPBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'WhiteOctoberTCPDFBundle', ($this->targetDirs[2].'/Resources/WhiteOctoberTCPDFBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'WhiteOctoberTCPDFBundle', ($this->targetDirs[3].'/vendor/whiteoctober/tcpdf-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SGKBarcodeBundle', ($this->targetDirs[2].'/Resources/SGKBarcodeBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'SGKBarcodeBundle', ($this->targetDirs[3].'/vendor/mwsimple/barcode-bundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'MarkupBarcodeBundle', ($this->targetDirs[2].'/Resources/MarkupBarcodeBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'MarkupBarcodeBundle', ($this->targetDirs[3].'/vendor/markup/barcode-bundle/Markup/BarcodeBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DebugBundle', ($this->targetDirs[2].'/Resources/DebugBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'DebugBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
         $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource(array(0 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'WebProfilerBundle', ($this->targetDirs[2].'/Resources/WebProfilerBundle/views'), '/\\.[^.]+\\.twig$/'), 1 => new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($a, 'WebProfilerBundle', ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), '/\\.[^.]+\\.twig$/'))), 'twig');
@@ -1876,7 +1879,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getMarkupBarcode_Generator_ProviderService()
     {
-        return $this->services['markup_barcode.generator.provider'] = new \Markup\BarcodeBundle\Generator\Provider(array('invoice' => array('type' => 'code128', 'format' => 'gif', 'image_options' => array(), 'barcode_options' => array())), $this->get('markup_barcode.definition_provider'), $this->get('markup_barcode.factory'), $this->get('markup_barcode.base64_encoder'));
+        return $this->services['markup_barcode.generator.provider'] = new \Markup\BarcodeBundle\Generator\Provider(array('invoice' => array('type' => 'code128', 'format' => 'png', 'image_options' => array(), 'barcode_options' => array())), $this->get('markup_barcode.definition_provider'), $this->get('markup_barcode.factory'), $this->get('markup_barcode.base64_encoder'));
     }
 
     /**
@@ -2428,7 +2431,7 @@ class appDevDebugProjectContainer extends Container
         $p->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
         $p->addHandler($n);
 
-        return $this->services['security.firewall.map.context.page'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $c), 'page', $a, $d), 2 => $o, 3 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($b, $n, $g, $a, $d, true, $h), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '5cc07c17872ec8.66473091', $a, $g), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $j, $g)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, 'page', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $k, 'login', false), NULL, NULL, $a, false), $p);
+        return $this->services['security.firewall.map.context.page'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($j, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => $c), 'page', $a, $d), 2 => $o, 3 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($b, $n, $g, $a, $d, true, $h), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '5cc1ed81dc6734.01639288', $a, $g), 5 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $j, $g)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), $k, 'page', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($f, $k, 'login', false), NULL, NULL, $a, false), $p);
     }
 
     /**
@@ -2703,6 +2706,26 @@ class appDevDebugProjectContainer extends Container
     protected function getSessionListenerService()
     {
         return $this->services['session_listener'] = new \Symfony\Bundle\FrameworkBundle\EventListener\SessionListener($this);
+    }
+
+    /**
+     * Gets the public 'sgk_barcode.generator' shared service.
+     *
+     * @return \SGK\BarcodeBundle\Generator\Generator
+     */
+    protected function getSgkBarcode_GeneratorService()
+    {
+        return $this->services['sgk_barcode.generator'] = new \SGK\BarcodeBundle\Generator\Generator();
+    }
+
+    /**
+     * Gets the public 'sgk_barcode.twig.extension' shared service.
+     *
+     * @return \SGK\BarcodeBundle\Twig\Extensions\Barcode
+     */
+    protected function getSgkBarcode_Twig_ExtensionService()
+    {
+        return $this->services['sgk_barcode.twig.extension'] = new \SGK\BarcodeBundle\Twig\Extensions\Barcode($this->get('sgk_barcode.generator'));
     }
 
     /**
@@ -3384,11 +3407,12 @@ class appDevDebugProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpKernelExtension($d));
         $instance->addExtension($e);
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'form_div_layout.html.twig')), $this->get('security.csrf.token_manager', ContainerInterface::NULL_ON_INVALID_REFERENCE))));
-        $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(0 => 'FrameworkBundle', 1 => 'SecurityBundle', 2 => 'TwigBundle', 3 => 'MonologBundle', 4 => 'SwiftmailerBundle', 5 => 'AsseticBundle', 6 => 'DoctrineBundle', 7 => 'SensioFrameworkExtraBundle', 8 => 'KnpPaginatorBundle', 9 => 'ThemeAplicativoBundle', 10 => 'MProdLicenciaCyPBundle', 11 => 'WhiteOctoberTCPDFBundle', 12 => 'MarkupBarcodeBundle', 13 => 'DebugBundle', 14 => 'WebProfilerBundle', 15 => 'SensioDistributionBundle', 16 => 'SensioGeneratorBundle', 17 => 'DoctrineFixturesBundle'), new \Symfony\Bundle\AsseticBundle\DefaultValueSupplier($this)));
+        $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(0 => 'FrameworkBundle', 1 => 'SecurityBundle', 2 => 'TwigBundle', 3 => 'MonologBundle', 4 => 'SwiftmailerBundle', 5 => 'AsseticBundle', 6 => 'DoctrineBundle', 7 => 'SensioFrameworkExtraBundle', 8 => 'KnpPaginatorBundle', 9 => 'ThemeAplicativoBundle', 10 => 'MProdLicenciaCyPBundle', 11 => 'WhiteOctoberTCPDFBundle', 12 => 'SGKBarcodeBundle', 13 => 'MarkupBarcodeBundle', 14 => 'DebugBundle', 15 => 'WebProfilerBundle', 16 => 'SensioDistributionBundle', 17 => 'SensioGeneratorBundle', 18 => 'DoctrineFixturesBundle'), new \Symfony\Bundle\AsseticBundle\DefaultValueSupplier($this)));
         $instance->addExtension(new \Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension());
         $instance->addExtension($this->get('knp_paginator.twig.extension.pagination'));
         $instance->addExtension($this->get('stg.deim.themes.aplicativo.twig.global_data_extension'));
         $instance->addExtension(new \MProd\LicenciaCyPBundle\Twig\BarcodeTwigExtension($this->get('barcode_service'), ($this->targetDirs[2].'/../web/barcode/')));
+        $instance->addExtension($this->get('sgk_barcode.twig.extension'));
         $instance->addExtension($this->get('markup_barcode.twig.extension'));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\DumpExtension($this->get('var_dumper.cloner')));
         $instance->addExtension(new \Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension());
@@ -3710,7 +3734,7 @@ class appDevDebugProjectContainer extends Container
     {
         $a = $this->get('security.user_checker.page');
 
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.usuarios'), $a, 'page', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'licencia1234', 'page'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5cc07c17872ec8.66473091')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.usuarios'), $a, 'page', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'licencia1234', 'page'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5cc1ed81dc6734.01639288')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -3872,6 +3896,7 @@ class appDevDebugProjectContainer extends Container
                 'ThemeAplicativoBundle' => 'STG\\DEIM\\Themes\\Bundles\\AplicativoBundle\\ThemeAplicativoBundle',
                 'MProdLicenciaCyPBundle' => 'MProd\\LicenciaCyPBundle\\MProdLicenciaCyPBundle',
                 'WhiteOctoberTCPDFBundle' => 'WhiteOctober\\TCPDFBundle\\WhiteOctoberTCPDFBundle',
+                'SGKBarcodeBundle' => 'SGK\\BarcodeBundle\\SGKBarcodeBundle',
                 'MarkupBarcodeBundle' => 'Markup\\BarcodeBundle\\MarkupBarcodeBundle',
                 'DebugBundle' => 'Symfony\\Bundle\\DebugBundle\\DebugBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
@@ -3939,6 +3964,11 @@ class appDevDebugProjectContainer extends Container
                     'parent' => NULL,
                     'path' => ($this->targetDirs[3].'/vendor/whiteoctober/tcpdf-bundle'),
                     'namespace' => 'WhiteOctober\\TCPDFBundle',
+                ),
+                'SGKBarcodeBundle' => array(
+                    'parent' => NULL,
+                    'path' => ($this->targetDirs[3].'/vendor/mwsimple/barcode-bundle'),
+                    'namespace' => 'SGK\\BarcodeBundle',
                 ),
                 'MarkupBarcodeBundle' => array(
                     'parent' => NULL,
@@ -4393,12 +4423,13 @@ class appDevDebugProjectContainer extends Container
                 9 => 'ThemeAplicativoBundle',
                 10 => 'MProdLicenciaCyPBundle',
                 11 => 'WhiteOctoberTCPDFBundle',
-                12 => 'MarkupBarcodeBundle',
-                13 => 'DebugBundle',
-                14 => 'WebProfilerBundle',
-                15 => 'SensioDistributionBundle',
-                16 => 'SensioGeneratorBundle',
-                17 => 'DoctrineFixturesBundle',
+                12 => 'SGKBarcodeBundle',
+                13 => 'MarkupBarcodeBundle',
+                14 => 'DebugBundle',
+                15 => 'WebProfilerBundle',
+                16 => 'SensioDistributionBundle',
+                17 => 'SensioGeneratorBundle',
+                18 => 'DoctrineFixturesBundle',
             ),
             'assetic.twig_extension.class' => 'Symfony\\Bundle\\AsseticBundle\\Twig\\AsseticExtension',
             'assetic.twig_formula_loader.class' => 'Assetic\\Extension\\Twig\\TwigFormulaLoader',
@@ -4414,7 +4445,7 @@ class appDevDebugProjectContainer extends Container
 
             ),
             'assetic.java.bin' => '/usr/bin/java',
-            'assetic.node.bin' => '/home/abrusut/.nvm/versions/node/v10.15.1/bin/node',
+            'assetic.node.bin' => '/usr/bin/node',
             'assetic.ruby.bin' => '/usr/bin/ruby',
             'assetic.sass.bin' => '/usr/bin/sass',
             'assetic.reactjsx.bin' => '/usr/bin/jsx',
@@ -4611,7 +4642,7 @@ class appDevDebugProjectContainer extends Container
             'markup_barcode.definition.configuration' => array(
                 'invoice' => array(
                     'type' => 'code128',
-                    'format' => 'gif',
+                    'format' => 'png',
                     'image_options' => array(
 
                     ),

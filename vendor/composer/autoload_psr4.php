@@ -36,6 +36,7 @@ return array(
     'SymfonyStandard\\' => array($baseDir . '/app/SymfonyStandard'),
     'Sensio\\Bundle\\FrameworkExtraBundle\\' => array($vendorDir . '/sensio/framework-extra-bundle'),
     'SensioLabs\\Security\\' => array($vendorDir . '/sensiolabs/security-checker/SensioLabs/Security'),
+    'SGK\\BarcodeBundle\\' => array($vendorDir . '/mwsimple/barcode-bundle'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'PhpOffice\\PhpWord\\' => array($vendorDir . '/phpoffice/phpword/src/PhpWord'),
@@ -51,5 +52,7 @@ return array(
     'Doctrine\\Bundle\\DoctrineCacheBundle\\' => array($vendorDir . '/doctrine/doctrine-cache-bundle'),
     'Doctrine\\Bundle\\DoctrineBundle\\' => array($vendorDir . '/doctrine/doctrine-bundle'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
+    'Com\\Tecnick\\Color\\' => array($vendorDir . '/tecnickcom/tc-lib-color/src'),
+    'Com\\Tecnick\\Barcode\\' => array($vendorDir . '/tecnickcom/tc-lib-barcode/src'),
     '' => array($baseDir . '/src'),
 );

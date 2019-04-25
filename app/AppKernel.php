@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new MProd\LicenciaCyPBundle\MProdLicenciaCyPBundle(),
 
             new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),      
+            new SGK\BarcodeBundle\SGKBarcodeBundle(),
             new Markup\BarcodeBundle\MarkupBarcodeBundle()     
         );
 

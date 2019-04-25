@@ -32,7 +32,7 @@ class BoletaPagoController extends Controller
         $barcodeService = $this->get('barcode_service');
 
         return $this->render(
-            'MProdLicenciaCyPBundle:Licencia:boleta.pago.html.twig',
+            'MProdLicenciaCyPBundle:Licencia:boleta.pago.pdf.html.twig',
             array('licencia' => $licencia,
                     'impresion' => $impresion)
         );
@@ -48,11 +48,8 @@ class BoletaPagoController extends Controller
         $licenciaService = $this->get('licencia_service');
 
         $licencia = $licenciaService->findById($idLicencia);
-       
-
-        $twigExtBarCode = $this->container->get('twig')->getExtension(BarcodeTwigExtension::class);
-
-        $pdf = $this->container->get("white_october.tcpdf")->create('VERTICAL', 
+                       
+        $pdf = $this->container->get("white_october.tcpdf")->create('', 
                                     PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetAuthor('Ministerio de la Producción');
         $pdf->SetTitle('Emisión de Boletas Licencias Caza y Pesca');
@@ -65,15 +62,29 @@ class BoletaPagoController extends Controller
         $pdf->AddPage();       
 
 
+        $options = array(
+            'code'   => $licencia->getComprobante()->getNumeroCodigoBarra(),
+            'type'   => 'c128',
+            'format' => 'png',
+            'width'  => 10,
+            'height' => 10,
+            'color'  => array(127, 127, 127),
+        );
+        
+        $barcode =
+            $this->get('sgk_barcode.generator')->generate($options);
+
+        $savePath = $this->container->getParameter('barcode_directory');
+        $fileName = 'barcode.png';
+    
+        file_put_contents($savePath.$fileName, base64_decode($barcode));    
+
         // El HTML Tiene los datos de la licencia
         $html = $this->renderView('MProdLicenciaCyPBundle:Licencia:boleta.pago.pdf.html.twig',
                                     array('licencia' => $licencia));        
         $pdf->writeHTML($html, true, false, true, false, 'J');
         
-                
-        $html = $this->renderView('MProdLicenciaCyPBundle:Licencia:boleta.pago.pdf.sinbarcode.html.twig',
-                                array('licencia' => $licencia));        
-        $pdf->writeHTML($html, true, false, true, false, 'J');
+                       
         $pdf->Output("example.pdf", 'I');        
     }
 

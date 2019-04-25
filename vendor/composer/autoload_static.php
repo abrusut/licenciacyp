@@ -64,6 +64,7 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
             'SymfonyStandard\\' => 16,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
             'SensioLabs\\Security\\' => 20,
+            'SGK\\BarcodeBundle\\' => 18,
         ),
         'P' => 
         array (
@@ -97,6 +98,8 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         'C' => 
         array (
             'Composer\\CaBundle\\' => 18,
+            'Com\\Tecnick\\Color\\' => 18,
+            'Com\\Tecnick\\Barcode\\' => 20,
         ),
     );
 
@@ -221,6 +224,10 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         array (
             0 => __DIR__ . '/..' . '/sensiolabs/security-checker/SensioLabs/Security',
         ),
+        'SGK\\BarcodeBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mwsimple/barcode-bundle',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
@@ -280,6 +287,14 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         'Composer\\CaBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
+        'Com\\Tecnick\\Color\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-color/src',
+        ),
+        'Com\\Tecnick\\Barcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-barcode/src',
         ),
     );
 

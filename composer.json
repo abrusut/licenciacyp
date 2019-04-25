@@ -24,7 +24,9 @@
         "ircmaxell/password-compat": "~1.0",
         "whiteoctober/tcpdf-bundle": "^1.0",
         "phpoffice/phpword": "dev-master",        
-        "markup/barcode-bundle": "^2.0"      
+        "markup/barcode-bundle": "^2.0",
+        "tecnickcom/tc-lib-barcode": "^1.15",
+        "mwsimple/barcode-bundle": "^2.0"      
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
