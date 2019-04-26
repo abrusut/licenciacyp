@@ -225,6 +225,17 @@ class Licencia
         return $this->comprobante;
     }
 
+    /**
+     * Get getNumeroCompleto
+     *
+     * @return string
+     */
+    public function getNumeroCompleto()
+    {
+        if(!is_null($this->comprobante) && !is_null($this->tipoLicencia) )
+            return $this->getTipoLicencia()->getId(). $this->getId() .$this->getComprobante()->getId();
+        return "";
+    }
 
     public function configurarVigencia(){
          // Vencimiento

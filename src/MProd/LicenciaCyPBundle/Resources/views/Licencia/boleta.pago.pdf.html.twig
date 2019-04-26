@@ -106,8 +106,8 @@
 
                   <div class="center">                  
                     <strong>Licencia: </strong>
-                    123456789123456789123
-                    <b>{{ licencia.tipoLicencia.descripcion }}</b>
+                    {{licencia.numeroCompleto}} - 
+                    {{ licencia.tipoLicencia.descripcion }}
                   </div>         
     <table >
       <tbody>            
@@ -180,7 +180,7 @@
                 {% endif %}             
                 
                 <tr>
-                  <td width="80px" >
+                  <td width="70px" >
                     <strong>Valido:</strong>
                   </td>
                   <td width="150px" class="left" >
@@ -192,7 +192,7 @@
                   </td>
                 </tr>
                 <tr>
-                   <td width="80px" class="left" >
+                   <td width="70px" class="left" >
                     <strong>Son Pesos:</strong>
                   </td>
                    <td width="100px" class="left" >                    
@@ -275,22 +275,22 @@
                   <td width="50px" >
                     <strong>Titular:</strong>
                   </td>
-                  <td width="150px" >
+                  <td width="130px" >
                     {{ licencia.persona.nombre }}
                     {{ licencia.persona.apellido }}
                   </td>                                                                
-                  <td width="80px" >
-                    <strong>Valido Hasta:</strong>
+                  <td width="45px" >
+                    <strong>Valido:</strong>
                   </td>
-                  <td width="65px" class="left" >
-                   {{licencia.fechaDesde | date('d/m/Y')}} 
+                  <td width="130px" class="center" >
+                   {{licencia.fechaDesde | date('d/m/Y')}} -
                     {{licencia.fechaVencimiento | date('d/m/Y')}}
                   </td>
                   <td>
                     
                   </td>               
-                   <td width="80px" class="left" >
-                    <strong>Son Pesos:</strong>
+                   <td width="75px" class="left" >
+                    <strong>Pesos:</strong>
                   </td>
                    <td width="80px" class="left" >                    
                     ${{ licencia.comprobante.monto }}
@@ -326,22 +326,22 @@
                   <td width="50px" >
                     <strong>Titular:</strong>
                   </td>
-                  <td width="150px" >
+                  <td width="130px" >
                     {{ licencia.persona.nombre }}
                     {{ licencia.persona.apellido }}
                   </td>                                                                
-                  <td width="80px" >
-                    <strong>Valido Hasta:</strong>
+                  <td width="45px" >
+                    <strong>Valido:</strong>
                   </td>
-                  <td width="65px" class="left" >
-                    {{licencia.fechaDesde | date('d/m/Y')}}  
+                  <td width="130px" class="center" >
+                   {{licencia.fechaDesde | date('d/m/Y')}} -
                     {{licencia.fechaVencimiento | date('d/m/Y')}}
                   </td>
                   <td>
                     
                   </td>               
-                   <td width="80px" class="left" >
-                    <strong>Son Pesos:</strong>
+                   <td width="75px" class="left" >
+                    <strong>Pesos:</strong>
                   </td>
                    <td width="80px" class="left" >                    
                     ${{ licencia.comprobante.monto }}
@@ -349,7 +349,7 @@
                   <td>
                   </td>
                 </tr>
-                 <tr><td></td></tr>
+                <tr><td></td></tr>
               </tbody>
             </table>
     <div class="center">
@@ -361,7 +361,6 @@
             />
           {{licencia.comprobante.numeroCodigoBarra }}
     </div>
-
     
 
     <footer>
