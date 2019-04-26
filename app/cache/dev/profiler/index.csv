@@ -330,3 +330,4 @@ f4c27f,127.0.0.1,POST,http://localhost:8000/,1556287226,,302
 7457a0,127.0.0.1,GET,http://localhost:8000/licencia/12,1556287226,,200
 e908b2,127.0.0.1,GET,http://localhost:8000/boletaPago/imprimir/12,1556287233,10b75a,200
 10b75a,127.0.0.1,GET,http://localhost:8000/boletaPago/imprimir/12,1556287233,,500
+94fcd6,127.0.0.1,GET,http://localhost:8000/,1556288932,,200
