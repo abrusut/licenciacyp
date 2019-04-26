@@ -154,7 +154,11 @@ function step3()
     $('#divTerminosYCondiciones').hide();
     $('#divBusquedaPersona').hide(); 
     $('#divFormularioLicencia').show();       
-    $('#divFormularioLicencia').removeClass("disabledPanel");        
+    $('#divFormularioLicencia').removeClass("disabledPanel"); 
+
+    var provinciaId =  $('#mprod_licenciacypbundle_licencia_persona_provincia').val();
+    var provinciaNombre = $('#mprod_licenciacypbundle_licencia_persona_provincia option[value='+provinciaId +']').text();
+    evaluarProvincia(provinciaId,provinciaNombre);       
 }
 
 function imprimirBoletaPago(urlBoletaPago){
