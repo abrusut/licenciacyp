@@ -12,7 +12,7 @@
     <meta name="robot" content="all" />
     <!--link rel="icon" href="http://www.santafe.gob.ar/assets/standard/images/favicon.ico" -->
 
-    <link rel="stylesheet" href="{{ asset('css/pdf.css') }}" />
+ 
   </head>
   <body>
     <style>
@@ -92,36 +92,43 @@
     </style>
 
 
-    <div class="center">  <img
+    <div class="center">  
+          <img
               src="{{ asset('images/gob-santafe.png') }}"
-              alt="{{encabezado_nombre_organismo }}"
-              
-            >   <h4> {{ encabezado_nombre_organismo | default('Nombre de organismo') }}</h4></div>
-<div class="panel">            
+              alt="{{encabezado_nombre_organismo }}" >   
+              <h3> {{ encabezado_nombre_organismo | default('Nombre de organismo') }} - Gobierno de Santa Fe</h3>
+    </div>
+<div>   
+<!--21 Digitos Total para identificar la licencia
+		     	2 tipo licencia
+			    9 id licencia
+		      10 id comprobante-->
+
+                  <div class="center">                  
+                    <strong>Licencia: </strong>
+                    123456789123456789123
+                    <b>{{ licencia.tipoLicencia.descripcion }}</b>
+                  </div>         
     <table >
-      <tbody>      
+      <tbody>            
         <tr>
-          <td>
+          <td class="center">
             <div class="texto-muy-chico">
               Sr./Sra Portar este documento personal e intransferible,
               lo habilita para el ejercicio de la pesca o caza, en
               territorio de la provincia de Santa Fe.
             </div>
-              <div class="texto-muy-chico">
-                  La presente no tiene validez,
+              <div class="center texto-muy-chico">
+                 <b> La presente no tiene validez,
                   si no est&aacute; acompa&ntilde;ado por el comprobante
-                  de pago correspondiente.
-                  </div>
+                  de pago correspondiente.</b>
+                  </div>            
           </td>   
             
           <td>
             <table >
               <tbody>
-                <tr>
-                  <td class="center" style="width: 100%;" colspan="2">                  
-                    <b>{{ licencia.tipoLicencia.descripcion }}</b>
-                  </td>
-                </tr>
+                
                 <tr>
                   <td width="70px" >
                     <strong>Titular:</strong>
@@ -139,25 +146,45 @@
                     <strong>Domicilio:</strong>
                     </td>
                   <td class="left" width="210px">
-                     {{ licencia.persona.domicilioCalle
-                    }}{{ licencia.persona.domicilioNumero }}
+                     {{ licencia.persona.domicilioCalle}} {{ licencia.persona.domicilioNumero }}
                   </td>                  
                 </tr>
+                <tr>
+                  <td  width="70px">
+                    <strong>Provincia:</strong>
+                  </td>
+                  <td  width="150px">
+                    {{ licencia.persona.provincia }}
+                  </td>                
+                </tr>
+                {% if licencia.persona.localidad is not null %}
                 <tr>
                   <td  width="70px">
                     <strong>Localidad:</strong>
                   </td>
                   <td  width="150px">
-                    {{ licencia.persona.localidad }}
+                    {{ licencia.persona.localidad.LNomDis }}
                   </td>                
                 </tr>
-                               
+                {% endif %}
+                 {% if licencia.persona.localidad is null 
+                  and licencia.persona.localidadOtraProvincia is not null %}
+                <tr>
+                  <td  width="70px">
+                    <strong>Localidad:</strong>
+                  </td>
+                  <td  width="150px">
+                    {{ licencia.persona.localidadOtraProvincia }}
+                  </td>                
+                </tr>
+                {% endif %}             
                 
                 <tr>
                   <td width="80px" >
-                    <strong>Valido Hasta:</strong>
+                    <strong>Valido:</strong>
                   </td>
                   <td width="150px" class="left" >
+                  {{licencia.fechaDesde | date('d/m/Y')}} a 
                     {{licencia.fechaVencimiento | date('d/m/Y')}}
                   </td>
                   <td>
@@ -169,7 +196,7 @@
                     <strong>Son Pesos:</strong>
                   </td>
                    <td width="100px" class="left" >                    
-                    {{ licencia.comprobante.monto }}
+                    ${{ licencia.comprobante.monto }}
                   </td>
                   <td>
                   </td>
@@ -184,36 +211,35 @@
 <br/>
     <div class="center">
       Santa Fe,
-      {{"now"|date('l')|replace({
-      'Monday'   : 'Lunes',
-      'Tuesday'  : 'Martes',
-      'Wednesday': 'Miercoles',
-      'Thursday' : 'Jueves',
-      'Friday'   : 'Viernes',
-      'Saturday' : 'Sabado',
-      'Sunday'   : 'Domingo'
+            {{"now"|date('l')|replace({
+            'Monday'   : 'Lunes',
+            'Tuesday'  : 'Martes',
+            'Wednesday': 'Miercoles',
+            'Thursday' : 'Jueves',
+            'Friday'   : 'Viernes',
+            'Saturday' : 'Sabado',
+            'Sunday'   : 'Domingo'
 
-})
+      })
       }}, {{"now"|date('d')}} de
       {{ "now"|date('F')|replace(
-{
-      'January'   : 'Enero',
-      'February'  : 'Febrero',
-      'March'     : 'Marzo',
-      'April'     : 'Abril',
-      'May'       : 'Mayo',
+      {
+          'January'   : 'Enero',
+          'February'  : 'Febrero',
+          'March'     : 'Marzo',
+          'April'     : 'Abril',
+          'May'       : 'Mayo',
 
-      'June'      : 'Junio',
-      'July'      : 'Julio',
-      'August'    : 'Agosto',
+          'June'      : 'Junio',
+          'July'      : 'Julio',
+          'August'    : 'Agosto',
 
-      'September' : 'Septiembre',
-      'October'   : 'Octubre',
-      'November'  : 'Noviembre',
-      'December'  : 'Diciembre',
-      
-}
-)}}
+          'September' : 'Septiembre',
+          'October'   : 'Octubre',
+          'November'  : 'Noviembre',
+          'December'  : 'Diciembre',      
+      }
+      )}}
       de {{"now"|date('Y')}}.
     </div>
 
@@ -224,12 +250,124 @@
       alt="Example"
     />
     
-    <div class="center"><b><img
+    <div class="center">
+      <img
               src="{{ asset('barcode/barcode.png') }}"
               alt="{{licencia.comprobante.numeroCodigoBarra }}"
               width="350"
               height="80"
-            /> </b>
-    {{licencia.comprobante.numeroCodigoBarra }}</div>
+            />
+          {{licencia.comprobante.numeroCodigoBarra }}
+    </div>
+     <img
+      src="{{ asset('images/barra-header.png') }}"
+      height="2"
+      width="1200"
+      alt="Example"
+    />
+
+
+  <!-- Segunda Parte -->
+   <table >
+              <tbody>
+                
+                <tr>
+                  <td width="50px" >
+                    <strong>Titular:</strong>
+                  </td>
+                  <td width="150px" >
+                    {{ licencia.persona.nombre }}
+                    {{ licencia.persona.apellido }}
+                  </td>                                                                
+                  <td width="80px" >
+                    <strong>Valido Hasta:</strong>
+                  </td>
+                  <td width="65px" class="left" >
+                   {{licencia.fechaDesde | date('d/m/Y')}} 
+                    {{licencia.fechaVencimiento | date('d/m/Y')}}
+                  </td>
+                  <td>
+                    
+                  </td>               
+                   <td width="80px" class="left" >
+                    <strong>Son Pesos:</strong>
+                  </td>
+                   <td width="80px" class="left" >                    
+                    ${{ licencia.comprobante.monto }}
+                  </td>
+                  <td>
+                  </td>
+                </tr>
+                <tr><td></td></tr>
+              </tbody>
+            </table>
+    <div class="center">
+      <img
+              src="{{ asset('barcode/barcode.png') }}"
+              alt="{{licencia.comprobante.numeroCodigoBarra }}"
+              width="350"
+              height="80"
+            />
+          {{licencia.comprobante.numeroCodigoBarra }}
+    </div>
+
+ <img
+      src="{{ asset('images/barra-header.png') }}"
+      height="2"
+      width="1200"
+      alt="Example"
+    />
+
+<!-- Tercer Parte -->
+   <table >
+              <tbody>
+                
+                <tr>
+                  <td width="50px" >
+                    <strong>Titular:</strong>
+                  </td>
+                  <td width="150px" >
+                    {{ licencia.persona.nombre }}
+                    {{ licencia.persona.apellido }}
+                  </td>                                                                
+                  <td width="80px" >
+                    <strong>Valido Hasta:</strong>
+                  </td>
+                  <td width="65px" class="left" >
+                    {{licencia.fechaDesde | date('d/m/Y')}}  
+                    {{licencia.fechaVencimiento | date('d/m/Y')}}
+                  </td>
+                  <td>
+                    
+                  </td>               
+                   <td width="80px" class="left" >
+                    <strong>Son Pesos:</strong>
+                  </td>
+                   <td width="80px" class="left" >                    
+                    ${{ licencia.comprobante.monto }}
+                  </td>
+                  <td>
+                  </td>
+                </tr>
+                 <tr><td></td></tr>
+              </tbody>
+            </table>
+    <div class="center">
+      <img
+              src="{{ asset('barcode/barcode.png') }}"
+              alt="{{licencia.comprobante.numeroCodigoBarra }}"
+              width="350"
+              height="80"
+            />
+          {{licencia.comprobante.numeroCodigoBarra }}
+    </div>
+
+    
+
+    <footer>
+     <div class="center">
+        <h6> {{ encabezado_nombre_organismo | default('Nombre de organismo') }} - Gobierno de Santa Fe</h6>        
+    </div>
+    </footer>
   </body>
 </html>

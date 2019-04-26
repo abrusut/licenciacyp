@@ -232,14 +232,14 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
 
         if (0 === strpos($pathinfo, '/boletaPago/imprimir')) {
+            // boleta_pago_imprimir_html
+            if (0 === strpos($pathinfo, '/boletaPago/imprimirhtml') && preg_match('#^/boletaPago/imprimirhtml/(?P<licenciaId>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'boleta_pago_imprimir_html')), array (  '_controller' => 'MProd\\LicenciaCyPBundle\\Controller\\BoletaPagoController::imprimirHtmlAction',));
+            }
+
             // boleta_pago_imprimir
             if (preg_match('#^/boletaPago/imprimir/(?P<licenciaId>[^/]++)$#sD', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'boleta_pago_imprimir')), array (  '_controller' => 'MProd\\LicenciaCyPBundle\\Controller\\BoletaPagoController::imprimirAction',));
-            }
-
-            // boleta_pago_imprimir_pdf
-            if (0 === strpos($pathinfo, '/boletaPago/imprimirPdf') && preg_match('#^/boletaPago/imprimirPdf/(?P<licenciaId>[^/]++)$#sD', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'boleta_pago_imprimir_pdf')), array (  '_controller' => 'MProd\\LicenciaCyPBundle\\Controller\\BoletaPagoController::imprimirPdfAction',));
             }
 
         }

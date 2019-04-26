@@ -16,9 +16,9 @@ use MProd\LicenciaCyPBundle\Twig\BarcodeTwigExtension;
 
 class BoletaPagoController extends Controller
 {
-    public function imprimirAction(Request $request, $licenciaId)
+    public function imprimirHtmlAction(Request $request, $licenciaId)
     {
-        $this->get('logger')->info("BoletaPagoController, imprimirAction, licencia " . $licenciaId);
+        $this->get('logger')->info("BoletaPagoController, imprimirHtmlAction, licencia " . $licenciaId);
 
         $impresion = $request->query->get('impresion');
 
@@ -38,10 +38,10 @@ class BoletaPagoController extends Controller
         );
     }
 
-    public function imprimirPdfAction(Request $request, $licenciaId)
+    public function imprimirAction(Request $request, $licenciaId)
     {      
         error_reporting(E_ERROR); 
-        $this->get('logger')->info("BoletaPagoController, imprimirPdfAction, licencia " . $licenciaId);
+        $this->get('logger')->info("BoletaPagoController, imprimirAction, licencia " . $licenciaId);
 
         $idLicencia = urldecode($licenciaId);
         /** @var LicenciaServiceImpl $licenciaService */
@@ -68,7 +68,7 @@ class BoletaPagoController extends Controller
             'format' => 'png',
             'width'  => 10,
             'height' => 10,
-            'color'  => array(127, 127, 127),
+            'color'  => array(0, 0,0)
         );
         
         $barcode =
@@ -85,7 +85,7 @@ class BoletaPagoController extends Controller
         $pdf->writeHTML($html, true, false, true, false, 'J');
         
                        
-        $pdf->Output("example.pdf", 'I');        
+        $pdf->Output($licencia->getTipoLicencia()->getDescripcion().'.pdf', 'I');        
     }
 
    
