@@ -105,18 +105,18 @@
 		      10 id comprobante-->
 
                   <div class="center">                  
-                    <strong>Licencia: </strong>
+                    <strong>Licencia N°: </strong>
                     {{licencia.numeroCompleto}} - 
-                    {{ licencia.tipoLicencia.descripcion }}
+                    <strong>Categoría:</strong> {{ licencia.tipoLicencia.descripcion }}
                   </div>         
     <table >
       <tbody>            
         <tr>
           <td class="center">
             <div class="texto-muy-chico">
-              Sr./Sra Portar este documento personal e intransferible,
-              lo habilita para el ejercicio de la pesca o caza, en
-              territorio de la provincia de Santa Fe.
+               Portar este documento personal e intransferible, lo habilita para la pesca o caza, 
+               en territorio de la provincia de Santa Fe, de acuerdo a la categoría 
+               que se indica en la Licencia en los términos regulados por la ley provincial 99.999
             </div>
               <div class="center texto-muy-chico">
                  <b> La presente no tiene validez,
@@ -181,7 +181,7 @@
                 
                 <tr>
                   <td width="70px" >
-                    <strong>Valido:</strong>
+                    <strong>Validez:</strong>
                   </td>
                   <td width="150px" class="left" >
                   {{licencia.fechaDesde | date('d/m/Y')}} a 
@@ -193,7 +193,7 @@
                 </tr>
                 <tr>
                    <td width="70px" class="left" >
-                    <strong>Son Pesos:</strong>
+                    <strong>Arancel:</strong>
                   </td>
                    <td width="100px" class="left" >                    
                     ${{ licencia.comprobante.monto }}
@@ -279,8 +279,8 @@
                     {{ licencia.persona.nombre }}
                     {{ licencia.persona.apellido }}
                   </td>                                                                
-                  <td width="45px" >
-                    <strong>Valido:</strong>
+                  <td width="50px" >
+                    <strong>Validez:</strong>
                   </td>
                   <td width="130px" class="center" >
                    {{licencia.fechaDesde | date('d/m/Y')}} -
@@ -290,7 +290,7 @@
                     
                   </td>               
                    <td width="75px" class="left" >
-                    <strong>Pesos:</strong>
+                    <strong>Arancel:</strong>
                   </td>
                    <td width="80px" class="left" >                    
                     ${{ licencia.comprobante.monto }}
@@ -330,8 +330,8 @@
                     {{ licencia.persona.nombre }}
                     {{ licencia.persona.apellido }}
                   </td>                                                                
-                  <td width="45px" >
-                    <strong>Valido:</strong>
+                  <td width="50px" >
+                    <strong>Validez:</strong>
                   </td>
                   <td width="130px" class="center" >
                    {{licencia.fechaDesde | date('d/m/Y')}} -
@@ -341,7 +341,7 @@
                     
                   </td>               
                    <td width="75px" class="left" >
-                    <strong>Pesos:</strong>
+                    <strong>Arancel:</strong>
                   </td>
                    <td width="80px" class="left" >                    
                     ${{ licencia.comprobante.monto }}

@@ -232,8 +232,19 @@ class Licencia
      */
     public function getNumeroCompleto()
     {
-        if(!is_null($this->comprobante) && !is_null($this->tipoLicencia) )
-            return $this->getTipoLicencia()->getId(). $this->getId() .$this->getComprobante()->getId();
+        if(!is_null($this->getPersona()) && 
+            !is_null($this->getPersona()->getTipoDocumento()) &&
+            !is_null($this->getPersona()->getTipoDocumento()->getId()) &&
+            !is_null($this->getPersona()->getNumeroDocumento()) &&
+            !is_null($this->getTipoLicencia()) &&
+            !is_null($this->getTipoLicencia()->getId()) 
+            ){
+
+            return $this->getPersona()->getTipoDocumento()->getId(). 
+                    $this->getPersona()->getNumeroDocumento() .
+                    $this->getTipoLicencia()->getId();
+        }
+            
         return "";
     }
 
