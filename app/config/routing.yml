@@ -2,25 +2,11 @@ m_prod_licencia_cy_p:
     resource: "@MProdLicenciaCyPBundle/Resources/config/routing.yml"
     prefix:   /
 
-#m_prod_ecosocial_tweb:
- #   resource: "@MProdEcosocialTwebBundle/Resources/config/routing.yml"
-  #  prefix:   /
-
-#Enrutado del bundle del proyecto
-#m_prod_emprendedores:
-#    resource: "@MProdEmprendedoresBundle/Resources/config/routing.yml"
-#    prefix:   /
-
 #Enrutado del bundle de la interfaz gráfica
 theme_aplicativo:
     resource: "@ThemeAplicativoBundle/Resources/config/routing.yml"
     prefix:   /
 
-#Enrutado del login para la stg, no va a ser utilizado por el momento
-#_demo_login:
-#    pattern: /demo/secured/loginCAS
-#    defaults: 
-
-#_demo_logout:
-#    pattern: /demo/secured/logoutCAS
-#    defaults: 
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /

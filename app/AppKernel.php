@@ -26,7 +26,8 @@ class AppKernel extends Kernel
 
             new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),      
             new SGK\BarcodeBundle\SGKBarcodeBundle(),
-            new Markup\BarcodeBundle\MarkupBarcodeBundle()     
+            new Markup\BarcodeBundle\MarkupBarcodeBundle(),
+            new FOS\UserBundle\FOSUserBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

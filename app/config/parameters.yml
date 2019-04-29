@@ -7,6 +7,6 @@ parameters:
     database_password: root
     mailer_transport: smtp
     mailer_host: correo.santafe.gov.ar
-    mailer_user: null
-    mailer_password: null
+    mailer_user: agespinosa
+    mailer_password: 
     secret: 2474fa53cf18a3fa7c197b5835c5e10f9

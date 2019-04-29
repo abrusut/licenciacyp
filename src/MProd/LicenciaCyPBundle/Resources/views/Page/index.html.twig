@@ -39,7 +39,7 @@
 
         {% if  not is_granted('IS_AUTHENTICATED_FULLY')  %}
             <li class=''>
-                <a href="{{ path('login') }}">
+                <a href="{{ path('fos_user_security_login') }}">
                     <span>Entrar</span>
                 </a>
             </li>

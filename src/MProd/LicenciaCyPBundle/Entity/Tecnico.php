@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Tecnico
  *
- * @ORM\Entity
+ * @ORM\Entity 
  */
 class Tecnico extends Usuario
 {

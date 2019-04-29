@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Administrador
  *
- * @ORM\Entity
+ * @ORM\Entity 
  */
 class Administrador extends Usuario
 {

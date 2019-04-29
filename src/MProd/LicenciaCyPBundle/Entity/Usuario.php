@@ -7,17 +7,19 @@ use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use FOS\UserBundle\Model\User as BaseUser;
 /**
  * @ORM\Entity
  * @ORM\Table(name="usuario")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({ "tecnico" = "Tecnico", "administrador" = "Administrador"})
+ * @ORM\DiscriminatorMap({"usuario" = "Usuario", "tecnico" = "Tecnico", "administrador" = "Administrador"})
  * @UniqueEntity("email")
+ * AdvancedUserInterface
+ * 
  */
 
-class Usuario implements AdvancedUserInterface, \Serializable {
+class Usuario extends BaseUser implements \Serializable {
 
     /**
      * @var int
@@ -30,44 +32,27 @@ class Usuario implements AdvancedUserInterface, \Serializable {
 
     /**
      * @var string
-     * @ORM\Column(name="nombre", type="string", length=50)
-     * @Assert\NotBlank()
-     * @Assert\Length(min = 3)
-     * @Assert\Length( max = 150)
-     * @Assert\NotNull()
+     * @ORM\Column(name="nombre", type="string", length=50, nullable=true)     
+      
      */
     protected $nombre;
 
     /**
      * @var string
-     * @ORM\Column(name="apellido", type="string", length=50)
-     * @Assert\NotBlank()
-     * @Assert\Length(min = 3)
-     * @Assert\Length( max = 50)
-     * @Assert\NotNull()
+     * @ORM\Column(name="apellido", type="string", length=50, nullable=true)     
+ 
      */
     protected $apellido;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="dni", type="string", length=9, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(min = 8)
-     * @Assert\Length( max = 8)
-     * @Assert\NotNull()
+     * @ORM\Column(name="dni", type="string", length=9, unique=true, nullable=true)     
      * @Assert\Regex(pattern="/^[F|M|f|m|\d]\d{1,7}$/")
      */
     protected $dni;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=50, nullable=false, unique=true)
-     * @Assert\NotNull()
-     * @Assert\Email()
-     */
-    protected $email;
+  
 
     /**
      * @var string
@@ -75,39 +60,6 @@ class Usuario implements AdvancedUserInterface, \Serializable {
      * @ORM\Column(name="telefono", type="string", length=50, nullable=true)
      */
     protected $telefono;
-
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", columnDefinition="ENUM('ROLE_ADMIN', 'ROLE_TECNICO', 'ROLE_SUPER_ADMIN')", length=50)
-     * @Assert\NotBlank()
-     * @Assert\Choice(choices = {"ROLE_ADMIN", "ROLE_TECNICO", "ROLE_SUPER_ADMIN"})
-     */
-    protected $role;
-
-    /**
-     *
-     * @var  string
-     * @ORM\Column(name="password", type="string", length=255, nullable=true)
-     */
-    protected $password;
-
-    /**
-     * Todavia no va a ser especificado
-     * @var boolean
-     *
-     * @ORM\Column(name="is_active", type="boolean")
-     *
-     */
-    protected $isActive;
-
-    /**
-     * @var string
-     * @ORM\Column(name="salt", type="string",nullable=true)
-     *
-     */
-    protected $salt;
 
 
     /**
@@ -187,29 +139,7 @@ class Usuario implements AdvancedUserInterface, \Serializable {
         return $this->dni;
     }
 
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Usuario
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
+   
     /**
      * Set telefonoFijo
      *
@@ -231,118 +161,7 @@ class Usuario implements AdvancedUserInterface, \Serializable {
         return $this->telefono;
     }
 
-    /**
-     * Set role
-     *
-     * @param string $role
-     * @return Usuario
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Get role
-     *
-     * @return string 
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Usuario
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     * @return Usuario
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     * @return Usuario
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string 
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-    /* ===================================Serialización ===================== */
-
-    /** @see \Serializable::serialize() */
-    public function serialize() {
-        return serialize(array(
-            $this->id,
-            $this->email,
-            $this->password,
-            $this->isActive
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized) {
-        list (
-            $this->id,
-            $this->email,
-            $this->password,
-            $this->isActive
-            ) = unserialize($serialized);
-    }
+   
 
     /* ===================================Issers ===================== */
 
@@ -358,10 +177,7 @@ class Usuario implements AdvancedUserInterface, \Serializable {
         return true;
     }
 
-    public function isEnabled() {
-        return $this->isActive;
-    }
-
+   
     /* ===================================Método to String ===================== */
 
     /**
@@ -381,27 +197,7 @@ class Usuario implements AdvancedUserInterface, \Serializable {
 
     }
 
-    /**
-     *
-     * @return Role[] The user roles
-     */
-    public function getRoles() {
-        return array($this->role);
-    }
+    
 
-    /**
-     * Get userName
-     *
-     * @return string
-     */
-    public function getUsername() {
-        return $this->getEmail();
-    }
-
-    public function __construct() {
-        $this->setRole("ROLE_PERSONA");
-        //Esto no se ejecuta, no se porque
-        //$this->setFechaAlta();
-        $this->isActive = true;
-    }
+   
 }

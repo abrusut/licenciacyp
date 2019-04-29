@@ -102,16 +102,13 @@ theme_aplicativo:
     datos_aplicativo:
         encabezado:
             titulo: 'Gestión de Licencia Caza y Pesca'
-            nombre_dependencia:  'Secretaría de Ganadería, Lechería y Recursos Naturales'
-            nombre_organismo: 'Ministerio de la Producción'
-            #imagen_top_url:  '../../src/MProd/EmprendedoresBundle/Resources/images/logoCrear1.jpg'
-            #path_ayuda: m_prod_emprendedores_ayuda
-            path_logout :  logout
-            #path_login:   login
+            nombre_dependencia:  ''
+            nombre_organismo: 'Ministerio de la Producción'                        
+            path_logout :  fos_user_security_logout            
             path_home: path_home
             webmaster_correo: agespinosa@santafe.gov.ar
         pie_pagina:
-            titulo: 
+            titulo: 'Gestión de Licencia Caza y Pesca'
             domicilio: 
             telefono: 
             copyright:
@@ -131,3 +128,11 @@ markup_barcode:
             invoice:
                 type: code128
                 format: png
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: MProd\LicenciaCyPBundle\Entity\Usuario
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"                
