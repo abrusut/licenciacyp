@@ -77,31 +77,32 @@ Tipo Licencia
     {{ form_start(edit_form) }}
 
     {{ form_widget(edit_form) }}
-    <p>
+    <p class="col-md-12">
         <button type="submit" class="btn btn-primary">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Update
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Actualizar
         </button>
+          <a class="btn btn-default" href="{{ path('tipolicencia') }}">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+        Volver a Listado
+    </a>
+    <a class="btn btn-info" href="{{ path('tipolicencia_new') }}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Nuevo
+    </a>
+    
     </p>
     {{ form_end(edit_form) }}
 
     <hr/>
 
     
-<div class="form-group">
-    <a class="btn btn-default" href="{{ path('tipolicencia') }}">
-        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-        Back to list
-    </a>
-    <a class="btn btn-info" href="{{ path('tipolicencia_new') }}">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        New
-    </a>
-    <form action="{{ path('tipolicencia_delete', { 'id': tipoLicencium.id }) }}" method="post" style="display: inline-block">
+<div class="col-md-12 form-group">
+  <form action="{{ path('tipolicencia_delete', { 'id': tipoLicencium.id }) }}" method="post" >
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure');">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Está Seguro?');">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            Delete
+            Borrar
         </button>
     </form>
 </div>

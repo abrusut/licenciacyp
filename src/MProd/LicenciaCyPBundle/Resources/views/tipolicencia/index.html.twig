@@ -37,6 +37,31 @@ Tipo Licencia
 
 <!-- FILTERING -->
 <div class="col-md-12">
+<div class="ui-widget">
+                            <div style="margin-right: 20px;margin-top: 20px; margin-bottom: 20px; padding: 10px;" class="ui-state-highlight ui-corner-all">
+                                <p>
+                                    <a data-toggle="collapse" href="#help" aria-expanded="false" aria-controls="help">
+                                        <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"> </span> 
+                                        <strong>
+                                            Ver Ayuda General                                        
+                                        </strong>
+                                    </a>
+                                    <div class="collapse" id="help">
+                                    <ul class="list-group"> <strong><span class="glyphicon glyphicon-cog"></span>GENERO JUBILADO</strong>
+                                        <li class="list-group-item">Si configura esto en 'j', se validara que la persona indique jubilado "Si" en el alta de la licencia</li>
+                                        <li class="list-group-item"> Si configura esto en 'f', se validara que la persona indique sexo = "Femenino" en el alta de la licencia</li>                                        
+                                        <li class="list-group-item"> Si configura esto en 'm', se validara que la persona indique sexo = "Masculino" en el alta de la licencia</li>                                        
+                                    </ul>
+                                    <ul class="list-group"> <strong><span class="glyphicon glyphicon-cog"></span>Aplica en Provincia</strong>
+                                        <li class="list-group-item">Si configura esto en 'SF', el tipo de licencia solo estara disponible si la persona es de provincia Santa Fe</li>
+                                        <li class="list-group-item">Si configura esto en 'T', el tipo de licencia estará disponible siempre que la persona NO sea de provincia Santa Fe</li>                                                                             
+                                    </ul>
+                                    </div>
+                              
+                                </p>
+                            </div>
+                        </div>
+                    </div> 
     <div  id="filters" class="collapse">
 
         <form class="well" action="{{ path('tipolicencia') }}" method="get" >
@@ -210,11 +235,11 @@ Tipo Licencia
                          {#<td>{{ tipoLicencium.diasPrimerVencimiento }}</td>
                         <td>{{ tipoLicencium.diasSegundoVencimiento }}</td>#}
                         <td>{%- if tipoLicencium.fechaTope %}{{ tipoLicencium.fechaTope|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{%- if tipoLicencium.isActive %}Yes{% else %}No{% endif %}</td>
-                        <td>{{ tipoLicencium.aplicaEnProvincia }}</td>
+                        <td>{%- if tipoLicencium.isActive %}SI{% else %}No{% endif %}</td>
+                        <td>{%- if tipoLicencium.aplicaEnProvincia == "SF" or tipoLicencium.aplicaEnProvincia == "sf"  %}Santa Fe{% else %}{{tipoLicencium.aplicaEnProvincia}}{% endif %}</td>
     
                         <td class="actions">
-                            <a  onclick="return confirm('Are you sure!');" title="Delete" class="btn btn-danger btn-sm" href="{{ path('tipolicencia_by_id_delete', { 'id': tipoLicencium.id}) }}">
+                            <a  onclick="return confirm('Está Seguro?');" title="Delete" class="btn btn-danger btn-sm" href="{{ path('tipolicencia_by_id_delete', { 'id': tipoLicencium.id}) }}">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
                             <a title='Show' class="btn btn-info btn-sm" href="{{ path('tipolicencia_show', { 'id': tipoLicencium.id }) }}">

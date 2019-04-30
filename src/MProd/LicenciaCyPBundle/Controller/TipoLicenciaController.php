@@ -247,7 +247,8 @@ class TipoLicenciaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($tipoLicencium);
+            $tipoLicencium->setIsActive(false);
+            $em->persist($tipoLicencium);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'Registro Borrado');
         } else {
@@ -283,11 +284,12 @@ class TipoLicenciaController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         try {
-            $em->remove($tipoLicencium);
+            $tipoLicencium->setIsActive(false);
+            $em->persist($tipoLicencium);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'Registro Eliminado');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Desactivado');
         } catch (Exception $ex) {
-            $this->get('session')->getFlashBag()->add('error', 'Error al eliminar registro');
+            $this->get('session')->getFlashBag()->add('error', 'Error al desactivar registro');
         }
 
         return $this->redirect($this->generateUrl('tipolicencia'));

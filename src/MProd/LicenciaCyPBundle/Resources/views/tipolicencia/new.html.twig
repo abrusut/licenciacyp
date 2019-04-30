@@ -52,6 +52,10 @@ Tipo Licencia
                                         <li class="list-group-item"> Si configura esto en 'f', se validara que la persona indique sexo = "Femenino" en el alta de la licencia</li>                                        
                                         <li class="list-group-item"> Si configura esto en 'm', se validara que la persona indique sexo = "Masculino" en el alta de la licencia</li>                                        
                                     </ul>
+                                    <ul class="list-group"> <strong><span class="glyphicon glyphicon-cog"></span>Aplica en Provincia</strong>
+                                        <li class="list-group-item">Si configura esto en 'SF', el tipo de licencia solo estara disponible si la persona es de provincia Santa Fe</li>
+                                        <li class="list-group-item">Si configura esto en 'T', el tipo de licencia estará disponible siempre que la persona NO sea de provincia Santa Fe</li>                                                                             
+                                    </ul>
                                     </div>
                               
                                 </p>
@@ -85,7 +89,7 @@ Tipo Licencia
         <div class="form-group">
         <a class="btn btn-default" href="{{ path('tipolicencia') }}">
             <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-            Back to list
+            Volver al Listado
         </a>
     </div>
     </p>
