@@ -138,8 +138,8 @@ class TipoLicencia
      */
     private $aplicaEnProvincia;
 
-    public static $SF = 'SF';
-    public static $T = 'T';
+    public static $SantaFe = 'SF';
+    public static $Todas = 'T';
 
     /*============================Setter y getters ===============================*/
 

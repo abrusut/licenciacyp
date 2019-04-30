@@ -42,12 +42,12 @@ class TipoLicenciaServiceImpl implements ITipoLicenciaService {
                 !is_null($tipoLicencia->getAplicaEnProvincia())){
 
                 if($provincia->isSantaFe() && 
-                    $tipoLicencia->getAplicaEnProvincia() == TipoLicencia::$SF){
+                    $tipoLicencia->getAplicaEnProvincia() == TipoLicencia::$SantaFe){
                         array_push($tiposLicenciaResult, $tipoLicencia);
                 }
 
                 if(!$provincia->isSantaFe() && 
-                    ($tipoLicencia->getAplicaEnProvincia() == TipoLicencia::$T 
+                    ($tipoLicencia->getAplicaEnProvincia() == TipoLicencia::$Todas 
                         || is_null($tipoLicencia->getAplicaEnProvincia()))){
                         array_push($tiposLicenciaResult, $tipoLicencia);
                 }

@@ -7,10 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
-    'Sensio\\Bundle\\GeneratorBundle' => array($vendorDir . '/sensio/generator-bundle'),
     'Sensio\\Bundle\\DistributionBundle' => array($vendorDir . '/sensio/distribution-bundle'),
     'STG\\DEIM\\Themes\\Bundles\\AplicativoBundle' => array($vendorDir . '/stg/theme-bundle'),
     'STG\\DEIM\\Security\\Bundle\\CasBundle' => array($vendorDir . '/stg/cas-bundle'),
+    'Pagerfanta\\' => array($vendorDir . '/pagerfanta/pagerfanta/src'),
     'Markup\\BarcodeBundle' => array($vendorDir . '/markup/barcode-bundle'),
     'Knp\\Component' => array($vendorDir . '/knplabs/knp-components/src'),
     'Imagine' => array($vendorDir . '/imagine/imagine/lib'),

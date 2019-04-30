@@ -4,8 +4,7 @@ namespace MProd\LicenciaCyPBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use MProd\LicenciaCyPBundle\Form\PersonaType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TipoLicenciaType extends AbstractType
 {
@@ -17,25 +16,41 @@ class TipoLicenciaType extends AbstractType
     {
         $builder
             ->add('descripcion')
+            ->add('generoJubilado')
+            ->add('clienteSap')
+            ->add('letraServicio')
+            ->add('arancel')
+            ->add('porcentajeRecargoPrimerVencimiento')
+            ->add('porcentajeRecargoSegundoVencimiento')
+            ->add('diasVigencia')
+            ->add('diasPrimerVencimiento')
+            ->add('diasSegundoVencimiento')
+            ->add('fechaTope')
+            ->add('fechaTope','date', array(                        
+                'constraints' => null,
+                'data' => (isset($options['data']) && 
+                                $options['data']->getFechaTope() !== null) ? $options['data']->getFechaTope() : new \DateTime(),
+                 // render as a single text box
+                 'widget' => 'single_text',
+                 'format' => 'dd/MM/yyyy',
+                 // do not render as type="date", to avoid HTML5 date pickers
+                 'html5' => false,
+                 // add a class that can be selected in JavaScript
+                 'attr' => ['class' => 'js-datepicker']
+                )
+            )
+            ->add('isActive')
+            ->add('aplicaEnProvincia')
         ;
     }
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MProd\LicenciaCyPBundle\Entity\TipoLicencia',
-            'cascade_validation' => true
+            'data_class' => 'MProd\LicenciaCyPBundle\Entity\TipoLicencia'
         ));
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mprod_licenciacypbundle_licencia';
     }
 }

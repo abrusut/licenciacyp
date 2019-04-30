@@ -27,10 +27,11 @@
         "markup/barcode-bundle": "^2.0",
         "tecnickcom/tc-lib-barcode": "^1.15",
         "mwsimple/barcode-bundle": "^2.0",
-        "friendsofsymfony/user-bundle": "~2.0"      
+        "friendsofsymfony/user-bundle": "~2.0",
+        "sensio/generator-bundle": "^3.1",
+        "petkopara/crud-generator-bundle": "^3.0"      
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "symfony/phpunit-bridge": "^4.0"
     },

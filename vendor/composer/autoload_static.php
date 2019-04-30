@@ -12,7 +12,6 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'e40631d46120a9c38ea139981f8dab26' => __DIR__ . '/..' . '/ircmaxell/password-compat/lib/password.php',
-        'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -20,6 +19,7 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         'edc6464955a37aa4d5fbf39d40fb6ee7' => __DIR__ . '/..' . '/symfony/polyfill-php55/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
+        'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -62,6 +62,7 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
             'Symfony\\Bridge\\Monolog\\' => 23,
             'Symfony\\Bridge\\Doctrine\\' => 24,
             'SymfonyStandard\\' => 16,
+            'Sensio\\Bundle\\GeneratorBundle\\' => 30,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
             'SensioLabs\\Security\\' => 20,
             'SGK\\BarcodeBundle\\' => 18,
@@ -72,10 +73,16 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
             'Psr\\Container\\' => 14,
             'PhpOffice\\PhpWord\\' => 18,
             'PhpOffice\\Common\\' => 17,
+            'Petkopara\\MultiSearchBundle\\' => 28,
+            'Petkopara\\CrudGeneratorBundle\\' => 30,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
+        ),
+        'L' => 
+        array (
+            'Lexik\\Bundle\\FormFilterBundle\\' => 30,
         ),
         'K' => 
         array (
@@ -220,6 +227,10 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         array (
             0 => __DIR__ . '/../..' . '/app/SymfonyStandard',
         ),
+        'Sensio\\Bundle\\GeneratorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sensio/generator-bundle',
+        ),
         'Sensio\\Bundle\\FrameworkExtraBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/sensio/framework-extra-bundle',
@@ -248,9 +259,21 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         array (
             0 => __DIR__ . '/..' . '/phpoffice/common/src/Common',
         ),
+        'Petkopara\\MultiSearchBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/petkopara/multi-search-bundle',
+        ),
+        'Petkopara\\CrudGeneratorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/petkopara/crud-generator-bundle',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Lexik\\Bundle\\FormFilterBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lexik/form-filter-bundle',
         ),
         'Knp\\Bundle\\PaginatorBundle\\' => 
         array (
@@ -320,10 +343,6 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         ),
         'S' => 
         array (
-            'Sensio\\Bundle\\GeneratorBundle' => 
-            array (
-                0 => __DIR__ . '/..' . '/sensio/generator-bundle',
-            ),
             'Sensio\\Bundle\\DistributionBundle' => 
             array (
                 0 => __DIR__ . '/..' . '/sensio/distribution-bundle',
@@ -335,6 +354,13 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
             'STG\\DEIM\\Security\\Bundle\\CasBundle' => 
             array (
                 0 => __DIR__ . '/..' . '/stg/cas-bundle',
+            ),
+        ),
+        'P' => 
+        array (
+            'Pagerfanta\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/src',
             ),
         ),
         'M' => 

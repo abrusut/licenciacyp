@@ -35,8 +35,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
- #   form_themes:
- #       - "MProdEmprendedoresBundle:Form:Mensajes_error.html.twig"
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
     
 
 # Assetic Configuration
@@ -136,3 +136,4 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"                
+     

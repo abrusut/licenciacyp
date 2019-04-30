@@ -1,3 +1,28 @@
+m_prod_licencia_cy_p_comprobante:
+    resource: "@MProdLicenciaCyPBundle/Controller/ComprobanteController.php"
+    type:     annotation
+    prefix:   /admin
+
+m_prod_licencia_cy_p_localidad:
+    resource: "@MProdLicenciaCyPBundle/Controller/LocalidadController.php"
+    type:     annotation
+    prefix:   /admin
+
+m_prod_licencia_cy_p_usuario:
+    resource: "@MProdLicenciaCyPBundle/Controller/UsuarioController.php"
+    type:     annotation
+    prefix:   /admin
+
+m_prod_licencia_cy_p_tipo_licencia:
+    resource: "@MProdLicenciaCyPBundle/Controller/TipoLicenciaController.php"
+    type:     annotation
+    prefix:   /admin
+
+m_prod_licencia_cy_p_tipo_documento:
+    resource: "@MProdLicenciaCyPBundle/Controller/TipoDocumentoController.php"
+    type:     annotation
+    prefix:   /admin
+
 m_prod_licencia_cy_p:
     resource: "@MProdLicenciaCyPBundle/Resources/config/routing.yml"
     prefix:   /

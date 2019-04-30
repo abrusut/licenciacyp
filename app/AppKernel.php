@@ -27,7 +27,12 @@ class AppKernel extends Kernel
             new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),      
             new SGK\BarcodeBundle\SGKBarcodeBundle(),
             new Markup\BarcodeBundle\MarkupBarcodeBundle(),
-            new FOS\UserBundle\FOSUserBundle()
+            new FOS\UserBundle\FOSUserBundle(),
+
+            // Petkopara
+            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
+            new Petkopara\MultiSearchBundle\PetkoparaMultiSearchBundle(),
+            new Petkopara\CrudGeneratorBundle\PetkoparaCrudGeneratorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
