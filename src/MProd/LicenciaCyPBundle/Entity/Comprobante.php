@@ -79,16 +79,14 @@ class Comprobante
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="primer_vencimiento", type="datetime", nullable=true)
-     * @Assert\NotNull()
+     * @ORM\Column(name="primer_vencimiento", type="datetime", nullable=true)     
      */
     private $primerVencimiento;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="segundo_vencimiento", type="datetime", nullable=true)
-     * @Assert\NotNull()
+     * @ORM\Column(name="segundo_vencimiento", type="datetime", nullable=true)     
      */
     private $segundoVencimiento;    
 

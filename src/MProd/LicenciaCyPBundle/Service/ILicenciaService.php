@@ -14,6 +14,8 @@ interface ILicenciaService{
 
     public function findById($id);
 
+    public function findByComprobanteId($idComprobante);
+
     public function generarLicencia(Licencia $licencia);
 
     public function bindPersonaToLicencia(Licencia $licencia);

@@ -48,7 +48,11 @@ boleta_pago_imprimir_html:
 
 boleta_pago_imprimir:
     path:     /boletaPago/imprimir/{licenciaId}
-    defaults: { _controller: MProdLicenciaCyPBundle:BoletaPago:imprimir }        
+    defaults: { _controller: MProdLicenciaCyPBundle:BoletaPago:imprimir }   
+
+boleta_pago_imprimir_by_comprobante_id:
+    path:     /boletaPago/imprimir/comprobante/{id}
+    defaults: { _controller: MProdLicenciaCyPBundle:BoletaPago:imprimirByComprobante }        
     
 licencia_generada_detalle:
     path:     /licencia/{licenciaId}

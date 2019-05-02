@@ -38,6 +38,18 @@ class BoletaPagoController extends Controller
         );
     }
 
+    public function imprimirByComprobanteAction(Request $request, $id)
+    {
+        error_reporting(E_ERROR); 
+        $this->get('logger')->info("BoletaPagoController, imprimirByComprobante, comprobante " . $id);
+
+        /** @var LicenciaServiceImpl $licenciaService */
+        $licenciaService = $this->get('licencia_service');
+
+        $licencia = $licenciaService->findByComprobanteId($id);
+        return $this->imprimirAction($request,$licencia->getId());
+    }
+
     public function imprimirAction(Request $request, $licenciaId)
     {      
         error_reporting(E_ERROR); 

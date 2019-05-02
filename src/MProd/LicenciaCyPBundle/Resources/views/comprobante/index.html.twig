@@ -5,6 +5,7 @@
 {% block styles %}
      <!-- Le styles -->
         <link href="{{ asset('bundles/petkoparacrudgenerator/css/bootstrap.min.css') }}" rel="stylesheet">               
+         <link href="{{ asset('css/ajustesPetkoparaStg.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block javascriptsIncludes %} 
@@ -15,7 +16,7 @@
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/jquery.min.js') }}"></script>
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/petkopara-crud-generator.js') }}"></script>
-     
+      
 {% endblock %} 
 
 {% block title %}
@@ -44,13 +45,7 @@
 
                  
                     <div class="col-md-6">{{ form_row(filterForm.monto) }}</div>
-
-                 
-                    <div class="col-md-6">{{ form_row(filterForm.recargoSegundoVencimiento) }}</div>
-
-                 
-                    <div class="col-md-6">{{ form_row(filterForm.recargoPrimerVencimiento) }}</div>
-
+                                   
                  
                     <div class="col-md-6">{{ form_row(filterForm.clienteSap) }}</div>
 
@@ -62,13 +57,7 @@
 
                  
                     <div class="col-md-6">{{ form_row(filterForm.fechaPago) }}</div>
-
                  
-                    <div class="col-md-6">{{ form_row(filterForm.primerVencimiento) }}</div>
-
-                 
-                    <div class="col-md-6">{{ form_row(filterForm.segundoVencimiento) }}</div>
-
                  
                     <div class="col-md-6">{{ form_row(filterForm.numeroCodigoBarra) }}</div>
 
@@ -80,8 +69,8 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-warning" name="filter_action" value="filter"> <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter</button>
-                        <button type="submit" class="btn btn-default" name="filter_action" value="reset"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Reset</button>
+                        <button type="submit" class="btn btn-warning" name="filter_action" value="filter"> <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Buscar</button>
+                        <button type="submit" class="btn btn-default" name="filter_action" value="reset"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Restablecer</button>
                     </div>
                 </div>
             </div>
@@ -115,10 +104,10 @@
 <div class="col-md-3">
 
             <a class="btn btn-primary h3 pull-right" href="{{ path('comprobante_new') }}" style="margin-bottom:10px">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
         </a>
         <a class="btn dropdown-toggle pull-right h3" data-toggle="collapse" data-target="#filters">
-        Filter
+        Buscar
         <span class="caret"></span>
     </a>
 </div>
@@ -164,20 +153,16 @@
 
                 {% import "PetkoparaCrudGeneratorBundle::macros/th_sortable.html.twig" as macros %}
                             <th>{{macros.th_sortable('id',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('monto',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('recargoSegundoVencimiento',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('recargoPrimerVencimiento',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('clienteSap',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('letraServicio',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('rendicionNumero',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('fechaPago',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('primerVencimiento',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('segundoVencimiento',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('numeroCodigoBarra',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
-                            <th>{{macros.th_sortable('createdAt',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>
+                            <th>{{macros.th_sortable('monto',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante')}}</th>                            
+                            <th>{{macros.th_sortable('clienteSap',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante', 'Cliente Sap')}}</th>
+                            <th>{{macros.th_sortable('letraServicio',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante', 'Letra Servicio')}}</th>
+                            <th>{{macros.th_sortable('rendicionNumero',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante', 'Numero Rendicion')}}</th>
+                            <th>{{macros.th_sortable('fechaPago',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante','Fecha Pago')}}</th>                            
+                            <th>{{macros.th_sortable('numeroCodigoBarra',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante', 'Codigo Barra')}}</th>
+                            <th>{{macros.th_sortable('createdAt',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'comprobante', 'Fecha Alta')}}</th>
     
                        
-                        <th width = "130px">List</th>
+                        <th width = "130px">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -185,26 +170,27 @@
                     <tr>
                         <td><input type="checkbox" name="ids[]" onclick='bulkSubmitBtnManage();' class="check-all" value="{{comprobante.id}}"/></td>
                         <td><a href="{{ path('comprobante_edit', { 'id': comprobante.id }) }}">{{ comprobante.id }}</a></td>
-                        <td>{{ comprobante.monto }}</td>
-                        <td>{{ comprobante.recargoSegundoVencimiento }}</td>
-                        <td>{{ comprobante.recargoPrimerVencimiento }}</td>
+                        <td>{{ comprobante.monto }}</td>                        
                         <td>{{ comprobante.clienteSap }}</td>
                         <td>{{ comprobante.letraServicio }}</td>
                         <td>{{ comprobante.rendicionNumero }}</td>
-                        <td>{%- if comprobante.fechaPago %}{{ comprobante.fechaPago|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{%- if comprobante.primerVencimiento %}{{ comprobante.primerVencimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{%- if comprobante.segundoVencimiento %}{{ comprobante.segundoVencimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{{ comprobante.numeroCodigoBarra }}</td>
-                        <td>{%- if comprobante.createdAt %}{{ comprobante.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{%- if comprobante.fechaPago %}{{ comprobante.fechaPago|date('d-m-Y H:i:s') }}{% endif %}</td>
+                        <td>
+                            <a href="{{path('boleta_pago_imprimir_by_comprobante_id',{'id':comprobante.id})}}" target="_blank"
+                                 data-toggle="tooltip" title="{{ comprobante.numeroCodigoBarra }}">
+                                 {{ comprobante.numeroCodigoBarra |slice(0, 10) }}</a>                        
+                        
+                        </td>
+                        <td>{%- if comprobante.createdAt %}{{ comprobante.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
     
                         <td class="actions">
-                            <a  onclick="return confirm('Are you sure!');" title="Delete" class="btn btn-danger btn-sm" href="{{ path('comprobante_by_id_delete', { 'id': comprobante.id}) }}">
+                            <a  onclick="return confirm('Esta Seguro?!');" title="Borrar" class="btn btn-danger btn-sm" href="{{ path('comprobante_by_id_delete', { 'id': comprobante.id}) }}">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
-                            <a title='Show' class="btn btn-info btn-sm" href="{{ path('comprobante_show', { 'id': comprobante.id }) }}">
+                            <a title='Ver' class="btn btn-info btn-sm" href="{{ path('comprobante_show', { 'id': comprobante.id }) }}">
                                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                             </a>
-                            <a  title='Edit' class="btn btn-primary btn-sm" href="{{ path('comprobante_edit', { 'id': comprobante.id }) }}">
+                            <a  title='Editar' class="btn btn-primary btn-sm" href="{{ path('comprobante_edit', { 'id': comprobante.id }) }}">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
                         </td>
@@ -227,9 +213,9 @@
     <div class="col-md-4 pull-left">
             <div class="pagination form-inline ">
                 <select class = "form-control" name="bulk_action" >
-                    <option value="delete">DELETE</option>
+                    <option value="delete">Borrar</option>
                 </select>
-                <input type="submit" id='bulkSubmitBtn' onclick="return confirm('Are you sure?')" form="bulk_form" class="form-control btn btn-danger btn-sm" disabled>
+                <input type="submit" id='bulkSubmitBtn' onclick="return confirm('Esta Seguro?')" form="bulk_form" class="form-control btn btn-danger btn-sm" disabled>
             </div>
     </div>
     
@@ -242,7 +228,7 @@
     </div>
 </div> <!-- /#bottom -->
 
-
+</div>
 
 {% endblock %}
 

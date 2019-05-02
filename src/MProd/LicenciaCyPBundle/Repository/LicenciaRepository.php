@@ -22,6 +22,11 @@ class LicenciaRepository extends EntityRepository implements ILicenciaRepository
         return $this->find($id);
     }
 
+    public function findByComprobanteId($idComprobante){
+        return $this
+            ->findOneByComprobante($idComprobante);
+    }
+
 }
 
 

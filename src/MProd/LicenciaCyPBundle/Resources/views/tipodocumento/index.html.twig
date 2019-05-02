@@ -5,7 +5,8 @@
 {% endblock %}
 {% block styles %}
      <!-- Le styles -->
-        <link href="{{ asset('bundles/petkoparacrudgenerator/css/bootstrap.min.css') }}" rel="stylesheet">               
+        <link href="{{ asset('bundles/petkoparacrudgenerator/css/bootstrap.min.css') }}" rel="stylesheet"> 
+         <link href="{{ asset('css/ajustesPetkoparaStg.css') }}" rel="stylesheet">              
 {% endblock %}
 
 {% block javascriptsIncludes %} 
@@ -16,7 +17,7 @@
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/jquery.min.js') }}"></script>
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/petkopara-crud-generator.js') }}"></script>
-     
+    
 {% endblock %} 
 
 {% block title %}
@@ -46,13 +47,15 @@
                  
                     <div class="col-md-6">{{ form_row(filterForm.tipo) }}</div>
 
-                                <div class="col-md-6">
+                <div class="col-md-6">
                     {{ form_rest(filterForm) }}
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-warning" name="filter_action" value="filter"> <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Buscar</button>
-                        <button type="submit" class="btn btn-default" name="filter_action" value="reset"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Restablecer</button>
+                        <button type="submit" class="btn btn-warning btn-sm" name="filter_action" value="filter"> 
+                                <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Buscar</button>
+                        <button type="submit" class="btn btn-default btn-sm" name="filter_action" value="reset">
+                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Restablecer</button>
                     </div>
                 </div>
             </div>
@@ -85,13 +88,13 @@
 
 <div class="col-md-3">
 
-            <a class="btn btn-primary h3 pull-right" href="{{ path('tipodocumento_new') }}" style="margin-bottom:10px">
+        <button class="btn  btn-primary h3 pull-right" href="{{ path('tipodocumento_new') }}" style="margin-bottom:10px">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
-        </a>
-        <a class="btn dropdown-toggle pull-right h3" data-toggle="collapse" data-target="#filters">
+        </button>
+        <button class="btn btn dropdown-toggle pull-right h3" data-toggle="collapse" data-target="#filters">
         Buscar
         <span class="caret"></span>
-    </a>
+    </button>
 </div>
 
 
@@ -139,7 +142,7 @@
                             <th>{{macros.th_sortable('fechaBaja',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'tipodocumento', 'Fecha Baja')}}</th>
     
                        
-                        <th width = "130px">Acciones</th>
+                        <th width = "230px">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -151,7 +154,8 @@
                         <td>{%- if tipoDocumento.fechaBaja %}{{ tipoDocumento.fechaBaja|date('d-m-Y') }}{% endif %}</td>
     
                         <td class="actions">
-                            <a  onclick="return confirm('Esta Seguro?!');" title="Borrar" class="btn btn-danger btn-sm" href="{{ path('tipodocumento_by_id_delete', { 'id': tipoDocumento.id}) }}">
+                            <a  onclick="return confirm('Esta Seguro?!');" title="Borrar" 
+                                class="btn btn-danger btn-sm" href="{{ path('tipodocumento_by_id_delete', { 'id': tipoDocumento.id}) }}">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
                             <a title='Ver' class="btn btn-info btn-sm" href="{{ path('tipodocumento_show', { 'id': tipoDocumento.id }) }}">
@@ -194,7 +198,7 @@
          {{ pagerHtml|raw }} 
     </div>
 </div> <!-- /#bottom -->
-
+</div>
 
 {% endblock %}
 {% endblock %}

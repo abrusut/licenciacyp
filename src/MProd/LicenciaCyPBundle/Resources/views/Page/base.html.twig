@@ -12,6 +12,10 @@
     </script> 
      <script>
         $(document).ready(function () {
+            $(document).ready(function(){
+              $('[data-toggle="tooltip"]').tooltip(); 
+            });
+
             $.ajaxSetup({         
                     beforeSend: function() {
                         $('.loading').show();

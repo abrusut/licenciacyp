@@ -15,6 +15,12 @@ interface ILicenciaRepository{
      * @return MProd\LicenciaCyPBundle\Entity\Licencia
      */    
     public function findById($id);
+
+     /**
+     * @param integer $idComprobante     
+     * @return MProd\LicenciaCyPBundle\Entity\Licencia
+     */    
+    public function findByComprobanteId($idComprobante);
 }
 
 ?>

@@ -125,8 +125,8 @@ class ComprobanteController extends Controller
         $view = new TwitterBootstrap3View();
         $pagerHtml = $view->render($pagerfanta, $routeGenerator, array(
             'proximity' => 3,
-            'prev_message' => 'previous',
-            'next_message' => 'next',
+            'prev_message' => 'Anterior',
+            'next_message' => 'Siguiente',
         ));
 
         return array($entities, $pagerHtml);
@@ -148,7 +148,7 @@ class ComprobanteController extends Controller
         if ($endRecord > $totalOfRecords) {
             $endRecord = $totalOfRecords;
         }
-        return "Showing $startRecord - $endRecord of $totalOfRecords Records.";
+        return "Mostrando $startRecord - $endRecord de $totalOfRecords Registros.";
     }
     
     
@@ -172,7 +172,7 @@ class ComprobanteController extends Controller
             $em->flush();
             
             $editLink = $this->generateUrl('comprobante_edit', array('id' => $comprobante->getId()));
-            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>New comprobante was created successfully.</a>" );
+            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>Registro Creado.</a>" );
             
             $nextAction=  $request->get('submit') == 'save' ? 'comprobante' : 'comprobante_new';
             return $this->redirectToRoute($nextAction);
@@ -218,7 +218,7 @@ class ComprobanteController extends Controller
             $em->persist($comprobante);
             $em->flush();
             
-            $this->get('session')->getFlashBag()->add('success', 'Edited Successfully!');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Actualizado!');
             return $this->redirectToRoute('comprobante_edit', array('id' => $comprobante->getId()));
         }
         return $this->render('MProdLicenciaCyPBundle:comprobante:edit.html.twig', array(
@@ -246,9 +246,9 @@ class ComprobanteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($comprobante);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'The Comprobante was deleted successfully');
+            $this->get('session')->getFlashBag()->add('success', 'Comprobante Actualizado');
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the Comprobante');
+            $this->get('session')->getFlashBag()->add('error', 'Error Comprobante');
         }
         
         return $this->redirectToRoute('comprobante');
@@ -282,9 +282,9 @@ class ComprobanteController extends Controller
         try {
             $em->remove($comprobante);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'The Comprobante was deleted successfully');
+            $this->get('session')->getFlashBag()->add('success', 'Borrado Correcto');
         } catch (Exception $ex) {
-            $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the Comprobante');
+            $this->get('session')->getFlashBag()->add('error', 'Error Borrando');
         }
 
         return $this->redirect($this->generateUrl('comprobante'));
@@ -313,10 +313,10 @@ class ComprobanteController extends Controller
                     $em->flush();
                 }
 
-                $this->get('session')->getFlashBag()->add('success', 'comprobantes was deleted successfully!');
+                $this->get('session')->getFlashBag()->add('success', 'Comprobantes Borrados!');
 
             } catch (Exception $ex) {
-                $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the comprobantes ');
+                $this->get('session')->getFlashBag()->add('error', 'Error Borrando ');
             }
         }
 

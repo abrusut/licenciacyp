@@ -45,6 +45,10 @@ class LicenciaServiceImpl implements ILicenciaService {
         $this->logger->info("Buscando Licencia por id ".$id);
         return $this->licenciaRepository->findById($id);       
     }
+    public function findByComprobanteId($idComprobante){
+        $this->logger->info("Buscando Licencia por id Comprobante ".$idComprobante);
+        return $this->licenciaRepository->findByComprobanteId($idComprobante);       
+    }
 
     public function generarLicencia(Licencia $licencia){
         $this->validate($licencia);            
