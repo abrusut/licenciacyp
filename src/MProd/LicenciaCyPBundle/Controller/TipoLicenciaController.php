@@ -250,9 +250,9 @@ class TipoLicenciaController extends Controller
             $tipoLicencium->setIsActive(false);
             $em->persist($tipoLicencium);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'Registro Borrado');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Deshabilitado');
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'Error al Borrar Registro');
+            $this->get('session')->getFlashBag()->add('error', 'Error al Deshabilitando Registro');
         }
         
         return $this->redirectToRoute('tipolicencia');
@@ -287,9 +287,9 @@ class TipoLicenciaController extends Controller
             $tipoLicencium->setIsActive(false);
             $em->persist($tipoLicencium);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'Registro Desactivado');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Deshabilitado');
         } catch (Exception $ex) {
-            $this->get('session')->getFlashBag()->add('error', 'Error al desactivar registro');
+            $this->get('session')->getFlashBag()->add('error', 'Error al Deshabilitando registro');
         }
 
         return $this->redirect($this->generateUrl('tipolicencia'));
@@ -314,14 +314,16 @@ class TipoLicenciaController extends Controller
 
                 foreach ($ids as $id) {
                     $tipoLicencium = $repository->find($id);
-                    $em->remove($tipoLicencium);
+                    $tipoLicencium->setIsActive(false);
+                    $em->persist($tipoLicencium);
+            
                     $em->flush();
                 }
 
-                $this->get('session')->getFlashBag()->add('success', 'Registro Eliminado');
+                $this->get('session')->getFlashBag()->add('success', 'Registro Deshabilitado');
 
             } catch (Exception $ex) {
-                $this->get('session')->getFlashBag()->add('error', 'Error Eliminando Registro ');
+                $this->get('session')->getFlashBag()->add('error', 'Error Deshabilitando Registro ');
             }
         }
 

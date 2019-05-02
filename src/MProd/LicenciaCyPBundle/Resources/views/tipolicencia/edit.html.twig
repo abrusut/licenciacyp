@@ -78,13 +78,14 @@ Tipo Licencia
 
     {{ form_widget(edit_form) }}
     <p class="col-md-12">
+      <a class="btn btn-default" href="{{ path('tipolicencia') }}">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+        Volver a Listado
+        </a>
         <button type="submit" class="btn btn-primary">
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Actualizar
         </button>
-          <a class="btn btn-default" href="{{ path('tipolicencia') }}">
-        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-        Volver a Listado
-    </a>
+        
     <a class="btn btn-info" href="{{ path('tipolicencia_new') }}">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         Nuevo
@@ -96,19 +97,11 @@ Tipo Licencia
     <hr/>
 
     
-<div class="col-md-12 form-group">
-  <form action="{{ path('tipolicencia_delete', { 'id': tipoLicencium.id }) }}" method="post" >
-        <input type="hidden" name="_method" value="DELETE" />
-        {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit" onclick="return confirm('Está Seguro?');">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            Borrar
-        </button>
-    </form>
-</div>
+
 
 </div>
 
+</div>
 </div>
 {% endblock %}
 {% endblock %} 
