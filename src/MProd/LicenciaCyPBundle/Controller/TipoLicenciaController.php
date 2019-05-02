@@ -34,10 +34,7 @@ class TipoLicenciaController extends Controller
         list($tipoLicencias, $pagerHtml) = $this->paginator($queryBuilder, $request);
         
         $totalOfRecordsString = $this->getTotalOfRecordsString($queryBuilder, $request);
-
-        $search = array('<span>previous</span>','<span>next</span>');
-        $replace = array('<span>anterior</span>','<span>siguiente</span>');
-        $pagerHtml = str_replace($search, $replace,$pagerHtml);
+       
         return $this->render('MProdLicenciaCyPBundle:tipolicencia:index.html.twig', array(
             'tipoLicencias' => $tipoLicencias,
             'pagerHtml' => $pagerHtml,
@@ -128,8 +125,8 @@ class TipoLicenciaController extends Controller
         $view = new TwitterBootstrap3View();
         $pagerHtml = $view->render($pagerfanta, $routeGenerator, array(
             'proximity' => 3,
-            'prev_message' => 'previous',
-            'next_message' => 'next',
+            'prev_message' => 'Anterior',
+            'next_message' => 'Siguiente',
         ));
 
         return array($entities, $pagerHtml);
@@ -175,7 +172,7 @@ class TipoLicenciaController extends Controller
             $em->flush();
             
             $editLink = $this->generateUrl('tipolicencia_edit', array('id' => $tipoLicencium->getId()));
-            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>New tipoLicencium was created successfully.</a>" );
+            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>Registro Creado.</a>" );
             
             $nextAction=  $request->get('submit') == 'save' ? 'tipolicencia' : 'tipolicencia_new';
             return $this->redirectToRoute($nextAction);

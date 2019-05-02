@@ -38,7 +38,10 @@ class PersonaType extends AbstractType
                         'label' => 'Tipo Documento',
                         'class' => 'MProdLicenciaCyPBundle:TipoDocumento',                         
                         'required' => FALSE,
-                        'empty_value' => '-- Seleccione --'
+                        'empty_value' => '-- Seleccione --',
+                        'query_builder' => function (EntityRepository $er) {        
+                            return $er->createQueryBuilder('td')->where('td.fechaBaja is null')->orderBy('td.tipo', 'ASC');     
+                         },
                     ))            
             ->add('numeroDocumento', 'text', array('label' => 'Número de Documento', 'attr'=>array('placeholder'=>'99999999')))
             ->add('domicilioCalle')

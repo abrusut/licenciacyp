@@ -34,7 +34,7 @@ class TipoDocumentoController extends Controller
         list($tipoDocumentos, $pagerHtml) = $this->paginator($queryBuilder, $request);
         
         $totalOfRecordsString = $this->getTotalOfRecordsString($queryBuilder, $request);
-
+        
         return $this->render('MProdLicenciaCyPBundle:tipodocumento:index.html.twig', array(
             'tipoDocumentos' => $tipoDocumentos,
             'pagerHtml' => $pagerHtml,
@@ -125,8 +125,8 @@ class TipoDocumentoController extends Controller
         $view = new TwitterBootstrap3View();
         $pagerHtml = $view->render($pagerfanta, $routeGenerator, array(
             'proximity' => 3,
-            'prev_message' => 'previous',
-            'next_message' => 'next',
+            'prev_message' => 'anterior',
+            'next_message' => 'siguiente',
         ));
 
         return array($entities, $pagerHtml);
@@ -148,7 +148,7 @@ class TipoDocumentoController extends Controller
         if ($endRecord > $totalOfRecords) {
             $endRecord = $totalOfRecords;
         }
-        return "Showing $startRecord - $endRecord of $totalOfRecords Records.";
+        return "Mostrando $startRecord - $endRecord de $totalOfRecords Registros.";
     }
     
     
@@ -172,7 +172,7 @@ class TipoDocumentoController extends Controller
             $em->flush();
             
             $editLink = $this->generateUrl('tipodocumento_edit', array('id' => $tipoDocumento->getId()));
-            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>New tipoDocumento was created successfully.</a>" );
+            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>Registro Creado.</a>" );
             
             $nextAction=  $request->get('submit') == 'save' ? 'tipodocumento' : 'tipodocumento_new';
             return $this->redirectToRoute($nextAction);
@@ -218,7 +218,7 @@ class TipoDocumentoController extends Controller
             $em->persist($tipoDocumento);
             $em->flush();
             
-            $this->get('session')->getFlashBag()->add('success', 'Edited Successfully!');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Actualizado!');
             return $this->redirectToRoute('tipodocumento_edit', array('id' => $tipoDocumento->getId()));
         }
         return $this->render('MProdLicenciaCyPBundle:tipodocumento:edit.html.twig', array(
@@ -244,11 +244,12 @@ class TipoDocumentoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($tipoDocumento);
+            $tipoDocumento->setFechaBaja(new \DateTime());
+            $em->persist($tipoDocumento);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'The TipoDocumento was deleted successfully');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Actualizado');
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the TipoDocumento');
+            $this->get('session')->getFlashBag()->add('error', 'Error Actualizando');
         }
         
         return $this->redirectToRoute('tipodocumento');
@@ -280,11 +281,12 @@ class TipoDocumentoController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         try {
-            $em->remove($tipoDocumento);
+            $tipoDocumento->setFechaBaja(new \DateTime());
+            $em->persist($tipoDocumento);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'The TipoDocumento was deleted successfully');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Actualizado');
         } catch (Exception $ex) {
-            $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the TipoDocumento');
+            $this->get('session')->getFlashBag()->add('error', 'Error Actualizando Registro');
         }
 
         return $this->redirect($this->generateUrl('tipodocumento'));
@@ -309,14 +311,15 @@ class TipoDocumentoController extends Controller
 
                 foreach ($ids as $id) {
                     $tipoDocumento = $repository->find($id);
-                    $em->remove($tipoDocumento);
+                    $tipoDocumento->setFechaBaja(new \DateTime());
+                    $em->persist($tipoDocumento);
                     $em->flush();
                 }
 
-                $this->get('session')->getFlashBag()->add('success', 'tipoDocumentos was deleted successfully!');
+                $this->get('session')->getFlashBag()->add('success', 'Registros Actualizados!');
 
             } catch (Exception $ex) {
-                $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the tipoDocumentos ');
+                $this->get('session')->getFlashBag()->add('error', 'Error Actualizando registros ');
             }
         }
 

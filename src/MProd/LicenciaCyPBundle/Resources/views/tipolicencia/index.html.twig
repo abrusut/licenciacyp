@@ -187,7 +187,7 @@ Tipo Licencia
                         <td>{{ tipoLicencium.diasVigencia }}</td>
                          {#<td>{{ tipoLicencium.diasPrimerVencimiento }}</td>
                         <td>{{ tipoLicencium.diasSegundoVencimiento }}</td>#}
-                        <td>{%- if tipoLicencium.fechaTope %}{{ tipoLicencium.fechaTope|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{%- if tipoLicencium.fechaTope %}{{ tipoLicencium.fechaTope|date('d-m-Y H:i:s') }}{% endif %}</td>
                         <td>{%- if tipoLicencium.isActive %}SI{% else %}No{% endif %}</td>
                         <td>{%- if tipoLicencium.aplicaEnProvincia == "SF" or tipoLicencium.aplicaEnProvincia == "sf"  %}Santa Fe{% else %}{{tipoLicencium.aplicaEnProvincia}}{% endif %}</td>
     
