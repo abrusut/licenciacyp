@@ -16,15 +16,23 @@ class LocalidadType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('l_distrito')
-            ->add('l_nom_dis')
-            ->add('l_departamento')
-            ->add('l_nom_dpto')
+            ->add('l_distrito','text',
+                 array(
+                    'label' => 'Id Distrito'))
+            ->add('l_nom_dis','text',
+                    array(
+                    'label' => 'Nombre Distrito'))
+            ->add('l_departamento','text',
+                    array(
+                    'label' => 'Departamento'))
+            ->add('l_nom_dpto','text',
+                    array(
+                    'label' => 'Nombre Departamento'))
             ->add('nodo')
             ->add('provincia', EntityType::class, array(
                 'class' => 'MProd\LicenciaCyPBundle\Entity\Provincia',
                 'choice_label' => 'nombre',
-                'placeholder' => 'Please choose',
+                'placeholder' => 'Seleccione una Provincia',
                 'empty_data' => null,
                 'required' => false
  

@@ -125,8 +125,8 @@ class LocalidadController extends Controller
         $view = new TwitterBootstrap3View();
         $pagerHtml = $view->render($pagerfanta, $routeGenerator, array(
             'proximity' => 3,
-            'prev_message' => 'previous',
-            'next_message' => 'next',
+            'prev_message' => 'anterior',
+            'next_message' => 'siguiente',
         ));
 
         return array($entities, $pagerHtml);
@@ -148,7 +148,7 @@ class LocalidadController extends Controller
         if ($endRecord > $totalOfRecords) {
             $endRecord = $totalOfRecords;
         }
-        return "Showing $startRecord - $endRecord of $totalOfRecords Records.";
+        return "Mostrando $startRecord - $endRecord de $totalOfRecords Registros.";
     }
     
     
@@ -172,7 +172,7 @@ class LocalidadController extends Controller
             $em->flush();
             
             $editLink = $this->generateUrl('localidad_edit', array('id' => $localidad->getId()));
-            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>New localidad was created successfully.</a>" );
+            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>Registro Creado.</a>" );
             
             $nextAction=  $request->get('submit') == 'save' ? 'localidad' : 'localidad_new';
             return $this->redirectToRoute($nextAction);
@@ -218,7 +218,7 @@ class LocalidadController extends Controller
             $em->persist($localidad);
             $em->flush();
             
-            $this->get('session')->getFlashBag()->add('success', 'Edited Successfully!');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Actualizado!');
             return $this->redirectToRoute('localidad_edit', array('id' => $localidad->getId()));
         }
         return $this->render('MProdLicenciaCyPBundle:localidad:edit.html.twig', array(
@@ -246,9 +246,9 @@ class LocalidadController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($localidad);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'The Localidad was deleted successfully');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Borrado');
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the Localidad');
+            $this->get('session')->getFlashBag()->add('error', 'Problemas Borrando Registro');
         }
         
         return $this->redirectToRoute('localidad');
@@ -282,9 +282,9 @@ class LocalidadController extends Controller
         try {
             $em->remove($localidad);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'The Localidad was deleted successfully');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Borrado');
         } catch (Exception $ex) {
-            $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the Localidad');
+            $this->get('session')->getFlashBag()->add('error', 'Problemas borrando registro');
         }
 
         return $this->redirect($this->generateUrl('localidad'));
@@ -313,10 +313,10 @@ class LocalidadController extends Controller
                     $em->flush();
                 }
 
-                $this->get('session')->getFlashBag()->add('success', 'localidads was deleted successfully!');
+                $this->get('session')->getFlashBag()->add('success', 'Registros Borrados!');
 
             } catch (Exception $ex) {
-                $this->get('session')->getFlashBag()->add('error', 'Problem with deletion of the localidads ');
+                $this->get('session')->getFlashBag()->add('error', 'Problemas Borrando Registros');
             }
         }
 
