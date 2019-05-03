@@ -28,7 +28,7 @@ Persona
 
 <div  class="row">
     <div class="page-header">
-        <h2>View persona <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> </h2>
+        <h2><a href="{{ path('persona') }}">Ver persona <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a> </h2>
     </div>
 </div>
 
@@ -55,28 +55,28 @@ Persona
 
     </div>
     <div class="col-md-6">
-        <p><strong>Fechanacimiento</strong></p>
+        <p><strong>Fecha Nacimiento</strong></p>
         <p>
             {% if persona.fechaNacimiento %}{{ persona.fechaNacimiento|date('Y-m-d') }}{% endif %}
         </p>
 
     </div>
     <div class="col-md-6">
-        <p><strong>Domiciliocalle</strong></p>
+        <p><strong>Domicilio calle</strong></p>
         <p>
             {{ persona.domicilioCalle }}
         </p>
 
     </div>
     <div class="col-md-6">
-        <p><strong>Domicilionumero</strong></p>
+        <p><strong>Domicilio numero</strong></p>
         <p>
             {{ persona.domicilioNumero }}
         </p>
 
     </div>
     <div class="col-md-6">
-        <p><strong>Localidadotraprovincia</strong></p>
+        <p><strong>Localidad otra provincia</strong></p>
         <p>
             {{ persona.localidadOtraProvincia }}
         </p>
@@ -118,7 +118,7 @@ Persona
 
     </div>
     <div class="col-md-6">
-        <p><strong>Createdat</strong></p>
+        <p><strong>Created at</strong></p>
         <p>
             {% if persona.createdAt %}{{ persona.createdAt|date('Y-m-d H:i:s') }}{% endif %}
         </p>
@@ -131,24 +131,13 @@ Persona
 <div class="form-group">
     <a class="btn btn-default" href="{{ path('persona') }}">
         <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-        Back to list
+        Volver al Listado
     </a>
     <a class="btn btn-primary" href="{{ path('persona_edit', { 'id':  persona.id }) }}">
         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-        Edit
+        Editar
     </a>
-    <a class="btn btn-info" href="{{ path('persona_new') }}">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        New
-    </a>
-    <form action="{{ path('persona_delete', { 'id': persona.id }) }}" method="post" style="display: inline-block">
-        <input type="hidden" name="_method" value="DELETE" />
-        {{ form_widget(delete_form) }}
-        <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure');">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            Delete
-        </button>
-    </form>
+   
 </div>
 
 </div>

@@ -142,6 +142,7 @@ class PersonaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $persona->setCreatedAt(new \DateTime());
             $em->persist($persona);
             $em->flush();
             
