@@ -19,6 +19,11 @@ class UsuarioType extends AbstractType
             ->add('apellido')
             ->add('dni')
             ->add('telefono')
+            ->add('username')  
+            ->add('password')              
+            ->add('email')            
+            ->add('enabled')            
+            ->add('roles')
         ;
     }
     

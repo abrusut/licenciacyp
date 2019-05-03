@@ -8,23 +8,27 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class UsuarioFilterType extends AbstractType
+class PersonaFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         
         $builder->add('search', MultiSearchType::class, array(
-                    'class' => 'MProdLicenciaCyPBundle:Usuario',
+                    'class' => 'MProdLicenciaCyPBundle:Persona',
                     'search_fields' => array( //optional, if it's empty it will search in the all entity columns
                         'id',
                         'nombre',
                         'apellido',
-                        'dni',
+                        'fechaNacimiento',
+                        'domicilioCalle',
+                        'domicilioNumero',
+                        'localidadOtraProvincia',
+                        'numeroDocumento',
+                        'sexo',
+                        'jubilado',
                         'telefono',
-                        'username',                        
-                        'email',                        
-                        'enabled',                                                                  
-                      
+                        'email',
+                        'createdAt',
                  ), 
                     ));
                     

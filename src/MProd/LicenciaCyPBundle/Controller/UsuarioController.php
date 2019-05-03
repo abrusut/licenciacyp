@@ -35,7 +35,7 @@ class UsuarioController extends Controller
         
         $totalOfRecordsString = $this->getTotalOfRecordsString($queryBuilder, $request);
 
-        return $this->render('MProdLicenciaCyPBundle:usuario:index.html.twig', array(
+        return $this->render('MProdLicenciaCyPBundle:Usuario:index.html.twig', array(
             'usuarios' => $usuarios,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
@@ -44,51 +44,25 @@ class UsuarioController extends Controller
         ));
     }
 
+
     /**
     * Create filter form and process filter request.
     *
     */
-    protected function filter($queryBuilder, Request $request)
+    protected function filter($queryBuilder, $request)
     {
-        $session = $request->getSession();
         $filterForm = $this->createForm('MProd\LicenciaCyPBundle\Form\UsuarioFilterType');
 
-        // Reset filter
-        if ($request->get('filter_action') == 'reset') {
-            $session->remove('UsuarioControllerFilter');
-        }
+        // Bind values from the request
+        $filterForm->handleRequest($request);
 
-        // Filter action
-        if ($request->get('filter_action') == 'filter') {
-            // Bind values from the request
-            $filterForm->handleRequest($request);
-
-            if ($filterForm->isValid()) {
-                // Build the query from the given form object
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
-                // Save filter to session
-                $filterData = $filterForm->getData();
-                $session->set('UsuarioControllerFilter', $filterData);
-            }
-        } else {
-            // Get filter from session
-            if ($session->has('UsuarioControllerFilter')) {
-                $filterData = $session->get('UsuarioControllerFilter');
-                
-                foreach ($filterData as $key => $filter) { //fix for entityFilterType that is loaded from session
-                    if (is_object($filter)) {
-                        $filterData[$key] = $queryBuilder->getEntityManager()->merge($filter);
-                    }
-                }
-                
-                $filterForm = $this->createForm('MProd\LicenciaCyPBundle\Form\UsuarioFilterType', $filterData);
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
-            }
+        if ($filterForm->isValid()) {
+            // Build the query from the given form object
+            $this->get('petkopara_multi_search.builder')->searchForm( $queryBuilder, $filterForm->get('search'));
         }
 
         return array($filterForm, $queryBuilder);
     }
-
 
     /**
     * Get results from paginator and get paginator view.
@@ -177,7 +151,7 @@ class UsuarioController extends Controller
             $nextAction=  $request->get('submit') == 'save' ? 'usuario' : 'usuario_new';
             return $this->redirectToRoute($nextAction);
         }
-        return $this->render('MProdLicenciaCyPBundle:usuario:new.html.twig', array(
+        return $this->render('MProdLicenciaCyPBundle:Usuario:new.html.twig', array(
             'usuario' => $usuario,
             'form'   => $form->createView(),
         ));
@@ -193,7 +167,7 @@ class UsuarioController extends Controller
     public function showAction(Usuario $usuario)
     {
         $deleteForm = $this->createDeleteForm($usuario);
-        return $this->render('MProdLicenciaCyPBundle:usuario:show.html.twig', array(
+        return $this->render('MProdLicenciaCyPBundle:Usuario:show.html.twig', array(
             'usuario' => $usuario,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -221,7 +195,7 @@ class UsuarioController extends Controller
             $this->get('session')->getFlashBag()->add('success', 'Edited Successfully!');
             return $this->redirectToRoute('usuario_edit', array('id' => $usuario->getId()));
         }
-        return $this->render('MProdLicenciaCyPBundle:usuario:edit.html.twig', array(
+        return $this->render('MProdLicenciaCyPBundle:Usuario:edit.html.twig', array(
             'usuario' => $usuario,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -4,13 +4,9 @@ namespace MProd\LicenciaCyPBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
-use MProd\LicenciaCyPBundle\Entity\Persona;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 
 class PersonaType extends AbstractType
 {
@@ -21,19 +17,7 @@ class PersonaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id','hidden')
-            ->add('nombre')
-            ->add('apellido')
-            ->add('fechaNacimiento', 'date', array( 'label'=>'Fecha de Nacimiento',
-                    'required' => FALSE,
-                    // render as a single text box
-                    'widget' => 'single_text',
-                    'format' => 'dd/MM/yyyy',
-                    // do not render as type="date", to avoid HTML5 date pickers
-                    'html5' => false,
-                    // add a class that can be selected in JavaScript
-                    'attr' => ['class' => 'js-datepicker'],))
-            ->add('tipoDocumento', 'entity', 
+        ->add('tipoDocumento', 'entity', 
                     array(
                         'label' => 'Tipo Documento',
                         'class' => 'MProdLicenciaCyPBundle:TipoDocumento',                         
@@ -42,16 +26,32 @@ class PersonaType extends AbstractType
                         'query_builder' => function (EntityRepository $er) {        
                             return $er->createQueryBuilder('td')->where('td.fechaBaja is null')->orderBy('td.tipo', 'ASC');     
                          },
-                    ))            
-            ->add('numeroDocumento', 'text', array('label' => 'Número de Documento', 'attr'=>array('placeholder'=>'99999999')))
-            ->add('domicilioCalle')
-            ->add('domicilioNumero')
+                    ))       
+            ->add('numeroDocumento')
             ->add('sexo', 'choice', 
                 array(
                         'choices' => array('m' => 'Masculino', 'f' => 'Femenino'), 
                         'required' => FALSE,
                         'empty_value' => '-- Seleccione --',
                     ))
+            ->add('nombre')
+            ->add('apellido')            
+            ->add('fechaNacimiento','date', array(                        
+                'constraints' => null,
+                'data' => (isset($options['data']) && 
+                                $options['data']->getFechaNacimiento() !== null) ? $options['data']->getFechaNacimiento() : null,
+                 // render as a single text box
+                 'widget' => 'single_text',
+                 'format' => 'dd/MM/yyyy',
+                 // do not render as type="date", to avoid HTML5 date pickers
+                 'html5' => false,
+                 // add a class that can be selected in JavaScript
+                 'attr' => ['class' => 'js-datepicker']
+                )
+            )
+            ->add('domicilioCalle')
+            ->add('domicilioNumero')      
+            
             ->add('jubilado', 'choice', 
                      array('choices' => array(1 => 'Si', 0 => 'No'),
                            'required' => true,
@@ -59,51 +59,39 @@ class PersonaType extends AbstractType
                            'expanded' => true                           
                            )                   
                      )
-            ->add('telefono', 'text', array('label' => 'Teléfono', 'required' => FALSE, 'attr'=>array('placeholder'=>'3420000000')))
-            ->add('email', EmailType::class)
-            ->add('provincia', EntityType::class,array(
-                'class' => 'MProdLicenciaCyPBundle:Provincia',
-                'empty_value' => '-- Seleccione --',
-                'query_builder' => function (EntityRepository $er) {        
-                    return $er->createQueryBuilder('p')->orderBy('p.nombre', 'ASC');     
-                 },
-                 'required' => TRUE                
-                ))
-            ->add('localidad', EntityType::class,array(
-                        'class' => 'MProdLicenciaCyPBundle:Localidad',
+            ->add('telefono')
+            ->add('email')                                   
+                    ->add('provincia', EntityType::class,array(
+                        'class' => 'MProdLicenciaCyPBundle:Provincia',
                         'empty_value' => '-- Seleccione --',
                         'query_builder' => function (EntityRepository $er) {        
-                            return $er->createQueryBuilder('l')->orderBy('l.l_nom_dis', 'ASC');     
+                            return $er->createQueryBuilder('p')->orderBy('p.nombre', 'ASC');     
                          },
-                         'required' => FALSE                 
-                        ))                    
-            
-            ->add('localidadOtraProvincia','text', array(
-                'label' => 'Localidad Otra Provincia',
-                'required' => FALSE                              
-            ));
-        
-            
+                         'required' => TRUE                
+                        ))
+                    ->add('localidad', EntityType::class,array(
+                                'class' => 'MProdLicenciaCyPBundle:Localidad',
+                                'empty_value' => '-- Seleccione --',
+                                'query_builder' => function (EntityRepository $er) {        
+                                    return $er->createQueryBuilder('l')->orderBy('l.l_nom_dis', 'ASC');     
+                                 },
+                                 'required' => FALSE                 
+                                ))                    
+                    
+                    ->add('localidadOtraProvincia','text', array(
+                        'label' => 'Localidad Otra Provincia',
+                        'required' => FALSE                              
+                    ));
+        ;
     }
-
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MProd\LicenciaCyPBundle\Entity\Persona',
-            'cascade_validation' => true,
-            'error_bubbling' => true
+            'data_class' => 'MProd\LicenciaCyPBundle\Entity\Persona'
         ));
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mprod_licenciacypbundle_persona';
     }
 }

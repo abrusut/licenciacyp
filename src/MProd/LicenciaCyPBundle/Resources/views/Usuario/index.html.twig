@@ -5,6 +5,7 @@
 {% block styles %}
      <!-- Le styles -->
         <link href="{{ asset('bundles/petkoparacrudgenerator/css/bootstrap.min.css') }}" rel="stylesheet">               
+         <link href="{{ asset('css/ajustesPetkoparaStg.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block javascriptsIncludes %} 
@@ -15,11 +16,11 @@
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/jquery.min.js') }}"></script>
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/petkopara-crud-generator.js') }}"></script>
-     
+      
 {% endblock %} 
 
 {% block title %}
-Usuario
+{{ parent() }} - usuario index
 {% endblock %}
 
 {% block cuerpo %}
@@ -32,45 +33,7 @@ Usuario
         <div class="page-header">
             <h2><a href="{{ path('usuario') }}">Usuario</a></h2>
         </div>
-    </div>       
-
-<!-- FILTERING -->
-<div class="col-md-12">
-    <div  id="filters" class="collapse">
-
-        <form class="well" action="{{ path('usuario') }}" method="get" >
-            <div class="row">
-                 
-                    <div class="col-md-6">{{ form_row(filterForm.id) }}</div>
-
-                 
-                    <div class="col-md-6">{{ form_row(filterForm.nombre) }}</div>
-
-                 
-                    <div class="col-md-6">{{ form_row(filterForm.apellido) }}</div>
-
-                 
-                    <div class="col-md-6">{{ form_row(filterForm.dni) }}</div>
-
-                 
-                    <div class="col-md-6">{{ form_row(filterForm.telefono) }}</div>
-
-                                <div class="col-md-6">
-                    {{ form_rest(filterForm) }}
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-warning" name="filter_action" value="filter"> <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter</button>
-                        <button type="submit" class="btn btn-default" name="filter_action" value="reset"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Reset</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<!-- END FILTERING -->
-
-
+    </div>    
 <div class="col-md-3 pull-left">
         
     <!-- PAGE SIZE -->
@@ -87,27 +50,34 @@ Usuario
 
 </div>
 
+
+<!-- FILTERING -->
 <div class="col-md-6">
+    <form action="{{ path('usuario') }}" method="get" >
 
+        <div class="input-group h3">
 
+            {{form_widget(filterForm.search, { 'attr': {'class': 'form-control'} })}}
+            {{form_rest(filterForm) }}
+
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+
+        </div>
+    </form>
 </div>
+<!-- END FILTERING -->            
+            
+            
 
 <div class="col-md-3">
-
             <a class="btn btn-primary h3 pull-right" href="{{ path('usuario_new') }}" style="margin-bottom:10px">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New
         </a>
-        <a class="btn dropdown-toggle pull-right h3" data-toggle="collapse" data-target="#filters">
-        Filter
-        <span class="caret"></span>
-    </a>
-</div>
-
-
-
-
-
-
+    </div>
 
     <div class="col-md-12">
         {%- if form_errors(filterForm) %}
@@ -148,6 +118,17 @@ Usuario
                             <th>{{macros.th_sortable('apellido',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
                             <th>{{macros.th_sortable('dni',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
                             <th>{{macros.th_sortable('telefono',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('username',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('usernameCanonical',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('email',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('emailCanonical',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('enabled',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('salt',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('password',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('lastLogin',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('confirmationToken',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('passwordRequestedAt',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
+                            <th>{{macros.th_sortable('roles',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'usuario')}}</th>
     
                        
                         <th width = "130px">List</th>
@@ -162,6 +143,17 @@ Usuario
                         <td>{{ usuario.apellido }}</td>
                         <td>{{ usuario.dni }}</td>
                         <td>{{ usuario.telefono }}</td>
+                        <td>{{ usuario.username }}</td>
+                        <td>{{ usuario.usernameCanonical }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ usuario.emailCanonical }}</td>
+                        <td>{%- if usuario.enabled %}Yes{% else %}No{% endif %}</td>
+                        <td>{{ usuario.salt }}</td>
+                        <td>{{ usuario.password }}</td>
+                        <td>{%- if usuario.lastLogin %}{{ usuario.lastLogin|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ usuario.confirmationToken }}</td>
+                        <td>{%- if usuario.passwordRequestedAt %}{{ usuario.passwordRequestedAt|date('Y-m-d') }}{% endif %}</td>
+                        <td>{%- if usuario.roles %}{{ usuario.roles|join(', ') }}{% endif %}</td>
     
                         <td class="actions">
                             <a  onclick="return confirm('Are you sure!');" title="Delete" class="btn btn-danger btn-sm" href="{{ path('usuario_by_id_delete', { 'id': usuario.id}) }}">
@@ -208,7 +200,7 @@ Usuario
     </div>
 </div> <!-- /#bottom -->
 
-
-
+</div>
 {% endblock %}
 {% endblock %}
+

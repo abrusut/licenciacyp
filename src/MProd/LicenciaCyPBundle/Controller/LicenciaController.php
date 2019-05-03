@@ -156,7 +156,8 @@ class LicenciaController extends Controller
         /** @var ComprobanteServiceImpl $comprobanteService */
         $comprobanteService =  $this->get('comprobante_service');
 
-        $licencia = $licenciaService->findById($idLicencia);
+        /** @var Licencia $licencia */
+        $licencia =  $licenciaService->findById($idLicencia);
                
 
         try {

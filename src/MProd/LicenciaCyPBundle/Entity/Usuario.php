@@ -61,7 +61,6 @@ class Usuario extends BaseUser implements \Serializable {
      */
     protected $telefono;
 
-
     /**
      * Get id
      *

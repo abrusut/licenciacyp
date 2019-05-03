@@ -5,7 +5,6 @@ namespace MProd\LicenciaCyPBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use MProd\LicenciaCyPBundle\Form\PersonaType;
 use MProd\LicenciaCyPBundle\Form\TipoLicenciaType;
 
 class LicenciaType extends AbstractType
@@ -51,7 +50,7 @@ class LicenciaType extends AbstractType
                      'attr' => ['class' => 'js-datepicker']
                     )
                 )
-            ->add('persona',  new PersonaType())
+            ->add('persona',  new PersonaLicenciaType())
         ;
     }
     

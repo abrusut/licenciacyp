@@ -5,6 +5,7 @@
 {% block styles %}
      <!-- Le styles -->
         <link href="{{ asset('bundles/petkoparacrudgenerator/css/bootstrap.min.css') }}" rel="stylesheet">               
+         <link href="{{ asset('css/ajustesPetkoparaStg.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block javascriptsIncludes %} 
@@ -15,20 +16,20 @@
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/jquery.min.js') }}"></script>
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bundles/petkoparacrudgenerator/js/petkopara-crud-generator.js') }}"></script>
-     
+      
 {% endblock %} 
 
 {% block title %}
-Usuario
+{{ parent() }} - usuario 
 {% endblock %}
 
 {% block cuerpo %}
-
 {% block body %}
 
-<div id="top" class="row">
+<div class="row">
     <div class="page-header">
-        <h2>View usuario <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> </h2>
+        <h2><a href="{{ path('usuario') }}">Ver usuario 
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a> </h2>
     </div>
 </div>
 
@@ -67,6 +68,83 @@ Usuario
             {{ usuario.telefono }}
         </p>
 
+    </div>
+    <div class="col-md-6">
+        <p><strong>Username</strong></p>
+        <p>
+            {{ usuario.username }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Usernamecanonical</strong></p>
+        <p>
+            {{ usuario.usernameCanonical }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Email</strong></p>
+        <p>
+            {{ usuario.email }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Emailcanonical</strong></p>
+        <p>
+            {{ usuario.emailCanonical }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Enabled</strong></p>
+        <p>
+            {% if usuario.enabled %}Yes{% else %}No{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Salt</strong></p>
+        <p>
+            {{ usuario.salt }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Password</strong></p>
+        <p>
+            {{ usuario.password }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Lastlogin</strong></p>
+        <p>
+            {% if usuario.lastLogin %}{{ usuario.lastLogin|date('Y-m-d') }}{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Confirmationtoken</strong></p>
+        <p>
+            {{ usuario.confirmationToken }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Passwordrequestedat</strong></p>
+        <p>
+            {% if usuario.passwordRequestedAt %}{{ usuario.passwordRequestedAt|date('Y-m-d') }}{% endif %}
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <p><strong>Roles</strong></p>
+        <p>
+            {% if usuario.roles %}{{ usuario.roles|join(', ') }}{% endif %}
+        </p>
+
     </div></div>
 
 <hr/>
@@ -94,8 +172,7 @@ Usuario
         </button>
     </form>
 </div>
-
-
+</div>
+{% endblock %}
 {% endblock %}
 
-{% endblock %}

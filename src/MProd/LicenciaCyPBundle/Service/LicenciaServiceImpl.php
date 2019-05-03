@@ -96,6 +96,7 @@ class LicenciaServiceImpl implements ILicenciaService {
     
     public function bindPersonaToLicencia(Licencia $licencia) {        
         // Saco los datos de la persona que vino en el request
+        /** @var Persona $personaRequest */ 
         $personaRequest = $licencia->getPersona();
         
         // Si la licencia tiene ID de Persona, lo levanto para que Doctrine no intente
@@ -104,7 +105,8 @@ class LicenciaServiceImpl implements ILicenciaService {
             is_object($personaRequest) &&
             !is_null($personaRequest->getId()))
         {           
-            // Obtengo la Persona desde la Base              
+            // Obtengo la Persona desde la Base      
+            /** @var Persona $persona */        
             $persona = $this->personaService->findById($personaRequest->getId());
 
             // SI existe actualizo los datos con los datos que viajaron en el request
@@ -113,7 +115,7 @@ class LicenciaServiceImpl implements ILicenciaService {
                 if(!is_null($personaRequest->getLocalidad())){
                     $persona->setLocalidadOtraProvincia(null);
                 }
-
+                
                 $licencia->setPersona($persona);
             }            
         }
