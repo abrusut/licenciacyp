@@ -79,3 +79,24 @@ services:
         arguments:
            - MProd\LicenciaCyPBundle\Entity\Provincia        
         autowiring_types: MProd\LicenciaCyPBundle\Repository\IProvinciaRepository
+
+    numerador_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - MProd\LicenciaCyPBundle\Entity\Numerador        
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\INumeradorRepository
+    
+    liquidacion_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - MProd\LicenciaCyPBundle\Entity\Liquidacion        
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\ILiquidacionRepository
+    
+    rendicion_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - MProd\LicenciaCyPBundle\Entity\Rendicion        
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\IRendicionRepository        

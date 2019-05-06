@@ -33,7 +33,9 @@ class LicenciaType extends AbstractType
                      // do not render as type="date", to avoid HTML5 date pickers
                      'html5' => false,
                      // add a class that can be selected in JavaScript
-                     'attr' => ['class' => 'js-datepicker disabledPanel']
+                     'attr' => ['class' => 'js-datepicker disabledPanel'],
+                     'disabled' => TRUE,
+                     'read_only' => TRUE
                     )
                 )
                 ->add('fechaDesde','date', array(                        

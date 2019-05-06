@@ -95,3 +95,18 @@ m_prod_licencia_cy_p_persona:
     resource: "@MProdLicenciaCyPBundle/Controller/PersonaController.php"
     type:     annotation
     prefix:   /admin    
+
+m_prod_licencia_cy_p_numerador:
+    resource: "@MProdLicenciaCyPBundle/Controller/NumeradorController.php"
+    type:     annotation
+    prefix:   /admin
+
+m_prod_licencia_cy_p_liquidacion:
+    resource: "@MProdLicenciaCyPBundle/Controller/LiquidacionController.php"
+    type:     annotation
+    prefix:   /admin
+
+m_prod_licencia_cy_p_rendicion:
+    resource: "@MProdLicenciaCyPBundle/Controller/RendicionController.php"
+    type:     annotation    
+    prefix:   /admin

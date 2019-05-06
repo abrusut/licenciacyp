@@ -237,12 +237,14 @@ class Licencia
             !is_null($this->getPersona()->getTipoDocumento()->getId()) &&
             !is_null($this->getPersona()->getNumeroDocumento()) &&
             !is_null($this->getTipoLicencia()) &&
-            !is_null($this->getTipoLicencia()->getId()) 
+            !is_null($this->getTipoLicencia()->getId()) &&
+            !is_null($this->getId())
             ){
 
             return $this->getPersona()->getTipoDocumento()->getId(). 
                     $this->getPersona()->getNumeroDocumento() .
-                    $this->getTipoLicencia()->getId();
+                    $this->getTipoLicencia()->getId() .
+                    $this->getId();
         }
             
         return "";
