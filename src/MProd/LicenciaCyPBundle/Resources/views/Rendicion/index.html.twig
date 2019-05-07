@@ -33,7 +33,7 @@ Rendicion
             <h2><a href="{{ path('rendicion') }}">Rendicion</a></h2>
         </div>
     </div>    
-<div class="col-md-3 pull-left">
+<div class="col-md-1 pull-left">
         
     <!-- PAGE SIZE -->
     <div class="pagination form-inline ">
@@ -51,7 +51,7 @@ Rendicion
 
 
 <!-- FILTERING -->
-<div class="col-md-6">
+<div class="col-md-5">
     <form action="{{ path('rendicion') }}" method="get" >
 
         <div class="input-group h3">
@@ -72,10 +72,14 @@ Rendicion
             
             
 
-<div class="col-md-3">
-            <a class="btn btn-primary h3 pull-right" href="{{ path('rendicion_new') }}" style="margin-bottom:10px">
+    <div class="col-md-6">
+        <a class="btn btn-primary h3 pull-right" href="{{ path('rendicion_new') }}" style="margin-bottom:10px">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
         </a>
+        <a class="btn btn-primary h3 pull-right" href="{{ path('rendicion_upload_file') }}" style="margin-right:10px;margin-bottom:10px">
+            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Subir Archivo
+        </a>
+
     </div>
 
     <div class="col-md-12">

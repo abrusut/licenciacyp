@@ -38,6 +38,22 @@ services:
     barcode_service:
         class: MProd\LicenciaCyPBundle\Service\Barcode\Barcode        
 
+    liquidacion_service:
+        class: MProd\LicenciaCyPBundle\Service\LiquidacionServiceImpl
+        autowire: true
+
+    numerador_service:
+        class: MProd\LicenciaCyPBundle\Service\NumeradorServiceImpl
+        autowire: true
+    
+    rendicion_service:
+        class: MProd\LicenciaCyPBundle\Service\RendicionServiceImpl
+        autowire: true
+    
+    atributo_configuracion_service:
+        class: MProd\LicenciaCyPBundle\Service\AtributoConfiguracionServiceImpl
+        autowire: true
+
     barcode.twig_extension:
         class: MProd\LicenciaCyPBundle\Twig\BarcodeTwigExtension
         arguments: ['@barcode_service','%barcode_directory%']
@@ -100,3 +116,10 @@ services:
         arguments:
             - MProd\LicenciaCyPBundle\Entity\Rendicion        
         autowiring_types: MProd\LicenciaCyPBundle\Repository\IRendicionRepository        
+    
+    atributo_configuracion_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - MProd\LicenciaCyPBundle\Entity\AtributoConfiguracion        
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\IAtributoConfiguracionRepository

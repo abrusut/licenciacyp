@@ -1,9 +1,9 @@
 <?php
-namespace MProd\LicenciaCyPBundle\Repository;
+namespace MProd\LicenciaCyPBundle\Service;
 
 use MProd\LicenciaCyPBundle\Entity\Rendicion;
 
-interface IRendicionRepository{
+interface IRendicionService{    
 
     /**
      * @param MProd\LicenciaCyPBundle\Entity\Rendicion     
@@ -11,11 +11,8 @@ interface IRendicionRepository{
      */  
     public function save(Rendicion $rendicion);
 
-     /**
-     * @param integer $id     
-     * @return MProd\LicenciaCyPBundle\Entity\Rendicion
-     */    
     public function findById($id);
 }
+
 
 ?>

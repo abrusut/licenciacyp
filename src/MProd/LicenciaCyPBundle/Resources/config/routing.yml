@@ -110,3 +110,8 @@ m_prod_licencia_cy_p_rendicion:
     resource: "@MProdLicenciaCyPBundle/Controller/RendicionController.php"
     type:     annotation    
     prefix:   /admin
+
+m_prod_licencia_cy_p_atributo_configuracion:
+    resource: "@MProdLicenciaCyPBundle/Controller/AtributoConfiguracionController.php"
+    type:     annotation  
+    prefix:   /admin  

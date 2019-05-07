@@ -10,46 +10,33 @@ use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\View\TwitterBootstrap3View;
 
-use MProd\LicenciaCyPBundle\Entity\Rendicion;
+use MProd\LicenciaCyPBundle\Entity\AtributoConfiguracion;
 
 /**
- * Rendicion controller.
+ * AtributoConfiguracion controller.
  *
- * @Route("/rendicion")
+ * @Route("/atributoconfiguracion")
  */
-class RendicionController extends Controller
+class AtributoConfiguracionController extends Controller
 {
     /**
-     * Lists all Rendicion entities.
+     * Lists all AtributoConfiguracion entities.
      *
-     * @Route("/rendicion/upload/file", name="rendicion_upload_file")
-     * @Method("GET")
-     */
-    public function rendicionUploadFileAction(Request $request)
-    {
-                
-        return $this->render('MProdLicenciaCyPBundle:Upload:upload.file.html.twig', array(            
-        ));
-    }
-
-    /**
-     * Lists all Rendicion entities.
-     *
-     * @Route("/", name="rendicion")
+     * @Route("/", name="atributoconfiguracion")
      * @Method("GET")
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('MProdLicenciaCyPBundle:Rendicion')->createQueryBuilder('e');
+        $queryBuilder = $em->getRepository('MProdLicenciaCyPBundle:AtributoConfiguracion')->createQueryBuilder('e');
 
         list($filterForm, $queryBuilder) = $this->filter($queryBuilder, $request);
-        list($rendicions, $pagerHtml) = $this->paginator($queryBuilder, $request);
+        list($atributoConfiguracions, $pagerHtml) = $this->paginator($queryBuilder, $request);
         
         $totalOfRecordsString = $this->getTotalOfRecordsString($queryBuilder, $request);
 
-        return $this->render('MProdLicenciaCyPBundle:Rendicion:index.html.twig', array(
-            'rendicions' => $rendicions,
+        return $this->render('MProdLicenciaCyPBundle:AtributoConfiguracion:index.html.twig', array(
+            'atributoConfiguracions' => $atributoConfiguracions,
             'pagerHtml' => $pagerHtml,
             'filterForm' => $filterForm->createView(),
             'totalOfRecordsString' => $totalOfRecordsString,
@@ -64,7 +51,7 @@ class RendicionController extends Controller
     */
     protected function filter($queryBuilder, $request)
     {
-        $filterForm = $this->createForm('MProd\LicenciaCyPBundle\Form\RendicionFilterType');
+        $filterForm = $this->createForm('MProd\LicenciaCyPBundle\Form\AtributoConfiguracionFilterType');
 
         // Bind values from the request
         $filterForm->handleRequest($request);
@@ -105,7 +92,7 @@ class RendicionController extends Controller
         {
             $requestParams = $request->query->all();
             $requestParams['pcg_page'] = $page;
-            return $me->generateUrl('rendicion', $requestParams);
+            return $me->generateUrl('atributoconfiguracion', $requestParams);
         };
 
         // Paginator - view
@@ -141,48 +128,48 @@ class RendicionController extends Controller
     
 
     /**
-     * Displays a form to create a new Rendicion entity.
+     * Displays a form to create a new AtributoConfiguracion entity.
      *
-     * @Route("/new", name="rendicion_new")
+     * @Route("/new", name="atributoconfiguracion_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
     
-        $rendicion = new Rendicion();
-        $form   = $this->createForm('MProd\LicenciaCyPBundle\Form\RendicionType', $rendicion);
+        $atributoConfiguracion = new AtributoConfiguracion();
+        $form   = $this->createForm('MProd\LicenciaCyPBundle\Form\AtributoConfiguracionType', $atributoConfiguracion);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $rendicion->setCreatedAt(new \DateTime());
-            $em->persist($rendicion);
+            $atributoConfiguracion->setCreatedAt(new \DateTime());
+            $em->persist($atributoConfiguracion);
             $em->flush();
             
-            $editLink = $this->generateUrl('rendicion_edit', array('id' => $rendicion->getId()));
-            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>Registro Creado</a>" );
+            $editLink = $this->generateUrl('atributoconfiguracion_edit', array('id' => $atributoConfiguracion->getId()));
+            $this->get('session')->getFlashBag()->add('success', "<a href='$editLink'>Registro Creado.</a>" );
             
-            $nextAction=  $request->get('submit') == 'save' ? 'rendicion' : 'rendicion_new';
+            $nextAction=  $request->get('submit') == 'save' ? 'atributoconfiguracion' : 'atributoconfiguracion_new';
             return $this->redirectToRoute($nextAction);
         }
-        return $this->render('MProdLicenciaCyPBundle:Rendicion:new.html.twig', array(
-            'rendicion' => $rendicion,
+        return $this->render('MProdLicenciaCyPBundle:AtributoConfiguracion:new.html.twig', array(
+            'atributoConfiguracion' => $atributoConfiguracion,
             'form'   => $form->createView(),
         ));
     }
     
 
     /**
-     * Finds and displays a Rendicion entity.
+     * Finds and displays a AtributoConfiguracion entity.
      *
-     * @Route("/{id}", name="rendicion_show")
+     * @Route("/{id}", name="atributoconfiguracion_show")
      * @Method("GET")
      */
-    public function showAction(Rendicion $rendicion)
+    public function showAction(AtributoConfiguracion $atributoConfiguracion)
     {
-        $deleteForm = $this->createDeleteForm($rendicion);
-        return $this->render('MProdLicenciaCyPBundle:Rendicion:show.html.twig', array(
-            'rendicion' => $rendicion,
+        $deleteForm = $this->createDeleteForm($atributoConfiguracion);
+        return $this->render('MProdLicenciaCyPBundle:AtributoConfiguracion:show.html.twig', array(
+            'atributoConfiguracion' => $atributoConfiguracion,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -190,28 +177,28 @@ class RendicionController extends Controller
     
 
     /**
-     * Displays a form to edit an existing Rendicion entity.
+     * Displays a form to edit an existing AtributoConfiguracion entity.
      *
-     * @Route("/{id}/edit", name="rendicion_edit")
+     * @Route("/{id}/edit", name="atributoconfiguracion_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Rendicion $rendicion)
+    public function editAction(Request $request, AtributoConfiguracion $atributoConfiguracion)
     {
-        $deleteForm = $this->createDeleteForm($rendicion);
-        $editForm = $this->createForm('MProd\LicenciaCyPBundle\Form\RendicionType', $rendicion);
+        $deleteForm = $this->createDeleteForm($atributoConfiguracion);
+        $editForm = $this->createForm('MProd\LicenciaCyPBundle\Form\AtributoConfiguracionType', $atributoConfiguracion);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $rendicion->setUpdatedAt(new \DateTime());            
-            $em->persist($rendicion);
+            $atributoConfiguracion->setUpdatedAt(new \DateTime());
+            $em->persist($atributoConfiguracion);
             $em->flush();
             
             $this->get('session')->getFlashBag()->add('success', 'Registro Actualizado!');
-            return $this->redirectToRoute('rendicion_edit', array('id' => $rendicion->getId()));
+            return $this->redirectToRoute('atributoconfiguracion_edit', array('id' => $atributoConfiguracion->getId()));
         }
-        return $this->render('MProdLicenciaCyPBundle:Rendicion:edit.html.twig', array(
-            'rendicion' => $rendicion,
+        return $this->render('MProdLicenciaCyPBundle:AtributoConfiguracion:edit.html.twig', array(
+            'atributoConfiguracion' => $atributoConfiguracion,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -220,72 +207,72 @@ class RendicionController extends Controller
     
 
     /**
-     * Deletes a Rendicion entity.
+     * Deletes a AtributoConfiguracion entity.
      *
-     * @Route("/{id}", name="rendicion_delete")
+     * @Route("/{id}", name="atributoconfiguracion_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Rendicion $rendicion)
+    public function deleteAction(Request $request, AtributoConfiguracion $atributoConfiguracion)
     {
     
-        $form = $this->createDeleteForm($rendicion);
+        $form = $this->createDeleteForm($atributoConfiguracion);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $rendicion->setFechaBaja(new \DateTime());
-            $em->persist($rendicion);
+            $atributoConfiguracion->setFechaBaja(new \DateTime());
+            $em->persist($atributoConfiguracion);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'Registro Borrado');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Dado de Baja');
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'Problemas Borrando Registro');
+            $this->get('session')->getFlashBag()->add('error', 'Problemas dando de Baja Registro');
         }
         
-        return $this->redirectToRoute('rendicion');
+        return $this->redirectToRoute('atributoconfiguracion');
     }
     
     /**
-     * Creates a form to delete a Rendicion entity.
+     * Creates a form to delete a AtributoConfiguracion entity.
      *
-     * @param Rendicion $rendicion The Rendicion entity
+     * @param AtributoConfiguracion $atributoConfiguracion The AtributoConfiguracion entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Rendicion $rendicion)
+    private function createDeleteForm(AtributoConfiguracion $atributoConfiguracion)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('rendicion_delete', array('id' => $rendicion->getId())))
+            ->setAction($this->generateUrl('atributoconfiguracion_delete', array('id' => $atributoConfiguracion->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
     }
     
     /**
-     * Delete Rendicion by id
+     * Delete AtributoConfiguracion by id
      *
-     * @Route("/delete/{id}", name="rendicion_by_id_delete")
+     * @Route("/delete/{id}", name="atributoconfiguracion_by_id_delete")
      * @Method("GET")
      */
-    public function deleteByIdAction(Rendicion $rendicion){
+    public function deleteByIdAction(AtributoConfiguracion $atributoConfiguracion){
         $em = $this->getDoctrine()->getManager();
         
         try {
-            $rendicion->setFechaBaja(new \DateTime());
-            $em->persist($rendicion);            
+            $atributoConfiguracion->setFechaBaja(new \DateTime());
+            $em->persist($atributoConfiguracion);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'Registro Borrado');
+            $this->get('session')->getFlashBag()->add('success', 'Registro Dado de Baja');
         } catch (Exception $ex) {
-            $this->get('session')->getFlashBag()->add('error', 'Problemas Borrando Registro');
+            $this->get('session')->getFlashBag()->add('error', 'Problemas dando de Baja Registro');
         }
 
-        return $this->redirect($this->generateUrl('rendicion'));
+        return $this->redirect($this->generateUrl('atributoconfiguracion'));
 
     }
     
 
     /**
     * Bulk Action
-    * @Route("/bulk-action/", name="rendicion_bulk_action")
+    * @Route("/bulk-action/", name="atributoconfiguracion_bulk_action")
     * @Method("POST")
     */
     public function bulkAction(Request $request)
@@ -296,23 +283,23 @@ class RendicionController extends Controller
         if ($action == "delete") {
             try {
                 $em = $this->getDoctrine()->getManager();
-                $repository = $em->getRepository('MProdLicenciaCyPBundle:Rendicion');
+                $repository = $em->getRepository('MProdLicenciaCyPBundle:AtributoConfiguracion');
 
                 foreach ($ids as $id) {
-                    $rendicion = $repository->find($id);
-                    $rendicion->setFechaBaja(new \DateTime());
-                    $em->persist($rendicion);
+                    $atributoConfiguracion = $repository->find($id);
+                    $atributoConfiguracion->setFechaBaja(new \DateTime());
+                    $em->persist($atributoConfiguracion);
                     $em->flush();
                 }
 
-                $this->get('session')->getFlashBag()->add('success', 'Registros Borrados!');
+                $this->get('session')->getFlashBag()->add('success', 'Registros Dados de Baja!');
 
             } catch (Exception $ex) {
-                $this->get('session')->getFlashBag()->add('error', 'Problemas Borrando Registros ');
+                $this->get('session')->getFlashBag()->add('error', 'Problemas dando de baja Registros ');
             }
         }
 
-        return $this->redirect($this->generateUrl('rendicion'));
+        return $this->redirect($this->generateUrl('atributoconfiguracion'));
     }
     
 

@@ -12,6 +12,7 @@ use MProd\LicenciaCyPBundle\Service\BoletaServiceImpl;
 use MProd\LicenciaCyPBundle\Service\ComprobanteServiceImpl;
 use MProd\LicenciaCyPBundle\Service\EncryptImpl;
 use MProd\LicenciaCyPBundle\Form\LicenciaReadOnlyType;
+use MProd\LicenciaCyPBundle\Service\AtributoConfiguracionServiceImpl;
 
 class LicenciaController extends Controller
 {
@@ -20,6 +21,17 @@ class LicenciaController extends Controller
     {
         $this->get('logger')->info("LicenciaController, addAction");
 
+         /** @var AtributoConfiguracionServiceImpl $atributoConfiguracionService */
+         $atributoConfiguracionService = $this->get('atributo_configuracion_service');
+
+         $terminosYCondiciones
+            = $atributoConfiguracionService
+                ->getAtributoConfiguracion('licencia_texto_terminoycondiciones');
+        
+        $ayudaGeneral
+                = $atributoConfiguracionService
+                    ->getAtributoConfiguracion('licencia_texto_ayudageneral');
+        
         $licencia = new Licencia();
         $form = $this
             ->container
@@ -61,10 +73,12 @@ class LicenciaController extends Controller
                 $this->get('logger')->error("LicenciaController,ERROR " . $exceptionNumber . " message " . $exceptionMessage);
                 $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .' . $sme->getMessage());
                 return $this->render(
-                    'MProdLicenciaCyPBundle:Licencia:add.html.twig',
+                    'MProdLicenciaCyPBundle:Licencia:alta.licencia.html.twig',
                     array(
                         'form' => $form->createView(),
-                        'licencia' => $licencia
+                        'licencia' => $licencia,
+                        'terminosYCondiciones' => $terminosYCondiciones,
+                        'ayudaGeneral' => $ayudaGeneral
                     )
                 );
             } catch (\RuntimeException $re) {
@@ -73,10 +87,12 @@ class LicenciaController extends Controller
                 $this->get('logger')->error("LicenciaController,ERROR " . $exceptionNumber . " message " . $exceptionMessage);
                 $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .' . $re->getMessage());
                 return $this->render(
-                    'MProdLicenciaCyPBundle:Licencia:add.html.twig',
+                    'MProdLicenciaCyPBundle:Licencia:alta.licencia.html.twig',
                     array(
                         'form' => $form->createView(),
-                        'licencia' => $licencia
+                        'licencia' => $licencia,
+                        'terminosYCondiciones' => $terminosYCondiciones,
+                        'ayudaGeneral' => $ayudaGeneral
                     )
                 );
             }
@@ -104,10 +120,12 @@ class LicenciaController extends Controller
                 $this->get('logger')->error("LicenciaController,ERROR " . $exceptionNumber . " message " . $exceptionMessage);
                 $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .' . $sme->getMessage());
                 return $this->render(
-                    'MProdLicenciaCyPBundle:Licencia:add.html.twig',
+                    'MProdLicenciaCyPBundle:Licencia:alta.licencia.html.twig',
                     array(
                         'form' => $form->createView(),
-                        'licencia' => $licencia
+                        'licencia' => $licencia,
+                        'terminosYCondiciones' => $terminosYCondiciones,
+                        'ayudaGeneral' => $ayudaGeneral
                     )
                 );
             } catch (\RuntimeException $re) {
@@ -116,10 +134,12 @@ class LicenciaController extends Controller
                 $this->get('logger')->error("LicenciaController,ERROR " . $exceptionNumber . " message " . $exceptionMessage);
                 $this->addFlash('licenciaForm_message_error', 'La Licencia no pudo ser generada .' . $re->getMessage());
                 return $this->render(
-                    'MProdLicenciaCyPBundle:Licencia:add.html.twig',
+                    'MProdLicenciaCyPBundle:Licencia:alta.licencia.html.twig',
                     array(
                         'form' => $form->createView(),
-                        'licencia' => $licencia
+                        'licencia' => $licencia,
+                        'terminosYCondiciones' => $terminosYCondiciones,
+                        'ayudaGeneral' => $ayudaGeneral
                     )
                 );
             }
@@ -136,10 +156,12 @@ class LicenciaController extends Controller
 
         $this->get('logger')->info("LicenciaController, devuelvo formulario a la vista");
         return $this->render(
-            'MProdLicenciaCyPBundle:Licencia:add.html.twig',
+            'MProdLicenciaCyPBundle:Licencia:alta.licencia.html.twig',
             array(
                 'form' => $form->createView(),
-                'licencia' => $licencia                
+                'licencia' => $licencia,
+                'terminosYCondiciones' => $terminosYCondiciones,
+                'ayudaGeneral' => $ayudaGeneral              
             )
         );
     }
