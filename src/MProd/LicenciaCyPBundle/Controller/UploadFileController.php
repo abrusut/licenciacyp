@@ -14,6 +14,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use MProd\LicenciaCyPBundle\Entity\FileRendicionLiquidacion;
 use MProd\LicenciaCyPBundle\Form\FileRendicionLiquidacionType;
 use MProd\LicenciaCyPBundle\Service\JsonServiceImpl;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\FileBag;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Rendicion controller.
@@ -21,68 +25,101 @@ use MProd\LicenciaCyPBundle\Service\JsonServiceImpl;
  * @Route("/upload")
  */
 class UploadFileController extends Controller
-{
-    /**
-     * Vich Uploader
-     *
-     * @Route("/filevich", name="vich_upload_file_rendicion_liquidacion")
+{   
+
+    /**     
+     * Muestra el form para upload de archivos
+     * @Route("/file", name="index_file_upload")
      * @Method("GET")
      */
-    public function vichRendicionLiquidacionUploadFileAction(Request $request)
-    {
-        $this->get('logger')->info("UploadFileController, vichRendicionLiquidacionUploadFileAction ");
-
-        $fileRendicionLiquidacion = new FileRendicionLiquidacion();
-        $form = $this
-            ->container
-            ->get('form.factory')
-            ->create(new FileRendicionLiquidacionType(), $fileRendicionLiquidacion);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('logger')->info("UploadFileController, archivo enviado y validado OK..");
-        }
-               
-        return $this->render('MProdLicenciaCyPBundle:Upload:vich.upload.file.html.twig',  array(
-            'form' => $form->createView()
-        ));
-    }
-
-    /**
-     * Lists all Rendicion entities.
-     *
-     * @Route("/file", name="upload_file_rendicion_liquidacion")
-     * @Method("GET")
-     */
-    public function rendicionLiquidacionUploadFileAction(Request $request)
-    {
-                
+    public function indexUploadFileAction(Request $request)
+    {                
         return $this->render('MProdLicenciaCyPBundle:Upload:nostg.upload.file.html.twig', array(            
         ));
     }
 
     /**
-     * Lists all Rendicion entities.
+     * Procesa el Upload de Rendiciones y Liquidaciones
      *
-     * @Route("/file/process", name="process_file_rendicion_liquidacion")
+     * @Route("/file/process", name="process_file_upload")
      * @Method("POST")
      */
     public function rendicionLiquidacionProcessFileAction(Request $request)        
     {
-        $files = $request->files;
+        $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction ");
+        if (!$request->isXmlHttpRequest()) {
+            $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction, llamada no ajax ");
+            return new JsonResponse(array('message' => 'No es posible enviar el formulario'), 400);
+        }
 
-        $resultUpload = true;
+        $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction, leo el archivo");
+        /** @var FileBag  $file */        
+        $file = $request->files;  
+        if(is_null($file)){
+            $this->get('logger')->info("UploadFileController, file is null ");    
+            return new JsonResponse(array('message' => 'No adjunta archivo'), 400);
+        }
+        
+        /** @var UploadedFile  $fileUploadedFile */
+        $fileUploadedFile = null;
+        if(!is_null($file->all()) && is_array($file->all()) ){
+            foreach ($file->all() as $key => $value) {
+                if($value instanceof UploadedFile){
+                    $fileUploadedFile = $value;  
+                    break;  
+                }
+            }
+            
+        }
+        
+        $fileName = sha1(md5(sha1(time().$fileUploadedFile->getClientOriginalName()).time())).$fileUploadedFile->getExtension();
+        $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction, fileName ".$fileName);
 
-         /** @var JsonServiceImp $jsonService */
-         $jsonService = $this->get('json_service');          
-         //$jsonService->setArrayIgnoredAttributes(array('licencias'));
+        $fileRendicionLiquidacion = new FileRendicionLiquidacion();
+        $fileRendicionLiquidacion->bindValueFromFile($fileUploadedFile,$fileName);        
+        $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction, FileRendicionLiquidacion ".$fileRendicionLiquidacion);
+        
+        $validator = $this->get('validator');
+        $errors = $validator->validate($fileRendicionLiquidacion);
+
+        if (count($errors) > 0) {            
+            $errorsString = (string) $errors;
+            $this->get('logger')->info("UploadFileController, No supera validaciones: ".$errorsString);
+            return new JsonResponse(array('message' => $errorsString), 400);
+        }
+         
+        $pathForUpload = $this->getParameter('app.path.upload.file.rendicion.liquidacion');
+        try {
+            $this->get('logger')->info("UploadFileController, Voy a subir el archivo a ".$pathForUpload. " fileName ". $fileName);
+            $fileUploadedFile->move(
+                $pathForUpload,
+                $fileName
+            );
+        } catch (FileException $e) {
+            $this->get('logger')->error("UploadFileController, Error Subiendo archivo a ".$pathForUpload. " fileName ". $fileName);
+            $this->get('logger')->error("UploadFileController, FileException: ".$e);
+            return new JsonResponse(array('message' => $e->getMessage()), 400);
+        }catch (Exception $ex) {
+            $this->get('logger')->error("UploadFileController, Error Subiendo archivo a ".$pathForUpload. " fileName ". $fileName);
+            $this->get('logger')->error("UploadFileController, Exception: ".$ex);
+            return new JsonResponse(array('message' => $ex->getMessage()), 400);
+        }
  
-         $resultJson = $jsonService->transformToJson($resultUpload);
-                      
- 
-         $this->get('logger')->info("Result Upload: ".$resultJson);  
- 
-         return new Response($resultJson,Response::HTTP_OK, array('content-type'=> 'application/json'));       
+        $this->get('logger')->info("UploadFileController, Persisto el registro : ".$fileRendicionLiquidacion);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($fileRendicionLiquidacion);
+        $em->flush();
+     
+        $this->get('logger')->info("UploadFileController, Devuelvo Success 200 : ".$fileRendicionLiquidacion);
+        return new JsonResponse(array('message' => 'Success!'), 200);        
+               
     }
+
+    /**
+     * @return string
+     */
+    private function generateUniqueFileName()
+    {        
+        return md5(uniqid());
+    }    
 }

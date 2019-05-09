@@ -7,11 +7,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\PrePersist;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * FileRendicionLiquidacion
- *
- * @Vich\Uploadable
+ * 
  * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\FileRendicionLiquidacionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -31,8 +31,10 @@ class FileRendicionLiquidacion
     private $nombreArchivo;
 
     /**
-     * @Vich\UploadableField(mapping="rendicion_liquidacion_file_config", fileNameProperty="nombreArchivo")
-     * @var File
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Por favor adjunte un csv o txt.")
+     * @Assert\File(mimeTypes={ "text/csv" })
      */
     private $archivo;
    
@@ -154,5 +156,50 @@ class FileRendicionLiquidacion
     public function getFechaBaja()
     {
         return $this->fechaBaja;
+    }
+
+    /**
+     * Set nombreArchivo
+     *
+     * @param string $nombreArchivo
+     * @return FileRendicionLiquidacion
+     */
+    public function setNombreArchivo($nombreArchivo)
+    {
+        $this->nombreArchivo = $nombreArchivo;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreArchivo
+     *
+     * @return string 
+     */
+    public function getNombreArchivo()
+    {
+        return $this->nombreArchivo;
+    }
+
+    /**
+     * Get archivo
+     *
+     * @return \File 
+     */
+    public function getArchivo()
+    {
+        return $this->archivo;
+    }
+
+    /**
+     * bind values from archivo
+     *
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile 
+     * @return void
+     */
+    public function bindValueFromFile(UploadedFile $file){
+        $this->setNombreArchivo($file->getFilename());
+        
+
     }
 }

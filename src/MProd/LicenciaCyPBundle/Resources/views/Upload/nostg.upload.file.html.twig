@@ -48,11 +48,13 @@
 
         $("#file-upload").fileinput({
             theme: 'fas',
-            uploadUrl: "{{path('process_file_rendicion_liquidacion')}}",
+            uploadUrl: "{{path('process_file_upload')}}",
             language:'es',    
             allowedFileExtensions: ['txt','csv'],
-            maxFilesNum: 3 ,
-            showAjaxErrorDetails: false           
+            maxFilesNum: 3 ,            
+            showAjaxErrorDetails: false  ,
+            required: true
+                     
         });
 
     });

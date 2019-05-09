@@ -2932,7 +2932,7 @@
             }
         },
         _ajaxSubmit: function (fnBefore, fnSuccess, fnComplete, fnError, formdata, fileId, index, vUrl) {
-            debugger;
+            //debugger;
             var self = this, settings, defaults, data, processQueue;
             if (!self._raise('filepreajax', [formdata, fileId, index])) {
                 return;

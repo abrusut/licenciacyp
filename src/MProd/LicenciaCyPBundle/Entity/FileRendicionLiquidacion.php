@@ -7,11 +7,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\PrePersist;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\FileBag;
 
 /**
  * FileRendicionLiquidacion
- *
- * @Vich\Uploadable
+ * 
  * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\FileRendicionLiquidacionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -31,8 +32,7 @@ class FileRendicionLiquidacion
     private $nombreArchivo;
 
     /**
-     * @Vich\UploadableField(mapping="rendicion_liquidacion_file_config", fileNameProperty="nombreArchivo")
-     * @var File
+     * @ORM\Column(type="string")    
      */
     private $archivo;
    
@@ -188,4 +188,36 @@ class FileRendicionLiquidacion
     {
         return $this->archivo;
     }
+
+      /**
+     * Set archivo
+     *
+     * @param string $archivo
+     * @return FileRendicionLiquidacion
+     */
+    public function setArchivo($archivo)
+    {
+        $this->archivo = $archivo;
+
+        return $this;
+    }
+
+    /**
+     * bind values from archivo
+     *
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile 
+     * @return void
+     */
+    public function bindValueFromFile(UploadedFile $file, $fileName){
+        $this->setNombreArchivo($file->getFilename());
+        $this->setArchivo($fileName);
+        $this->setCreatedAt(new \DateTime());                
+    }
+   
+    public function __toString() {
+        return $this->getNombreArchivo() ." - ".$this->getArchivo();
+    }
+
+
+  
 }
