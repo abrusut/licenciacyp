@@ -35,6 +35,10 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         array (
             'WhiteOctober\\TCPDFBundle\\' => 25,
         ),
+        'V' => 
+        array (
+            'Vich\\UploaderBundle\\' => 20,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -138,6 +142,10 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         'WhiteOctober\\TCPDFBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/whiteoctober/tcpdf-bundle',
+        ),
+        'Vich\\UploaderBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vich/uploader-bundle',
         ),
         'Twig\\' => 
         array (
@@ -365,6 +373,10 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         ),
         'M' => 
         array (
+            'Metadata\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/metadata/src',
+            ),
             'Markup\\BarcodeBundle' => 
             array (
                 0 => __DIR__ . '/..' . '/markup/barcode-bundle',

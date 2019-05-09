@@ -12,6 +12,7 @@ return array(
     'Zend\\Escaper\\' => array($vendorDir . '/zendframework/zend-escaper/src'),
     'Zend\\Barcode\\' => array($vendorDir . '/zendframework/zend-barcode/src'),
     'WhiteOctober\\TCPDFBundle\\' => array($vendorDir . '/whiteoctober/tcpdf-bundle'),
+    'Vich\\UploaderBundle\\' => array($vendorDir . '/vich/uploader-bundle'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Symfony\\Polyfill\\Util\\' => array($vendorDir . '/symfony/polyfill-util'),
     'Symfony\\Polyfill\\Php70\\' => array($vendorDir . '/symfony/polyfill-php70'),

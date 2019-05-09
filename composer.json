@@ -29,7 +29,8 @@
         "mwsimple/barcode-bundle": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0",
         "sensio/generator-bundle": "^3.1",
-        "petkopara/crud-generator-bundle": "^3.0"      
+        "petkopara/crud-generator-bundle": "^3.0",
+        "vich/uploader-bundle": "^1.4"      
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^2.3",

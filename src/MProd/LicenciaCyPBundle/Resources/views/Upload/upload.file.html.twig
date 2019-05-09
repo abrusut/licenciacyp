@@ -29,7 +29,7 @@
     <link href="{{ asset('css/theme.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="{{ asset('js/sortable.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/fileinput.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/fileinput.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/es.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/theme.min.js') }}" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
@@ -133,7 +133,7 @@
                 <h1><a href="{{ path('rendicion') }}">Subir Rendiciones / Liquidaciones</a>
                 </h1>
             </div>
-            <form enctype="multipart/form-data">
+            <form enctype="multipart/form-data" method="post" action="{{path('process_file_rendicion_liquidacion')}}">
                 <input id="file-upload" type="file" multiple><br />
                 <button type="submit" class="btn btn-success">Subir Archivos</button>
                 <button type="reset" class="btn btn-warning">Reset</button>
@@ -152,12 +152,10 @@
     $(document).ready(function () {
 
         $("#file-upload").fileinput({
-            'theme': 'explorer',
-            'uploadUrl': "{{path('rendicion_upload_file')}}",
-            language:'es',
-            overwriteInitial: false,
-            initialPreviewAsData: true,
-            dropZoneTitle:'Suelta los archivos aqui para Subirlos'          
+            theme: 'explorer',
+            uploadUrl: "{{path('process_file_rendicion_liquidacion')}}",
+            language:'es',            
+            
         });
 
     });

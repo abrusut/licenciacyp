@@ -10,3 +10,5 @@ parameters:
     mailer_user: agespinosa
     mailer_password: null
     secret: 2474fa53cf18a3fa7c197b5835c5e10f9
+
+    app.path.upload.file.rendicion.liquidacion: /uploads/files/

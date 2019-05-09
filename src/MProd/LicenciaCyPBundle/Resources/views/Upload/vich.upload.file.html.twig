@@ -1,0 +1,45 @@
+{% extends "MProdLicenciaCyPBundle:Page:index.html.twig" %}
+
+
+{% block cuerpo %}
+<div class="loading">Loading&#8230;</div>
+     {% if app.session.flashBag.has('licenciaForm_message') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('licenciaForm_message') %}
+                {{ msg }}
+            {% endfor %}
+            
+        </div>
+    {% endif %}
+
+    {% if app.session.flashBag.has('licenciaForm_message_error') %}
+        <div class="alert alert-danger">
+            {% for msg in app.session.flashBag.get('licenciaForm_message_error') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block  breadcrumb %}
+        {% set breadoption = { 'Inicio': 'path_home', 'Subir Rendicion/Liquidacion': '#'} %}
+        {{parent()}}
+    {% endblock%}
+
+    <div class="row form">        
+            <h3>Subir Rendicion/Liquidacion</h3>
+            <div class="row">                             
+                {{ form_start(form) }}                                                                
+                
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+                 <input type='submit' value='Guardar'>
+            </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+  
+    <script language = "javascript"  src = "{{ asset('js/licencia.js') }}">          
+    </script> 
+
+{% endblock %}   

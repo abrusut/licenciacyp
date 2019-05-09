@@ -11,6 +11,7 @@ return array(
     'STG\\DEIM\\Themes\\Bundles\\AplicativoBundle' => array($vendorDir . '/stg/theme-bundle'),
     'STG\\DEIM\\Security\\Bundle\\CasBundle' => array($vendorDir . '/stg/cas-bundle'),
     'Pagerfanta\\' => array($vendorDir . '/pagerfanta/pagerfanta/src'),
+    'Metadata\\' => array($vendorDir . '/jms/metadata/src'),
     'Markup\\BarcodeBundle' => array($vendorDir . '/markup/barcode-bundle'),
     'Knp\\Component' => array($vendorDir . '/knplabs/knp-components/src'),
     'Imagine' => array($vendorDir . '/imagine/imagine/lib'),

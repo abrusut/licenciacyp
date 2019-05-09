@@ -19,19 +19,7 @@ use MProd\LicenciaCyPBundle\Entity\Rendicion;
  */
 class RendicionController extends Controller
 {
-    /**
-     * Lists all Rendicion entities.
-     *
-     * @Route("/rendicion/upload/file", name="rendicion_upload_file")
-     * @Method("GET")
-     */
-    public function rendicionUploadFileAction(Request $request)
-    {
-                
-        return $this->render('MProdLicenciaCyPBundle:Upload:upload.file.html.twig', array(            
-        ));
-    }
-
+    
     /**
      * Lists all Rendicion entities.
      *
