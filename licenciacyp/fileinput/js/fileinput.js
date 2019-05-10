@@ -1038,6 +1038,7 @@
                     }
                 },
                 reset: function () {
+                    debugger;
                     var rm = self.resumableManager;
                     rm.processed = {};
                 },
@@ -2932,60 +2933,59 @@
             }
         },
         _ajaxSubmit: function (fnBefore, fnSuccess, fnComplete, fnError, formdata, fileId, index, vUrl) {
-            //debugger;
+            debugger;
             var self = this, settings, defaults, data, processQueue;
             if (!self._raise('filepreajax', [formdata, fileId, index])) {
                 return;
             }
-            formdata.append('initialPreview', JSON.stringify(self.initialPreview));
-            formdata.append('initialPreviewConfig', JSON.stringify(self.initialPreviewConfig));
-            formdata.append('initialPreviewThumbTags', JSON.stringify(self.initialPreviewThumbTags));
-            self._initAjaxSettings();
-            self._mergeAjaxCallback('beforeSend', fnBefore);
-            self._mergeAjaxCallback('success', fnSuccess);
-            self._mergeAjaxCallback('complete', fnComplete);
-            self._mergeAjaxCallback('error', fnError);
-            vUrl = vUrl || self.uploadUrlThumb || self.uploadUrl;
-            if (typeof vUrl === 'function') {
-                vUrl = vUrl();
-            }
-            data = self._getExtraData(fileId, index) || {};
-            if (typeof data === 'object') {
-                $.each(data, function (key, value) {
-                    formdata.append(key, value);
-                });
-            }
-            defaults = {
-                xhr: function () {
-                    var xhrobj = $.ajaxSettings.xhr();
-                    return self._initXhr(xhrobj, fileId, self.fileManager.count());
-                },
-                url: self._encodeURI(vUrl),
-                type: 'POST',
-                dataType: 'json',
-                data: formdata,
-                cache: false,
-                processData: false,
-                contentType: false
-            };
-            settings = $.extend(true, {}, defaults, self._ajaxSettings);
-            self.ajaxQueue.push(settings);
-            processQueue = function () {
-                var config, xhr;
-                if (self.ajaxCurrentThreads < self.maxAjaxThreads) {
-                    config = self.ajaxQueue.shift();
-                    if (typeof config !== 'undefined') {
-                        self.ajaxCurrentThreads++;
-                        xhr = $.ajax(config).done(function () {
-                            clearInterval(self.ajaxQueueIntervalId);
-                            self.ajaxCurrentThreads--;
-                        });
-                        self.ajaxRequests.push(xhr);
-                    }
+                formdata.append('initialPreview', JSON.stringify(self.initialPreview));
+                formdata.append('initialPreviewConfig', JSON.stringify(self.initialPreviewConfig));
+                formdata.append('initialPreviewThumbTags', JSON.stringify(self.initialPreviewThumbTags));
+                self._initAjaxSettings();
+                self._mergeAjaxCallback('beforeSend', fnBefore);
+                self._mergeAjaxCallback('success', fnSuccess);
+                self._mergeAjaxCallback('complete', fnComplete);
+                self._mergeAjaxCallback('error', fnError);
+                vUrl = vUrl || self.uploadUrlThumb || self.uploadUrl;
+                if (typeof vUrl === 'function') {
+                    vUrl = vUrl();
                 }
-            };
-            self.ajaxQueueIntervalId = setInterval(processQueue, self.queueDelay);
-
+                data = self._getExtraData(fileId, index) || {};
+                if (typeof data === 'object') {
+                    $.each(data, function (key, value) {
+                        formdata.append(key, value);
+                    });
+                }
+                defaults = {
+                    xhr: function () {
+                        var xhrobj = $.ajaxSettings.xhr();
+                        return self._initXhr(xhrobj, fileId, self.fileManager.count());
+                    },
+                    url: self._encodeURI(vUrl),
+                    type: 'POST',
+                    dataType: 'json',
+                    data: formdata,
+                    cache: false,
+                    processData: false,
+                    contentType: false
+                };
+                settings = $.extend(true, {}, defaults, self._ajaxSettings);
+                self.ajaxQueue.push(settings);
+                processQueue = function () {
+                    var config, xhr;
+                    if (self.ajaxCurrentThreads < self.maxAjaxThreads) {
+                        config = self.ajaxQueue.shift();
+                        if (typeof config !== 'undefined') {
+                            self.ajaxCurrentThreads++;
+                            xhr = $.ajax(config).done(function () {
+                                clearInterval(self.ajaxQueueIntervalId);
+                                self.ajaxCurrentThreads--;
+                            });
+                            self.ajaxRequests.push(xhr);
+                        }
+                    }
+                };
+                self.ajaxQueueIntervalId = setInterval(processQueue, self.queueDelay);                    
         },
         _mergeArray: function (prop, content) {
             var self = this, arr1 = $h.cleanArray(self[prop]), arr2 = $h.cleanArray(content);
@@ -3105,6 +3105,7 @@
             }
         },
         _uploadSingle: function (i, id, isBatch) {
+            debugger;
             var self = this, fm = self.fileManager, count = fm.count(), formdata = new FormData(), outData,
                 previewId = self.previewInitId + '-' + i, $thumb, chkComplete, $btnUpload, $btnDelete,
                 hasPostData = count > 0 || !$.isEmptyObject(self.uploadExtraData), uploadFailed, $prog, fnBefore,
@@ -3523,7 +3524,28 @@
                     if ($frame.hasClass('file-preview-error') && !self.retryErrorUploads) {
                         return;
                     }
-                    self._uploadSingle(self.fileManager.getIndex(id), id, false);
+                    $.confirm({
+                        title: 'Atencion!',
+                        content: 'Desea Procesar el Archivo?!',
+                        icon: 'fa fa-question-circle-o',
+                        theme: 'modern',
+                        closeIcon: true,
+                        animation: 'scale',
+                        type: 'blue',
+                        buttons: {
+                            Procesar:  {
+                                text: 'Procesar',
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    self._uploadSingle(self.fileManager.getIndex(id), id, false);
+                                }
+                                
+                            },
+                            cancel: function () {
+                                //$('#uploadForm').trigger("reset");                                
+                            }
+                        }
+                    });      
                 });
             });
         },
@@ -5133,7 +5155,7 @@
             self._raise('filecleared');
             return self.$element;
         },
-        reset: function () {
+        reset: function () {            
             var self = this;
             if (!self._raise('filereset')) {
                 return;
@@ -5173,55 +5195,78 @@
             self._initDragDrop();
             return self.$element;
         },
-        upload: function () {
+        upload: function () {                        
             var self = this, fm = self.fileManager, totLen = fm.count(), i, outData, len,
                 hasExtraData = !$.isEmptyObject(self._getExtraData());
             if (!self.isAjaxUpload || self.isDisabled || !self._isFileSelectionValid(totLen)) {
                 return;
             }
-            self.lastProgress = 0;
-            self._resetUpload();
-            if (totLen === 0 && !hasExtraData) {
-                self._showFileError(self.msgUploadEmpty);
-                return;
-            }
-            self.cancelling = false;
-            self.$progress.show();
-            self.lock();
-            len = fm.count();
-            if (totLen === 0 && hasExtraData) {
-                self._setProgress(2);
-                self._uploadExtraOnly();
-                return;
-            }
-            if (self.enableResumableUpload) {
-                return self.resume();
-            }
-            if (self.uploadAsync || self.enableResumableUpload) {
-                outData = self._getOutData(null);
-                self._raise('filebatchpreupload', [outData]);
-                self.fileBatchCompleted = false;
-                self.uploadCache = {content: [], config: [], tags: [], append: true};
-                for (i = 0; i < len; i++) {
-                    self.uploadCache.content[i] = null;
-                    self.uploadCache.config[i] = null;
-                    self.uploadCache.tags[i] = null;
+
+            $.confirm({
+                title: 'Atencion!',
+                content: '¿Desea Procesar TODOS los Archivos?',
+                icon: 'fa fa-question-circle-o',
+                theme: 'modern',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'blue',
+                alignMiddle:true,
+                draggable: true,
+                buttons: {                    
+                    Procesar: {                        
+                        text: 'Procesar',
+                        btnClass: 'btn-red',
+                        action: function(){ 
+                            self.lastProgress = 0;
+                            self._resetUpload();
+                            if (totLen === 0 && !hasExtraData) {
+                                self._showFileError(self.msgUploadEmpty);
+                                return;
+                            }
+                            self.cancelling = false;
+                            self.$progress.show();
+                            self.lock();
+                            len = fm.count();
+                            if (totLen === 0 && hasExtraData) {
+                                self._setProgress(2);
+                                self._uploadExtraOnly();
+                                return;
+                            }
+                            if (self.enableResumableUpload) {
+                                return self.resume();
+                            }
+                            if (self.uploadAsync || self.enableResumableUpload) {
+                                outData = self._getOutData(null);
+                                self._raise('filebatchpreupload', [outData]);
+                                self.fileBatchCompleted = false;
+                                self.uploadCache = {content: [], config: [], tags: [], append: true};
+                                for (i = 0; i < len; i++) {
+                                    self.uploadCache.content[i] = null;
+                                    self.uploadCache.config[i] = null;
+                                    self.uploadCache.tags[i] = null;
+                                }
+                                self.$preview.find('.file-preview-initial').removeClass($h.SORT_CSS);
+                                self._initSortable();
+                                self.cacheInitialPreview = self.getPreview();
+                            }
+                            self._setProgress(2);
+                            self.hasInitData = false;
+                            if (self.uploadAsync) {
+                                i = 0;
+                                $.each(fm.stack, function (id) {
+                                    self._uploadSingle(i, id, true, true);
+                                    i++;
+                                });
+                                return;
+                            }
+                            self._uploadBatch();
+                        }
+                    },
+                    cancelar: function () {                                                
+                        //$('#uploadForm').trigger("reset");
+                    }
                 }
-                self.$preview.find('.file-preview-initial').removeClass($h.SORT_CSS);
-                self._initSortable();
-                self.cacheInitialPreview = self.getPreview();
-            }
-            self._setProgress(2);
-            self.hasInitData = false;
-            if (self.uploadAsync) {
-                i = 0;
-                $.each(fm.stack, function (id) {
-                    self._uploadSingle(i, id, true);
-                    i++;
-                });
-                return;
-            }
-            self._uploadBatch();
+            });      
             return self.$element;
         },
         destroy: function () {

@@ -12,8 +12,8 @@ use Symfony\Component\HttpFoundation\FileBag;
 
 /**
  * FileRendicionLiquidacion
- * 
- * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\FileRendicionLiquidacionRepository")
+ *  
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  */
 class FileRendicionLiquidacion
@@ -26,22 +26,50 @@ class FileRendicionLiquidacion
     private $id;
     
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $nombreArchivo;
 
     /**
-     * @ORM\Column(type="string")    
+     * @ORM\Column(type="string", nullable=true)    
      */
     private $archivo;
    
+    /**
+     * @ORM\Column(type="string", nullable=true)    
+     */
+    private $extension;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)    
+     */
+    private $size;
+
+     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $nombreOriginalArchivo;
+
+     /**
+     * The mime type provided by the uploader.
+     * @ORM\Column(type="string", length=100,nullable=true)
+     *
+     * @var string
+     */
+    private $mimeType;
+
+    /**     
+     * @ORM\Column(type="string", length=100,nullable=true)    
+     * @var string
+     */
+    private $guessClientExtension;    
 
      /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     * @Assert\NotNull()
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)     
      */
     private $createdAt;
 
@@ -60,6 +88,39 @@ class FileRendicionLiquidacion
      */
     private $fechaBaja;
 
+
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="procesado", type="boolean")
+     * 
+     */
+    protected $procesado;
+
+    public function __construct(){
+        $this->procesado = false;
+    }
+    /**
+     * bind values from archivo
+     *
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile 
+     * @return void
+     */
+    public function bindValueFromFile(UploadedFile $file, $fileName){
+        $this->setNombreOriginalArchivo($file->getClientOriginalName());
+        $this->setExtension($file->getClientOriginalExtension());
+        $this->setSize($file->getClientSize());
+        $this->setNombreArchivo($file->getFilename());
+        $this->setArchivo($fileName);
+        $this->setGuessClientExtension($file->guessClientExtension());
+        $this->setMimeType($file->getClientMimeType());
+        
+        //$this->setCreatedAt(new \DateTime());        
+    }
+   
+    public function __toString() {
+        return $this->getNombreArchivo() ." - ".$this->getArchivo();
+    }
 
 
     /** @ORM\PreUpdate */
@@ -202,22 +263,165 @@ class FileRendicionLiquidacion
         return $this;
     }
 
+    
     /**
-     * bind values from archivo
+     * Set extension
      *
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile 
-     * @return void
+     * @param string $extension
+     * @return FileRendicionLiquidacion
      */
-    public function bindValueFromFile(UploadedFile $file, $fileName){
-        $this->setNombreArchivo($file->getFilename());
-        $this->setArchivo($fileName);
-        $this->setCreatedAt(new \DateTime());                
-    }
-   
-    public function __toString() {
-        return $this->getNombreArchivo() ." - ".$this->getArchivo();
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+
+        return $this;
     }
 
+    /**
+     * Get extension
+     *
+     * @return string 
+     */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
 
-  
+    /**
+     * Set size
+     *
+     * @param string $size
+     * @return FileRendicionLiquidacion
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return string 
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set nombreOriginalArchivo
+     *
+     * @param string $nombreOriginalArchivo
+     * @return FileRendicionLiquidacion
+     */
+    public function setNombreOriginalArchivo($nombreOriginalArchivo)
+    {
+        $this->nombreOriginalArchivo = $nombreOriginalArchivo;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreOriginalArchivo
+     *
+     * @return string 
+     */
+    public function getNombreOriginalArchivo()
+    {
+        return $this->nombreOriginalArchivo;
+    }
+
+    /**
+     * Set mimeType
+     *
+     * @param string $mimeType
+     * @return FileRendicionLiquidacion
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mimeType = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * Get mimeType
+     *
+     * @return string 
+     */
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
+
+    /**
+     * Set guessClientExtension
+     *
+     * @param string $guessClientExtension
+     * @return FileRendicionLiquidacion
+     */
+    public function setGuessClientExtension($guessClientExtension)
+    {
+        $this->guessClientExtension = $guessClientExtension;
+
+        return $this;
+    }
+
+    /**
+     * Get guessClientExtension
+     *
+     * @return string 
+     */
+    public function getGuessClientExtension()
+    {
+        return $this->guessClientExtension;
+    }
+
+    /**
+     * Set guessExtension
+     *
+     * @param string $guessExtension
+     * @return FileRendicionLiquidacion
+     */
+    public function setGuessExtension($guessExtension)
+    {
+        $this->guessExtension = $guessExtension;
+
+        return $this;
+    }
+
+    /**
+     * Get guessExtension
+     *
+     * @return string 
+     */
+    public function getGuessExtension()
+    {
+        return $this->guessExtension;
+    }
+
+    /**
+     * Set procesado
+     *
+     * @param boolean $procesado
+     * @return FileRendicionLiquidacion
+     */
+    public function setProcesado($procesado)
+    {
+        $this->procesado = $procesado;
+
+        return $this;
+    }
+
+    /**
+     * Get procesado
+     *
+     * @return boolean 
+     */
+    public function getProcesado()
+    {
+        return $this->procesado;
+    }
 }

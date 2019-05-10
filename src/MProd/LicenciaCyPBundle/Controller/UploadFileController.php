@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use MProd\LicenciaCyPBundle\Exception\SimpleMessageException;
+use MProd\LicenciaCyPBundle\Service\FileUploaderServiceImpl;
 
 /**
  * Rendicion controller.
@@ -47,69 +49,46 @@ class UploadFileController extends Controller
     public function rendicionLiquidacionProcessFileAction(Request $request)        
     {
         $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction ");
+
         if (!$request->isXmlHttpRequest()) {
             $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction, llamada no ajax ");
             return new JsonResponse(array('message' => 'No es posible enviar el formulario'), 400);
         }
 
         $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction, leo el archivo");
-        /** @var FileBag  $file */        
-        $file = $request->files;  
-        if(is_null($file)){
-            $this->get('logger')->info("UploadFileController, file is null ");    
-            return new JsonResponse(array('message' => 'No adjunta archivo'), 400);
-        }
+         
+         /** @var UploadedFile  $fileUploadedFile */
+        $fileUploadedFile = $this
+                                ->getUploadedFile($request);
         
-        /** @var UploadedFile  $fileUploadedFile */
-        $fileUploadedFile = null;
-        if(!is_null($file->all()) && is_array($file->all()) ){
-            foreach ($file->all() as $key => $value) {
-                if($value instanceof UploadedFile){
-                    $fileUploadedFile = $value;  
-                    break;  
-                }
-            }
-            
-        }
-        
-        $fileName = sha1(md5(sha1(time().$fileUploadedFile->getClientOriginalName()).time())).$fileUploadedFile->getExtension();
-        $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction, fileName ".$fileName);
+        $fileName = $this
+                    ->generateUniqueFileName($fileUploadedFile->getClientOriginalName()).
+                        "." .
+                        $fileUploadedFile->getClientOriginalExtension();
 
-        $fileRendicionLiquidacion = new FileRendicionLiquidacion();
-        $fileRendicionLiquidacion->bindValueFromFile($fileUploadedFile,$fileName);        
-        $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction, FileRendicionLiquidacion ".$fileRendicionLiquidacion);
-        
-        $validator = $this->get('validator');
-        $errors = $validator->validate($fileRendicionLiquidacion);
-
-        if (count($errors) > 0) {            
-            $errorsString = (string) $errors;
-            $this->get('logger')->info("UploadFileController, No supera validaciones: ".$errorsString);
-            return new JsonResponse(array('message' => $errorsString), 400);
-        }
+        $this->get('logger')->info("UploadFileController, rendicionLiquidacionProcessFileAction, fileName ".$fileName);      
          
         $pathForUpload = $this->getParameter('app.path.upload.file.rendicion.liquidacion');
+
+        /** @var FileUploaderServiceImpl $fileUploadService */
+        $fileUploadService = $this->get('file_upload_service');     
         try {
-            $this->get('logger')->info("UploadFileController, Voy a subir el archivo a ".$pathForUpload. " fileName ". $fileName);
-            $fileUploadedFile->move(
-                $pathForUpload,
-                $fileName
-            );
+            $fileUploadService->upload( $pathForUpload,
+                                        $fileUploadedFile,
+                                        $fileName);            
         } catch (FileException $e) {
-            $this->get('logger')->error("UploadFileController, Error Subiendo archivo a ".$pathForUpload. " fileName ". $fileName);
-            $this->get('logger')->error("UploadFileController, FileException: ".$e);
             return new JsonResponse(array('message' => $e->getMessage()), 400);
         }catch (Exception $ex) {
-            $this->get('logger')->error("UploadFileController, Error Subiendo archivo a ".$pathForUpload. " fileName ". $fileName);
-            $this->get('logger')->error("UploadFileController, Exception: ".$ex);
             return new JsonResponse(array('message' => $ex->getMessage()), 400);
         }
  
-        $this->get('logger')->info("UploadFileController, Persisto el registro : ".$fileRendicionLiquidacion);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($fileRendicionLiquidacion);
-        $em->flush();
-     
+        try{
+            $fileRendicionLiquidacion = $this->
+                                        createFileRendicionLiquidacion($fileUploadedFile, $fileName);
+        }catch (Exception $ex) {
+              return new JsonResponse(array('message' => $ex->getMessage()), 400);
+        }
+        
         $this->get('logger')->info("UploadFileController, Devuelvo Success 200 : ".$fileRendicionLiquidacion);
         return new JsonResponse(array('message' => 'Success!'), 200);        
                
@@ -118,8 +97,54 @@ class UploadFileController extends Controller
     /**
      * @return string
      */
-    private function generateUniqueFileName()
+    private function generateUniqueFileName($stringName)
     {        
-        return md5(uniqid());
+        return sha1(md5(sha1(time().$stringName).time()));
     }    
+
+    private function createFileRendicionLiquidacion($fileUploadedFile,$fileName){
+        $this->get('logger')->info("UploadFileController, createFileRendicionLiquidacion ".$fileUploadedFile." fileName ".$fileName);
+        $fileRendicionLiquidacion = new FileRendicionLiquidacion();
+        $fileRendicionLiquidacion->bindValueFromFile($fileUploadedFile,$fileName);        
+        $this->get('logger')->info("UploadFileController, FileRendicionLiquidacion Creado ".$fileRendicionLiquidacion);
+        
+        $validator = $this->get('validator');
+        $errors = $validator->validate($fileRendicionLiquidacion);
+
+        if (count($errors) > 0) {            
+            $errorsString = (string) $errors;
+            $this->get('logger')->info("UploadFileController, No supera validaciones: ".$errorsString);
+            throw new SimpleMessageException("No supera validaciones ".$errorsString);            
+        }
+
+        $this->get('logger')->info("UploadFileController, Persisto el registro : ".$fileRendicionLiquidacion);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($fileRendicionLiquidacion);
+        $em->flush();
+
+        return $fileRendicionLiquidacion;
+    }
+
+    private function getUploadedFile(Request $request){
+         /** @var FileBag  $file */        
+         $file = $request->files;  
+         if(is_null($file)){
+             $this->get('logger')->info("UploadFileController, file is null ");    
+             return new JsonResponse(array('message' => 'No adjunta archivo'), 400);
+         }
+         
+         /** @var UploadedFile  $fileUploadedFile */
+         $fileUploadedFile = null;
+         if(!is_null($file->all()) && is_array($file->all()) ){
+             foreach ($file->all() as $key => $value) {
+                 if($value instanceof UploadedFile){
+                     $fileUploadedFile = $value;  
+                     break;  
+                 }
+             }
+             
+         }
+
+         return $fileUploadedFile;
+    }
 }

@@ -22,19 +22,25 @@
     <script src="{{ asset('fileinput/js/locales/es.js') }}" type="text/javascript"></script>
     <script src="{{ asset('fileinput/themes/fas/theme.js') }}" type="text/javascript"></script>
     <script src="{{ asset('fileinput/themes/explorer-fas/theme.js') }}" type="text/javascript"></script>
+      <link rel="stylesheet"
+          type="text/css"
+          href="{{ asset('jquery-confirm/jquery-confirm.css') }}"/>
+    <script type="text/javascript"
+            src="{{ asset('jquery-confirm/jquery-confirm.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('jquery-confirm/bundled.css') }}">
     
 </head>
 <body id="top">
 
                 {# ruta de navegacion #} 
-    <div class="kv-main">
+    <div class="kv-main">        
          <div class="page-header">
              <h1><a href="{{ path('rendicion') }}">Subir Rendiciones / Liquidaciones</a>
               </h1>
           </div>
-          <form enctype="multipart/form-data">
-                <input id="file-upload" type="file" multiple><br />
-                <button type="submit" class="btn btn-success">Subir Archivos</button>
+          <form enctype="multipart/form-data" id="uploadForm">
+                <input id="file-upload" type="file" multiple><br />               
                 <button type="reset" class="btn btn-warning">Reset</button>
             </form>
     </div>

@@ -54,6 +54,10 @@ services:
         class: MProd\LicenciaCyPBundle\Service\AtributoConfiguracionServiceImpl
         autowire: true
 
+    file_upload_service:
+        class: MProd\LicenciaCyPBundle\Service\FileUploaderServiceImpl
+        autowire: true
+
     barcode.twig_extension:
         class: MProd\LicenciaCyPBundle\Twig\BarcodeTwigExtension
         arguments: ['@barcode_service','%barcode_directory%']
