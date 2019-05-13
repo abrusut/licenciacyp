@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\FileBag;
 /**
  * FileRendicionLiquidacion
  *  
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\FileRendicionLiquidacionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class FileRendicionLiquidacion
@@ -51,6 +51,12 @@ class FileRendicionLiquidacion
      * @var string
      */
     private $nombreOriginalArchivo;
+
+     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $fullPath;
 
      /**
      * The mime type provided by the uploader.
@@ -106,7 +112,7 @@ class FileRendicionLiquidacion
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile 
      * @return void
      */
-    public function bindValueFromFile(UploadedFile $file, $fileName){
+    public function bindValueFromFile(UploadedFile $file, $fileName,$pathForUpload ){
         $this->setNombreOriginalArchivo($file->getClientOriginalName());
         $this->setExtension($file->getClientOriginalExtension());
         $this->setSize($file->getClientSize());
@@ -114,6 +120,7 @@ class FileRendicionLiquidacion
         $this->setArchivo($fileName);
         $this->setGuessClientExtension($file->guessClientExtension());
         $this->setMimeType($file->getClientMimeType());
+        $this->setFullPath($pathForUpload."/".$fileName);
         
         //$this->setCreatedAt(new \DateTime());        
     }
@@ -423,5 +430,28 @@ class FileRendicionLiquidacion
     public function getProcesado()
     {
         return $this->procesado;
+    }
+
+    /**
+     * Set fullPath
+     *
+     * @param string $fullPath
+     * @return FileRendicionLiquidacion
+     */
+    public function setFullPath($fullPath)
+    {
+        $this->fullPath = $fullPath;
+
+        return $this;
+    }
+
+    /**
+     * Get fullPath
+     *
+     * @return string 
+     */
+    public function getFullPath()
+    {
+        return $this->fullPath;
     }
 }

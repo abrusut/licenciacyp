@@ -1,6 +1,8 @@
 parameters:
     keySalt:  licenciaCyPMinisterioProduccion
     barcode_directory: '%kernel.root_dir%/../web/barcode/'
+    app.path.upload.file.rendicion.liquidacion: "%kernel.root_dir%/../web/uploads/files/"
+
 services:
    
     provincia_service:
@@ -56,6 +58,10 @@ services:
 
     file_upload_service:
         class: MProd\LicenciaCyPBundle\Service\FileUploaderServiceImpl
+        autowire: true
+    
+    file_csv_reader:
+        class: MProd\LicenciaCyPBundle\Service\FileCsvReaderServiceImpl
         autowire: true
 
     barcode.twig_extension:
@@ -127,3 +133,10 @@ services:
         arguments:
             - MProd\LicenciaCyPBundle\Entity\AtributoConfiguracion        
         autowiring_types: MProd\LicenciaCyPBundle\Repository\IAtributoConfiguracionRepository
+
+    file_rendicion_liquidacion_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - MProd\LicenciaCyPBundle\Entity\FileRendicionLiquidacion        
+        autowiring_types: MProd\LicenciaCyPBundle\Repository\IFileRendicionLiquidacionRepository

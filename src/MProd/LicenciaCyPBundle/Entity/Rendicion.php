@@ -391,4 +391,15 @@ class Rendicion
     {
         return $this->fechaBaja;
     }
+
+
+    public function bind($linea){
+        if(!is_null($linea)){
+            foreach ($linea as $key => $value) {
+
+                if($key==2)
+                    $this->setCodigoBarraCliente($value);
+            }
+        }
+    }
 }

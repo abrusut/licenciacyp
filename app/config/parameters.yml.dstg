@@ -10,4 +10,4 @@ parameters:
     mailer_host: smtp.santafe.gov.ar
     mailer_user: agespinosa
     mailer_password: 
-    secret: 2474fa53cf18a3fa7c197b5835c5e10f9
+    secret: 2474fa53cf18a3fa7c197b5835c5e10f9    

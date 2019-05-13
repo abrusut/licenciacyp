@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use MProd\LicenciaCyPBundle\Exception\SimpleMessageException;
 use MProd\LicenciaCyPBundle\Service\FileUploaderServiceImpl;
+use MProd\LicenciaCyPBundle\Service\FileCsvReaderServiceImpl;
 
 /**
  * Rendicion controller.
@@ -73,20 +74,26 @@ class UploadFileController extends Controller
         /** @var FileUploaderServiceImpl $fileUploadService */
         $fileUploadService = $this->get('file_upload_service');     
         try {
-            $fileUploadService->upload( $pathForUpload,
-                                        $fileUploadedFile,
-                                        $fileName);            
+            $em = $this->getDoctrine()->getManager();
+            
+            $fileRendicionLiquidacion = $this->
+                                        createFileRendicionLiquidacion($fileUploadedFile, $fileName,$pathForUpload );
+
+            $achivoEnDisco = $fileUploadService
+                                        ->upload( $pathForUpload,
+                                            $fileUploadedFile,
+                                            $fileName);            
+
+            /** @var FileCsvReaderServiceImpl $fileCsvReaderServiceImpl */
+            $fileCsvReaderServiceImpl = $this->get('file_csv_reader');
+            $fileCsvReaderServiceImpl->readCsvFile($achivoEnDisco, $fileRendicionLiquidacion);
+
+            
+            $em->flush();
         } catch (FileException $e) {
             return new JsonResponse(array('message' => $e->getMessage()), 400);
         }catch (Exception $ex) {
             return new JsonResponse(array('message' => $ex->getMessage()), 400);
-        }
- 
-        try{
-            $fileRendicionLiquidacion = $this->
-                                        createFileRendicionLiquidacion($fileUploadedFile, $fileName);
-        }catch (Exception $ex) {
-              return new JsonResponse(array('message' => $ex->getMessage()), 400);
         }
         
         $this->get('logger')->info("UploadFileController, Devuelvo Success 200 : ".$fileRendicionLiquidacion);
@@ -102,10 +109,10 @@ class UploadFileController extends Controller
         return sha1(md5(sha1(time().$stringName).time()));
     }    
 
-    private function createFileRendicionLiquidacion($fileUploadedFile,$fileName){
+    private function createFileRendicionLiquidacion($fileUploadedFile,$fileName,$pathForUpload){
         $this->get('logger')->info("UploadFileController, createFileRendicionLiquidacion ".$fileUploadedFile." fileName ".$fileName);
         $fileRendicionLiquidacion = new FileRendicionLiquidacion();
-        $fileRendicionLiquidacion->bindValueFromFile($fileUploadedFile,$fileName);        
+        $fileRendicionLiquidacion->bindValueFromFile($fileUploadedFile,$fileName,$pathForUpload );        
         $this->get('logger')->info("UploadFileController, FileRendicionLiquidacion Creado ".$fileRendicionLiquidacion);
         
         $validator = $this->get('validator');
@@ -119,8 +126,7 @@ class UploadFileController extends Controller
 
         $this->get('logger')->info("UploadFileController, Persisto el registro : ".$fileRendicionLiquidacion);
         $em = $this->getDoctrine()->getManager();
-        $em->persist($fileRendicionLiquidacion);
-        $em->flush();
+        $em->persist($fileRendicionLiquidacion);        
 
         return $fileRendicionLiquidacion;
     }

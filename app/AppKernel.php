@@ -3,6 +3,7 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
+
 class AppKernel extends Kernel
 {
     public function registerBundles()
@@ -26,7 +27,8 @@ class AppKernel extends Kernel
 
             new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),      
             new SGK\BarcodeBundle\SGKBarcodeBundle(),
-            new Markup\BarcodeBundle\MarkupBarcodeBundle(),
+            
+            //new Markup\BarcodeBundle\MarkupBarcodeBundle(),
             new FOS\UserBundle\FOSUserBundle(),
 
             // Petkopara
@@ -35,7 +37,11 @@ class AppKernel extends Kernel
             new Petkopara\CrudGeneratorBundle\PetkoparaCrudGeneratorBundle(),
 
             // Upload
-            new Vich\UploaderBundle\VichUploaderBundle(),
+            //new Vich\UploaderBundle\VichUploaderBundle(),
+
+            // Leer CSV
+            new TangoMan\CSVReaderBundle\TangoManCSVReaderBundle(),
+                        
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

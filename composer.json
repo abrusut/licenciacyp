@@ -30,7 +30,8 @@
         "friendsofsymfony/user-bundle": "~2.0",
         "sensio/generator-bundle": "^3.1",
         "petkopara/crud-generator-bundle": "^3.0",
-        "vich/uploader-bundle": "^1.4"      
+        "vich/uploader-bundle": "^1.4",
+        "tangoman/csv-reader-bundle": "^1.0"      
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^2.3",

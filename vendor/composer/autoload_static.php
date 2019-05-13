@@ -42,6 +42,7 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         'T' => 
         array (
             'Twig\\' => 5,
+            'TangoMan\\CSVReaderBundle\\' => 25,
         ),
         'S' => 
         array (
@@ -150,6 +151,10 @@ class ComposerStaticInit3a136ecb7ae7d70fb07ffba516864731
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'TangoMan\\CSVReaderBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tangoman/csv-reader-bundle',
         ),
         'Symfony\\Polyfill\\Util\\' => 
         array (

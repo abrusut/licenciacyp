@@ -14,6 +14,7 @@ return array(
     'WhiteOctober\\TCPDFBundle\\' => array($vendorDir . '/whiteoctober/tcpdf-bundle'),
     'Vich\\UploaderBundle\\' => array($vendorDir . '/vich/uploader-bundle'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
+    'TangoMan\\CSVReaderBundle\\' => array($vendorDir . '/tangoman/csv-reader-bundle'),
     'Symfony\\Polyfill\\Util\\' => array($vendorDir . '/symfony/polyfill-util'),
     'Symfony\\Polyfill\\Php70\\' => array($vendorDir . '/symfony/polyfill-php70'),
     'Symfony\\Polyfill\\Php56\\' => array($vendorDir . '/symfony/polyfill-php56'),

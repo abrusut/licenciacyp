@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\FileBag;
 /**
  * FileRendicionLiquidacion
  *  
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="MProd\LicenciaCyPBundle\Repository\FileRendicionLiquidacionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class FileRendicionLiquidacion
@@ -51,6 +51,12 @@ class FileRendicionLiquidacion
      * @var string
      */
     private $nombreOriginalArchivo;
+
+     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $fullPath;
 
      /**
      * The mime type provided by the uploader.
@@ -97,6 +103,9 @@ class FileRendicionLiquidacion
      */
     protected $procesado;
 
+    public function __construct(){
+        $this->procesado = false;
+    }
     /**
      * bind values from archivo
      *
@@ -397,5 +406,28 @@ class FileRendicionLiquidacion
     public function getGuessExtension()
     {
         return $this->guessExtension;
+    }
+
+    /**
+     * Set procesado
+     *
+     * @param boolean $procesado
+     * @return FileRendicionLiquidacion
+     */
+    public function setProcesado($procesado)
+    {
+        $this->procesado = $procesado;
+
+        return $this;
+    }
+
+    /**
+     * Get procesado
+     *
+     * @return boolean 
+     */
+    public function getProcesado()
+    {
+        return $this->procesado;
     }
 }

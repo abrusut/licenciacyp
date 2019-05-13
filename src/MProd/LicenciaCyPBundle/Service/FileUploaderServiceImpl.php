@@ -20,7 +20,7 @@ class FileUploaderServiceImpl implements IFileUploaderService{
     {
         $this->logger->info("FileUploaderServiceImpl, Voy a subir el archivo a ".$uploadDir. " fileName ". $filename);
         try {            
-            $file->move($uploadDir, $filename);
+          return  $file->move($uploadDir, $filename);            
         } catch (FileException $e){            
             $this->logger->error("FileUploaderServiceImpl, Error Subiendo archivo a ".$uploadDir. " fileName ". $filename);
             $this->logger->error("FileUploaderServiceImpl, FileException: ".$e->getMessage());           
