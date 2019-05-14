@@ -37,8 +37,8 @@ class UploadFileController extends Controller
      */
     public function indexUploadFileAction(Request $request)
     {                
-        return $this->render('MProdLicenciaCyPBundle:Upload:nostg.upload.file.html.twig', array(            
-        ));
+        return $this->render('MProdLicenciaCyPBundle:Upload:nostg.upload.file.html.twig', array());
+        //return $this->render('MProdLicenciaCyPBundle:Upload:stg.upload.file.html.twig', array());
     }
 
     /**
@@ -75,7 +75,7 @@ class UploadFileController extends Controller
         $fileUploadService = $this->get('file_upload_service');     
         try {
             $em = $this->getDoctrine()->getManager();
-            
+
             $fileRendicionLiquidacion = $this->
                                         createFileRendicionLiquidacion($fileUploadedFile, $fileName,$pathForUpload );
 
@@ -88,7 +88,7 @@ class UploadFileController extends Controller
             $fileCsvReaderServiceImpl = $this->get('file_csv_reader');
             $fileCsvReaderServiceImpl->readCsvFile($achivoEnDisco, $fileRendicionLiquidacion);
 
-            
+            $fileRendicionLiquidacion->setProcesado(true);
             $em->flush();
         } catch (FileException $e) {
             return new JsonResponse(array('message' => $e->getMessage()), 400);

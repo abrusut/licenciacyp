@@ -1,3 +1,7 @@
+m_prod_licencia_cy_p_rendicion:
+    resource: "@MProdLicenciaCyPBundle/Controller/RendicionController.php"
+    type:     annotation
+
 m_prod_licencia_cy_p:
     resource: "@MProdLicenciaCyPBundle/Resources/config/routing.yml"
     prefix:   /

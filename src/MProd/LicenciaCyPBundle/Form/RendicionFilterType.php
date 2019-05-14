@@ -22,9 +22,9 @@ class RendicionFilterType extends AbstractType
                         'fechaCobro',
                         'codigoBarraCliente',
                         'importeCobrado',
-                        'fechaLecturaArchivo',
-                        'fechaCreacionArchivo',
                         'createdAt',
+                        'updatedAt',
+                        'fechaBaja',
                  ), 
                     ));
                     

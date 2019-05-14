@@ -41,6 +41,13 @@ Rendicion
 
     </div>
     <div class="col-md-6">
+        <p><strong>Archivo</strong></p>
+        <p>
+            {{ rendicion.fileRendicionLiquidacion.nombreOriginalArchivo }}
+        </p>
+
+    </div>
+    <div class="col-md-6">
         <p><strong>Numero Rendicion</strong></p>
         <p>
             {{ rendicion.numeroRendicion }}
@@ -75,20 +82,7 @@ Rendicion
         </p>
 
     </div>
-    <div class="col-md-6">
-        <p><strong>Fecha Lectura Archivo</strong></p>
-        <p>
-            {% if rendicion.fechaLecturaArchivo %}{{ rendicion.fechaLecturaArchivo|date('Y-m-d H:i:s') }}{% endif %}
-        </p>
-
-    </div>
-    <div class="col-md-6">
-        <p><strong>Fecha Creacion Archivo</strong></p>
-        <p>
-            {% if rendicion.fechaCreacionArchivo %}{{ rendicion.fechaCreacionArchivo|date('Y-m-d H:i:s') }}{% endif %}
-        </p>
-
-    </div>
+  
     <div class="col-md-6">
         <p><strong>Fecha Alta</strong></p>
         <p>

@@ -7,6 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\PrePersist;
+use TangoMan\CSVReaderBundle\Service\CSVLine;
+
 /**
  * Rendicion
  *
@@ -25,8 +27,7 @@ class Rendicion
     /**
      * @var string
      *
-     * @ORM\Column(name="numero_rendicion", type="string", nullable=false)
-     * @Assert\NotNull()
+     * @ORM\Column(name="numero_rendicion", type="string", nullable=true)     
      */
     private $numeroRendicion;
 
@@ -44,11 +45,18 @@ class Rendicion
      */
     private $liquidacion;
 
+     /**
+     * Many rendiciones tienen 1 FileRendicionLiquidacion
+     * @ORM\ManyToOne(targetEntity="MProd\LicenciaCyPBundle\Entity\FileRendicionLiquidacion", inversedBy="rendiciones")
+     * @ORM\JoinColumn(name="file_rendicion_liquidacion_id", referencedColumnName="id")
+     */
+    private $fileRendicionLiquidacion;
+
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="fecha_cobro", type="datetime",nullable=false)
-     * @Assert\NotNull()
+     * @ORM\Column(name="fecha_cobro", type="date",nullable=false)
+     * @Assert\NotNull()     
      */
     private $fechaCobro;
 
@@ -70,20 +78,6 @@ class Rendicion
      */
     private $importeCobrado;
 
-
-     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fecha_lectura_archivo", type="datetime",nullable=true)     
-     */
-    private $fechaLecturaArchivo;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="fecha_creacion_archivo", type="datetime",nullable=true)     
-     */
-    private $fechaCreacionArchivo;
 
      /**
      * @var \DateTime|null
@@ -208,29 +202,7 @@ class Rendicion
         return $this->nis;
     }
 
-    /**
-     * Set fechaCobro
-     *
-     * @param \DateTime $fechaCobro
-     * @return Rendicion
-     */
-    public function setFechaCobro($fechaCobro)
-    {
-        $this->fechaCobro = $fechaCobro;
-
-        return $this;
-    }
-
-    /**
-     * Get fechaCobro
-     *
-     * @return \DateTime 
-     */
-    public function getFechaCobro()
-    {
-        return $this->fechaCobro;
-    }
-
+   
     /**
      * Set codigoBarraCliente
      *
@@ -275,52 +247,6 @@ class Rendicion
     public function getImporteCobrado()
     {
         return $this->importeCobrado;
-    }
-
-    /**
-     * Set fechaLecturaArchivo
-     *
-     * @param \DateTime $fechaLecturaArchivo
-     * @return Rendicion
-     */
-    public function setFechaLecturaArchivo($fechaLecturaArchivo)
-    {
-        $this->fechaLecturaArchivo = $fechaLecturaArchivo;
-
-        return $this;
-    }
-
-    /**
-     * Get fechaLecturaArchivo
-     *
-     * @return \DateTime 
-     */
-    public function getFechaLecturaArchivo()
-    {
-        return $this->fechaLecturaArchivo;
-    }
-
-    /**
-     * Set fechaCreacionArchivo
-     *
-     * @param \DateTime $fechaCreacionArchivo
-     * @return Rendicion
-     */
-    public function setFechaCreacionArchivo($fechaCreacionArchivo)
-    {
-        $this->fechaCreacionArchivo = $fechaCreacionArchivo;
-
-        return $this;
-    }
-
-    /**
-     * Get fechaCreacionArchivo
-     *
-     * @return \DateTime 
-     */
-    public function getFechaCreacionArchivo()
-    {
-        return $this->fechaCreacionArchivo;
     }
 
     /**
@@ -393,13 +319,65 @@ class Rendicion
     }
 
 
-    public function bind($linea){
-        if(!is_null($linea)){
-            foreach ($linea as $key => $value) {
+    public function bind(CSVLine $linea, $head){        
+        foreach ($head as $key => $value) {  
+            if(!is_null($value) && !empty($value)){              
 
-                if($key==2)
-                    $this->setCodigoBarraCliente($value);
+                if($value == 'fechaCobro')
+                {
+                    $formato = 'd/m/Y';
+                    $this->$value = new \DateTime(\DateTime::createFromFormat($formato, $linea->get($value))->format('Y-m-d'));                     
+                }else{
+                    $this->$value = $linea->get($value);
+                }
+               
             }
-        }
+        }        
+    }
+
+    /**
+     * Set fechaCobro
+     *
+     * @param \DateTime $fechaCobro
+     * @return Rendicion
+     */
+    public function setFechaCobro($fechaCobro)
+    {
+        $this->fechaCobro = $fechaCobro;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaCobro
+     *
+     * @return \DateTime 
+     */
+    public function getFechaCobro()
+    {
+        return $this->fechaCobro;
+    }
+
+    /**
+     * Set fileRendicionLiquidacion
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\FileRendicionLiquidacion $fileRendicionLiquidacion
+     * @return Rendicion
+     */
+    public function setFileRendicionLiquidacion(\MProd\LicenciaCyPBundle\Entity\FileRendicionLiquidacion $fileRendicionLiquidacion = null)
+    {
+        $this->fileRendicionLiquidacion = $fileRendicionLiquidacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fileRendicionLiquidacion
+     *
+     * @return \MProd\LicenciaCyPBundle\Entity\FileRendicionLiquidacion 
+     */
+    public function getFileRendicionLiquidacion()
+    {
+        return $this->fileRendicionLiquidacion;
     }
 }

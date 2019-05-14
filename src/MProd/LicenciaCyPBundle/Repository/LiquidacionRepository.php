@@ -13,9 +13,19 @@ class LiquidacionRepository extends EntityRepository implements ILiquidacionRepo
 {
     public function save(Liquidacion $liquidacion)
     {
-        $this->_em->persist($liquidacion);
+        $this->_em->persist($liquidacion);        
         $this->_em->flush();
-    }    
+    } 
+    
+    public function persist(Liquidacion $liquidacion)
+    {
+        $this->_em->persist($liquidacion);                
+    }
+
+    public function flush()
+    {
+        $this->_em->flush();
+    }
 
     public function findById($id){
         return $this->find($id);

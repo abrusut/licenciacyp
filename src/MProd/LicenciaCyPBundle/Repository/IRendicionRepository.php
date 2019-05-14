@@ -9,7 +9,11 @@ interface IRendicionRepository{
      * @param MProd\LicenciaCyPBundle\Entity\Rendicion     
      * @return void
      */  
-    public function save(Rendicion $rendicion);
+    public function save(Rendicion $rendicion);   
+
+    public function persist(Rendicion $rendicion);
+
+    public function flush();
 
      /**
      * @param integer $id     

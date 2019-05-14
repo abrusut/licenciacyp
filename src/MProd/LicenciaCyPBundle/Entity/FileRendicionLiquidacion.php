@@ -103,6 +103,18 @@ class FileRendicionLiquidacion
      */
     protected $procesado;
 
+     /**    
+    * @var \MProd\LicenciaCyPBundle\Entity\Rendicion
+    * @ORM\OneToMany(targetEntity="MProd\LicenciaCyPBundle\Entity\Rendicion", mappedBy="fileRendicionLiquidacion")
+    */
+    private $rendiciones;
+    
+     /**    
+    * @var \MProd\LicenciaCyPBundle\Entity\Rendicion
+    * @ORM\OneToMany(targetEntity="MProd\LicenciaCyPBundle\Entity\Rendicion", mappedBy="fileRendicionLiquidacion")
+    */
+    private $liquidaciones;
+
     public function __construct(){
         $this->procesado = false;
     }
@@ -453,5 +465,71 @@ class FileRendicionLiquidacion
     public function getFullPath()
     {
         return $this->fullPath;
+    }
+
+    /**
+     * Add rendiciones
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\Rendicion $rendiciones
+     * @return FileRendicionLiquidacion
+     */
+    public function addRendicione(\MProd\LicenciaCyPBundle\Entity\Rendicion $rendiciones)
+    {
+        $this->rendiciones[] = $rendiciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove rendiciones
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\Rendicion $rendiciones
+     */
+    public function removeRendicione(\MProd\LicenciaCyPBundle\Entity\Rendicion $rendiciones)
+    {
+        $this->rendiciones->removeElement($rendiciones);
+    }
+
+    /**
+     * Get rendiciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRendiciones()
+    {
+        return $this->rendiciones;
+    }
+
+    /**
+     * Add liquidaciones
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\Rendicion $liquidaciones
+     * @return FileRendicionLiquidacion
+     */
+    public function addLiquidacione(\MProd\LicenciaCyPBundle\Entity\Rendicion $liquidaciones)
+    {
+        $this->liquidaciones[] = $liquidaciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove liquidaciones
+     *
+     * @param \MProd\LicenciaCyPBundle\Entity\Rendicion $liquidaciones
+     */
+    public function removeLiquidacione(\MProd\LicenciaCyPBundle\Entity\Rendicion $liquidaciones)
+    {
+        $this->liquidaciones->removeElement($liquidaciones);
+    }
+
+    /**
+     * Get liquidaciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLiquidaciones()
+    {
+        return $this->liquidaciones;
     }
 }

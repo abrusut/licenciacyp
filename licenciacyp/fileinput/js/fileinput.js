@@ -1038,7 +1038,7 @@
                     }
                 },
                 reset: function () {
-                    debugger;
+                    //debugger;
                     var rm = self.resumableManager;
                     rm.processed = {};
                 },
@@ -2933,7 +2933,7 @@
             }
         },
         _ajaxSubmit: function (fnBefore, fnSuccess, fnComplete, fnError, formdata, fileId, index, vUrl) {
-            debugger;
+            //debugger;
             var self = this, settings, defaults, data, processQueue;
             if (!self._raise('filepreajax', [formdata, fileId, index])) {
                 return;
@@ -3105,7 +3105,7 @@
             }
         },
         _uploadSingle: function (i, id, isBatch) {
-            debugger;
+            //debugger;
             var self = this, fm = self.fileManager, count = fm.count(), formdata = new FormData(), outData,
                 previewId = self.previewInitId + '-' + i, $thumb, chkComplete, $btnUpload, $btnDelete,
                 hasPostData = count > 0 || !$.isEmptyObject(self.uploadExtraData), uploadFailed, $prog, fnBefore,
@@ -3138,7 +3138,7 @@
                 }
             };
             chkComplete = function () {
-                debugger;
+                //debugger;
                 var $initThumbs;
                 if (!self.fileBatchCompleted) {
                     return;
@@ -3164,7 +3164,7 @@
                 }, self.processDelay);
             };
             fnBefore = function (jqXHR) {
-                debugger;
+                //debugger;
                 outData = self._getOutData(formdata, jqXHR);
                 fm.initStats(id);
                 self.fileBatchCompleted = false;
@@ -3200,7 +3200,7 @@
                 }
             };
             fnSuccess = function (data, textStatus, jqXHR) {
-                debugger;
+                //debugger;
                 var pid = self.showPreview && $thumb.attr('id') ? $thumb.attr('id') : previewId;
                 outData = self._getOutData(formdata, jqXHR, data);
                 $.extend(true, params, outData);
@@ -3234,7 +3234,7 @@
                 }, self.processDelay);
             };
             fnComplete = function () {
-                debugger;
+                //debugger;
                 setTimeout(function () {
                     if (self.showPreview) {
                         $btnUpload.removeAttr('disabled');
@@ -3251,7 +3251,7 @@
                 }, self.processDelay);
             };
             fnError = function (jqXHR, textStatus, errorThrown) {
-                debugger;
+                //debugger;
                 errMsg = self._parseError(op, jqXHR, errorThrown, self.fileManager.getFileName(id));
                 uploadFailed = true;
                 setTimeout(function () {
@@ -3541,8 +3541,11 @@
                                 }
                                 
                             },
-                            cancel: function () {
-                                //$('#uploadForm').trigger("reset");                                
+                            Cancelar: {
+                                text: 'Cancelar',
+                                btnClass: 'btn-default',
+                                action: function(){
+                                }
                             }
                         }
                     });      
@@ -5262,8 +5265,11 @@
                             self._uploadBatch();
                         }
                     },
-                    cancelar: function () {                                                
-                        //$('#uploadForm').trigger("reset");
+                    Cancelar: {
+                        text: 'Cancelar',
+                        btnClass: 'btn-default',
+                        action: function(){
+                        }
                     }
                 }
             });      

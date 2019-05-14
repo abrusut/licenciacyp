@@ -13,9 +13,20 @@ class RendicionRepository extends EntityRepository implements IRendicionReposito
 {
     public function save(Rendicion $rendicion)
     {
-        $this->_em->persist($rendicion);
-        $this->_em->flush();
+        $this->_em->persist($rendicion);        
+        $this->_em->flush();            
     }    
+
+    public function persist(Rendicion $rendicion)
+    {
+        $this->_em->persist($rendicion);                         
+    }
+
+    public function flush()
+    {
+        $this->_em->flush();
+    }
+
 
     public function findById($id){
         return $this->find($id);

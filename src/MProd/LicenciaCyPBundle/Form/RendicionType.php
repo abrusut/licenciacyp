@@ -33,41 +33,7 @@ class RendicionType extends AbstractType
                 )
             )
             ->add('codigoBarraCliente')
-            ->add('importeCobrado')            
-            ->add('fechaLecturaArchivo','date', array(                        
-                'constraints' => null,
-                'data' => (isset($options['data']) && 
-                                $options['data']->getFechaLecturaArchivo() !== null) ? $options['data']->getFechaLecturaArchivo() : new \DateTime(),
-                 // render as a single text box
-                 'widget' => 'single_text',
-                 'format' => 'dd/MM/yyyy',
-                 // do not render as type="date", to avoid HTML5 date pickers
-                 'html5' => false,
-                 // add a class that can be selected in JavaScript
-                 'attr' => ['class' => 'js-datepicker'],
-                 'label' => 'Fecha Lectura Archivo' ,
-                 'read_only' => TRUE,
-                 'disabled' => TRUE ,
-                 'required' => false             
-                )
-            )              
-            ->add('fechaCreacionArchivo','date', array(                        
-                'constraints' => null,
-                'data' => (isset($options['data']) && 
-                                $options['data']->getFechaCreacionArchivo() !== null) ? $options['data']->getFechaCreacionArchivo() : new \DateTime(),
-                 // render as a single text box
-                 'widget' => 'single_text',
-                 'format' => 'dd/MM/yyyy',
-                 // do not render as type="date", to avoid HTML5 date pickers
-                 'html5' => false,
-                 // add a class that can be selected in JavaScript
-                 'attr' => ['class' => 'js-datepicker'],
-                 'label' => 'Fecha Creacion Archivo' ,
-                 'read_only' => TRUE,
-                 'disabled' => TRUE,
-                 'required' => false
-                )
-            )         
+            ->add('importeCobrado')                        
             ->add('createdAt','date', array(                        
                 'constraints' => null,
                 'data' => (isset($options['data']) && 
@@ -105,6 +71,14 @@ class RendicionType extends AbstractType
             ->add('liquidacion', EntityType::class, array(
                 'class' => 'MProd\LicenciaCyPBundle\Entity\Liquidacion',
                 'choice_label' => 'nis',
+                'placeholder' => '--Seleccione--',
+                'empty_data' => null,
+                'required' => false
+ 
+            )) 
+            ->add('fileRendicionLiquidacion', EntityType::class, array(
+                'class' => 'MProd\LicenciaCyPBundle\Entity\FileRendicionLiquidacion',
+                'choice_label' => 'nombreOriginalArchivo',
                 'placeholder' => '--Seleccione--',
                 'empty_data' => null,
                 'required' => false

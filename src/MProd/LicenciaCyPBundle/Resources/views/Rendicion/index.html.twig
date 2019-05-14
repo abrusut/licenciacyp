@@ -76,6 +76,10 @@ Rendicion
         <a class="btn btn-primary h3 pull-right" href="{{ path('rendicion_new') }}" style="margin-bottom:10px">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
         </a>
+        <!-- Button trigger modal upload -->
+        <button type="button" class="btn btn-primary h3 pull-right" data-toggle="modal" data-target="#exampleModalCenter">
+            Subir Archivos
+        </button>
         
     </div>
 
@@ -114,13 +118,12 @@ Rendicion
 
                 {% import "PetkoparaCrudGeneratorBundle::macros/th_sortable.html.twig" as macros %}
                             <th>{{macros.th_sortable('id',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion')}}</th>
+                            <th>{{macros.th_sortable('fileRendicionLiquidacion',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Archivo')}}</th>
                             <th>{{macros.th_sortable('numeroRendicion',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Numero Rendicion')}}</th>
                             <th>{{macros.th_sortable('nis',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Nis')}}</th>
                             <th>{{macros.th_sortable('fechaCobro',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Fecha Cobro')}}</th>
                             <th>{{macros.th_sortable('codigoBarraCliente',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion', 'Codigo Barra')}}</th>
-                            <th>{{macros.th_sortable('importeCobrado',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Importe Cobrado')}}</th>
-                            <th>{{macros.th_sortable('fechaLecturaArchivo',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Fecha Lectura Archivo')}}</th>
-                            <th>{{macros.th_sortable('fechaCreacionArchivo',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Fecha Creacion Archivo')}}</th>
+                            <th>{{macros.th_sortable('importeCobrado',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Importe Cobrado')}}</th>                           
                             <th>{{macros.th_sortable('createdAt',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Fecha Creacion')}}</th>
     
                        
@@ -132,13 +135,12 @@ Rendicion
                     <tr>
                         <td><input type="checkbox" name="ids[]" onclick='bulkSubmitBtnManage();' class="check-all" value="{{rendicion.id}}"/></td>
                         <td><a href="{{ path('rendicion_edit', { 'id': rendicion.id }) }}">{{ rendicion.id }}</a></td>
+                        <td>{{ rendicion.fileRendicionLiquidacion.nombreOriginalArchivo }}</td>
                         <td>{{ rendicion.numeroRendicion }}</td>
                         <td>{{ rendicion.nis }}</td>
                         <td>{%- if rendicion.fechaCobro %}{{ rendicion.fechaCobro|date('d-m-Y H:i:s') }}{% endif %}</td>
                         <td>{{ rendicion.codigoBarraCliente }}</td>
-                        <td>{{ rendicion.importeCobrado }}</td>
-                        <td>{%- if rendicion.fechaLecturaArchivo %}{{ rendicion.fechaLecturaArchivo|date('d-m-Y H:i:s') }}{% endif %}</td>
-                        <td>{%- if rendicion.fechaCreacionArchivo %}{{ rendicion.fechaCreacionArchivo|date('d-m-Y H:i:s') }}{% endif %}</td>
+                        <td>{{ rendicion.importeCobrado }}</td>                        
                         <td>{%- if rendicion.createdAt %}{{ rendicion.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
     
                         <td class="actions">
@@ -188,6 +190,28 @@ Rendicion
 
 
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Subir Archivos Rendicion o Liquidacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+            <iframe src="{{path('index_file_upload')}}" height="445px" width="100%"></iframe>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 {% endblock %}
 
