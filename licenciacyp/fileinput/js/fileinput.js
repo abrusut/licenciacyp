@@ -3200,14 +3200,14 @@
                 }
             };
             fnSuccess = function (data, textStatus, jqXHR) {
-                //debugger;
+                debugger;
                 var pid = self.showPreview && $thumb.attr('id') ? $thumb.attr('id') : previewId;
                 outData = self._getOutData(formdata, jqXHR, data);
                 $.extend(true, params, outData);
                 setTimeout(function () {
                     if ($h.isEmpty(data) || $h.isEmpty(data.error)) {
                         if (self.showPreview) {
-                            self._setThumbStatus($thumb, 'Success');
+                            self._setThumbStatus($thumb, 'Success',data);
                             $btnUpload.hide();
                             self._initUploadSuccess(data, $thumb, isBatch);
                             self._setProgress(101, $prog);
@@ -3898,7 +3898,8 @@
                 self._initPreviewActions();
             }
         },
-        _setThumbStatus: function ($thumb, status) {
+        _setThumbStatus: function ($thumb, status, data = undefined) {
+            debugger;
             var self = this;
             if (!self.showPreview) {
                 return;
@@ -3911,8 +3912,15 @@
             if (status === 'Success') {
                 $thumb.find('.file-drag-handle').remove();
             }
+
+            var textoSuccess="";
+            var divSuccess="";
+            if(data !== undefined && data.cantidadRegistrosGuardados !== undefined){
+                divSuccess = "<div class='file-caption-info'> Se procesaron "+data.cantidadRegistrosGuardados +" Reg.</div>";
+                textoSuccess="Se procesaron "+data.cantidadRegistrosGuardados +" Reg";
+            }
             $indicator.html(config[icon]);
-            $indicator.attr('title', config[msg]);
+            $indicator.attr('title', config[msg] +" "+textoSuccess);
             $thumb.addClass(css);
             if (status === 'Error' && !self.retryErrorUploads) {
                 $thumb.find('.kv-file-upload').attr('disabled', true);

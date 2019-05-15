@@ -35,7 +35,7 @@
                                         <li><a href="{{path('localidad')}}" ><span>Localidades</span></a></li>
                                         <li><a href="{{path('usuario')}}" ><span>Usuarios</span></a></li>
                                         <li><a href="{{path('persona')}}"><span>Personas</span></a></li>
-                                        <li><a href="{{path('index_file_upload')}}"><span>Subir Rendiciones/Liquidaciones</span></a></li>                                                                                
+                                        <li><a href="{{path('index_file_upload')}}" target="_blank"><span>Subir Archivos</span></a></li>                                                                                
                                     </ul>
                                 </li>
                             
@@ -49,18 +49,18 @@
                                         <li><a href="{{path('persona')}}"><span>Personas</span></a></li>
                                         <li><a href="{{path('rendicion')}}"><span>Rendiciones</span></a></li>
                                         <li><a href="{{path('liquidacion')}}"><span>Liquidaciones</span></a></li>
-                                        <li><a href="{{path('index_file_upload')}}"><span>Subir Rendiciones/Liquidaciones</span></a></li>                                                                                
+                                        <li><a href="{{path('index_file_upload')}}" target="_blank"><span>Subir Archivos</span></a></li>                                                                                
                                     </ul>
                                 </li>
             </li>
         {% endif %}
-        {% if  is_granted('ROLE_ADMIN') or  is_granted('ROLE_SUPER_ADMIN') %}
+        {#% if  is_granted('ROLE_ADMIN') or  is_granted('ROLE_SUPER_ADMIN') %}
             <li>
                 <a href="{{path('tecnico_list')}}">
                     <span>Tecnicos</span>
                 </a>
             </li>
-        {% endif %}
+        {% endif %#}
 
         {% if  not is_granted('IS_AUTHENTICATED_FULLY')  %}
             <li class='' style="float:right;text-align:right;">

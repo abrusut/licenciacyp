@@ -102,7 +102,7 @@ theme_aplicativo:
     datos_aplicativo:
         encabezado:
             titulo: 'Gestión de Licencia Caza y Pesca'
-            nombre_dependencia:  ''
+            nombre_dependencia:  'Gestion de Licencia Caza y Pesca'
             nombre_organismo: 'Ministerio de la Producción'                        
             path_logout :  fos_user_security_logout            
             path_home: path_home

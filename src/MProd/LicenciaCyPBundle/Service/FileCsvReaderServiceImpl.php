@@ -62,6 +62,7 @@ class FileCsvReaderServiceImpl implements IFileCsvReaderService
         $this->logger->info("FileCsvReaderServiceImpl,Leyendo el Archivo ");
         // File check
         $count = 0;
+        $registrosGuardados = 0;
         if (is_file($file)) {
 
             $head = $this->createHeader($objectToSave);
@@ -89,6 +90,7 @@ class FileCsvReaderServiceImpl implements IFileCsvReaderService
                     $objectToSave->bind($value, $head);
                     $objectToSave->setFileRendicionLiquidacion($fileRendicionLiquidacion);
                     $this->liquidacionRepository->persist($objectToSave);
+                    $registrosGuardados++;
                 }  
                 $this->liquidacionRepository->flush();     
             }
@@ -99,11 +101,13 @@ class FileCsvReaderServiceImpl implements IFileCsvReaderService
                     $objectToSave->bind($value, $head);    
                     $objectToSave->setFileRendicionLiquidacion($fileRendicionLiquidacion);     
                     $this->rendicionRepository->persist($objectToSave);
+                    $registrosGuardados++;
                 }
                 $this->rendicionRepository->flush();
             }
-            $this->logger->info("FileCsvReaderServiceImpl,Cantidad de Registros leidos " . $count);
+            $this->logger->info("FileCsvReaderServiceImpl,Cantidad de Registros leidos " . $count. " cant Persistidos: ".$registrosGuardados);            
         }
+        return $registrosGuardados;
     }
 
     private function createHeader($objectToSave){

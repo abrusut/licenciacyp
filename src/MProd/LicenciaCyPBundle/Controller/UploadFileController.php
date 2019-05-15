@@ -86,7 +86,8 @@ class UploadFileController extends Controller
 
             /** @var FileCsvReaderServiceImpl $fileCsvReaderServiceImpl */
             $fileCsvReaderServiceImpl = $this->get('file_csv_reader');
-            $fileCsvReaderServiceImpl->readCsvFile($achivoEnDisco, $fileRendicionLiquidacion);
+            $registrosGuardados = 
+                    $fileCsvReaderServiceImpl->readCsvFile($achivoEnDisco, $fileRendicionLiquidacion);
 
             $fileRendicionLiquidacion->setProcesado(true);
             $em->flush();
@@ -97,7 +98,7 @@ class UploadFileController extends Controller
         }
         
         $this->get('logger')->info("UploadFileController, Devuelvo Success 200 : ".$fileRendicionLiquidacion);
-        return new JsonResponse(array('message' => 'Success!'), 200);        
+        return new JsonResponse(array('message' => 'Success!','cantidadRegistrosGuardados'=>$registrosGuardados), 200);        
                
     }
 

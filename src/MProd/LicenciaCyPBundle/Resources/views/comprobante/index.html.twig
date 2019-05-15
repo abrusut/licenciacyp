@@ -178,7 +178,7 @@
                         <td>
                             <a href="{{path('boleta_pago_imprimir_by_comprobante_id',{'id':comprobante.id})}}" target="_blank"
                                  data-toggle="tooltip" title="{{ comprobante.numeroCodigoBarra }}">
-                                 {{ comprobante.numeroCodigoBarra |slice(0, 10) }}</a>                        
+                                 {{ comprobante.numeroCodigoBarra |slice(0, 10) }}...</a>                        
                         
                         </td>
                         <td>{%- if comprobante.createdAt %}{{ comprobante.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>

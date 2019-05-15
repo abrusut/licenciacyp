@@ -327,26 +327,17 @@ Licencia Generada': '#'} %}
             </div>
           </div>         
 </form>
-
-      {% if readOnly is defined and readOnly %}
-        {% if comprobante is defined  %}
-        <div class="row form">
-          <label>Comprobante :</label> {{ comprobante.id }}
-          <label>Codigo Barra :</label>{{ comprobante.numeroCodigoBarra }} ( {{ comprobante.numeroCodigoBarra |length }} )
-          <div class="row">
-              <img width="50%" src="{{ licencia.comprobante.numeroCodigoBarra |markup_barcode_data_uri('invoice')}}">              
-          </div>                          
-        </div>
-          
-        {% endif %}
-      {% endif %}
-
+      
       {% endblock %}
     </div>
   </div>
+  </div>
+
+
 </div>
 
-{% endblock %} {% block javascripts %}
+{% endblock %} 
+{% block javascripts %}
 {{ parent() }}
 
 <script language="javascript" src="{{ asset('js/licencia.js') }}"></script>

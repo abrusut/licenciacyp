@@ -74,9 +74,13 @@ Liquidacion
             
 
 <div class="col-md-3">
-            <a class="btn btn-primary h3 pull-right" href="{{ path('liquidacion_new') }}" style="margin-bottom:10px">
+        <a class="btn btn-primary h3 pull-right" href="{{ path('liquidacion_new') }}" style="margin-bottom:10px">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo
         </a>
+        <!-- Button trigger modal upload 
+        <button type="button" class="btn btn-primary h3 pull-right" data-toggle="modal" data-target="#exampleModalCenter">
+            Subir Archivos
+        </button>-->
     </div>
 
     <div class="col-md-12">
@@ -114,14 +118,13 @@ Liquidacion
 
                 {% import "PetkoparaCrudGeneratorBundle::macros/th_sortable.html.twig" as macros %}
                             <th>{{macros.th_sortable('id',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion')}}</th>
+                            <th>{{macros.th_sortable('fileRendicionLiquidacion',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'rendicion','Archivo')}}</th>
                             <th>{{macros.th_sortable('nis',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion','Nis')}}</th>
                             <th>{{macros.th_sortable('fechaCobro',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion','Fecha Cobro')}}</th>
                             <th>{{macros.th_sortable('codigoBarraCliente',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion','Codigo Barra Cliente')}}</th>
                             <th>{{macros.th_sortable('numeroRendicion',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion','Numero Rendicion')}}</th>
                             <th>{{macros.th_sortable('importeCobrado',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion','Importe Cobrado')}}</th>
-                            <th>{{macros.th_sortable('comision',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion')}}</th>
-                            <th>{{macros.th_sortable('fechaLecturaArchivo',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion','Fecha Lectura Archivo')}}</th>
-                            <th>{{macros.th_sortable('fechaCreacionArchivo',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion','Fecha Creacion Archivo')}}</th>
+                            <th>{{macros.th_sortable('comision',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion')}}</th>                           
                             <th>{{macros.th_sortable('createdAt',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'liquidacion','Fecha Alta')}}</th>
     
                        
@@ -133,14 +136,13 @@ Liquidacion
                     <tr>
                         <td><input type="checkbox" name="ids[]" onclick='bulkSubmitBtnManage();' class="check-all" value="{{liquidacion.id}}"/></td>
                         <td><a href="{{ path('liquidacion_edit', { 'id': liquidacion.id }) }}">{{ liquidacion.id }}</a></td>
+                        <td data-toggle="tooltip" title="{{ liquidacion.fileRendicionLiquidacion.nombreOriginalArchivo }}">{{ liquidacion.fileRendicionLiquidacion.nombreOriginalArchivo |slice(0, 10) }}...</td>
                         <td>{{ liquidacion.nis }}</td>
                         <td>{%- if liquidacion.fechaCobro %}{{ liquidacion.fechaCobro|date('d-m-Y H:i:s') }}{% endif %}</td>
                         <td>{{ liquidacion.codigoBarraCliente }}</td>
                         <td>{{ liquidacion.numeroRendicion }}</td>
                         <td>{{ liquidacion.importeCobrado }}</td>
-                        <td>{{ liquidacion.comision }}</td>
-                        <td>{%- if liquidacion.fechaLecturaArchivo %}{{ liquidacion.fechaLecturaArchivo|date('d-m-Y H:i:s') }}{% endif %}</td>
-                        <td>{%- if liquidacion.fechaCreacionArchivo %}{{ liquidacion.fechaCreacionArchivo|date('d-m-Y H:i:s') }}{% endif %}</td>
+                        <td>{{ liquidacion.comision }}</td>                        
                         <td>{%- if liquidacion.createdAt %}{{ liquidacion.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
     
                         <td class="actions">
@@ -189,6 +191,8 @@ Liquidacion
 </div> <!-- /#bottom -->
 
 </div>
+
+{#{ include('MProdLicenciaCyPBundle:Upload:modal.upload.file.html.twig') }#}
 {% endblock %}
 
 {% endblock %}
